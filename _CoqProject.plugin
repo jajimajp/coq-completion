@@ -1,10 +1,21 @@
-src/META.coq-completion
+plugin/META.coq-completion
 -R theories/ Completion
 -I plugin
 
 theories/Plugin.v
 
-plugin/msg.ml
-plugin/msg.mli
-plugin/g_main.mlg
+plugin/devutil.mli
+plugin/main.mli
+plugin/g_tactics.mlg
+plugin/toma.mli
+plugin/tomaparser.mli
+plugin/dune
+plugin/my_term.mli
+plugin/main.ml
+plugin/compl.mli
+plugin/compl.ml
+plugin/tomaparser.ml
+plugin/my_term.ml
+plugin/devutil.ml
+plugin/toma.ml
 plugin/plugin.mlpack

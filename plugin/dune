@@ -1,7 +1,9 @@
 (library
  (name plugin)
  (public_name coq-completion.plugin)
- (libraries coq-core.plugins.ltac))
+ (libraries coq-core.plugins.ltac)
+ (preprocess (pps ppx_inline_test))
+ (inline_tests))
 
 (coq.pp
- (modules g_main))
+ (modules g_tactics))

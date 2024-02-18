@@ -1,0 +1,21 @@
+DECLARE PLUGIN "coq-completion.plugin"
+
+{
+open Stdarg
+}
+
+VERNAC COMMAND EXTEND PrintTheorem CLASSIFIED AS QUERY
+| [ "Interreduce" ident(name) ":=" constr(e) "by" ident(a) "using" ident_list(rs)] -> {
+    let rs = List.map Names.Id.to_string rs in
+    let a = Names.Id.to_string a in
+    let rewriters = List.map Libnames.qualid_of_string rs in
+    let applier = Libnames.qualid_of_string a in
+    let () = Main.prove_interreduce ~name ~goal:e ~rewriters ~applier in
+    Feedback.msg_notice @@ Pp.str "P"
+}
+| [ "Complete" reference_list(axioms) ":" reference_list(ops) ":" ident(hint) ] -> {
+  let hint_db_name = Names.Id.to_string hint in
+  let _ = Main.complete axioms hint_db_name ops in
+  Feedback.msg_notice @@ Pp.str "Finish"
+}
+END

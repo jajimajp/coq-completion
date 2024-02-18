@@ -23,3 +23,5 @@ _build
 Makefile.coq
 Makefile.coq.conf
 META
+
+.DS_Store
