@@ -1,0 +1,25 @@
+*.a
+*.o
+*.cmo
+*.cma
+*.cmi
+*.cmt
+*.cmti
+*.cmxs
+*.cmxa
+*.aux
+*.d
+*.glob
+*.vo
+*.vok
+*.vos
+*~
+g_*.ml
+
+# dune
+_build
+
+# coq_makefile
+Makefile.coq
+Makefile.coq.conf
+META

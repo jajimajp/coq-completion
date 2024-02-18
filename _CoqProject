@@ -1,0 +1,4 @@
+-R _build/default/theories Completion
+-I _build/default
+
+_build/default/theories/Plugin.v

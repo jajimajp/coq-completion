@@ -1,0 +1,8 @@
+opam-version: "2.0"
+name: "coq-completion"
+version: "dev"
+synopsis: "Knuth-Bendix Completion"
+author: "Yajima Soichi"
+license: "MIT"
+homepage: "https://github.com/jajimajp/coq-completion"
+depends: [ "ocaml" "coq" ]

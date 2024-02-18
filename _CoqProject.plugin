@@ -1,0 +1,10 @@
+src/META.coq-completion
+-R theories/ Completion
+-I plugin
+
+theories/Plugin.v
+
+plugin/msg.ml
+plugin/msg.mli
+plugin/g_main.mlg
+plugin/plugin.mlpack
