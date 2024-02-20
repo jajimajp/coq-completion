@@ -228,11 +228,26 @@ let proof_using_toma (sections : Tomaparser.tomaoutputsection list) (constants: 
     end in
   List.rev (aux sections [] (SS.of_list ["0";"1";"2";]) 0)
 
+let get_constant_body gref =
+  let open Names.GlobRef in
+  match gref with
+  | ConstRef cst ->
+    let cb = Global.lookup_constant cst in
+    cb
+  | _ -> failwith "Invalid input"
+
+let constr_of_qualid (ln: Libnames.qualid): Constr.t =
+  let gref = Nametab.global ln in
+  let cb = get_constant_body gref in
+  cb.const_type
+
 let complete rs dbName ops =
-  let outputs = Compl.complete ~axioms:rs ~hint_db_name:dbName ~ops in
-  let parsed_outputs = Tomaparser.readtomaoutput outputs in
+  let axioms = List.map constr_of_qualid rs in
+  (* path を付加する (例: "e" => "AutoEqProver.Test.e") *)
   let ops = List.map (fun op ->
     op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds) ops in
+  let outputs = Toma.toma axioms in
+  let parsed_outputs = Tomaparser.readtomaoutput outputs in
   let constantsopt: constants option = Some (My_term.constants_of_list ops) in
   let outputs = proof_using_toma parsed_outputs constantsopt in
   Pp.str @@ String.concat "\n" outputs

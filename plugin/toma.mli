@@ -1,6 +1,4 @@
-(* tomaを利用するためのモジュール *)
+(** Toma を利用するためのモジュール *)
 
-(* toma の出力を返す *)
-val execute_toma : My_term.t list -> string list
-
-val toma : Constr.t list -> string list -> string list
+(** 公理のリスト[Constr.t list] を与えて Toma を実行し、出力行のリスト[string list]を返す。 *)
+val toma : Constr.t list -> string list
