@@ -17,29 +17,15 @@ Axiom ax3 : forall x y, plus (s (x)) y = s (plus x y).
 
 Create HintDb hint_compl.
 
-Definition t0 := ax1.
-Definition t1 := ax2.
-Definition t2 := ax3.
-
-
 Complete ax1 ax2 ax3 : plus s p : hint_compl.
 
 Print Rewrite HintDb hint_compl.
 
-Theorem check1: forall x y, (i x) + (x + y) = y.
-Proof.
-  intros.
-  autorewrite with hint_compl.
-  reflexivity.
-Qed.
+Theorem check1 : forall x, s (p (s (p x))) = x.
+  Proof.
+    intros.
+    autorewrite with hint_compl.
+    reflexivity.
+  Qed.
 
-Print check1.
-
-Theorem check2: forall a b c, i (a + b) + (a + (b + c)) = c.
-Proof.
-  intros.
-  autorewrite with hint_compl.
-  reflexivity.
-Qed.
-
-Print check2.
+Check check1.

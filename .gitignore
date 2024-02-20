@@ -7,6 +7,7 @@
 *.cmti
 *.cmxs
 *.cmxa
+*.cmx
 *.aux
 *.d
 *.glob
@@ -19,9 +20,13 @@ g_*.ml
 # dune
 _build
 
+.merlin
+
 # coq_makefile
 Makefile.coq
 Makefile.coq.conf
 META
 
 .DS_Store
+.swp
+a.out
