@@ -132,7 +132,7 @@ let variables_of_constr c =
         (Names.Id.to_string id) :: aux acc subterm
     else
       fold aux acc c in
-  aux [] c
+  List.rev (aux [] c)
 
 (** Exception to early return.
     Intended to break fold, map or iter. *)
