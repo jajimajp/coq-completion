@@ -19,13 +19,9 @@ Axiom id_l : forall a, e + a = a.
 (* 左逆元 *)
 Axiom inv_l : forall a, i a + a = e.
 
-Definition t0 := id_l.
-Definition t1 := inv_l.
-Definition t2 := assoc.
-
 Create HintDb hint_compl.
 
-Complete t0 t1 t2 : f e i : hint_compl.
+Complete assoc id_l inv_l : f e i : hint_compl.
 
 Print Rewrite HintDb hint_compl.
 
