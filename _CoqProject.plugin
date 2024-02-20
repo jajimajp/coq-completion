@@ -5,6 +5,8 @@ plugin/META.coq-completion
 theories/Plugin.v
 
 plugin/devutil.mli
+plugin/equation.mli
+plugin/equation.ml
 plugin/main.mli
 plugin/g_tactics.mlg
 plugin/toma.mli
@@ -12,8 +14,6 @@ plugin/tomaparser.mli
 plugin/dune
 plugin/my_term.mli
 plugin/main.ml
-plugin/compl.mli
-plugin/compl.ml
 plugin/tomaparser.ml
 plugin/my_term.ml
 plugin/devutil.ml
