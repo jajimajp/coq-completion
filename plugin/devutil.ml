@@ -1,5 +1,11 @@
 open Constrexpr
 
+let insert_unique x l =
+  if List.mem x l then l else x :: l
+
+let merge l1 l2 =
+  List.fold_left (fun acc x -> insert_unique x acc) l1 l2
+
 let string_of_lname lname =
   lname.CAst.v
   |> Names.Name.print
