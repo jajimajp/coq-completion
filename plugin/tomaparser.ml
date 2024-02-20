@@ -43,6 +43,7 @@ let string_of_termast term =
   in aux term
 
 type tomaoutputsection =
+| Axioms of tomarule list
 | ReductionOrder of tomarule list
   (* 新しい規則, criticalpairs の規則１、規則２、superposition *)
 | CriticalPairs of (tomarule * termid * termid * term) list
@@ -77,6 +78,21 @@ let parsetomaruleopt line : tomarule option =
     Some (id, left, right)
   else
     None
+
+let readaxioms lines =
+  let rec aux lines acc = (* 規則、残りの行 *)
+    match lines with
+    | line :: rest -> begin
+      if line = "" then aux rest acc else
+      match String.sub line 0 2 with
+      | "ax" -> aux rest acc
+      | "in" -> acc, lines (* interreduce の開始 *)
+      | _ -> (aux rest ((parsetomarule line) :: acc))
+    end
+    | [] -> (acc, [])
+    in
+    let (rules, restlines) = aux lines [] in
+    (Axioms (List.rev rules), restlines)
 
 let readreductionorder lines =
   let rec aux lines acc = (* 規則、残りの行 *)
@@ -201,6 +217,9 @@ let readtomaoutput lines =
     | line :: rest -> begin
       if line = "" then aux rest acc else
       match String.sub line 0 2 with
+      | "ax" ->
+        let result, rest = readaxioms lines in
+        aux rest (result :: acc)
       | "re" ->
         let result, rest = readreductionorder lines in
         aux rest (result :: acc)
@@ -276,6 +295,7 @@ let describe out =
     match out with
     | [] -> ()
     | hd :: tl -> begin match hd with
+      | Axioms _ -> aux tl proved
       | ReductionOrder _ ->
           let proved = describereductionorder hd proved in
           aux tl proved

@@ -60,7 +60,7 @@ let add_local_rewrite_hint (base: string) (lcsr: Constrexpr.constr_expr) : Pp.t 
   let _ = add_hints base in
   Pp.strbrk "Added rewrite hints."
 
-let prove_reduction (records : tomarule  list) (proved: SS.t) (constants: constants option) axioms: (string list * SS.t) =
+let add_axioms (records : tomarule  list) (proved: SS.t) (constants: constants option) axioms: (string list * SS.t) =
   let rec aux records outputs proved =
     match records with
     | [] -> outputs, proved
@@ -250,9 +250,12 @@ let proof_using_toma (sections : Tomaparser.tomaoutputsection list) (constants: 
     | [] -> outputs
     | section :: rest -> begin
       match section with
-      | ReductionOrder rules ->
-        let (outputs', proved) = prove_reduction rules proved constants axioms in
+      | Axioms rules ->
+        let (outputs', proved) = add_axioms rules proved constants axioms in
         aux rest (outputs @ outputs') proved (dbg_cnt + 1)
+      | ReductionOrder rules ->
+        (* 現状、reductionorder: に対する新たな規則の証明は起こらない *)
+        aux rest outputs proved (dbg_cnt + 1)
       | CriticalPairs pairs ->
         let (outputs', proved) = proof_using_critical_pairs pairs proved constants in
         aux rest (outputs @ outputs') proved (dbg_cnt + 1)

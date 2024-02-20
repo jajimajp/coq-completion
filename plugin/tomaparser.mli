@@ -6,6 +6,9 @@ type termid = string
 type tomarule = termid * term * term
 
 type tomaoutputsection =
+  (* 公理のリスト 最初に与えた規則を表示するが、定理のIDや左辺・右辺の順は異なっている可能性がある *)
+| Axioms of tomarule list
+  (* 新しい規則, 簡約規則のリスト *)
 | ReductionOrder of tomarule list
   (* 新しい規則, criticalpairs の規則１、規則２、superposition *)
 | CriticalPairs of (tomarule * termid * termid * term) list

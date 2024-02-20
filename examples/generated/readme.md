@@ -11,7 +11,7 @@ Each example is tested with a timeout of 20 seconds.
 |file|status|
 |---|---|
 | [./kamereon.v](./kamereon.v) | 🔴 FAIL |
-| [./U.v](./U.v) | 🔴 FAIL |
+| [./U.v](./U.v) | 🟢 OK |
 | [./double_app.v](./double_app.v) | 🔴 FAIL |
 | [./div/division.v](./div/division.v) | 🔴 FAIL |
 | [./div/division_rev.v](./div/division_rev.v) | 🔴 FAIL |
@@ -37,7 +37,7 @@ Each example is tested with a timeout of 20 seconds.
 | [./ack.v](./ack.v) | 🔴 FAIL |
 | [./Der95_20.v](./Der95_20.v) | 🔴 FAIL |
 | [./com.v](./com.v) | 🔴 FAIL |
-| [./klein.v](./klein.v) | 🟢 OK |
+| [./klein.v](./klein.v) | 🔴 FAIL |
 | [./CiME_04_append.v](./CiME_04_append.v) | 🔴 FAIL |
 | [./subst.v](./subst.v) | 🔴 FAIL |
 | [./evenodd.v](./evenodd.v) | 🔴 FAIL |
