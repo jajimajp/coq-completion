@@ -1,19 +1,40 @@
-let get_constant_body gref =
-  let open Names.GlobRef in
-  match gref with
-  | ConstRef cst ->
-    let cb = Global.lookup_constant cst in
-    cb
-  | _ -> failwith "Invalid input"
+type ruleid = int
+type rule =
+  ruleid * Equation.t
 
-let constr_of_qualid (ln: Libnames.qualid): Constr.t =
-  let gref = Nametab.global ln in
-  let cb = get_constant_body gref in
-  cb.const_type
+type t =
+  { axioms       : Equation.t list
+  ; constants    : string list
+  ; hint_db_name : string
+  ; proved_rules : rule list
+  }
 
-let complete ~axioms ~hint_db_name ~ops =
-  let axioms = List.map constr_of_qualid axioms in
-  (* path を付加する (例: "e" => "AutoEqProver.Test.e") *)
-  let ops = List.map (fun op ->
-    op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds) ops in
-  Toma.toma axioms ops
+(** Make [t] from values with coq types *)
+let make
+    ~(axioms:Libnames.qualid list)
+    ~(constants:Libnames.qualid list)
+    ~(hint_db_name:string)
+    : t
+  =
+  { axioms = List.map Equation.of_qualid axioms
+  ; constants = List.map Libnames.string_of_qualid constants
+  ; hint_db_name
+  ; proved_rules = []
+  }
+
+let execute_action
+  ~(actions : Tomaparser.proof_action list)
+  ~(success_ruleids : ruleid list)
+  : Pp.t
+      = failwith "not implemented"
+
+let complete ~axioms ~constants ~hint_db_name =
+  let t = make ~axioms ~constants ~hint_db_name in
+  let _ = t in (* FIXME *)
+  let actions, result = (* TODO *) [], Error "not implemented" in
+    (* Toma.complete_and_return_actions ~axioms:t.axioms ~constants:t.constants *)
+  match result with
+  | Ok success_ruleids ->
+    execute_action ~actions ~success_ruleids
+  | Error err ->
+    Pp.str err
