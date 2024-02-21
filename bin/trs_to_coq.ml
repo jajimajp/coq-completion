@@ -3,25 +3,6 @@
 (* to compile, run: ocamlfind ocamlopt -linkpkg -thread -package core -package str -package ppx_jane trs_to_coq.ml *)
 open Core
 
-let strip s =
-  let rec strip_left s =
-    if String.length s = 0 then
-      s
-    else if String.contains " \t\n" s.[0] then
-      strip_left (String.sub s ~pos:1 ~len:(String.length s - 1))
-    else
-      s
-  in
-  let rec strip_right s =
-    if String.length s = 0 then
-      s
-    else if String.contains " \t\n" s.[String.length s - 1] then
-      strip_right (String.sub s ~pos:0 ~len:(String.length s - 1))
-    else
-      s
-  in
-  strip_left (strip_right s)
-
 let escape_name = function
 | "0" -> "zero"
 | "+" -> "plus"
@@ -64,15 +45,6 @@ module T = struct
       if String.contains str ' ' then
         Printf.eprintf "WARNING: space found in variable: \"%s\"\n" str;
       Var (escape_name str)
-
-  let to_string t =
-    let rec loop t =
-      match t with
-      | Var s -> s
-      | App (f, args) ->
-        let args_str = List.map ~f:loop args |> String.concat ~sep:"," in
-        Printf.sprintf "%s(%s)" f args_str in
-    loop t
 
   let rec iter_vars t ~f =
     match t with
@@ -122,9 +94,6 @@ module E = struct
       let r = Str.matched_group 2 str in
       (T.of_string l, T.of_string r)
     | false -> failwith ("E: parse error: " ^ str)
-
-  let to_string (l, r) =
-    String.concat ~sep:" -> " [T.to_string l; T.to_string r]
 
   let iter_vars (l, r) ~f =
     T.iter_vars l ~f;
@@ -207,9 +176,6 @@ module Trs = struct
         | "(RUL" -> let rules, rest = parseRULES lines in loop { acc with rules = rules } rest
         | _ -> Printf.eprintf "INFO: ignoring line: %s\n" hd; loop acc tl) in
     loop { var = []; rules = [] } lines
-
-  let to_string trs =
-    String.concat ~sep:"\n" ((String.concat ~sep:" " trs.var) :: (List.map ~f:E.to_string trs.rules))
 
   let to_coq t =
     let funnames =

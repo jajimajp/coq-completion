@@ -42,7 +42,7 @@ convert_files() {
             if [[ $base =~ ^[0-9] ]]; then
                 base="g_$base"
             fi
-            ./bin/a.out "$file" > "$target_dir/$base.v"
+            dune exec ./bin/trs_to_coq.exe "$file" > "$target_dir/$base.v"
         fi
     done
 
