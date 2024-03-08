@@ -332,3 +332,148 @@ let _ =
   ignore @@ describe_toma_output lines
 *)
  
+
+module V6 = struct
+  type procedure = proof list * rule list (* (proofs for all rules, completed rules) *)
+  and rule = termid * eq
+  and eq = term * term
+  and proof = (rule * strat)
+  and strat =
+    | Axiom
+    (* Critical pair between [rule] and [rule] with superposition [term]. *)
+    | Crit of termid * termid * term
+    (* [Simp (r, l1, l2)] simplify r by rewriting lhs with [l1], and rhs with [l2] *)
+    | Simp of termid * termid list * termid list
+
+  (** [expect str lines] expects [str] as head of lines.
+      If head = str, then returns rest lines, raises error otherwise. *)
+  let rec expect str lines : string list =
+    match lines with
+    | hd :: tl ->
+      if hd = str then
+        tl
+      else if hd = "" then
+        expect str tl
+      else
+        failwith ("expect: Unexpected output " ^ hd ^ ", expected " ^ str)
+    | _ -> failwith ("expect: Unexpected end of input, expected " ^ str)
+
+  (** [expect_axioms lines] consumes input [lines], returns (lines of axioms, rest lines) *)
+  let expect_axioms lines : string list * string list =
+    let rec aux lines acc =
+      match lines with
+      | line :: rest ->
+        if line = "generated rules:" then (List.rev acc, lines) else
+        aux rest (line :: acc)  
+      | [] -> failwith "expect_axioms: reached end of input" in
+    aux lines []
+  
+  (** [consume_proof lines] consumes proof with rule and rest lines if next lines if proof.
+      Otherwise returns None with lines unchanged. *)
+  let rec consume_proof lines : proof option * string list =
+    match lines with
+    | [] -> None, []
+    | line :: rest ->
+      if line = "" then consume_proof rest
+      else if line = "ES:" then (None, lines) else
+        let parse_header line : rule =
+          (* (ex) 49: X6 = +(-(-(X10)), +(-(+(X9, X10)), +(X9, X6))). *)
+          let re = Str.regexp "^\\([0-9]+\\): \\(.+\\) = \\(.+\\)\\.$" in
+          if Str.string_match re line 0 then
+            let id = Str.matched_group 1 line in
+            let l = Str.matched_group 2 line in
+            let r = Str.matched_group 3 line in
+            let l = termast_of_string l in
+            let r = termast_of_string r in
+            (id, (l, r))
+          else
+            failwith "parse_header: invalid toma rule" in
+        let rule = parse_header line in
+        let parse_crit line = 
+          (* (ex) Proof: A critical pair between equations 2 and 1 with superposition +(+(-(X3), X3), X2). *)
+          let re = Str.regexp "^Proof: A critical pair between equations \\([0-9]+\\) and \\([0-9]+\\) with superposition \\(.+\\)\\.$" in
+          if Str.string_match re line 0 then
+            let id1 = Str.matched_group 1 line in
+            let id2 = Str.matched_group 2 line in
+            let term = Str.matched_group 3 line in
+            let term = termast_of_string term in
+            Crit (id1, id2, term)
+          else
+            failwith "parse_crit: invalid toma rule" in
+        let parse_simp lines : strat * string list =
+          (* (ex) Proof: Rewrite equation 3,
+                      lhs with equations []
+                      rhs with equations [0]. *)
+          begin match lines with
+          | l1 :: l2 :: l3 :: rest ->
+            let err l = failwith ("parse_simp: invalid toma rule: " ^ l) in
+            let re1 = Str.regexp "^Proof: Rewrite equation \\([0-9]+\\),$" in
+            if Str.string_match re1 l1 0 then
+            let id = Str.matched_group 1 l1 in
+            let re2 = Str.regexp ".*lhs with equations \\[\\(.*\\)\\]$" in
+            if Str.string_match re2 l2 0 then
+            let lids = Str.matched_group 1 l2 |> String.split_on_char ',' in
+            let re3 = Str.regexp ".*rhs with equations \\[\\(.*\\)\\].$" in
+            if Str.string_match re3 l3 0 then
+            let rids = Str.matched_group 1 l3 |> String.split_on_char ',' in
+            Simp (id, lids, rids), rest
+            else err l3
+            else err l2
+            else err l1
+          | _ -> failwith "parse_simp: unexpected end of input"
+          end in
+        match (String.split_on_char ' ' (List.hd rest)) with
+        | "Proof:" :: "Axiom." :: _ -> Some (rule, Axiom), (List.tl rest)
+        | "Proof:" :: "A" :: "critical" :: _ -> Some (rule, parse_crit (List.hd rest)), (List.tl rest)
+        | "Proof:" :: "Rewrite" :: _ ->
+          let strat, rest = parse_simp rest in
+          Some (rule, strat), rest
+        | _ -> failwith ("consume_proof: invalid input: " ^ List.hd rest)
+
+  let expect_completed_rules lines : rule list =
+    let parse_rule line : rule =
+      (* (ex) 9: +(X4, 0()) -> X4 *)
+      let re = Str.regexp "^\\([0-9]+\\): \\(.+\\) -> \\(.+\\)$" in
+      if Str.string_match re line 0 then
+        let id = Str.matched_group 1 line in
+        let l = Str.matched_group 2 line in
+        let r = Str.matched_group 3 line in
+        let l = termast_of_string l in
+        let r = termast_of_string r in
+        (id, (l, r))
+      else
+        failwith "parse_rule: invalid toma rule" in
+    let rec aux lines acc =
+      match lines with
+      | [] -> List.rev acc
+      | hd :: tl ->
+        if hd = "" then aux tl acc else
+          aux tl ((parse_rule hd) :: acc) in
+    aux lines []
+
+  let parse lines = 
+    let lines = expect "Completed" lines in
+    let lines = expect "axioms:" lines in
+    let _, lines = expect_axioms lines in
+    let lines = expect "generated rules:" lines in
+    let rec aux lines acc : proof list * string list =
+      match lines with
+      | [] -> List.rev acc, []
+      | hd :: tl ->
+        match consume_proof lines with
+        | None, _ -> List.rev acc, lines
+        | Some (rule, strat), rest -> aux rest ((rule, strat) :: acc) in
+    let proofs, lines = aux lines [] in
+    let lines = expect "ES:" lines in
+    let completed_rules = expect_completed_rules lines in
+    (proofs, completed_rules)
+
+  let print_procedure (proofs, comp_rules) : unit =
+    let print_proof = function
+      | (rule, Axiom) -> print_endline @@ "Axiom: " ^ (fst rule) ^ ": " ^ (string_of_termast (fst (snd rule))) ^ " = " ^ (string_of_termast (snd (snd rule)))
+      | (rule, Crit (id1, id2, sp)) -> print_endline @@ "Crit: " ^ (fst rule) ^ ": " ^ (string_of_termast (fst (snd rule))) ^ " = " ^ (string_of_termast (snd (snd rule))) ^ " with superposition " ^ (string_of_termast sp)
+      | (rule, Simp (id, lhs, rhs)) -> print_endline @@ "Simp: " ^ (fst rule) ^ ": " ^ (string_of_termast (fst (snd rule))) ^ " = " ^ (string_of_termast (snd (snd rule))) ^ " by rewriting lhs with " ^ (String.concat ", " lhs) ^ ", and rhs with " ^ (String.concat ", " rhs) in
+    List.iter print_proof proofs;
+    let print_rule (id, (l, r)) = print_endline @@ "Completed: " ^ id ^ ": " ^ (string_of_termast l) ^ " -> " ^ (string_of_termast r) in
+    List.iter print_rule comp_rules
+end
