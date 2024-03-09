@@ -22,16 +22,16 @@ val describe_toma_output : string list -> unit
 val readtomaoutput : string list -> tomaoutputsection list
 
 module V6 : sig
-  type procedure = proof list * rule list (* (proofs for all rules, completed rules) *)
+  type procedure = strat proof list * rule list (* (proofs for all rules, completed rules) *)
   and rule = termid * eq
   and eq = term * term
-  and proof = (rule * strat)
+  and 'strat proof = (rule * 'strat)
   and strat =
     | Axiom
-    (* Critical pair between [termid1] and [termid2] with superposition [term]. *)
-    | Crit of termid * termid * term
-    (* [Simp (r, l1, l2)] simplify r by rewriting lhs with [l1], and rhs with [l2] *)
-    | Simp of termid * termid list * termid list
+    (* Critical pair between [rule1] and [rule2] with superposition [term]. *)
+    | Crit of rule * rule * term
+    (* [Simp (r, l)] simplify r by rewriting with [l] *)
+    | Simp of rule * termid list
   
   val print_procedure : procedure -> unit
 
