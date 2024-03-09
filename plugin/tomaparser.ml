@@ -334,16 +334,24 @@ let _ =
  
 
 module V6 = struct
-  type procedure = proof list * rule list (* (proofs for all rules, completed rules) *)
+  type procedure = strat proof list * rule list (* (proofs for all rules, completed rules) *)
   and rule = termid * eq
   and eq = term * term
-  and proof = (rule * strat)
+  and 'strat proof = (rule * 'strat)
+
   and strat =
     | Axiom
     (* Critical pair between [rule] and [rule] with superposition [term]. *)
-    | Crit of termid * termid * term
+    | Crit of rule * rule * term
     (* [Simp (r, l1, l2)] simplify r by rewriting lhs with [l1], and rhs with [l2] *)
-    | Simp of termid * termid list * termid list
+    | Simp of rule * termid list
+  
+  and minimal_strat =
+    | MAxiom
+    (* Critical pair between [rule] and [rule] with superposition [term]. *)
+    | MCrit of termid * termid * term
+    (* [Simp (r, l1, l2)] simplify r by rewriting lhs with [l1], and rhs with [l2] *)
+    | MSimp of termid * termid list
 
   (** [expect str lines] expects [str] as head of lines.
       If head = str, then returns rest lines, raises error otherwise. *)
@@ -370,7 +378,7 @@ module V6 = struct
   
   (** [consume_proof lines] consumes proof with rule and rest lines if next lines if proof.
       Otherwise returns None with lines unchanged. *)
-  let rec consume_proof lines : proof option * string list =
+  let rec consume_proof lines : minimal_strat proof option * string list =
     match lines with
     | [] -> None, []
     | line :: rest ->
@@ -378,14 +386,17 @@ module V6 = struct
       else if line = "ES:" then (None, lines) else
         let parse_header line : rule =
           (* (ex) 49: X6 = +(-(-(X10)), +(-(+(X9, X10)), +(X9, X6))). *)
-          let re = Str.regexp "^\\([0-9]+\\): \\(.+\\) = \\(.+\\)\\.$" in
+          let re = Str.regexp "^\\([0-9]+\\): \\(.+\\) \\(->\\|=\\|<-\\) \\(.+\\)\\.$" in
           if Str.string_match re line 0 then
             let id = Str.matched_group 1 line in
             let l = Str.matched_group 2 line in
-            let r = Str.matched_group 3 line in
+            let op = Str.matched_group 3 line in
+            let r = Str.matched_group 4 line in
             let l = termast_of_string l in
             let r = termast_of_string r in
-            (id, (l, r))
+            match op with
+            | "<-" -> (id, (r, l))
+            | _ -> (id, (l, r))
           else
             failwith "parse_header: invalid toma rule" in
         let rule = parse_header line in
@@ -397,10 +408,10 @@ module V6 = struct
             let id2 = Str.matched_group 2 line in
             let term = Str.matched_group 3 line in
             let term = termast_of_string term in
-            Crit (id1, id2, term)
+            MCrit (id1, id2, term)
           else
             failwith "parse_crit: invalid toma rule" in
-        let parse_simp lines : strat * string list =
+        let parse_simp lines : minimal_strat * string list =
           (* (ex) Proof: Rewrite equation 3,
                       lhs with equations []
                       rhs with equations [0]. *)
@@ -416,14 +427,17 @@ module V6 = struct
             let re3 = Str.regexp ".*rhs with equations \\[\\(.*\\)\\].$" in
             if Str.string_match re3 l3 0 then
             let rids = Str.matched_group 1 l3 |> String.split_on_char ',' in
-            Simp (id, lids, rids), rest
+            let ids = lids @ rids in
+            (* delete duplicates *)
+            let ids = List.sort_uniq compare ids in
+            MSimp (id, ids), rest
             else err l3
             else err l2
             else err l1
           | _ -> failwith "parse_simp: unexpected end of input"
           end in
         match (String.split_on_char ' ' (List.hd rest)) with
-        | "Proof:" :: "Axiom." :: _ -> Some (rule, Axiom), (List.tl rest)
+        | "Proof:" :: "Axiom." :: _ -> Some (rule, MAxiom), (List.tl rest)
         | "Proof:" :: "A" :: "critical" :: _ -> Some (rule, parse_crit (List.hd rest)), (List.tl rest)
         | "Proof:" :: "Rewrite" :: _ ->
           let strat, rest = parse_simp rest in
@@ -451,12 +465,12 @@ module V6 = struct
           aux tl ((parse_rule hd) :: acc) in
     aux lines []
 
-  let parse lines = 
+  let parse_minimal lines = 
     let lines = expect "Completed" lines in
     let lines = expect "axioms:" lines in
     let _, lines = expect_axioms lines in
     let lines = expect "generated rules:" lines in
-    let rec aux lines acc : proof list * string list =
+    let rec aux lines acc : minimal_strat proof list * string list =
       match lines with
       | [] -> List.rev acc, []
       | hd :: tl ->
@@ -468,12 +482,32 @@ module V6 = struct
     let completed_rules = expect_completed_rules lines in
     (proofs, completed_rules)
 
+  let parse lines = 
+    let proofs, comp_rules = parse_minimal lines in
+    let table = Hashtbl.create 10 in
+    List.iter (fun ((id, (l, r)), _) -> Hashtbl.add table id (id, (l, r))) proofs;
+    let find id = Hashtbl.find table id in
+    let rec aux (proofs : minimal_strat proof list) acc : strat proof list =
+      match proofs with
+      | [] -> List.rev acc
+      | (rule, strat) :: tl ->
+        begin match strat with
+        | MAxiom -> aux tl ((rule, Axiom) :: acc)
+        | MCrit (id1, id2, sp) -> aux tl ((rule, Crit (find id1, find id2, sp)) :: acc)
+        | MSimp (id, ids) -> aux tl ((rule, Simp (find id, ids)) :: acc)
+        end in
+    (aux proofs [], comp_rules)
+
   let print_procedure (proofs, comp_rules) : unit =
+    let rec string_of_term = function
+    | Var v -> v
+    | App (f, args) -> f ^ "(" ^ (String.concat "," (List.map string_of_term args)) ^ ")" in
+    let string_of_rule (id, (l, r)) = id ^ ": " ^ (string_of_term l) ^ " -> " ^ (string_of_term r) in
     let print_proof = function
-      | (rule, Axiom) -> print_endline @@ "Axiom: " ^ (fst rule) ^ ": " ^ (string_of_termast (fst (snd rule))) ^ " = " ^ (string_of_termast (snd (snd rule)))
-      | (rule, Crit (id1, id2, sp)) -> print_endline @@ "Crit: " ^ (fst rule) ^ ": " ^ (string_of_termast (fst (snd rule))) ^ " = " ^ (string_of_termast (snd (snd rule))) ^ " with superposition " ^ (string_of_termast sp)
-      | (rule, Simp (id, lhs, rhs)) -> print_endline @@ "Simp: " ^ (fst rule) ^ ": " ^ (string_of_termast (fst (snd rule))) ^ " = " ^ (string_of_termast (snd (snd rule))) ^ " by rewriting lhs with " ^ (String.concat ", " lhs) ^ ", and rhs with " ^ (String.concat ", " rhs) in
+      | (rule, Axiom) -> print_endline @@ "Axiom: " ^ (string_of_rule rule)
+      | (rule, Crit (r1, r2, sp)) -> print_endline @@ "Crit: " ^ (string_of_rule rule) ^ " with " ^ (string_of_rule r1) ^ " and " ^ (string_of_rule r2) ^ " with superposition " ^ (string_of_term sp)
+      | (rule, Simp (id, ids)) -> print_endline @@ "Simp: " ^ (string_of_rule rule) ^ " with " ^ (String.concat "," ids) in
     List.iter print_proof proofs;
-    let print_rule (id, (l, r)) = print_endline @@ "Completed: " ^ id ^ ": " ^ (string_of_termast l) ^ " -> " ^ (string_of_termast r) in
+    let print_rule rule = print_endline @@ "Completed: " ^ (string_of_rule rule) in
     List.iter print_rule comp_rules
 end
