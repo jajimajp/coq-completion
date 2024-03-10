@@ -34,6 +34,13 @@ let prove_by_axiom ~name ~goal ~axioms =
       end in
   try_proof axioms false
 
+let add_axiom (rule : V6.rule) (constants : constants option) axioms =
+  let name = Names.Id.of_string ("t" ^ fst rule) in
+  let constants = (match constants with None -> My_term.default_constants | Some cs -> cs) in
+  let goal = My_term.to_constrexpr_raw (fst (snd rule), snd (snd rule)) constants in
+  let () = prove_by_axiom ~name ~goal ~axioms in
+  ()
+
 (*
   書換規則をヒントDBに追加する
 
@@ -59,31 +66,6 @@ let add_local_rewrite_hint (base: string) (lcsr: Constrexpr.constr_expr) : Pp.t 
   let add_hints base = add_rew_rules ~locality:Local base [eq] in
   let _ = add_hints base in
   Pp.strbrk "Added rewrite hints."
-
-let add_axiom (rule : V6.rule) (constants : constants option) axioms =
-  let name = Names.Id.of_string ("t" ^ fst rule) in
-  let constants = (match constants with None -> My_term.default_constants | Some cs -> cs) in
-  let goal = My_term.to_constrexpr_raw (fst (snd rule), snd (snd rule)) constants in
-  let () = prove_by_axiom ~name ~goal ~axioms in
-  ()
-
-let add_axioms (records : tomarule  list) (proved: SS.t) (constants: constants option) axioms: (string list * SS.t) =
-  let rec aux records outputs proved =
-    match records with
-    | [] -> outputs, proved
-    | (id, left, right) :: rest ->
-      if SS.mem id proved then
-        aux rest (("skip " ^ id) :: outputs) proved
-      else
-        let name = Names.Id.of_string ("t" ^ id) in
-        let constants = (match constants with None -> My_term.default_constants | Some cs -> cs) in
-        let goal = My_term.to_constrexpr_raw (left, right) constants in
-        let () = prove_by_axiom ~name ~goal ~axioms in
-        let proved = SS.add id proved in
-          aux rest (("proved(by axiom) t" ^ id) :: outputs) proved
-    in
-    let outputs, proved = aux records [] proved in
-    List.rev outputs, proved
 
 (*
   critical_pair による定理の証明
@@ -162,24 +144,6 @@ let proof_using_crit ~name ~n1 ~n2 ~l ~r ~crit ~(constants:constants option) =
   let () = try_proof (1, 1) in
     Pp.strbrk "Proof"
 
-let proof_using_critical_pairs (pairs : (tomarule * termid * termid * term) list) (proved: SS.t) (constants: constants option) =
-  let rec aux pairs outputs proved =
-    match pairs with
-    | [] -> outputs, proved
-    | ((id, l, r), n1, n2, crit) :: rest ->
-      if SS.mem id proved then
-        aux rest (("skip t" ^ id) :: outputs) proved
-      else
-        let n1 = "t" ^ n1 in
-        let n2 = "t" ^ n2 in
-        let name = Names.Id.of_string ("t" ^ id) in
-        let _ = proof_using_crit ~name ~n1 ~n2 ~l ~r ~crit ~constants in
-        let proved = SS.add id proved in
-          aux rest (("proved t" ^ id) :: outputs) proved
-    in
-  let outputs, proved = aux pairs [] proved in
-  List.rev outputs, proved
-
 let prove_interreduce
   ~(name:Names.Id.t) (* 証明する定理名 *)
   ~(goal:Constrexpr.constr_expr) (* 定理の型 *)
@@ -195,7 +159,6 @@ let prove_interreduce
   let (t, types, ustate, obl_info) = Declare.Obls.prepare_obligation ~name ~types:None ~body sigma in
   let open Proofview.Notations in
   let open Tactypes in
-  let () = print_endline @@ "app: " ^ (Libnames.string_of_qualid applier) in
   let gen_tactic use_symmetry =
     Tactics.intros <*>
     Tactics.pose_proof (Names.Name (Names.Id.of_string "H")) (EConstr.mkRef (Nametab.global applier, EConstr.EInstance.empty)) <*>
@@ -216,39 +179,6 @@ let prove_interreduce
     end in
   try_proof false
 
-let proof_interreduce (records : ((tomarule * tomarule * termid list) list)) (proved: SS.t) (constants: constants option): (string list * SS.t) =
-  let rec aux records outputs proved =
-    match records with
-    | [] -> outputs, proved
-    | ((previd, prevl, prevr), (nextid, nextl, nextr), rewriterids) :: rest ->
-      if SS.mem nextid proved then
-        aux rest (("skip " ^ nextid) :: outputs) proved
-      else
-        let name = Names.Id.of_string ("t" ^ nextid) in
-        let rewriters = List.map (fun id -> Libnames.qualid_of_string ("t" ^ id)) rewriterids in
-        let applier = Libnames.qualid_of_string ("t" ^ previd) in
-        let constants = (match constants with None -> My_term.default_constants | Some cs -> cs) in
-        let goal = My_term.to_constrexpr_raw (nextl, nextr) constants in
-        let () = prove_interreduce ~name ~goal ~rewriters ~applier in
-        let proved = SS.add nextid proved in
-          aux rest (("proved(interreduce) t" ^ nextid) :: outputs) proved
-    in
-    let outputs, proved = aux records [] proved in
-    List.rev outputs, proved
-
-let add_rules_for_termination (rules : tomarule list) =
-  let rec aux = function
-  | [] -> ()
-  | (id, _, _) :: tl ->
-      let _ = add_local_rewrite_hint "hint_compl" (CAst.make (
-        CRef (
-          Libnames.qualid_of_string @@ "t" ^ id,
-          None
-        )
-      )) in
-      aux tl
-  in aux rules
-
 let add_rules_for_termination_v6 (rules : V6.rule list) =
   let rec aux = function
   | [] -> ()
@@ -261,32 +191,6 @@ let add_rules_for_termination_v6 (rules : V6.rule list) =
       )) in
       aux tl
   in aux rules
-
-let proof_using_toma (sections : Tomaparser.tomaoutputsection list) (constants: constants option) axioms : string list =
-  let open Tomaparser in
-  let rec aux sections outputs proved dbg_cnt =
-    if dbg_cnt = 30 then outputs else (* DEBUG *)
-    match sections with
-    | [] -> outputs
-    | section :: rest -> begin
-      match section with
-      | Axioms rules ->
-        let (outputs', proved) = add_axioms rules proved constants axioms in
-        aux rest (outputs @ outputs') proved (dbg_cnt + 1)
-      | ReductionOrder rules ->
-        (* 現状、reductionorder: に対する新たな規則の証明は起こらない *)
-        aux rest outputs proved (dbg_cnt + 1)
-      | CriticalPairs pairs ->
-        let (outputs', proved) = proof_using_critical_pairs pairs proved constants in
-        aux rest (outputs @ outputs') proved (dbg_cnt + 1)
-      | Interreduce records ->
-        let (outputs', proved) = proof_interreduce records proved constants in
-        aux rest (outputs @ outputs') proved (dbg_cnt + 1)
-      | TerminationSuccess rules ->
-        let () = add_rules_for_termination rules in
-        outputs
-    end in
-  List.rev (aux sections [] (SS.empty) 0)
 
 let proof_using_toma_v6 (proc : V6.procedure) (constants : constants option) axioms : string list =
   let open Tomaparser in
@@ -305,12 +209,7 @@ let proof_using_toma_v6 (proc : V6.procedure) (constants : constants option) axi
                                 ~goal:(My_term.to_constrexpr_raw (snd rule) constants)
                                 ~rewriters:(List.map (fun id -> Libnames.qualid_of_string ("t" ^ id)) rewriters)
                                 ~applier:(Libnames.qualid_of_string ("t" ^ (fst prev))) in
-  let rec take ls n =
-    match ls, n with
-    | _, 0 -> []
-    | [], _ -> []
-    | hd :: tl, _ -> hd :: take tl (n - 1) in
-  List.iter prove (take proofs 60); 
+  List.iter prove proofs; 
   add_rules_for_termination_v6 (snd proc);
   []
 
@@ -333,8 +232,6 @@ let complete rs dbName ops =
   let ops = List.map (fun op ->
     op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds) ops in
   let outputs = Toma.V6.toma axioms in
-  (* DEBUG *)
-  List.iter print_endline outputs;
   let procedure = Tomaparser.V6.parse outputs in
   let constantsopt: constants option = Some (My_term.constants_of_list ops) in
   let outputs = proof_using_toma_v6 procedure constantsopt rs in

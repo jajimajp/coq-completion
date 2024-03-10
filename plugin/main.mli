@@ -1,5 +1,3 @@
-val proof_using_toma : Tomaparser.tomaoutputsection list -> My_term.constants option -> Libnames.qualid list -> string list
-
 val prove_interreduce :
   name:Names.Id.t (* 証明する定理名 *)
   -> goal:Constrexpr.constr_expr (* 定理の型 *)
