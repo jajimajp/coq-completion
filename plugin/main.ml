@@ -60,6 +60,13 @@ let add_local_rewrite_hint (base: string) (lcsr: Constrexpr.constr_expr) : Pp.t 
   let _ = add_hints base in
   Pp.strbrk "Added rewrite hints."
 
+let add_axiom (rule : V6.rule) (constants : constants option) axioms =
+  let name = Names.Id.of_string ("t" ^ fst rule) in
+  let constants = (match constants with None -> My_term.default_constants | Some cs -> cs) in
+  let goal = My_term.to_constrexpr_raw (fst (snd rule), snd (snd rule)) constants in
+  let () = prove_by_axiom ~name ~goal ~axioms in
+  ()
+
 let add_axioms (records : tomarule  list) (proved: SS.t) (constants: constants option) axioms: (string list * SS.t) =
   let rec aux records outputs proved =
     match records with
@@ -242,6 +249,19 @@ let add_rules_for_termination (rules : tomarule list) =
       aux tl
   in aux rules
 
+let add_rules_for_termination_v6 (rules : V6.rule list) =
+  let rec aux = function
+  | [] -> ()
+  | (id, (_, _)) :: tl ->
+      let _ = add_local_rewrite_hint "hint_compl" (CAst.make (
+        CRef (
+          Libnames.qualid_of_string @@ "t" ^ id,
+          None
+        )
+      )) in
+      aux tl
+  in aux rules
+
 let proof_using_toma (sections : Tomaparser.tomaoutputsection list) (constants: constants option) axioms : string list =
   let open Tomaparser in
   let rec aux sections outputs proved dbg_cnt =
@@ -268,6 +288,32 @@ let proof_using_toma (sections : Tomaparser.tomaoutputsection list) (constants: 
     end in
   List.rev (aux sections [] (SS.empty) 0)
 
+let proof_using_toma_v6 (proc : V6.procedure) (constants : constants option) axioms : string list =
+  let open Tomaparser in
+  let open V6 in
+  let proofs = fst proc in
+  let prove (rule, strat) = match strat with
+  | Axiom ->
+    add_axiom rule constants axioms
+  | Crit (r1, r2, crit) ->
+    let n1 = "t" ^ (fst r1) in
+    let n2 = "t" ^ (fst r2) in
+    ignore @@ proof_using_crit ~name:(Names.Id.of_string ("t" ^ fst rule)) ~n1 ~n2 ~l:(fst (snd rule)) ~r:(snd (snd rule)) ~crit ~constants
+  | Simp (prev, rewriters) ->
+    let constants = (match constants with None -> My_term.default_constants | Some cs -> cs) in
+    ignore @@ prove_interreduce ~name:(Names.Id.of_string ("t" ^ (fst rule)))
+                                ~goal:(My_term.to_constrexpr_raw (snd rule) constants)
+                                ~rewriters:(List.map (fun id -> Libnames.qualid_of_string ("t" ^ id)) rewriters)
+                                ~applier:(Libnames.qualid_of_string ("t" ^ (fst prev))) in
+  let rec take ls n =
+    match ls, n with
+    | _, 0 -> []
+    | [], _ -> []
+    | hd :: tl, _ -> hd :: take tl (n - 1) in
+  List.iter prove (take proofs 60); 
+  add_rules_for_termination_v6 (snd proc);
+  []
+
 let get_constant_body gref =
   let open Names.GlobRef in
   match gref with
@@ -286,8 +332,10 @@ let complete rs dbName ops =
   (* path を付加する (例: "e" => "AutoEqProver.Test.e") *)
   let ops = List.map (fun op ->
     op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds) ops in
-  let outputs = Toma.toma axioms in
-  let parsed_outputs = Tomaparser.readtomaoutput outputs in
+  let outputs = Toma.V6.toma axioms in
+  (* DEBUG *)
+  List.iter print_endline outputs;
+  let procedure = Tomaparser.V6.parse outputs in
   let constantsopt: constants option = Some (My_term.constants_of_list ops) in
-  let outputs = proof_using_toma parsed_outputs constantsopt rs in
+  let outputs = proof_using_toma_v6 procedure constantsopt rs in
   Pp.str @@ String.concat "\n" outputs
