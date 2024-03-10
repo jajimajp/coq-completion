@@ -183,7 +183,7 @@ ES:
 |} |> String.split_on_char '\n'
 
 let%expect_test "parse" =
-  V6.print_procedure (V6.parse input);
+  print_procedure (parse input);
   [%expect {|
    Axiom: 0: +(0,X0) -> X0
    Axiom: 1: +(-(X1),X1) -> 0

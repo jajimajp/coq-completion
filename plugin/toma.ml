@@ -2,7 +2,6 @@
 module Exe : sig
   (** execute with input [string], and return output as [string list] *)
   val toma : string -> string list
-  val toma_v6 : string -> string list
 end = struct
   let write file content =
     let oc = open_out file in
@@ -31,16 +30,6 @@ end = struct
   let toma input =
     let argfile = file_with_content input in
     (* tomaへのパスが通っている必要がある *)
-    let command = "toma --ordered-completion " ^ argfile ^ " --v" in
-    let ic = Unix.open_process_in command in
-    let output = input_all_lines ic in
-    ignore (Unix.close_process_in ic);
-    (* 出力の先頭がリストの後ろに入っているので反転して返す *)
-    output
-
-  let toma_v6 input =
-    let argfile = file_with_content input in
-    (* tomaへのパスが通っている必要がある *)
     let command = "toma --completion-with-parsable-output " ^ argfile in
     let ic = Unix.open_process_in command in
     let output = input_all_lines ic in
@@ -58,12 +47,6 @@ let trs_of ~axioms =
     String.concat "\n" (List.map Equation.to_trs_string axioms);
     "\n)\n" ]
 
-let toma axioms =
+let toma axioms = 
   let axioms : Equation.t list = List.map Equation.of_constr axioms in
   Exe.toma (trs_of ~axioms)
-
-module V6 = struct
-  let toma axioms = 
-    let axioms : Equation.t list = List.map Equation.of_constr axioms in
-    Exe.toma_v6 (trs_of ~axioms)
-end
