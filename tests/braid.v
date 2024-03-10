@@ -14,16 +14,16 @@ Variable c1 : G.
 Variable c2 : G.
 
 (**** 公理 ****)
-Axiom t0 : forall x : G, e * x = x.
-Axiom t1 : forall x : G, x * e = x.
-Axiom t2 : forall x y z : G, (x * y) * z = x * (y * z).
-Axiom t3 : c1 * (c2 * c1) = c2 * (c1 * c2).
-Axiom t4 : e = c1 * c1.
-Axiom t5 : c2 * c2 = e.
+Axiom a0 : forall x : G, e * x = x.
+Axiom a1 : forall x : G, x * e = x.
+Axiom a2 : forall x y z : G, (x * y) * z = x * (y * z).
+Axiom a3 : c1 * (c2 * c1) = c2 * (c1 * c2).
+Axiom a4 : e = c1 * c1.
+Axiom a5 : c2 * c2 = e.
 
 Create HintDb hint_compl.
 
-Complete t0 t1 t2 t3 t4 t5 : f e c1 c2 : hint_compl.
+Complete a0 a1 a2 a3 a4 a5 : f e c1 c2 : hint_compl.
 
 Print Rewrite HintDb hint_compl.
 
