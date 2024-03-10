@@ -25,7 +25,7 @@ Each example is tested with a timeout of 20 seconds.
 | [./gcd/gcd.v](./gcd/gcd.v) | 🔴 FAIL |
 | [./g_917.v](./g_917.v) | 🟢 OK |
 | [./sp_com.v](./sp_com.v) | 🔴 FAIL |
-| [./list_rev.v](./list_rev.v) | 🔴 FAIL |
+| [./list_rev.v](./list_rev.v) | 🟢 OK |
 | [./qsort.v](./qsort.v) | 🔴 FAIL |
 | [./AG01#3.17.v](./AG01#3.17.v) | 🔴 FAIL |
 | [./fgf.v](./fgf.v) | 🔴 FAIL |
