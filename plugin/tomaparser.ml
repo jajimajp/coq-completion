@@ -23,14 +23,16 @@ let split_by_comma s =
   List.map string_of_chars (loop [] l 0)
 
 let rec termast_of_string str =
-  let reg = Str.regexp "^\\([^(]+\\)(\\(.+\\))$" in
+  let reg = Str.regexp "^\\([^(]+\\)(\\(.*\\))$" in
   match Str.string_match reg str 0 with
   | true ->
     let f = Str.matched_group 1 str in
     let args_str = Str.matched_group 2 str in
     let args_str_list = split_by_comma args_str in
-    let args = List.map termast_of_string args_str_list in
-    App (f, args)
+    if args_str_list = [""] then Var f
+    else
+      let args = List.map termast_of_string args_str_list in
+      App (f, args)
   | false -> Var str
 
 let string_of_termast term =
@@ -384,7 +386,7 @@ module V6 = struct
     | line :: rest ->
       if line = "" then consume_proof rest
       else if line = "ES:" then (None, lines) else
-        let parse_header line : rule =
+        let parse_header line : rule * bool = (* (rule, is_reversed(parsed "<-")) *)
           (* (ex) 49: X6 = +(-(-(X10)), +(-(+(X9, X10)), +(X9, X6))). *)
           let re = Str.regexp "^\\([0-9]+\\): \\(.+\\) \\(->\\|=\\|<-\\) \\(.+\\)\\.$" in
           if Str.string_match re line 0 then
@@ -395,17 +397,18 @@ module V6 = struct
             let l = termast_of_string l in
             let r = termast_of_string r in
             match op with
-            | "<-" -> (id, (r, l))
-            | _ -> (id, (l, r))
+            | "<-" -> (id, (r, l)), true
+            | _ -> (id, (l, r)), false
           else
             failwith "parse_header: invalid toma rule" in
-        let rule = parse_header line in
+        let rule, rev_lr = parse_header line in
         let parse_crit line = 
           (* (ex) Proof: A critical pair between equations 2 and 1 with superposition +(+(-(X3), X3), X2). *)
           let re = Str.regexp "^Proof: A critical pair between equations \\([0-9]+\\) and \\([0-9]+\\) with superposition \\(.+\\)\\.$" in
           if Str.string_match re line 0 then
             let id1 = Str.matched_group 1 line in
             let id2 = Str.matched_group 2 line in
+            let id1, id2 = if rev_lr then id2, id1 else id1, id2 in
             let term = Str.matched_group 3 line in
             let term = termast_of_string term in
             MCrit (id1, id2, term)
@@ -421,18 +424,17 @@ module V6 = struct
             let re1 = Str.regexp "^Proof: Rewrite equation \\([0-9]+\\),$" in
             if Str.string_match re1 l1 0 then
             let id = Str.matched_group 1 l1 in
-            let re2 = Str.regexp ".*lhs with equations \\[\\(.*\\)\\]$" in
-            if Str.string_match re2 l2 0 then
-            let lids = Str.matched_group 1 l2 |> String.split_on_char ',' in
-            let re3 = Str.regexp ".*rhs with equations \\[\\(.*\\)\\].$" in
-            if Str.string_match re3 l3 0 then
-            let rids = Str.matched_group 1 l3 |> String.split_on_char ',' in
-            let ids = lids @ rids in
+            let re2 = Str.regexp ".*lhs with equations \\[\\(.+\\)\\]$" in
+            let lids = if Str.string_match re2 l2 0 then
+              Str.matched_group 1 l2 |> String.split_on_char ','
+            else [] in 
+            let re3 = Str.regexp ".*rhs with equations \\[\\(.+\\)\\].$" in
+            let rids = if Str.string_match re3 l3 0 then
+              Str.matched_group 1 l3 |> String.split_on_char ','
+            else [] in
+            let ids = (lids @ rids) in
             (* delete duplicates *)
-            let ids = List.sort_uniq compare ids in
             MSimp (id, ids), rest
-            else err l3
-            else err l2
             else err l1
           | _ -> failwith "parse_simp: unexpected end of input"
           end in
