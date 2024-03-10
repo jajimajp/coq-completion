@@ -4,8 +4,6 @@ open Tomaparser
 open Autorewrite
 open Rewrite
 
-module SS = Set.Make(String)
-
 (** 公理のうちのどれかから直ちに導ける規則を証明する
     公理の一つと同じか、両辺を入れ替えたものである必要がある。*)
 let prove_by_axiom ~name ~goal ~axioms =
@@ -34,7 +32,7 @@ let prove_by_axiom ~name ~goal ~axioms =
       end in
   try_proof axioms false
 
-let add_axiom (rule : V6.rule) (constants : constants option) axioms =
+let add_axiom (rule : rule) (constants : constants option) axioms =
   let name = Names.Id.of_string ("t" ^ fst rule) in
   let constants = (match constants with None -> My_term.default_constants | Some cs -> cs) in
   let goal = My_term.to_constrexpr_raw (fst (snd rule), snd (snd rule)) constants in
@@ -179,7 +177,7 @@ let prove_interreduce
     end in
   try_proof false
 
-let add_rules_for_termination_v6 (rules : V6.rule list) =
+let add_rules_for_termination (rules : rule list) =
   let rec aux = function
   | [] -> ()
   | (id, (_, _)) :: tl ->
@@ -192,9 +190,8 @@ let add_rules_for_termination_v6 (rules : V6.rule list) =
       aux tl
   in aux rules
 
-let proof_using_toma_v6 (proc : V6.procedure) (constants : constants option) axioms : string list =
+let proof_using_toma (proc : procedure) (constants : constants option) axioms : string list =
   let open Tomaparser in
-  let open V6 in
   let proofs = fst proc in
   let prove (rule, strat) = match strat with
   | Axiom ->
@@ -210,7 +207,7 @@ let proof_using_toma_v6 (proc : V6.procedure) (constants : constants option) axi
                                 ~rewriters:(List.map (fun id -> Libnames.qualid_of_string ("t" ^ id)) rewriters)
                                 ~applier:(Libnames.qualid_of_string ("t" ^ (fst prev))) in
   List.iter prove proofs; 
-  add_rules_for_termination_v6 (snd proc);
+  add_rules_for_termination (snd proc);
   []
 
 let get_constant_body gref =
@@ -231,8 +228,8 @@ let complete rs dbName ops =
   (* path を付加する (例: "e" => "AutoEqProver.Test.e") *)
   let ops = List.map (fun op ->
     op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds) ops in
-  let outputs = Toma.V6.toma axioms in
-  let procedure = Tomaparser.V6.parse outputs in
+  let outputs = Toma.toma axioms in
+  let procedure = Tomaparser.parse outputs in
   let constantsopt: constants option = Some (My_term.constants_of_list ops) in
-  let outputs = proof_using_toma_v6 procedure constantsopt rs in
+  let outputs = proof_using_toma procedure constantsopt rs in
   Pp.str @@ String.concat "\n" outputs
