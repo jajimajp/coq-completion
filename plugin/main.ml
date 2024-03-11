@@ -81,6 +81,7 @@ let proof_using_crit ~name ~n1 ~n2 ~l ~r ~crit ~(constants:constants option) =
   | Some cs -> cs
   end in
   let e = My_term.to_constrexpr_raw (l, r) constants in
+  let evars = My_term.variables_except_constants (l, r) constants in
   let e1 = My_term.to_constrexpr_raw (crit, l) constants in
   let e1vars = My_term.variables_except_constants (crit, l) constants in
   let e2 = My_term.to_constrexpr_raw (crit, r) constants in
@@ -101,12 +102,23 @@ let proof_using_crit ~name ~n1 ~n2 ~l ~r ~crit ~(constants:constants option) =
   let open Tactypes in
   let rewriteLR c at =
     cl_rewrite_clause c true (OnlyOccurrences [at]) None in
+  let explicit_bind v =
+    if List.mem v evars then
+      CAst.make (NamedHyp (CAst.make (Names.Id.of_string v)), (EConstr.mkVar (Names.Id.of_string v)))
+    else
+      (*
+        Goal に含まれない変数の場合、rewriteタクティクのbind変数として使用すると Unbound のエラーが生じてしまう。
+        Goal:A=C を ２つのB=A, B=Cで示す際に、Bのみに含まれる変数がある状況が該当する。
+        このような状況で生じる変数は式変換の一部で現れ、結果に含まれないため、どの変数/定数でも良い。
+        よって、定数とGoalの変数のうち一つを採用する。
+      *)
+      let binder = List.hd (evars @ (My_term.list_of_constants constants)) in
+      CAst.make (NamedHyp (CAst.make (Names.Id.of_string v)), (EConstr.mkVar (Names.Id.of_string binder)))
+  in
   let rewriteLR_with_binds c (vars : string list) =
-    let explicit_bind v = CAst.make (NamedHyp (CAst.make (Names.Id.of_string v)), (EConstr.mkVar (Names.Id.of_string v))) in
     let binds = ExplicitBindings (List.map explicit_bind vars) in
     general_rewrite ~where:None ~l2r:true (OnlyOccurrences [1]) ~freeze:true ~dep:true ~with_evars:false (c, binds) in
   let rewriteRL_with_binds c (vars : string list) =
-    let explicit_bind v = CAst.make (NamedHyp (CAst.make (Names.Id.of_string v)), (EConstr.mkVar (Names.Id.of_string v))) in
     let binds = ExplicitBindings (List.map explicit_bind vars) in
     general_rewrite ~where:None ~l2r:false (OnlyOccurrences [1]) ~freeze:true ~dep:true ~with_evars:false (c, binds) in
   let gen_tactic at1 at2 = Tactics.assert_by Names.Name.Anonymous e1 (
@@ -143,6 +155,13 @@ let proof_using_crit ~name ~n1 ~n2 ~l ~r ~crit ~(constants:constants option) =
   let () = try_proof (1, 1) in
     Pp.strbrk "Proof"
 
+let cl_rewrite_clause_innermost ?(hyp:string = "H") (rewriter:Libnames.qualid) (left2right:bool) =
+  let open Rewrite in
+  let c_delayed = fun env sigma -> sigma, ((EConstr.mkRef (Nametab.global rewriter, EConstr.EInstance.empty))) in
+  let strat_ast = StratUnary (Innermost, StratConstr ((DAst.make (Glob_term.GVar (Names.Id.of_string "temp")), c_delayed), left2right)) in
+  let strat = strategy_of_ast strat_ast in
+  cl_rewrite_clause_strat strat (Some (Names.Id.of_string hyp))
+
 let prove_interreduce
   ~(name:Names.Id.t) (* 証明する定理名 *)
   ~(goal:Constrexpr.constr_expr) (* 定理の型 *)
@@ -157,7 +176,6 @@ let prove_interreduce
   let cinfo = Declare.CInfo.make ~name ~typ () in
   let (t, types, ustate, obl_info) = Declare.Obls.prepare_obligation ~name ~types:None ~body sigma in
   let open Proofview.Notations in
-  let open Tactypes in
   (*
     項の左右方向に関わらず証明するため、N個の書き換え規則に対して、l2rs として N+1 個のboolの組み合わせを受け取る。
     l2rs[0]  : symmetry. を使用するかどうか
@@ -171,7 +189,7 @@ let prove_interreduce
     Tactics.pose_proof (Names.Name (Names.Id.of_string "H")) (EConstr.mkRef (Nametab.global applier, EConstr.EInstance.empty)) <*>
     List.fold_left (fun prev cur -> prev <*> cur) Tacticals.tclIDTAC (
       List.map (fun (rewriter, l2r) -> 
-        cl_rewrite_clause (fun env sigma -> sigma, ((EConstr.mkRef (Nametab.global rewriter, EConstr.EInstance.empty)), NoBindings)) l2r (OnlyOccurrences [1]) (Some (Names.Id.of_string "H"))
+        cl_rewrite_clause_innermost rewriter l2r
         ) (List.combine rewriters l2rs)) <*>
     (if use_symmetry then Tactics.symmetry else Tacticals.tclIDTAC) <*>
     Tactics.apply (EConstr.mkVar (Names.Id.of_string "H")) in
@@ -216,7 +234,7 @@ let proof_using_toma (proc : procedure) (constants : constants option) axioms : 
                                 ~goal:(My_term.to_constrexpr_raw (snd rule) constants)
                                 ~rewriters:(List.map (fun id -> Libnames.qualid_of_string ("t" ^ id)) rewriters)
                                 ~applier:(Libnames.qualid_of_string ("t" ^ (fst prev))) in
-  List.iter prove proofs; 
+  List.iteri (fun i p -> print_endline ("PROVING t" ^ (fst (fst p))); prove p) proofs; 
   add_rules_for_termination (snd proc);
   []
 
@@ -239,6 +257,7 @@ let complete rs dbName ops =
   let ops = List.map (fun op ->
     op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds) ops in
   let outputs = Toma.toma axioms in
+  List.iter print_endline outputs;
   let procedure = Tomaparser.parse outputs in
   let constantsopt: constants option = Some (My_term.constants_of_list ops) in
   let outputs = proof_using_toma procedure constantsopt rs in

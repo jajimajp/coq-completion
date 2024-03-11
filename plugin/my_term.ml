@@ -25,6 +25,7 @@ let set_of_list ls =
 let default_constants = set_of_list default_constants_list
 
 let constants_of_list = set_of_list 
+let list_of_constants = SS.elements
 
 let variables t =
   let (t1, t2) = t in

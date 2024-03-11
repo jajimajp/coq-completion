@@ -17,6 +17,7 @@ type constants
 val empty_constants : constants
 val default_constants : constants
 val constants_of_list : string list -> constants
+val list_of_constants : constants -> string list
 
 (* 規則内の変数を返す *)
 val variables : t -> string list
