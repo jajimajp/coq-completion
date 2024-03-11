@@ -28,12 +28,12 @@ Each example is tested with a timeout of 20 seconds.
 | [./list_rev.v](./list_rev.v) | 🟢 OK |
 | [./qsort.v](./qsort.v) | 🔴 FAIL |
 | [./AG01#3.17.v](./AG01#3.17.v) | 🔴 FAIL |
+| [./simply_but_non_totally_terminating.v](./simply_but_non_totally_terminating.v) | 🟢 OK |
 | [./fgf.v](./fgf.v) | 🟢 OK |
 | [./sp.v](./sp.v) | 🟢 OK |
 | [./fgh.v](./fgh.v) | 🟢 OK |
 | [./compare_leaves.v](./compare_leaves.v) | 🔴 FAIL |
-| [./simply-but-non-totally-terminating.v](./simply-but-non-totally-terminating.v) | 🔴 FAIL |
-| [./non-terminating.v](./non-terminating.v) | 🔴 FAIL |
+| [./non_terminating.v](./non_terminating.v) | 🟢 OK |
 | [./ack.v](./ack.v) | 🟢 OK |
 | [./Der95_20.v](./Der95_20.v) | 🟢 OK |
 | [./com.v](./com.v) | 🔴 FAIL |
