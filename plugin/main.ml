@@ -9,6 +9,7 @@ open Rewrite
 let prove_by_axiom ~name ~goal ~axioms =
   let tactic_of axiom use_symmetry =
     let open Proofview.Notations in
+    Tactics.intros <*>
     (if use_symmetry then Tactics.symmetry else Tacticals.tclIDTAC) <*>
     Tactics.apply (EConstr.mkRef (Nametab.global axiom, EConstr.EInstance.empty)) in
   let env = Global.env () in 
