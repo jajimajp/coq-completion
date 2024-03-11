@@ -145,14 +145,17 @@ let rec consume_proof lines : minimal_strat proof option * string list =
 let expect_completed_rules lines : rule list =
   let parse_rule line : rule =
     (* (ex) 9: +(X4, 0()) -> X4 *)
-    let re = Str.regexp "^\\([0-9]+\\): \\(.+\\) -> \\(.+\\)$" in
+    let re = Str.regexp "^\\([0-9]+\\): \\(.+\\) \\(->\\|=\\|<-\\) \\(.+\\)$" in
     if Str.string_match re line 0 then
       let id = Str.matched_group 1 line in
       let l = Str.matched_group 2 line in
-      let r = Str.matched_group 3 line in
+      let op = Str.matched_group 3 line in
+      let r = Str.matched_group 4 line in
       let l = termast_of_string l in
       let r = termast_of_string r in
-      (id, (l, r))
+      match op with
+      | "<-" -> (id, (r, l))
+      | _ -> (id, (l, r))
     else
       failwith "parse_rule: invalid toma rule" in
   let rec aux lines acc =

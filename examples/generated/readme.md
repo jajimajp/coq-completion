@@ -36,7 +36,7 @@ Each example is tested with a timeout of 20 seconds.
 | [./non_terminating.v](./non_terminating.v) | 🟢 OK |
 | [./ack.v](./ack.v) | 🟢 OK |
 | [./Der95_20.v](./Der95_20.v) | 🟢 OK |
-| [./com.v](./com.v) | 🔴 FAIL |
+| [./com.v](./com.v) | 🟢 OK |
 | [./klein.v](./klein.v) | 🟢 OK |
 | [./CiME_04_append.v](./CiME_04_append.v) | 🔴 FAIL |
 | [./subst.v](./subst.v) | 🔴 FAIL |
