@@ -171,7 +171,7 @@ module Trs = struct
         (match String.sub hd ~pos:0 ~len:4 with
         | "(VAR" ->
           if List.length acc.var > 0 then
-            print_endline "WARNING: multiple VAR lines found in .trs file. This may cause unexpected behavior.";
+            Printf.eprintf "WARNING: multiple VAR lines found in .trs file. This may cause unexpected behavior.";
           loop { acc with var = parseVAR hd } tl
         | "(RUL" -> let rules, rest = parseRULES lines in loop { acc with rules = rules } rest
         | _ -> Printf.eprintf "INFO: ignoring line: %s\n" hd; loop acc tl) in
