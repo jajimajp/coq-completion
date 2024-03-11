@@ -42,8 +42,9 @@ convert_files() {
             if [[ $base =~ ^[0-9] ]]; then
                 base="g_$base"
             fi
-            # ファイル名にハイフンが含まれる場合はアンダースコアに変換
+            # ファイル名にハイフンまたはピリオドが含まれる場合はアンダースコアに変換
             base="${base//-/_}"
+            base="${base//./_}"
             dune exec ./bin/trs_to_coq.exe "$file" > "$target_dir/$base.v"
         fi
     done
