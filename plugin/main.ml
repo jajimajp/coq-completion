@@ -21,7 +21,7 @@ let prove_by_axiom ~name ~goal ~axioms =
   let (t, types, uctx, obl_info) = Declare.Obls.prepare_obligation ~name ~types:None ~body sigma in
   let rec try_proof axioms use_symmetry =
     match axioms, use_symmetry with
-    | [], _ -> failwith "Could not prove"
+    | [], _ -> failwith ("Could not prove axiom: " ^ (Names.Id.to_string name))
     | hd :: tl, _ ->
       let tactic = tactic_of hd use_symmetry in
       let _, progress = Declare.Obls.add_definition ~pm:(Declare.OblState.empty) ~cinfo ~info ~uctx ~tactic obl_info in
@@ -158,25 +158,34 @@ let prove_interreduce
   let (t, types, ustate, obl_info) = Declare.Obls.prepare_obligation ~name ~types:None ~body sigma in
   let open Proofview.Notations in
   let open Tactypes in
-  let gen_tactic use_symmetry =
+  (*
+    項の左右方向に関わらず証明するため、N個の書き換え規則に対して、l2rs として N+1 個のboolの組み合わせを受け取る。
+    l2rs[0]  : symmetry. を使用するかどうか
+    l2rs[1:] : i個目の cl_rewrite_clause の書き換え方向を -> にするかどうかを l2rs[i] で表す。
+    term の形を調べるかtomaの出力を修正すれば事前に書き換え方向は決定できそうだが、実装の簡単のため全ての組み合わせを試す。
+   *)
+  let gen_tactic l2rs =
+    let use_symmetry = List.hd l2rs in
+    let l2rs = List.tl l2rs in
     Tactics.intros <*>
     Tactics.pose_proof (Names.Name (Names.Id.of_string "H")) (EConstr.mkRef (Nametab.global applier, EConstr.EInstance.empty)) <*>
     List.fold_left (fun prev cur -> prev <*> cur) Tacticals.tclIDTAC (
-      List.map (fun rewriter -> 
-        cl_rewrite_clause (fun env sigma -> sigma, ((EConstr.mkRef (Nametab.global rewriter, EConstr.EInstance.empty)), NoBindings)) true (OnlyOccurrences [1]) (Some (Names.Id.of_string "H"))
-        ) rewriters) <*>
+      List.map (fun (rewriter, l2r) -> 
+        cl_rewrite_clause (fun env sigma -> sigma, ((EConstr.mkRef (Nametab.global rewriter, EConstr.EInstance.empty)), NoBindings)) l2r (OnlyOccurrences [1]) (Some (Names.Id.of_string "H"))
+        ) (List.combine rewriters l2rs)) <*>
     (if use_symmetry then Tactics.symmetry else Tacticals.tclIDTAC) <*>
     Tactics.apply (EConstr.mkVar (Names.Id.of_string "H")) in
-  let rec try_proof use_symmetry =
-    let tactic = gen_tactic use_symmetry in
+  let rec try_proof l2rs =
+    let tactic = gen_tactic l2rs in
     let _, progress = Declare.Obls.add_definition ~pm:(Declare.OblState.empty) ~cinfo ~info ~uctx:ustate ~tactic obl_info in
-    let use_symmetry' = if use_symmetry then false else true in
-    begin match progress with
-    | Remain _ -> if use_symmetry then failwith "Could not prove" else try_proof use_symmetry'
-    | Dependent -> if use_symmetry then failwith "Could not prove" else try_proof use_symmetry'
+    match progress with
     | Defined _ -> ()
-    end in
-  try_proof false
+    | _ ->
+      begin match Devutil.next_binls l2rs with
+      | None -> failwith ("Could not prove simp: " ^ (Names.Id.to_string name))
+      | Some l2rs -> try_proof l2rs
+      end in
+  try_proof (List.init (List.length rewriters + 1) (fun _ -> true))
 
 let add_rules_for_termination (rules : rule list) =
   let rec aux = function

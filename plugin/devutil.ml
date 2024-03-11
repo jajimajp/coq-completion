@@ -1,5 +1,25 @@
 open Constrexpr
 
+(** 全てtrueから始めて、2^n 個の組み合わせを試すための次のリストを返す *)
+let next_binls ls =
+  let r = List.rev ls in
+  let rec find_tru_idx i = function
+  | [] -> None
+  | true :: _ -> Some i
+  | false :: rest -> find_tru_idx (i + 1) rest in
+  let true_idx = find_tru_idx 0 r in
+  (* nthの要素をfalseに、それ以前の要素を全てtrueにしたリスト *)
+  let rec toggle nth i = function
+  | [] -> []
+  | (hd :: tl) as l ->
+    if i = nth then false :: tl
+    else if i < nth then true :: toggle nth (i + 1) tl
+    else l in
+  match true_idx with
+  | None -> None
+  | Some i -> Some (List.rev (toggle i 0 r))
+
+
 let insert_unique x l =
   if List.mem x l then l else x :: l
 
