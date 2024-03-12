@@ -192,7 +192,7 @@ let prove_interreduce
         cl_rewrite_clause_innermost rewriter l2r
         ) (List.combine rewriters l2rs)) <*>
     (if use_symmetry then Tactics.symmetry else Tacticals.tclIDTAC) <*>
-    Tactics.apply (EConstr.mkVar (Names.Id.of_string "H")) in
+    Auto.default_auto in
   let rec try_proof l2rs =
     let tactic = gen_tactic l2rs in
     let _, progress = Declare.Obls.add_definition ~pm:(Declare.OblState.empty) ~cinfo ~info ~uctx:ustate ~tactic obl_info in

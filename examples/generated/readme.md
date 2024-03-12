@@ -38,6 +38,6 @@ Each example is tested with a timeout of 20 seconds.
 | [./Der95_20.v](./Der95_20.v) | 🟢 OK |
 | [./com.v](./com.v) | 🟢 OK |
 | [./klein.v](./klein.v) | 🟢 OK |
-| [./CiME_04_append.v](./CiME_04_append.v) | 🔴 FAIL |
+| [./CiME_04_append.v](./CiME_04_append.v) | 🟢 OK |
 | [./subst.v](./subst.v) | 🔴 FAIL |
 | [./evenodd.v](./evenodd.v) | 🟢 OK |
