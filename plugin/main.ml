@@ -24,6 +24,7 @@ let prove_by_axiom ~name ~goal ~axioms =
     | [], _ -> failwith ("Could not prove axiom: " ^ (Names.Id.to_string name))
     | hd :: tl, _ ->
       let tactic = tactic_of hd use_symmetry in
+      let tactic = Proofview.tclORELSE tactic (fun _ -> Tacticals.tclIDTAC) in
       let _, progress = Declare.Obls.add_definition ~pm:(Declare.OblState.empty) ~cinfo ~info ~uctx ~tactic obl_info in
       begin match progress with
       | Defined _ -> ()
@@ -145,6 +146,7 @@ let proof_using_crit ~name ~n1 ~n2 ~l ~r ~crit ~(constants:constants option) =
         (x, y - 1)
     in
     let tactic = gen_tactic at1 at2 in
+    let tactic = Proofview.tclORELSE tactic (fun _ -> Tacticals.tclIDTAC) in
     let _, progress = Declare.Obls.add_definition ~pm:(Declare.OblState.empty) ~cinfo ~info ~uctx:ustate ~tactic obl_info in
     begin match progress with
     | Remain _ -> try_proof (next_pair (at1, at2))
@@ -195,6 +197,7 @@ let prove_interreduce
     Auto.default_auto in
   let rec try_proof l2rs =
     let tactic = gen_tactic l2rs in
+    let tactic = Proofview.tclORELSE tactic (fun _ -> Tacticals.tclIDTAC) in
     let _, progress = Declare.Obls.add_definition ~pm:(Declare.OblState.empty) ~cinfo ~info ~uctx:ustate ~tactic obl_info in
     match progress with
     | Defined _ -> ()
