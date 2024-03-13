@@ -31,3 +31,5 @@ Theorem comm : forall x y, f x y = f y x.
     lpo_autorewrite with hint_compl.
     reflexivity.
   Qed.
+
+Print comm.
