@@ -32,6 +32,8 @@ val constrexpr_of_term : term -> Constrexpr.constr_expr
 
 val to_constrexpr_raw : t -> constants -> Constrexpr.constr_expr
 
+val of_constr : Constr.t -> t
+
 (* Constr.tのリストをtのリストに変換したものと、定数（束縛されていないId）を返す *)
 val parse_constrs : Constr.t list -> t list * constants
 

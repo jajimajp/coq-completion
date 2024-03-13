@@ -24,3 +24,10 @@ Axiom ax2 : forall x y z, f (f x y) z = f x (f y z).
 Create HintDb hint_compl.
 Complete ax0 ax1 ax2 : e f : hint_compl.
 Print Rewrite HintDb hint_compl.
+
+Theorem comm : forall x y, f x y = f y x.
+  Proof.
+    intros.
+    lpo_autorewrite with hint_compl.
+    reflexivity.
+  Qed.

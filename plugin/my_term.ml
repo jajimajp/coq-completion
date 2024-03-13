@@ -138,7 +138,7 @@ type term_or_eq =
 | Term of term
 | Eq of term * term
 
-let from_constr (c: Constr.t) =
+let of_constr (c: Constr.t) =
   let rec aux = function
   | Rel i -> Term (Var ("x" ^ string_of_int i))
   | Prod (_, _, t) ->
@@ -175,9 +175,32 @@ let from_constr (c: Constr.t) =
         Term (App (f_name, args_list))
       | _ -> failwith "Invalid input: match aux"
       end
-  | Const (k, _) ->
-    Term (Var (Names.Constant.to_string k))
-  | _ -> failwith "Not implemented" in
+  | Const (k, _) -> Term (Var (Names.Constant.to_string k))
+  (* for LPO *)
+  | Var x -> Term (Var (Id.to_string x))
+  | c ->
+    let pr_label = (function
+    | Rel i -> "Rel " ^ string_of_int i
+    | Var x -> "Var " ^ Id.to_string x
+    | Meta _ -> "Meta"
+    | Evar _ -> "Evar"
+    | Sort _ -> "Sort"
+    | Cast (_, _, _) -> "Cast"
+    | Prod (_, _, _) -> "Prod"
+    | Lambda (_, _, _) -> "Lambda"
+    | LetIn (_, _, _, _) -> "LetIn"
+    | App (_, _) -> "App"
+    | Const (_, _) -> "Const"
+    | Ind (_, _) -> "Ind"
+    | Construct (_, _) -> "Construct"
+    | Case (_, _, _, _, _, _, _) -> "Case"
+    | Fix _ -> "Fix"
+    | CoFix _ -> "CoFix"
+    | Proj (_, _) -> "Proj"
+    | Int _ -> "Int"
+    | Float _ -> "Float"
+    | Array _ -> "Array") in
+      failwith ("Not implemented" ^ pr_label c) in
   match aux (Constr.kind c) with
   | Eq (t1, t2) -> (t1, t2)
   | _ -> failwith "Invalid input: not Eq"
@@ -196,7 +219,7 @@ let constants_of_constr e =
   aux (Constr.kind e)
 
 let parse_constrs l =
-  let ts = List.map from_constr l in
+  let ts = List.map of_constr l in
   let constant_list = List.map constants_of_constr l in
   let constants = List.fold_left SS.union SS.empty constant_list in
   (ts, constants)

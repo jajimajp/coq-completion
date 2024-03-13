@@ -6,3 +6,6 @@ val prove_interreduce :
                -> unit
 
 val complete : Libnames.qualid list -> string -> Libnames.qualid list -> Pp.t
+
+(** [lpo_autorewrite_with hintDb] returns tactic to rewrite current goal term. *)
+val lpo_autorewrite_with : string -> Locus.clause -> unit Proofview.tactic

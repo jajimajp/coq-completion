@@ -32,10 +32,11 @@ let rec termast_of_string str =
       App (f, args)
   | false -> Var str
 
-type procedure = strat proof list * rule list (* (proofs for all rules, completed rules) *)
+type procedure = strat proof list * rule list * order_param (* (proofs for all rules, completed rules) *)
 and rule = termid * eq
 and eq = term * term
 and 'strat proof = (rule * 'strat)
+and order_param = string list
 
 and strat =
   | Axiom
@@ -63,6 +64,18 @@ let rec expect str lines : string list =
     else
       failwith ("expect: Unexpected output " ^ hd ^ ", expected " ^ str)
   | _ -> failwith ("expect: Unexpected end of input, expected " ^ str)
+
+let expect_order lines : string list * string list =
+  match lines with
+  | hd :: tl ->
+    (* ex: LPO with precedence: ___false > ___true > - > + > 0 *)
+    let re = Str.regexp "^LPO with precedence: \\(.*\\)$" in
+    if Str.string_match re hd 0 then
+      let order = Str.matched_group 1 hd |> Str.split (Str.regexp " > ") in
+      (order, tl)
+    else
+      failwith ("expect_order: Unexpected output " ^ hd)
+  | _ -> failwith "expect_order: Unexpected end of input"
 
 (** [expect_axioms lines] consumes input [lines], returns (lines of axioms, rest lines) *)
 let expect_axioms lines : string list * string list =
@@ -168,6 +181,8 @@ let expect_completed_rules lines : rule list =
 
 let parse_minimal lines = 
   let lines = expect "Completed" lines in
+  let lines = expect "order:" lines in
+  let order_param, lines = expect_order lines in
   let lines = expect "axioms:" lines in
   let _, lines = expect_axioms lines in
   let lines = expect "generated rules:" lines in
@@ -181,10 +196,10 @@ let parse_minimal lines =
   let proofs, lines = aux lines [] in
   let lines = expect "ES:" lines in
   let completed_rules = expect_completed_rules lines in
-  (proofs, completed_rules)
+  (proofs, completed_rules, order_param)
 
 let parse lines = 
-  let proofs, comp_rules = parse_minimal lines in
+  let proofs, comp_rules, order_param = parse_minimal lines in
   let table = Hashtbl.create 10 in
   List.iter (fun ((id, (l, r)), _) -> Hashtbl.add table id (id, (l, r))) proofs;
   let find id = Hashtbl.find table id in
@@ -197,9 +212,10 @@ let parse lines =
       | MCrit (id1, id2, sp) -> aux tl ((rule, Crit (find id1, find id2, sp)) :: acc)
       | MSimp (id, ids) -> aux tl ((rule, Simp (find id, ids)) :: acc)
       end in
-  (aux proofs [], comp_rules)
+  (aux proofs [], comp_rules, order_param)
 
-let print_procedure (proofs, comp_rules) : unit =
+let print_procedure (proofs, comp_rules, order_param) : unit =
+  print_endline ("order: " ^ (String.concat " > " order_param));
   let rec string_of_term = function
   | Var v -> v
   | App (f, args) -> f ^ "(" ^ (String.concat "," (List.map string_of_term args)) ^ ")" in

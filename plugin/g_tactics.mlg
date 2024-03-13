@@ -1,6 +1,7 @@
 DECLARE PLUGIN "coq-completion.plugin"
 
 {
+open Ltac_plugin
 open Stdarg
 }
 
@@ -17,5 +18,11 @@ VERNAC COMMAND EXTEND PrintTheorem CLASSIFIED AS QUERY
   let hint_db_name = Names.Id.to_string hint in
   let _ = Main.complete axioms hint_db_name ops in
   Feedback.msg_notice @@ Pp.str "Finish"
+}
+END
+
+TACTIC EXTEND lpo_rewrite
+| [ "lpo_autorewrite" "with" preident(hint) clause(cl) ] -> {
+  Main.lpo_autorewrite_with hint cl
 }
 END
