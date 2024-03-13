@@ -10,7 +10,7 @@ cd toma
 make
 ```
 
-For more information, see https://github.com/jajimajp/toma.git
+For more information, see https://github.com/jajimajp/toma
 
 2. Add your toma executable to $PATH.
 
