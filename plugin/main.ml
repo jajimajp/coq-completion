@@ -171,6 +171,35 @@ let cl_rewrite_clause_innermost ?(hyp:string = "H") (rewriter:Libnames.qualid) (
   let strat = strategy_of_ast strat_ast in
   cl_rewrite_clause_strat strat (Some (Names.Id.of_string hyp))
 
+(** 現在のゴールを冗長な規則の書換によって示す。 *)
+let tac_prove_by_reduction ~(rewriters : Libnames.qualid list)
+                           ~(rewritee : Libnames.qualid) =
+  let open Proofview.Notations in
+  (*
+    項の左右方向に関わらず証明するため、N個の書き換え規則に対して、l2rs として N+1 個のboolの組み合わせを受け取る。
+    l2rs[0]  : symmetry. を使用するかどうか
+    l2rs[1:] : i個目の cl_rewrite_clause の書き換え方向を -> にするかどうかを l2rs[i] で表す。
+    term の形を調べるかtomaの出力を修正すれば事前に書き換え方向は決定できそうだが、実装の簡単のため全ての組み合わせを試す。
+   *)
+  let tactic_of l2rs =
+    let use_symmetry = List.hd l2rs in
+    let l2rs = List.tl l2rs in
+    Tactics.intros <*>
+    Tactics.pose_proof (Names.Name (Names.Id.of_string "H")) (EConstr.mkRef (Nametab.global rewritee, EConstr.EInstance.empty)) <*>
+    List.fold_left (fun prev cur -> prev <*> cur) Tacticals.tclIDTAC (
+      List.map (fun (rewriter, l2r) -> 
+        cl_rewrite_clause_innermost rewriter l2r
+        ) (List.combine rewriters l2rs)) <*>
+    (if use_symmetry then Tactics.symmetry else Tacticals.tclIDTAC) <*>
+    Auto.default_auto in
+  let rec aux l2rs =
+    Tacticals.tclORELSE
+      (tactic_of l2rs)
+      (match Devutil.next_binls l2rs with
+      | None -> Tacticals.tclFAIL (Pp.str "Could not prove goal by reduction.")
+      | Some l2rs -> aux l2rs) in
+  aux (List.init (List.length rewriters + 1) (fun _ -> true))
+
 let prove_interreduce
   ~(name:Names.Id.t) (* 証明する定理名 *)
   ~(goal:Constrexpr.constr_expr) (* 定理の型 *)
@@ -184,36 +213,11 @@ let prove_interreduce
   let info = Declare.Info.make ~poly:false () in
   let cinfo = Declare.CInfo.make ~name ~typ () in
   let (t, types, ustate, obl_info) = Declare.Obls.prepare_obligation ~name ~types:None ~body sigma in
-  let open Proofview.Notations in
-  (*
-    項の左右方向に関わらず証明するため、N個の書き換え規則に対して、l2rs として N+1 個のboolの組み合わせを受け取る。
-    l2rs[0]  : symmetry. を使用するかどうか
-    l2rs[1:] : i個目の cl_rewrite_clause の書き換え方向を -> にするかどうかを l2rs[i] で表す。
-    term の形を調べるかtomaの出力を修正すれば事前に書き換え方向は決定できそうだが、実装の簡単のため全ての組み合わせを試す。
-   *)
-  let gen_tactic l2rs =
-    let use_symmetry = List.hd l2rs in
-    let l2rs = List.tl l2rs in
-    Tactics.intros <*>
-    Tactics.pose_proof (Names.Name (Names.Id.of_string "H")) (EConstr.mkRef (Nametab.global applier, EConstr.EInstance.empty)) <*>
-    List.fold_left (fun prev cur -> prev <*> cur) Tacticals.tclIDTAC (
-      List.map (fun (rewriter, l2r) -> 
-        cl_rewrite_clause_innermost rewriter l2r
-        ) (List.combine rewriters l2rs)) <*>
-    (if use_symmetry then Tactics.symmetry else Tacticals.tclIDTAC) <*>
-    Auto.default_auto in
-  let rec try_proof l2rs =
-    let tactic = gen_tactic l2rs in
-    let tactic = Proofview.tclORELSE tactic (fun _ -> Tacticals.tclIDTAC) in
-    let _, progress = Declare.Obls.add_definition ~pm:(Declare.OblState.empty) ~cinfo ~info ~uctx:ustate ~tactic obl_info in
-    match progress with
-    | Defined _ -> ()
-    | _ ->
-      begin match Devutil.next_binls l2rs with
-      | None -> failwith ("Could not prove simp: " ^ (Names.Id.to_string name))
-      | Some l2rs -> try_proof l2rs
-      end in
-  try_proof (List.init (List.length rewriters + 1) (fun _ -> true))
+  let tactic = tac_prove_by_reduction ~rewriters ~rewritee:applier in
+  let _, progress = Declare.Obls.add_definition ~pm:(Declare.OblState.empty) ~cinfo ~info ~uctx:ustate ~tactic obl_info in
+  match progress with
+  | Defined _ -> ()
+  | _ -> failwith ("Could not prove interreduce: " ^ (Names.Id.to_string name))
 
 let add_rules_for_termination (rules : rule list) =
   let rec aux = function
