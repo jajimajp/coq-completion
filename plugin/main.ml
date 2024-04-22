@@ -4,14 +4,30 @@ open Tomaparser
 open Autorewrite
 open Rewrite
 
-(** 公理のうちのどれかから直ちに導ける規則を証明する
-    公理の一つと同じか、両辺を入れ替えたものである必要がある。*)
-let prove_by_axiom ~name ~goal ~axioms =
+(** 現在のゴールを、公理のうちいずれか一つを使って示す。
+    ゴールは公理と等しいか、両辺を入れ替えたものである必要がある。*)
+let tac_prove_by_axiom ~(axioms : Libnames.qualid list) =
+  let open Proofview.Notations in
   let tactic_of axiom use_symmetry =
-    let open Proofview.Notations in
     Tactics.intros <*>
     (if use_symmetry then Tactics.symmetry else Tacticals.tclIDTAC) <*>
     Tactics.apply (EConstr.mkRef (Nametab.global axiom, EConstr.EInstance.empty)) in
+  let rec aux axioms use_symmetry =
+    match axioms, use_symmetry with
+    | hd :: tl, false ->
+      Tacticals.tclORELSE
+        (tactic_of hd use_symmetry)
+        (aux axioms true)
+    | hd :: tl, true ->
+      Tacticals.tclORELSE
+        (tactic_of hd use_symmetry)
+        (aux tl false)
+    | [], _ -> Tacticals.tclFAIL (Pp.str "Could not prove goal by axioms.") in
+  aux axioms false
+
+(** 公理のうちのどれかから直ちに導ける規則を証明する
+    公理の一つと同じか、両辺を入れ替えたものである必要がある。*)
+let prove_by_axiom ~name ~goal ~axioms =
   let env = Global.env () in 
   let sigma = Evd.from_env env in
   let (sigma, body) = Constrintern.interp_constr_evars env sigma goal in
@@ -19,20 +35,11 @@ let prove_by_axiom ~name ~goal ~axioms =
   let info = Declare.Info.make ~poly:false () in
   let cinfo = Declare.CInfo.make ~name ~typ () in
   let (t, types, uctx, obl_info) = Declare.Obls.prepare_obligation ~name ~types:None ~body sigma in
-  let rec try_proof axioms use_symmetry =
-    match axioms, use_symmetry with
-    | [], _ -> failwith ("Could not prove axiom: " ^ (Names.Id.to_string name))
-    | hd :: tl, _ ->
-      let tactic = tactic_of hd use_symmetry in
-      let tactic = Proofview.tclORELSE tactic (fun _ -> Tacticals.tclIDTAC) in
-      let _, progress = Declare.Obls.add_definition ~pm:(Declare.OblState.empty) ~cinfo ~info ~uctx ~tactic obl_info in
-      begin match progress with
-      | Defined _ -> ()
-      | _ ->
-        if use_symmetry then try_proof tl false
-        else try_proof axioms true
-      end in
-  try_proof axioms false
+  let tactic = tac_prove_by_axiom ~axioms in
+  let _, progress = Declare.Obls.add_definition ~pm:(Declare.OblState.empty) ~cinfo ~info ~uctx ~tactic obl_info in
+  match progress with
+  | Defined _ -> ()
+  | _ -> failwith ("Could not prove axiom: " ^ (Names.Id.to_string name))
 
 let add_axiom (rule : rule) (constants : constants option) axioms =
   let name = Names.Id.of_string ("t" ^ fst rule) in
