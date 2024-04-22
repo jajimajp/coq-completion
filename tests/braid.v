@@ -25,8 +25,6 @@ Create HintDb hint_compl.
 
 Complete a0 a1 a2 a3 a4 a5 : f e c1 c2 : hint_compl.
 
-Print Rewrite HintDb hint_compl.
-
 Theorem check1: c1 * c2 * c1 = c2 * c1 * c2.
 Proof.
   intros.
@@ -34,4 +32,3 @@ Proof.
   reflexivity.
 Qed.
 
-Print check1.

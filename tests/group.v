@@ -23,8 +23,6 @@ Create HintDb hint_compl.
 
 Complete assoc id_l inv_l : f e i : hint_compl.
 
-Print Rewrite HintDb hint_compl.
-
 Theorem check1: forall x y, (i x) + (x + y) = y.
 Proof.
   intros.
@@ -32,13 +30,9 @@ Proof.
   reflexivity.
 Qed.
 
-Print check1.
-
 Theorem check2: forall a b c, i (a + b) + (a + (b + c)) = c.
 Proof.
   intros.
   autorewrite with hint_compl.
   reflexivity.
 Qed.
-
-Print check2.

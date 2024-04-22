@@ -49,4 +49,3 @@ Theorem t89 : forall x0 x14 x15 x16 x17 x18 : S,
     apply H.
   Qed.
 
-Print t89.

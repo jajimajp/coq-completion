@@ -13,4 +13,3 @@ Axiom ax2 : forall x l, rev (cons x l) = cons (last x l) (rev l).
 Axiom ax3 : rev nil = nil.
 Create HintDb hint_compl.
 Complete ax0 ax1 ax2 ax3 : cons last nil rev : hint_compl.
-Print Rewrite HintDb hint_compl.
