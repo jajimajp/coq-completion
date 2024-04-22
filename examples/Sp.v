@@ -2,11 +2,11 @@ Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
 (* Set *)
-Variable G : Set.
+Parameter G : Set.
 
-Variable s : G -> G.
-Variable p : G -> G.
-Variable plus : G -> G -> G.
+Parameter s : G -> G.
+Parameter p : G -> G.
+Parameter plus : G -> G -> G.
 
 (* Axioms *)
 Axiom ax1 : forall x, s (p x) = x.

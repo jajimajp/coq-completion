@@ -188,7 +188,7 @@ module Trs = struct
       funnames
       |> List.map ~f:(fun s ->
         let argnum = argnum_of_funname s in
-        String.concat ~sep:"" ["Variable ";s;" : ";String.concat ~sep:" -> " (List.init (argnum + 1) ~f:(fun _ -> "G"));"."])
+        String.concat ~sep:"" ["Parameter ";s;" : ";String.concat ~sep:" -> " (List.init (argnum + 1) ~f:(fun _ -> "G"));"."])
       |> String.concat ~sep:"\n" in
     let axioms =
       List.mapi ~f:(fun i r -> "Axiom ax" ^ (string_of_int i) ^ " : " ^ E.to_coq r t.var ^ ".") t.rules
@@ -199,7 +199,7 @@ module Trs = struct
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     |}
     ; functions
     ; axioms

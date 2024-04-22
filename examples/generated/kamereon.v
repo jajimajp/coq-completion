@@ -16,12 +16,12 @@ kamereon.trs:
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable a : G.
-Variable b : G.
-Variable c : G.
-Variable plus : G -> G -> G.
+Parameter a : G.
+Parameter b : G.
+Parameter c : G.
+Parameter plus : G -> G -> G.
 Axiom ax0 : plus c a = plus b b.
 Axiom ax1 : plus b c = plus a a.
 Axiom ax2 : plus a b = plus c c.

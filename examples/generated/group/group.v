@@ -14,11 +14,11 @@ group.trs:
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable minus : G -> G.
-Variable plus : G -> G -> G.
-Variable zero : G.
+Parameter minus : G -> G.
+Parameter plus : G -> G -> G.
+Parameter zero : G.
 Axiom ax0 : forall x y z, plus (plus x y) z = plus x (plus y z).
 Axiom ax1 : forall x, plus (minus x) x = zero.
 Axiom ax2 : forall y, plus zero y = y.

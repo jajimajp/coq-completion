@@ -1,11 +1,11 @@
 Require Import Coq.Setoids.Setoid.
 
-Variable S : Set.
+Parameter S : Set.
 
-Variable nil : S.
-Variable cons : S -> S -> S.
-Variable append : S -> S -> S.
-Variable ifappend : S -> S -> S -> S.
+Parameter nil : S.
+Parameter cons : S -> S -> S.
+Parameter append : S -> S -> S.
+Parameter ifappend : S -> S -> S -> S.
 
 Axiom th0 : forall x7 x3 x4 x2 x9,
     ifappend x2 x3 (ifappend x7 x9 (cons x4 nil)) = cons x4 (ifappend (ifappend nil x9 nil) x3 x9).

@@ -15,12 +15,12 @@ last(x, cons(y, l)) -> last(y, l)
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable cons : G -> G -> G.
-Variable last : G -> G -> G.
-Variable nil : G.
-Variable rev : G -> G.
+Parameter cons : G -> G -> G.
+Parameter last : G -> G -> G.
+Parameter nil : G.
+Parameter rev : G -> G.
 Axiom ax0 : forall x y l, last x (cons y l) = last y l.
 Axiom ax1 : forall x, last x nil = x.
 Axiom ax2 : forall x l, rev (cons x l) = cons (last x l) (rev l).

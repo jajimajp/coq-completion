@@ -20,15 +20,15 @@ AG01#3.17.trs:
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable app : G -> G -> G.
-Variable cons : G -> G -> G.
-Variable nil : G.
-Variable plus : G -> G -> G.
-Variable s : G -> G.
-Variable sum : G -> G.
-Variable zero : G.
+Parameter app : G -> G -> G.
+Parameter cons : G -> G -> G.
+Parameter nil : G.
+Parameter plus : G -> G -> G.
+Parameter s : G -> G.
+Parameter sum : G -> G.
+Parameter zero : G.
 Axiom ax0 : forall x y, plus (s x) y = s (plus x y).
 Axiom ax1 : forall y, plus zero y = y.
 Axiom ax2 : forall l x y k, sum (app l (cons x (cons y k))) = sum (app l (sum (cons x (cons y k)))).

@@ -20,13 +20,13 @@ AG01 Example 3.12
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable add : G -> G -> G.
-Variable app : G -> G -> G.
-Variable nil : G.
-Variable reverse : G -> G.
-Variable shuffle : G -> G.
+Parameter add : G -> G -> G.
+Parameter app : G -> G -> G.
+Parameter nil : G.
+Parameter reverse : G -> G.
+Parameter shuffle : G -> G.
 Axiom ax0 : forall n x, shuffle (add n x) = add n (shuffle (reverse x)).
 Axiom ax1 : shuffle nil = nil.
 Axiom ax2 : forall n x, reverse (add n x) = app (reverse x) (add n nil).

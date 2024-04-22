@@ -14,10 +14,10 @@ f(x,y) -> f(y,x)
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable e : G.
-Variable f : G -> G -> G.
+Parameter e : G.
+Parameter f : G -> G -> G.
 Axiom ax0 : forall x y, f x y = f y x.
 Axiom ax1 : forall x, f e x = x.
 Axiom ax2 : forall x y z, f (f x y) z = f x (f y z).

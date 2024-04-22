@@ -18,13 +18,13 @@ Example 4.1.10
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable a : G.
-Variable b : G.
-Variable f : G -> G.
-Variable g : G -> G.
-Variable h : G -> G.
+Parameter a : G.
+Parameter b : G.
+Parameter f : G -> G.
+Parameter g : G -> G.
+Parameter h : G -> G.
 Axiom ax0 : h a = h (f a).
 Axiom ax1 : f b = g a.
 Axiom ax2 : a = b.

@@ -29,22 +29,22 @@ AG01 Example 3.11
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable add : G -> G -> G.
-Variable app : G -> G -> G.
-Variable cons : G -> G -> G.
-Variable false : G.
-Variable high : G -> G -> G.
-Variable if_high : G -> G -> G -> G.
-Variable if_low : G -> G -> G -> G.
-Variable le : G -> G -> G.
-Variable low : G -> G -> G.
-Variable nil : G.
-Variable quicksort : G -> G.
-Variable s : G -> G.
-Variable true : G.
-Variable zero : G.
+Parameter add : G -> G -> G.
+Parameter app : G -> G -> G.
+Parameter cons : G -> G -> G.
+Parameter false : G.
+Parameter high : G -> G -> G.
+Parameter if_high : G -> G -> G -> G.
+Parameter if_low : G -> G -> G -> G.
+Parameter le : G -> G -> G.
+Parameter low : G -> G -> G.
+Parameter nil : G.
+Parameter quicksort : G -> G.
+Parameter s : G -> G.
+Parameter true : G.
+Parameter zero : G.
 Axiom ax0 : forall n x, quicksort (add n x) = app (quicksort (low n x)) (add n (quicksort (high n x))).
 Axiom ax1 : quicksort nil = nil.
 Axiom ax2 : forall n m x, if_high false n (add m x) = add m (high n x).

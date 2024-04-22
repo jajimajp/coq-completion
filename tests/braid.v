@@ -2,16 +2,16 @@ Require Import Coq.Setoids.Setoid.
 Require Import Loader.
 
 (* 集合 *)
-Variable G : Set.
+Parameter G : Set.
 
 (* * *)
-Variable f : G -> G -> G.
+Parameter f : G -> G -> G.
 Infix "*" := f (at level 40, left associativity).
 
 (* 定数 *)
-Variable e : G.
-Variable c1 : G.
-Variable c2 : G.
+Parameter e : G.
+Parameter c1 : G.
+Parameter c2 : G.
 
 (**** 公理 ****)
 Axiom a0 : forall x : G, e * x = x.

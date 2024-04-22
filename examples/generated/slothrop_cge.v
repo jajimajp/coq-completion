@@ -17,13 +17,13 @@ slothrop_cge.trs:
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable f : G -> G.
-Variable g : G -> G.
-Variable refl : G.
-Variable symm : G -> G.
-Variable trans : G -> G -> G.
+Parameter f : G -> G.
+Parameter g : G -> G.
+Parameter refl : G.
+Parameter symm : G -> G.
+Parameter trans : G -> G -> G.
 Axiom ax0 : forall x y, trans (f x) (g y) = trans (g y) (f x).
 Axiom ax1 : forall x y, trans (g x) (g y) = g (trans x y).
 Axiom ax2 : forall x y, trans (f x) (f y) = f (trans x y).

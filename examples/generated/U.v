@@ -16,14 +16,14 @@ a(a(a(s, i), a(x, x)), y) -> a(a(i, y), a(a(x,x), y))
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable a : G -> G -> G.
-Variable i : G.
-Variable k : G.
-Variable s : G.
-Variable x : G.
-Variable y : G.
+Parameter a : G -> G -> G.
+Parameter i : G.
+Parameter k : G.
+Parameter s : G.
+Parameter x : G.
+Parameter y : G.
 Axiom ax0 : a (a (a s i) (a x x)) y = a (a i y) (a (a x x) y).
 Axiom ax1 : a (a (a s i) i) x = a (a i x) (a i x).
 Axiom ax2 : a (a (a s (a k (a s i))) (a (a s i) i)) x = a (a (a k (a s i)) x) (a (a (a s i) i) x).

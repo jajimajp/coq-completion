@@ -12,9 +12,9 @@ f(x, y) -> f(y, x)
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable f : G -> G -> G.
+Parameter f : G -> G -> G.
 Axiom ax0 : forall x y, f x y = f y x.
 Create HintDb hint_compl.
 Complete ax0 : f : hint_compl.

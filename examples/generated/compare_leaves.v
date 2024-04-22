@@ -19,14 +19,14 @@ AG01 Example 3.14
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable concat : G -> G -> G.
-Variable cons : G -> G -> G.
-Variable false : G.
-Variable leaf : G.
-Variable less_leaves : G -> G -> G.
-Variable true : G.
+Parameter concat : G -> G -> G.
+Parameter cons : G -> G -> G.
+Parameter false : G.
+Parameter leaf : G.
+Parameter less_leaves : G -> G -> G.
+Parameter true : G.
 Axiom ax0 : forall u v w z, less_leaves (cons u v) (cons w z) = less_leaves (concat u v) (concat w z).
 Axiom ax1 : forall w z, less_leaves leaf (cons w z) = true.
 Axiom ax2 : forall x, less_leaves x leaf = false.

@@ -23,14 +23,14 @@ GWPO proofs require mix interpretation (max and polyonominals)?
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable a : G -> G -> G.
-Variable cur : G -> G.
-Variable i : G.
-Variable one : G.
-Variable p : G -> G -> G.
-Variable up : G.
+Parameter a : G -> G -> G.
+Parameter cur : G -> G.
+Parameter i : G.
+Parameter one : G.
+Parameter p : G -> G -> G.
+Parameter up : G.
 Axiom ax0 : forall x y, a up (p x y) = y.
 Axiom ax1 : forall x y, a one (p x y) = x.
 Axiom ax2 : a up i = up.

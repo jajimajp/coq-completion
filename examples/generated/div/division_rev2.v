@@ -19,12 +19,12 @@ division_rev2.trs:
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable d : G -> G -> G.
-Variable m : G -> G -> G.
-Variable s : G -> G.
-Variable zero : G.
+Parameter d : G -> G -> G.
+Parameter m : G -> G -> G.
+Parameter s : G -> G.
+Parameter zero : G.
 Axiom ax0 : forall x y, s (d (m x y) (s (s y))) = d (s (s x)) (s (s y)).
 Axiom ax1 : forall x, s (d x (s zero)) = d (s x) (s zero).
 Axiom ax2 : forall y, s (d zero (s y)) = d (s zero) (s y).

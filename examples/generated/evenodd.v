@@ -19,14 +19,14 @@ AG01 Example 3.37
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable evenodd : G -> G -> G.
-Variable false : G.
-Variable not : G -> G.
-Variable s : G -> G.
-Variable true : G.
-Variable zero : G.
+Parameter evenodd : G -> G -> G.
+Parameter false : G.
+Parameter not : G -> G.
+Parameter s : G -> G.
+Parameter true : G.
+Parameter zero : G.
 Axiom ax0 : forall x, evenodd (s x) (s zero) = evenodd x zero.
 Axiom ax1 : evenodd zero (s zero) = false.
 Axiom ax2 : forall x, evenodd x zero = not (evenodd x (s zero)).

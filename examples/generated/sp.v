@@ -14,11 +14,11 @@ p(s(x)) -> x
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable p : G -> G.
-Variable plus : G -> G -> G.
-Variable s : G -> G.
+Parameter p : G -> G.
+Parameter plus : G -> G -> G.
+Parameter s : G -> G.
 Axiom ax0 : forall x y, plus (s x) y = s (plus x y).
 Axiom ax1 : forall x, p (s x) = x.
 Axiom ax2 : forall x, s (p x) = x.

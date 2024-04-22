@@ -2,14 +2,14 @@ Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
 (* 集合 *)
-Variable G : Set.
+Parameter G : Set.
 (* + *)
-Variable f : G -> G -> G.
+Parameter f : G -> G -> G.
 Infix "+" := f (at level 50, left associativity).
 (* 単位元 *)
-Variable e : G.
+Parameter e : G.
 (* - *)
-Variable i : G -> G.
+Parameter i : G -> G.
 
 (**** 公理 ****)
 (* 結合律 *)

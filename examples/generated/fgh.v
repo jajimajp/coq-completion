@@ -13,11 +13,11 @@ f(h(x)) -> h(h(f(x)))
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable f : G -> G.
-Variable g : G -> G.
-Variable h : G -> G.
+Parameter f : G -> G.
+Parameter g : G -> G.
+Parameter h : G -> G.
 Axiom ax0 : forall x, f (h x) = h (h (f x)).
 Axiom ax1 : forall x, f (g x) = g (f (f x)).
 Create HintDb hint_compl.

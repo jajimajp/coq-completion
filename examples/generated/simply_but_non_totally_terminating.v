@@ -15,11 +15,11 @@ Zantema 1994 Ch 2.4
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable f : G -> G.
-Variable g : G -> G.
-Variable h : G -> G.
+Parameter f : G -> G.
+Parameter g : G -> G.
+Parameter h : G -> G.
 Axiom ax0 : forall x, f (g (h x)) = f (h (h (g (g x)))).
 Create HintDb hint_compl.
 Complete ax0 : f g h : hint_compl.

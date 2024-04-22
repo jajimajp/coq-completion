@@ -20,17 +20,17 @@ CiME_04_append.trs:
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable append : G -> G -> G.
-Variable cons : G -> G -> G.
-Variable false : G.
-Variable hd : G -> G.
-Variable ifappend : G -> G -> G -> G.
-Variable is_empty : G -> G.
-Variable nil : G.
-Variable tl : G -> G.
-Variable true : G.
+Parameter append : G -> G -> G.
+Parameter cons : G -> G -> G.
+Parameter false : G.
+Parameter hd : G -> G.
+Parameter ifappend : G -> G -> G -> G.
+Parameter is_empty : G -> G.
+Parameter nil : G.
+Parameter tl : G -> G.
+Parameter true : G.
 Axiom ax0 : forall l1 l2 x l, ifappend l1 l2 (cons x l) = cons x (append l l2).
 Axiom ax1 : forall l1 l2, ifappend l1 l2 nil = l2.
 Axiom ax2 : forall l1 l2, append l1 l2 = ifappend l1 l2 l1.

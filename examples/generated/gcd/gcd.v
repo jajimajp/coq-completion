@@ -21,16 +21,16 @@ if_gcd(false, s(X), s(Y)) -> gcd(minus(Y, X), s(X))
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable false : G.
-Variable gcd : G -> G -> G.
-Variable if_gcd : G -> G -> G -> G.
-Variable le : G -> G -> G.
-Variable minus : G -> G -> G.
-Variable s : G -> G.
-Variable true : G.
-Variable z : G.
+Parameter false : G.
+Parameter gcd : G -> G -> G.
+Parameter if_gcd : G -> G -> G -> G.
+Parameter le : G -> G -> G.
+Parameter minus : G -> G -> G.
+Parameter s : G -> G.
+Parameter true : G.
+Parameter z : G.
 Axiom ax0 : forall X Y, if_gcd false (s X) (s Y) = gcd (minus Y X) (s X).
 Axiom ax1 : forall X Y, if_gcd true (s X) (s Y) = gcd (minus X Y) (s Y).
 Axiom ax2 : forall X Y, gcd (s X) (s Y) = if_gcd (le Y X) (s X) (s Y).

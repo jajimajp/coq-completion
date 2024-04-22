@@ -22,11 +22,11 @@ submitted by: Raul Gutierrez and Salvador Lucas
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable a | x == a : G.
-Variable b | x == b : G.
-Variable f : G -> G.
+Parameter a | x == a : G.
+Parameter b | x == b : G.
+Parameter f : G -> G.
 Axiom ax0 : forall x, f x = b | x == b.
 Axiom ax1 : forall x, f x = a | x == a.
 Create HintDb hint_compl.

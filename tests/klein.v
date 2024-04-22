@@ -13,10 +13,10 @@ f(y) -> b
 Require Import Coq.Setoids.Setoid.
 Require Import Loader.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable b : G.
-Variable f : G -> G.
+Parameter b : G.
+Parameter f : G -> G.
 Axiom ax0 : forall y, f y = b.
 Axiom ax1 : forall x y, f x = f y.
 Create HintDb hint_compl.

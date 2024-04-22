@@ -14,11 +14,11 @@ Der95_20.trs:
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable and : G -> G -> G.
-Variable not : G -> G.
-Variable or : G -> G -> G.
+Parameter and : G -> G -> G.
+Parameter not : G -> G.
+Parameter or : G -> G -> G.
 Axiom ax0 : forall x y, not (and x y) = or (not (not (not x))) (not (not (not y))).
 Axiom ax1 : forall x y, not (or x y) = and (not (not (not x))) (not (not (not y))).
 Axiom ax2 : forall x, not (not x) = x.

@@ -27,17 +27,17 @@ No ground total reduction order can complete this system.
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable a : G.
-Variable f1 : G -> G.
-Variable f2 : G -> G.
-Variable g1 : G -> G.
-Variable g2 : G -> G.
-Variable h1 : G -> G.
-Variable h2 : G -> G.
-Variable i1 : G -> G.
-Variable i2 : G -> G.
+Parameter a : G.
+Parameter f1 : G -> G.
+Parameter f2 : G -> G.
+Parameter g1 : G -> G.
+Parameter g2 : G -> G.
+Parameter h1 : G -> G.
+Parameter h2 : G -> G.
+Parameter i1 : G -> G.
+Parameter i2 : G -> G.
 Axiom ax0 : i2 a = a.
 Axiom ax1 : i1 a = a.
 Axiom ax2 : f2 a = a.

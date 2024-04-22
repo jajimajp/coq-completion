@@ -14,11 +14,11 @@ a(s(x), s(y)) -> a(x, a(s(x), y))
 Require Import Coq.Setoids.Setoid.
 From Completion Require Import Plugin.
 
-Variable G : Set.
+Parameter G : Set.
     
-Variable a : G -> G -> G.
-Variable s : G -> G.
-Variable zero : G.
+Parameter a : G -> G -> G.
+Parameter s : G -> G.
+Parameter zero : G.
 Axiom ax0 : forall x y, a (s x) (s y) = a x (a (s x) y).
 Axiom ax1 : forall x, a (s x) zero = a x (s zero).
 Axiom ax2 : forall y, a zero y = s y.
