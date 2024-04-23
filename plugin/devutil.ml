@@ -114,3 +114,10 @@ and string_of_constr_expr (e : Constrexpr.constr_expr) : string =
     "CNotation (" ^ s ^ ")"
   | e -> "<not implemented" ^ string_of_constr_expr_label (CAst.make e) ^ ">"
   in string_of_constrexpr_r (e.CAst.v)
+
+let string_of_goal gl =
+  let env = Proofview.Goal.env gl in
+  let sigma = Proofview.Goal.sigma gl in
+  let concl = Proofview.Goal.concl gl in
+  let c = EConstr.to_constr sigma concl in
+  Pp.string_of_ppcmds (Printer.pr_constr_env env sigma c)
