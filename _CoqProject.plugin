@@ -7,12 +7,14 @@ theories/Plugin.v
 plugin/devutil.mli
 plugin/equation.mli
 plugin/equation.ml
-plugin/main.mli
 plugin/g_tactics.mlg
 plugin/toma.mli
 plugin/tomaparser.mli
 plugin/dune
 plugin/my_term.mli
+plugin/coq_intf.mli
+plugin/coq_intf.ml
+plugin/main.mli
 plugin/main.ml
 plugin/tomaparser.ml
 plugin/my_term.ml
