@@ -15,11 +15,5 @@ val complete_in_tac :
   -> Locus.clause
   -> unit Proofview.tactic
 
-val prove_by_complete :
-  string list    (* 公理名一覧 *)
-  -> string list (* 定数名一覧 *)
-  -> Locus.clause
-  -> unit Proofview.tactic
-
 (** [lpo_autorewrite_with hintDb] returns tactic to rewrite current goal term. *)
 val lpo_autorewrite_with : string -> Locus.clause -> unit Proofview.tactic

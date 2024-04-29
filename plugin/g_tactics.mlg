@@ -37,9 +37,3 @@ TACTIC EXTEND lpo_rewrite
   Main.lpo_autorewrite_with hint cl
 }
 END
-
-TACTIC EXTEND by_complete
-| [ "by_complete" preident_list(axioms) ":" preident_list(constants) clause(cl) ] -> {
-  Main.prove_by_complete axioms constants cl
-}
-END
