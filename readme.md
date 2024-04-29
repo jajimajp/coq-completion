@@ -2,7 +2,7 @@
 
 ## Installation
 
-1. Get toma(v0.6+PARSABLE) from [here](https://github.com/jajimajp/toma.git) and build it.
+1. Get toma(v0.7+PARSABLE) from [here](https://github.com/jajimajp/toma.git) and build it.
 
 ```bash
 git clone https://github.com/jajimajp/toma.git
