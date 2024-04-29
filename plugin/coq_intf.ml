@@ -246,7 +246,6 @@ let tac_prove_by_reduction ~(rewriters : Libnames.qualid list)
   let rec aux l2rs dbg_cnt =
     Proofview.Goal.enter (fun gl ->
       print_endline ("@tac_prove_by_recuction: hyps: " ^ (string_of_int (List.length (Proofview.Goal.hyps gl))));
-      print_endline ("DBG CNT: " ^ (string_of_int dbg_cnt));
       Tacticals.tclIFCATCH
         (try Tacticals.tclPROGRESS (tactic_of l2rs) with Nametab.GlobalizationError qid -> print_endline ("errrr" ^ (Libnames.string_of_qualid qid)); Tacticals.tclFAIL (Pp.str "fl"))
         (fun _ -> Tacticals.tclIDTAC)

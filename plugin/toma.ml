@@ -2,6 +2,7 @@
 module Exe : sig
   (** execute with input [string], and return output as [string list] *)
   val toma : string -> string list
+  val toma_with_goal : goal:string -> string -> string list
   val get_toma_version : unit -> string
 end = struct
   let write file content =
@@ -38,6 +39,17 @@ end = struct
     (* 出力の先頭がリストの後ろに入っているので反転して返す *)
     output
 
+  let toma_with_goal ~goal input =
+    let argfile = file_with_content input in
+    (* tomaへのパスが通っている必要がある *)
+    let command = "toma --parsable \"" ^ goal ^ "\" " ^ argfile in
+    print_endline command;
+    let ic = Unix.open_process_in command in
+    let output = input_all_lines ic in
+    ignore (Unix.close_process_in ic);
+    (* 出力の先頭がリストの後ろに入っているので反転して返す *)
+    output
+
   let get_toma_version () =
     let command = "toma -h" in
     let ic = Unix.open_process_in command in
@@ -61,3 +73,11 @@ let toma axioms =
     failwith ("VERSION CHECKED: NG : " ^ version);
   let axioms : Equation.t list = List.map Equation.of_constr axioms in
   Exe.toma (trs_of ~axioms)
+
+  let toma_with_goal ~goal axioms = 
+    let version =  Exe.get_toma_version () in
+    if not (version = "toma version 0.6+PARSABLE") then
+      failwith ("VERSION CHECKED: NG : " ^ version);
+    let goal = Equation.of_constr goal |> Equation.to_trs_string in
+    let axioms : Equation.t list = List.map Equation.of_constr axioms in
+    Exe.toma_with_goal ~goal (trs_of ~axioms)

@@ -5,7 +5,7 @@ open Ltac_plugin
 open Stdarg
 }
 
-VERNAC COMMAND EXTEND PrintTheorem CLASSIFIED AS QUERY
+VERNAC COMMAND EXTEND Complete CLASSIFIED AS QUERY
 | [ "Interreduce" ident(name) ":=" constr(e) "by" ident(a) "using" ident_list(rs)] -> {
     let rs = List.map Names.Id.to_string rs in
     let a = Names.Id.to_string a in
@@ -19,10 +19,27 @@ VERNAC COMMAND EXTEND PrintTheorem CLASSIFIED AS QUERY
   let _ = Main.complete axioms hint_db_name ops in
   Feedback.msg_notice @@ Pp.str "Finish"
 }
+| [ "Complete" reference_list(axioms) ":" reference_list(ops) ":" ident(hint) "for" constr(e) ] -> {
+  let hint_db_name = Names.Id.to_string hint in
+  let _ = Main.complete_for e axioms hint_db_name ops in
+  Feedback.msg_notice @@ Pp.str "Finish"
+}
+END
+
+TACTIC EXTEND complete
+| [ "complete" preident_list(axioms) ":" preident_list(constants) clause(cl) ] -> {
+  Main.complete_in_tac axioms constants cl
+}
 END
 
 TACTIC EXTEND lpo_rewrite
 | [ "lpo_autorewrite" "with" preident(hint) clause(cl) ] -> {
   Main.lpo_autorewrite_with hint cl
+}
+END
+
+TACTIC EXTEND by_complete
+| [ "by_complete" preident_list(axioms) ":" preident_list(constants) clause(cl) ] -> {
+  Main.prove_by_complete axioms constants cl
 }
 END

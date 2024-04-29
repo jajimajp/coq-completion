@@ -418,3 +418,108 @@ let auto_multi_rewrite ?(conds=Naive) lems cl =
 
 let lpo_autorewrite_with hintDb cl =
   (auto_multi_rewrite [hintDb] cl) 
+
+let complete_in_tac axs cs cl =
+  let axs = List.map Libnames.qualid_of_string axs in
+  let cs = List.map Libnames.qualid_of_string cs in
+  let axioms = List.map constr_of_qualid axs in
+  (* path を付加する (例: "e" => "AutoEqProver.Test.e") *)
+  let ops = List.map (fun op ->
+    op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds) cs in
+  let outputs = Toma.toma axioms in
+  let procedure = Tomaparser.parse outputs in
+  let constantsopt: constants option = Some (My_term.constants_of_list ops) in
+  let _ = proof_using_toma procedure constantsopt axs in
+  Proofview.tclUNIT ()
+
+let prove_by_complete axs cs cl =
+  let axs = List.map Libnames.qualid_of_string axs in
+  let cs = List.map Libnames.qualid_of_string cs in
+  let axioms = List.map constr_of_qualid axs in
+  (* path を付加する (例: "e" => "AutoEqProver.Test.e") *)
+  let ops = List.map (fun op ->
+    op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds) cs in
+  let outputs = Toma.toma axioms in
+  let procedure = Tomaparser.parse outputs in
+  let constantsopt: constants option = Some (My_term.constants_of_list ops) in
+  let _ = proof_using_toma procedure constantsopt axs in
+  (* lpo_autorewrite_with "hint_compl" cl  *)
+  Proofview.tclUNIT ()
+
+let complete_for (goal :Constrexpr.constr_expr) rs dbName ops =
+  let axioms = List.map constr_of_qualid rs in
+  (* path を付加する (例: "e" => "AutoEqProver.Test.e") *)
+  let ops = List.map (fun op ->
+    op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds) ops in
+  let env = Global.env () in 
+  let sigma = Evd.from_env env in
+  let (sigma, goal) = Constrintern.interp_constr_evars env sigma goal in
+  let goal = EConstr.to_constr sigma goal in
+  let outputs = Toma.toma_with_goal ~goal axioms in
+  let pl, gl, ord = Tomaparser.parse_for_goal outputs in
+  let rules = List.map (fun (r, _) -> r) pl in
+  let procedure = pl, rules, ord in
+  let constantsopt: constants option = Some (My_term.constants_of_list ops) in
+  let outputs = proof_using_toma procedure constantsopt rs in
+  Pp.str @@ String.concat "\n" outputs
+
+(*
+let prove_by_complete axs cs =
+  (*
+  print_endline (String.concat "\n"
+  [ "axioms: "
+  ; (String.concat ", " axs)
+  ; "constants: "
+  ; (String.concat ", " cs)
+  ]);
+  *)
+
+  let cs = List.map Libnames.qualid_of_string cs in
+  let ops = List.map (fun op ->
+    op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds) cs in
+  let constants = (My_term.constants_of_list ops) in
+  Proofview.Goal.enter (fun gl ->
+    let sigma = Proofview.Goal.sigma gl in
+    let concl = Proofview.Goal.concl gl in
+    let goal = EConstr.to_constr sigma concl in
+    let axs = List.map Libnames.qualid_of_string axs in
+    let axioms = List.map constr_of_qualid axs in
+    let outputs = Toma.toma_with_goal ~goal axioms in
+    print_endline "out: ";
+    List.iter print_endline outputs;
+    print_endline "end out: " ;
+    let proc = Tomaparser.parse_for_goal outputs in
+    Tomaparser.print_proofs (fst proc);
+    let tac = tac_of_procedure_for_goal
+      proc
+      axs
+      constants in
+    let print_back ifo = match Exninfo.get_backtrace ifo with
+      | None -> ()
+      | Some bt -> print_endline (Exninfo.backtrace_to_string bt) in
+    Proofview.tclIFCATCH (tac)
+      (fun () -> print_endline "OK"; tclIDTAC)
+      (fun (exn, ifo) ->
+        match exn with
+        | Nametab.GlobalizationError qid -> print_endline ("GlobalizationError: " ^ Libnames.string_of_qualid qid); tclFAIL (Pp.str "Could not prove by complete")
+        | Tacticals.FailError (lv, pplazy) -> print_endline ("FailError: <" ^ (Pp.string_of_ppcmds (Lazy.force pplazy)) ^ ">"); tclFAIL (Pp.str "Could not prove by complete");
+        | _ ->
+          print_endline "FAIL"; print_endline (Printexc.to_string exn); print_back ifo; tclFAIL (Pp.str "Could not prove by complete")))
+*)
+
+  (*
+  let axs = List.map Libnames.qualid_of_string axs in
+  let axioms = List.map constr_of_qualid axs in
+  (* path を付加する (例: "e" => "AutoEqProver.Test.e")
+  (* let cs = List.map Libnames.qualid_of_string cs in *)
+  (* let ops = List.map (fun op ->
+    op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds) cs in *)
+  let outputs = Toma.toma_with_goal axioms in
+  List.iter print_endline outputs
+  (* let procedure = Tomaparser.parse outputs in
+  let constantsopt: constants option = Some (My_term.constants_of_list ops) in
+  let outputs = proof_using_toma procedure constantsopt rs in
+  Pp.str @@ String.concat "\n" outputs
+  Proofview.tclUNIT () *)
+  *)
+  *)
