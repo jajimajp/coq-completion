@@ -21,7 +21,19 @@ Parameter f : G -> G -> G.
 Axiom ax0 : forall x y, f x y = f y x.
 Axiom ax1 : forall x, f e x = x.
 Axiom ax2 : forall x y z, f (f x y) z = f x (f y z).
+
+(* Set Nested Proofs Allowed. *)
+
 Create HintDb hint_compl.
+
+(* Complete ax0 ax1 ax2 : e f : hint_compl for (forall x y, f x y = f y x). *)
+(* Theorem comm : forall x y, f x y = f y x. *)
+(*   Proof. *)
+(*     lpo_autorewrite with hint_compl. *)
+
+(*     reflexivity. *)
+(*   Qed. *)
+
 Complete ax0 ax1 ax2 : e f : hint_compl.
 Print Rewrite HintDb hint_compl.
 
@@ -33,3 +45,76 @@ Theorem comm : forall x y, f x y = f y x.
   Qed.
 
 Print comm.
+
+(* Theorem comm2 : forall x y, f x y = f y x. *)
+(*   Proof. *)
+(*     by_complete ax0 ax1 ax2 : e f. *)
+(*   Qed. *)
+
+Theorem check : forall x y z: G, f x (f y z) = f y (f x z).
+  Proof.
+    assert (H0 : forall x0 x1 x2, f (f x0 x1) x2 = f x0 (f x1 x2)).
+      intros.
+      apply ax2.
+
+    assert (H1 : forall x0, f e x0 = x0).
+      intros.
+      apply ax1.
+
+    assert (H2 : forall x0 x1, f x0 x1 = f x1 x0).
+      intros.
+      apply ax0.
+
+    assert (H3 : forall x2, f x2 e = x2).
+      intros.
+      assert (H3_0 : forall x2, f e x2 = f x2 e).
+        intros.
+        setoid_rewrite H2 with (x0:=x0).
+        reflexivity.
+      assert (H3_1 : forall x2, f e x2 = x2).
+        intros.
+        setoid_rewrite H1.
+        reflexivity.
+      setoid_rewrite <- H3_0.
+      setoid_rewrite H3_1.
+      reflexivity.
+
+    assert (H4 : forall x3 x4 x5, f x5 (f x3 x4) = f x3 (f x4 x5)).
+      assert (H4_0 : forall x2 x3 x4, f (f x3 x4) x2 = f x3 (f x4 x2)).
+        intros.
+        setoid_rewrite H0 with (x0 := x3) (x1 := x4).
+        reflexivity.
+      assert (H4_1 : forall x2 x3 x4, f (f x3 x4) x2 = f x2 (f x3 x4)).
+        intros.
+        setoid_rewrite H2 with (x0 := (f x3 x4)).
+        reflexivity.
+      setoid_rewrite <- H4_0 at 2.
+      setoid_rewrite H4_1.
+      reflexivity.
+
+    assert (H5 : forall x2 x3 x4, f (f x4 x3) x2 = f x3 (f x4 x2)).
+      intros.
+      assert (H5_0 : forall x2 x3 x4, f (f x3 x4) x2 = f (f x4 x3) x2).
+        intros.
+        setoid_rewrite H2 with (x0 := x1) (x1 := x5).
+        reflexivity.
+      assert (H5_1 : forall x2 x3 x4, f (f x3 x4) x2 = f x3 (f x4 x2)).
+        intros.
+        setoid_rewrite H0 with (x0 := x1).
+        reflexivity.
+      setoid_rewrite <- H5_0 at 1.
+      setoid_rewrite H5_1.
+      reflexivity.
+
+    assert (H6 : forall x2 x3 x4, f x3 (f x4 x2) = f x4 (f x3 x2)).
+      intros.
+      pose proof H5.
+      rewrite_strat innermost H0 in H.
+      symmetry.
+      apply H.
+
+    intros.
+    apply H6.
+  Qed.
+
+Print check.

@@ -12,17 +12,18 @@ Parameter e : G.
 Parameter i : G -> G.
 
 (**** 公理 ****)
-Axiom ax0 : forall x y, x + y = y + x.
-Axiom ax1 : forall x, e + x = x.
-Axiom ax2 : forall x y z, (x + y) + z = x + (y + z).
+(* 結合律 *)
+Axiom assoc : forall a b c, a + b + c = a + (b + c).
+(* 左単位元 *)
+Axiom id_l : forall a, e + a = a.
+(* 左逆元 *)
+Axiom inv_l : forall a, i a + a = e.
 
 Create HintDb hint_compl.
 
-Complete ax0 ax1 ax2 : f e i : hint_compl.
-
-Theorem check: forall x y z, x + (y + z) = z + (x + y).
+Complete assoc id_l inv_l : f e i : hint_compl for (forall a b c, i (a + b) + (a + (b + c)) = c).
+Theorem check: forall a b c, i (a + b) + (a + (b + c)) = c.
 Proof.
-  intros.
   lpo_autorewrite with hint_compl.
   reflexivity.
 Qed.

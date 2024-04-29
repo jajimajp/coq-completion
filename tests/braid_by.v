@@ -22,15 +22,12 @@ Axiom a4 : e = c1 * c1.
 Axiom a5 : c2 * c2 = e.
 
 Create HintDb hint_compl.
-
-Complete a0 a1 a2 a3 a4 a5 : f e c1 c2 : hint_compl.
-
+Complete a0 a1 a2 a3 a4 a5 : f e c1 c2 : hint_compl for (c1 * c2 * c1 = c2 * c1 * c2).
+Print Rewrite HintDb hint_compl.
 Theorem check1: c1 * c2 * c1 = c2 * c1 * c2.
 Proof.
-  intros.
   autorewrite with hint_compl.
   (* ↓ not working *)
   (* lpo_autorewrite with hint_compl. *)
   reflexivity.
 Qed.
-
