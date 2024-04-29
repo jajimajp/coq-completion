@@ -177,7 +177,7 @@ let ord (a, b) =
     if List.mem s !order_params then `Func (find_index (fun x -> x = s) !order_params)
     else `Var s in
   match rank a, rank b with
-  | `Func i, `Func j -> if i > j then GR else if i = j then EQ else NGE
+  | `Func i, `Func j -> if i < j then GR else if i = j then EQ else NGE
   | `Func _, `Var _ -> GR
   | `Var _, `Func _ -> NGE
   | `Var x, `Var y -> if x > y then GR else if x = y then EQ else NGE

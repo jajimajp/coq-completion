@@ -26,8 +26,6 @@ Complete a0 a1 a2 a3 a4 a5 : f e c1 c2 : hint_compl for (c1 * c2 * c1 = c2 * c1 
 Print Rewrite HintDb hint_compl.
 Theorem check1: c1 * c2 * c1 = c2 * c1 * c2.
 Proof.
-  autorewrite with hint_compl.
-  (* ↓ not working *)
-  (* lpo_autorewrite with hint_compl. *)
+  lpo_autorewrite with hint_compl.
   reflexivity.
 Qed.

@@ -1,5 +1,5 @@
 Require Import Coq.Setoids.Setoid.
-Require Import Loader.
+From Completion Require Import Plugin.
 
 (* 集合 *)
 Parameter G : Set.
@@ -31,3 +31,4 @@ Proof.
   reflexivity.
 Qed.
 
+Print check1.
