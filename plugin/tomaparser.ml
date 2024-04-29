@@ -33,6 +33,8 @@ let rec termast_of_string str =
   | false -> Var str
 
 type procedure = strat proof list * rule list * order_param (* (proofs for all rules, completed rules) *)
+and procedure_for_goal = strat proof list * goal_strat * order_param
+and goal_strat = rule * termid list (* same as strat.Simp *)
 and rule = termid * eq
 and eq = term * term
 and 'strat proof = (rule * 'strat)
@@ -214,16 +216,98 @@ let parse lines =
       end in
   (aux proofs [], comp_rules, order_param)
 
-let print_procedure (proofs, comp_rules, order_param) : unit =
-  print_endline ("order: " ^ (String.concat " > " order_param));
-  let rec string_of_term = function
-  | Var v -> v
-  | App (f, args) -> f ^ "(" ^ (String.concat "," (List.map string_of_term args)) ^ ")" in
-  let string_of_rule (id, (l, r)) = id ^ ": " ^ (string_of_term l) ^ " -> " ^ (string_of_term r) in
+let rec string_of_term = function
+| Var v -> v
+| App (f, args) -> f ^ "(" ^ (String.concat "," (List.map string_of_term args)) ^ ")"
+let string_of_rule (id, (l, r)) = id ^ ": " ^ (string_of_term l) ^ " -> " ^ (string_of_term r)
+
+let print_proofs proofs =
   let print_proof = function
     | (rule, Axiom) -> print_endline @@ "Axiom: " ^ (string_of_rule rule)
     | (rule, Crit (r1, r2, sp)) -> print_endline @@ "Crit: " ^ (string_of_rule rule) ^ " with " ^ (string_of_rule r1) ^ " and " ^ (string_of_rule r2) ^ " with superposition " ^ (string_of_term sp)
     | (rule, Simp (id, ids)) -> print_endline @@ "Simp: " ^ (string_of_rule rule) ^ " with " ^ (String.concat "," ids) in
-  List.iter print_proof proofs;
+  List.iter print_proof proofs
+
+let print_procedure (proofs, comp_rules, order_param) : unit =
+  print_endline ("order: " ^ (String.concat " > " order_param));
+  print_proofs proofs;
   let print_rule rule = print_endline @@ "Completed: " ^ (string_of_rule rule) in
   List.iter print_rule comp_rules
+
+let rec consume_goal_simp lines : goal_strat option =
+  (* (ex) 10: +(c1(), 0()) = c1().
+          Proof: Rewrite lhs with equations []
+                         rhs with equations [0]. *)
+  let parse_header line : (rule * bool) option = (* (rule, is_reversed(parsed "<-")) *)
+    (* (ex) 10: +(c1(), 0()) = c1(). *)
+    let re = Str.regexp "^\\([0-9]+\\): \\(.+\\) \\(->\\|=\\|<-\\) \\(.+\\)\\.$" in
+    if Str.string_match re line 0 then
+      let id = Str.matched_group 1 line in
+      let l = Str.matched_group 2 line in
+      let op = Str.matched_group 3 line in
+      let r = Str.matched_group 4 line in
+      let l = termast_of_string l in
+      let r = termast_of_string r in
+      Some (match op with
+      | "<-" -> (id, (r, l)), true
+      | _ -> (id, (l, r)), false)
+    else
+      None in
+  match lines with
+  | l0 :: l1 :: l2 :: rest ->
+    if l0 = "" then consume_goal_simp (List.tl lines) else
+    begin match parse_header l0 with
+    | None -> None
+    | Some (rule, _) ->
+      let re1 = Str.regexp "^Proof: Rewrite lhs with equations \\[.*\\]$" in
+      if Str.string_match re1 l1 0 then
+      let re2 = Str.regexp "^Proof: Rewrite lhs with equations \\[\\(.+\\)\\]$" in
+      let lids = if Str.string_match re2 l1 0 then
+        Str.matched_group 1 l1 |> String.split_on_char ','
+      else [] in 
+      let re3 = Str.regexp ".*rhs with equations \\[\\(.+\\)\\].$" in
+      let rids = if Str.string_match re3 l2 0 then
+        Str.matched_group 1 l2 |> String.split_on_char ','
+      else [] in
+      let ids = (lids @ rids) in
+      (* delete duplicates *)
+      Some (rule, ids)
+      else None
+    end
+  | _ -> None
+
+let parse_minimal_for_goal lines =
+  let lines = expect "Success" lines in
+  let lines = expect "order:" lines in
+  let order_param, lines = expect_order lines in
+  let lines = expect "axioms:" lines in  
+  let _, lines = expect_axioms lines in
+  let lines = expect "generated rules:" lines in
+  let rec aux lines acc : minimal_strat proof list * goal_strat =
+    match consume_goal_simp lines with
+    | Some goal_strat -> (List.rev acc, goal_strat)
+    | None ->
+      match lines with
+      | [] -> failwith "parse_minimal_for_goal: unexpected end of input"
+      | hd :: tl ->
+        match consume_proof lines with
+        | None, _ -> failwith "parse_minimal_for_goal: unexpected end of input"
+        | Some (rule, strat), rest -> aux rest ((rule, strat) :: acc) in
+  let f, s = aux lines [] in
+  f, s, order_param
+  
+let parse_for_goal lines =
+  let proofs, goal_strat, order_param = parse_minimal_for_goal lines in
+  let table = Hashtbl.create 10 in
+  List.iter (fun ((id, (l, r)), _) -> Hashtbl.add table id (id, (l, r))) proofs;
+  let find id = Hashtbl.find table id in
+  let rec aux (proofs : minimal_strat proof list) acc : strat proof list =
+    match proofs with
+    | [] -> List.rev acc
+    | (rule, strat) :: tl ->
+      begin match strat with
+      | MAxiom -> aux tl ((rule, Axiom) :: acc)
+      | MCrit (id1, id2, sp) -> aux tl ((rule, Crit (find id1, find id2, sp)) :: acc)
+      | MSimp (id, ids) -> aux tl ((rule, Simp (find id, ids)) :: acc)
+      end in
+  aux proofs [], goal_strat, order_param

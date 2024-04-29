@@ -20,7 +20,7 @@ export PATH="<your/path/to/toma>:$PATH"
 
 ```bash
 $ toma -h | head -n1
-toma version 0.6+PARSABLE
+toma version 0.7+PARSABLE
 ```
 
 3. Clone this repository and install.

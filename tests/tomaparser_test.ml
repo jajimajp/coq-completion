@@ -2,6 +2,8 @@ open Plugin.Tomaparser
 
 let input = {|
 Completed
+order:
+LPO with precedence: ___false > ___true > - > + > 0
 axioms:
 0: +(0(), X0) = X0.
 1: +(-(X1), X1) = 0().
@@ -185,6 +187,7 @@ ES:
 let%expect_test "parse" =
   print_procedure (parse input);
   [%expect {|
+   order: ___false > ___true > - > + > 0
    Axiom: 0: +(0,X0) -> X0
    Axiom: 1: +(-(X1),X1) -> 0
    Axiom: 2: +(+(X1,X0),X2) -> +(X1,+(X0,X2))
@@ -246,3 +249,27 @@ let%expect_test "parse" =
    Completed: 14: +(X4,+(-(X4),X7)) -> X7
    Completed: 38: -(+(X9,X10)) -> +(-(X10),-(X9))
     |}]
+
+
+let input2 = {|
+Success
+order:
+LPO with precedence: c1 > + > - > 0
+axioms:
+0: +(0(), X0) = X0.
+1: +(-(X1), X1) = 0().
+2: +(+(X1, X0), X2) = +(X1, +(X0, X2)).
+generated rules:
+1: +(-(X1), X1) -> 0().
+Proof: Axiom.
+
+3: +(-(c1()), c1()) = 0().
+Proof: Rewrite lhs with equations [1]
+               rhs with equations [].
+|} |> String.split_on_char '\n'
+
+let%expect_test "parse with goal" =
+let prs, _, _ = parse_for_goal input2 in
+  print_proofs prs;
+  [%expect {|
+    Axiom: 1: +(-(X1),X1) -> 0|}]
