@@ -1,5 +1,5 @@
 Require Import Coq.Setoids.Setoid.
-(* From Completion Require Import Plugin. *)
+From Completion Require Import Plugin.
 
 (* 集合 *)
 Parameter G : Set.
@@ -21,7 +21,22 @@ Axiom inv_l : forall a, i a + a = e.
 (* 可換 *)
 Axiom comm : forall a b, a + b = b + a.
 
-Theorem check : forall x y, y + (x + x) = x + (x + y).
+Create HintDb hint.
+
+(* Non-terminating *)
+(* Complete assoc id_l inv_l comm : f e i : hint. *)
+
+Complete assoc id_l inv_l comm : f e i : hint for (forall a b, a + a + b = b + a + a).
+
+Theorem check : forall a b, a + a + b = b + a + a.
+Proof.
+  lpo_autorewrite with hint.
+  reflexivity.
+Qed.
+
+Print check.
+
+Theorem check_ : forall x y, y + (x + x) = x + (x + y).
   Proof.
     assert (H0 : forall x0 x1 x2, (x0 + x1) + x2 = x0 + (x1 + x2)) by (
                apply assoc).
