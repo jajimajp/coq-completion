@@ -67,17 +67,19 @@ let trs_of ~axioms =
     String.concat "\n" (List.map Equation.to_trs_string axioms);
     "\n)\n" ]
 
+let acceptable_toma_version = "toma version 0.7+PARSABLE"
+
 let toma axioms = 
   let version =  Exe.get_toma_version () in
-  if not (version = "toma version 0.6+PARSABLE") then
-    failwith ("VERSION CHECKED: NG : " ^ version);
+  if not (version = acceptable_toma_version) then
+    failwith ("VERSION CHECKED: NG : " ^ version ^ "\nexpected: " ^ acceptable_toma_version);
   let axioms : Equation.t list = List.map Equation.of_constr axioms in
   Exe.toma (trs_of ~axioms)
 
   let toma_with_goal ~goal axioms = 
     let version =  Exe.get_toma_version () in
-    if not (version = "toma version 0.6+PARSABLE") then
-      failwith ("VERSION CHECKED: NG : " ^ version);
+    if not (version = acceptable_toma_version) then
+      failwith ("VERSION CHECKED: NG : " ^ version ^ "\nexpected: " ^ acceptable_toma_version);
     let goal = Equation.of_constr goal |> Equation.to_trs_string in
     let axioms : Equation.t list = List.map Equation.of_constr axioms in
     Exe.toma_with_goal ~goal (trs_of ~axioms)
