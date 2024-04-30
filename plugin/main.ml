@@ -41,11 +41,11 @@ let add_local_rewrite_hint (base: string) (lcsr: Constrexpr.constr_expr) : Pp.t 
   let _ = add_hints base in
   Pp.strbrk "Added rewrite hints."
 
-let add_rules_for_termination (rules : rule list) =
+let add_rules_for_termination (rules : rule list) (hint_db_name : string) =
   let rec aux = function
   | [] -> ()
   | (id, (_, _)) :: tl ->
-      let _ = add_local_rewrite_hint "hint_compl" (CAst.make (
+      let _ = add_local_rewrite_hint hint_db_name (CAst.make (
         CRef (
           Libnames.qualid_of_string @@ "t" ^ id,
           None
@@ -57,7 +57,7 @@ let add_rules_for_termination (rules : rule list) =
 (* used in LPO, defined by toma output *)
 let order_params = Summary.ref ~name:"order_params" []
 
-let proof_using_toma (proc : procedure) (constants : constants option) axioms : string list =
+let proof_using_toma (proc : procedure) (constants : constants option) axioms hint_db_name : string list =
   let open Tomaparser in
   let (proofs, _, _) = proc in
   let prove (rule, strat) = match strat with
@@ -75,7 +75,7 @@ let proof_using_toma (proc : procedure) (constants : constants option) axioms : 
                                 ~applier:(Libnames.qualid_of_string ("t" ^ (fst prev))) in
   List.iter prove proofs; 
   let _, rules, _ = proc in
-  add_rules_for_termination rules;
+  add_rules_for_termination rules hint_db_name;
   let _, _, op = proc in
   order_params := op;
   []
@@ -93,7 +93,7 @@ let constr_of_qualid (ln: Libnames.qualid): Constr.t =
   let cb = get_constant_body gref in
   cb.const_type
 
-let complete rs dbName ops =
+let complete rs hint_db_name ops =
   let axioms = List.map constr_of_qualid rs in
   (* path を付加する (例: "e" => "AutoEqProver.Test.e") *)
   let ops = List.map (fun op ->
@@ -101,7 +101,7 @@ let complete rs dbName ops =
   let outputs = Toma.toma axioms in
   let procedure = Tomaparser.parse outputs in
   let constantsopt: constants option = Some (My_term.constants_of_list ops) in
-  let outputs = proof_using_toma procedure constantsopt rs in
+  let outputs = proof_using_toma procedure constantsopt rs hint_db_name in
   Pp.str @@ String.concat "\n" outputs
 
 open Equality
@@ -321,10 +321,10 @@ let complete_in_tac axs cs cl =
   let outputs = Toma.toma axioms in
   let procedure = Tomaparser.parse outputs in
   let constantsopt: constants option = Some (My_term.constants_of_list ops) in
-  let _ = proof_using_toma procedure constantsopt axs in
+  let _ = proof_using_toma procedure constantsopt axs "hint_compl" in
   Proofview.tclUNIT ()
 
-let complete_for (goal :Constrexpr.constr_expr) rs dbName ops =
+let complete_for (goal :Constrexpr.constr_expr) rs hint_db_name ops =
   let axioms = List.map constr_of_qualid rs in
   (* path を付加する (例: "e" => "AutoEqProver.Test.e") *)
   let ops = List.map (fun op ->
@@ -338,5 +338,5 @@ let complete_for (goal :Constrexpr.constr_expr) rs dbName ops =
   let rules = List.map (fun (r, _) -> r) pl in
   let procedure = pl, rules, ord in
   let constantsopt: constants option = Some (My_term.constants_of_list ops) in
-  let outputs = proof_using_toma procedure constantsopt rs in
+  let outputs = proof_using_toma procedure constantsopt rs hint_db_name in
   Pp.str @@ String.concat "\n" outputs

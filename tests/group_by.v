@@ -19,11 +19,10 @@ Axiom id_l : forall a, e + a = a.
 (* 左逆元 *)
 Axiom inv_l : forall a, i a + a = e.
 
-Create HintDb hint_compl.
-
-Complete assoc id_l inv_l : f e i : hint_compl for (forall a b c, i (a + b) + (a + (b + c)) = c).
-Theorem check: forall a b c, i (a + b) + (a + (b + c)) = c.
+Create HintDb hint.
+Complete assoc id_l inv_l : f e i : hint for (forall x y, (i x) + (x + y) = y).
+Theorem check1: forall x y, (i x) + (x + y) = y.
 Proof.
-  lpo_autorewrite with hint_compl.
+  lpo_autorewrite with hint.
   reflexivity.
 Qed.
