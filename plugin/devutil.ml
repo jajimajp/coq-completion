@@ -19,7 +19,6 @@ let next_binls ls =
   | None -> None
   | Some i -> Some (List.rev (toggle i 0 r))
 
-
 let insert_unique x l =
   if List.mem x l then l else x :: l
 

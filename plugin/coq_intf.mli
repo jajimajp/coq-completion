@@ -20,9 +20,3 @@ val prove_interreduce :
   rewriters:Libnames.qualid list ->
   applier:Libnames.qualid -> (* apply を行う定理名 *)
   unit
-
-
-val tac_of_procedure_for_goal :
-      Tomaparser.procedure_for_goal ->
-        Libnames.qualid list ->
-          My_term.constants -> unit Proofview.tactic
