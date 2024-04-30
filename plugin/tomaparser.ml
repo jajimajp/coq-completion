@@ -311,3 +311,32 @@ let parse_for_goal lines =
       | MSimp (id, ids) -> aux tl ((rule, Simp (find id, ids)) :: acc)
       end in
   aux proofs [], goal_strat, order_param
+
+let add_prefix procedure prefix =
+  let (proofs, rules, order_param) = procedure in
+  let for_rule (id, (l, r)) =
+    (prefix ^ id, (l, r)) in
+  let for_strat = function
+  | Axiom -> Axiom
+  | Crit (r1, r2, t) -> Crit (for_rule r1, for_rule r2, t)
+  | Simp (r, ids) -> Simp (for_rule r, List.map (fun i -> prefix ^ i) ids) in
+  let for_proof (r, s) =
+    for_rule r, for_strat s in
+  let proofs = List.map for_proof proofs in
+  let rules = List.map for_rule rules in
+  proofs, rules, order_param
+
+let add_prefix_proc_for_goal (procedure : procedure_for_goal) prefix =
+  let (proofs, (gr, gs), order_param) = procedure in
+  let for_rule (id, (l, r)) =
+    (prefix ^ id, (l, r)) in
+  let for_strat = function
+  | Axiom -> Axiom
+  | Crit (r1, r2, t) -> Crit (for_rule r1, for_rule r2, t)
+  | Simp (r, ids) -> Simp (for_rule r, List.map (fun i -> prefix ^ i) ids) in
+  let for_proof (r, s) =
+    for_rule r, for_strat s in
+  let proofs = List.map for_proof proofs in
+  let gs = List.map (fun i -> prefix ^ i) gs in
+  let goal_strat = (for_rule gr, gs) in
+  proofs, goal_strat, order_param

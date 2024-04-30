@@ -100,6 +100,7 @@ let complete rs hint_db_name ops =
     op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds) ops in
   let outputs = Toma.toma axioms in
   let procedure = Tomaparser.parse outputs in
+  let procedure = Tomaparser.add_prefix procedure ("_" ^ hint_db_name ^ "_") in
   let constantsopt: constants option = Some (My_term.constants_of_list ops) in
   let outputs = proof_using_toma procedure constantsopt rs hint_db_name in
   Pp.str @@ String.concat "\n" outputs
@@ -334,7 +335,8 @@ let complete_for (goal :Constrexpr.constr_expr) rs hint_db_name ops =
   let (sigma, goal) = Constrintern.interp_constr_evars env sigma goal in
   let goal = EConstr.to_constr sigma goal in
   let outputs = Toma.toma_with_goal ~goal axioms in
-  let pl, gl, ord = Tomaparser.parse_for_goal outputs in
+  let proc = Tomaparser.parse_for_goal outputs in
+  let pl, gl, ord = Tomaparser.add_prefix_proc_for_goal proc ("_" ^ hint_db_name ^ "_") in
   let rules = List.map (fun (r, _) -> r) pl in
   let procedure = pl, rules, ord in
   let constantsopt: constants option = Some (My_term.constants_of_list ops) in

@@ -24,3 +24,7 @@ val print_procedure : procedure -> unit
 val parse : string list -> procedure
 
 val parse_for_goal : string list -> procedure_for_goal
+
+(** [add_prefix procedure prefix] adds prefix to rule names. *)
+val add_prefix : procedure -> string -> procedure
+val add_prefix_proc_for_goal : procedure_for_goal -> string -> procedure_for_goal
