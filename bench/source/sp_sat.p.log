@@ -1,0 +1,25 @@
+% SZS status Satisfiable
+% SZS output start Proof
+original problem:
+axioms:
+s(p(X)) = X
+p(s(X)) = X
+add(z(), Y) = Y
+add(s(X), Y) = s(add(X, Y))
+goal:
+add(s(z()), p(z())) != s(z())
+To show the satisfiability of the original goal,
+it suffices to show that add(s(z()), p(z())) = s(z()) is not valid under the following axioms:
+The new axioms admits the following ground-complete ordered rewrite system:
+LPO with precedence: z > add > s > p
+ES:
+3: add(s(X0), X1) -> s(add(X0, X1))
+2: add(z(), X1) -> X1
+1: p(s(X0)) -> X0
+0: s(p(X0)) -> X0
+5: add(p(X3), X4) -> p(add(X3, X4))
+
+add(s(z()), p(z())) = s(z()) is not joinable.
+So add(s(z()), p(z())) = s(z()) is not valid.
+% SZS output end Proof
+source/sp_sat.p: Completed in 0.09 seconds

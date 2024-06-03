@@ -1,0 +1,32 @@
+% SZS status Unsatisfiable
+% SZS output start Proof
+original problem:
+axioms:
+f(a()) = b()
+f(c()) = d()
+a() = c()
+goal:
+f(a()) != d()
+To show the unsatisfiability of the original goal,
+it suffices to show that f(a()) = d() (skolemized goal) is valid under the axioms.
+Here is an equational proof:
+0: f(a()) -> b().
+Proof: Axiom.
+
+1: f(c()) <- d().
+Proof: Axiom.
+
+2: a() <- c().
+Proof: Axiom.
+
+3: b() <- d().
+Proof: Rewrite equation 1,
+               lhs with equations [2,0]
+               rhs with equations [].
+
+4: f(a()) = d().
+Proof: Rewrite lhs with equations [0]
+               rhs with equations [3].
+
+% SZS output end Proof
+refined/hoge.p: Completed in 0.04 seconds

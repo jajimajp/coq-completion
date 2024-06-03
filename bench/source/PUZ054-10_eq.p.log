@@ -1,0 +1,22 @@
+% SZS status Satisfiable
+% SZS output start Proof
+original problem:
+axioms:
+p(s(s(X)), Y) = p(X, s(Y))
+p(X, s(s(Y))) = p(X, s(Y))
+p(s(X), s(Y)) = p(s(X), Y)
+goal:
+p(s(s(s(s(s(s(s(s(s(s(n0())))))))))), s(s(s(s(s(s(s(s(s(n0())))))))))) != p(s(n0()), n0())
+To show the satisfiability of the original goal,
+it suffices to show that p(s(s(s(s(s(s(s(s(s(s(n0())))))))))), s(s(s(s(s(s(s(s(s(n0())))))))))) = p(s(n0()), n0()) is not valid under the following axioms:
+The new axioms admits the following ground-complete ordered rewrite system:
+LPO with precedence: n0 > p > s
+ES:
+2: p(s(X0), s(X1)) -> p(s(X0), X1)
+1: p(X0, s(s(X1))) -> p(X0, s(X1))
+0: p(s(s(X0)), X1) -> p(X0, s(X1))
+
+p(s(s(s(s(s(s(s(s(s(s(n0())))))))))), s(s(s(s(s(s(s(s(s(n0())))))))))) = p(s(n0()), n0()) is not joinable.
+So p(s(s(s(s(s(s(s(s(s(s(n0())))))))))), s(s(s(s(s(s(s(s(s(n0())))))))))) = p(s(n0()), n0()) is not valid.
+% SZS output end Proof
+source/PUZ054-10_eq.p: Completed in 0.04 seconds

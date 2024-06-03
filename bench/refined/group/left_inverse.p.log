@@ -1,0 +1,47 @@
+% SZS status Unsatisfiable
+% SZS output start Proof
+original problem:
+axioms:
+f(X, e()) = X
+f(X, i(X)) = e()
+f(f(X, Y), Z) = f(X, f(Y, Z))
+goal:
+f(i(X), X) != e()
+To show the unsatisfiability of the original goal,
+it suffices to show that f(i(c1()), c1()) = e() (skolemized goal) is valid under the axioms.
+Here is an equational proof:
+0: f(X0, e()) -> X0.
+Proof: Axiom.
+
+1: f(X0, i(X0)) -> e().
+Proof: Axiom.
+
+2: f(f(X0, X1), X2) -> f(X0, f(X1, X2)).
+Proof: Axiom.
+
+3: f(X3, f(e(), X2)) -> f(X3, X2).
+Proof: A critical pair between equations 2 and 0 with superposition f(f(X3, e()), X2).
+
+5: f(X3, f(i(X3), X2)) -> f(e(), X2).
+Proof: A critical pair between equations 2 and 1 with superposition f(f(X3, i(X3)), X2).
+
+7: f(e(), i(i(X3))) -> f(X3, e()).
+Proof: A critical pair between equations 5 and 1 with superposition f(X3, f(i(X3), i(i(X3)))).
+
+22: f(e(), i(i(X3))) -> X3.
+Proof: Rewrite equation 7,
+               lhs with equations []
+               rhs with equations [0].
+
+27: f(X3, i(i(X4))) -> f(X3, X4).
+Proof: A critical pair between equations 3 and 22 with superposition f(X3, f(e(), i(i(X4)))).
+
+45: f(i(X4), X4) -> e().
+Proof: A critical pair between equations 27 and 1 with superposition f(i(X4), i(i(X4))).
+
+56: f(i(c1()), c1()) = e().
+Proof: Rewrite lhs with equations [45]
+               rhs with equations [].
+
+% SZS output end Proof
+refined/group/left_inverse.p: Completed in 0.41 seconds

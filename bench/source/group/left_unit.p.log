@@ -1,0 +1,52 @@
+% SZS status Unsatisfiable
+% SZS output start Proof
+original problem:
+axioms:
+f(X, e()) = X
+f(X, i(X)) = e()
+f(f(X, Y), Z) = f(X, f(Y, Z))
+goal:
+f(e(), X) != X
+To show the unsatisfiability of the original goal,
+it suffices to show that f(e(), c1()) = c1() (skolemized goal) is valid under the axioms.
+Here is an equational proof:
+0: f(X0, e()) -> X0.
+Proof: Axiom.
+
+1: f(X0, i(X0)) -> e().
+Proof: Axiom.
+
+2: f(f(X0, X1), X2) -> f(X0, f(X1, X2)).
+Proof: Axiom.
+
+3: f(X3, f(e(), X2)) -> f(X3, X2).
+Proof: A critical pair between equations 2 and 0 with superposition f(f(X3, e()), X2).
+
+4: e() <- f(X3, f(X4, i(f(X3, X4)))).
+Proof: A critical pair between equations 1 and 2 with superposition f(f(X3, X4), i(f(X3, X4))).
+
+5: f(X3, f(i(X3), X2)) -> f(e(), X2).
+Proof: A critical pair between equations 2 and 1 with superposition f(f(X3, i(X3)), X2).
+
+11: f(e(), f(X6, i(f(i(X3), X6)))) -> f(X3, e()).
+Proof: A critical pair between equations 5 and 4 with superposition f(X3, f(i(X3), f(X6, i(f(i(X3), X6))))).
+
+18: f(e(), f(X6, i(f(i(X3), X6)))) -> X3.
+Proof: Rewrite equation 11,
+               lhs with equations []
+               rhs with equations [0].
+
+34: X3 <- f(e(), f(f(e(), X8), i(f(i(X3), X8)))).
+Proof: A critical pair between equations 18 and 3 with superposition f(e(), f(f(e(), X8), i(f(i(X3), f(e(), X8))))).
+
+37: X3 <- f(e(), X3).
+Proof: Rewrite equation 34,
+               lhs with equations []
+               rhs with equations [2,18].
+
+43: f(e(), c1()) = c1().
+Proof: Rewrite lhs with equations [37]
+               rhs with equations [].
+
+% SZS output end Proof
+source/group/left_unit.p: Completed in 0.26 seconds

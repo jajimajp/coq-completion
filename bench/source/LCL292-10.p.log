@@ -1,0 +1,5 @@
+% SZS status SyntaxError
+"./LCL292-10.p" (line 62, column 80):
+unexpected end of input
+expecting "\n"
+source/LCL292-10.p: Completed in 0.03 seconds

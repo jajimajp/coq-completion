@@ -1,0 +1,30 @@
+% SZS status Unsatisfiable
+% SZS output start Proof
+original problem:
+axioms:
+a(a(a(s(), X), Y), Z) = a(a(X, Z), a(Y, Z))
+a(a(k(), X), Y) = X
+a(i(), X) = X
+a(a(a(s(), a(k(), a(s(), i()))), a(a(s(), i()), i())), x()) = a(a(a(k(), a(s(), i())), x()), a(a(a(s(), i()), i()), x()))
+a(a(a(s(), i()), i()), x()) = a(a(i(), x()), a(i(), x()))
+a(a(a(s(), i()), a(x(), x())), y()) = a(a(i(), y()), a(a(x(), x()), y()))
+goal:
+a(a(a(a(s(), a(k(), a(s(), i()))), a(a(s(), i()), i())), x()), y()) != a(y(), a(a(x(), x()), y()))
+To show the unsatisfiability of the original goal,
+it suffices to show that a(a(a(a(s(), a(k(), a(s(), i()))), a(a(s(), i()), i())), x()), y()) = a(y(), a(a(x(), x()), y())) (skolemized goal) is valid under the axioms.
+Here is an equational proof:
+0: a(a(a(s(), X0), X1), X2) = a(a(X0, X2), a(X1, X2)).
+Proof: Axiom.
+
+1: a(a(k(), X0), X1) -> X0.
+Proof: Axiom.
+
+2: a(i(), X0) -> X0.
+Proof: Axiom.
+
+6: a(a(a(a(s(), a(k(), a(s(), i()))), a(a(s(), i()), i())), x()), y()) = a(y(), a(a(x(), x()), y())).
+Proof: Rewrite lhs with equations [0,1,0,2,2,0,2]
+               rhs with equations [].
+
+% SZS output end Proof
+source/U_lemma.p: Completed in 0.07 seconds

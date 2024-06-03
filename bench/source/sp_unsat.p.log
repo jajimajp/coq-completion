@@ -1,0 +1,28 @@
+% SZS status Unsatisfiable
+% SZS output start Proof
+original problem:
+axioms:
+s(p(X)) = X
+p(s(X)) = X
+add(z(), Y) = Y
+add(s(X), Y) = s(add(X, Y))
+goal:
+add(s(z()), p(z())) != z()
+To show the unsatisfiability of the original goal,
+it suffices to show that add(s(z()), p(z())) = z() (skolemized goal) is valid under the axioms.
+Here is an equational proof:
+0: s(p(X0)) -> X0.
+Proof: Axiom.
+
+2: add(z(), X1) -> X1.
+Proof: Axiom.
+
+3: add(s(X0), X1) -> s(add(X0, X1)).
+Proof: Axiom.
+
+4: add(s(z()), p(z())) = z().
+Proof: Rewrite lhs with equations [3,2,0]
+               rhs with equations [].
+
+% SZS output end Proof
+source/sp_unsat.p: Completed in 0.04 seconds

@@ -1,0 +1,31 @@
+% SZS status Unsatisfiable
+% SZS output start Proof
+original problem:
+axioms:
+add(z(), Y) = Y
+add(s(X), Y) = s(add(X, Y))
+mult(z(), Y) = z()
+mult(s(X), Y) = add(mult(X, Y), Y)
+goal:
+mult(s(s(z())), s(s(z()))) != s(s(s(s(z()))))
+To show the unsatisfiability of the original goal,
+it suffices to show that mult(s(s(z())), s(s(z()))) = s(s(s(s(z())))) (skolemized goal) is valid under the axioms.
+Here is an equational proof:
+0: add(z(), X0) -> X0.
+Proof: Axiom.
+
+1: add(s(X1), X0) -> s(add(X1, X0)).
+Proof: Axiom.
+
+2: mult(z(), X0) -> z().
+Proof: Axiom.
+
+3: mult(s(X1), X0) -> add(mult(X1, X0), X0).
+Proof: Axiom.
+
+4: mult(s(s(z())), s(s(z()))) = s(s(s(s(z())))).
+Proof: Rewrite lhs with equations [3,3,2,0,1,1,0]
+               rhs with equations [].
+
+% SZS output end Proof
+source/mult/mult_2_2_4.p: Completed in 0.04 seconds
