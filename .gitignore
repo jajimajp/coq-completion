@@ -17,6 +17,8 @@
 *~
 g_*.ml
 
+.DS_Store
+
 # dune
 _build
 
