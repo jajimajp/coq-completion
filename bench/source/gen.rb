@@ -31,6 +31,10 @@ def process_directory(base_directory, current_directory, output_dir)
       # `tptp2coqp file.p l` の結果を file/ComplLPO.v に保存
       compl_lpo_output = `tptp2coqp "#{path}" l`
       File.write(File.join(relative_dir, 'ComplLPO.v'), compl_lpo_output)
+
+      # `tptp2coqp file.p s` の結果を file/Smt.v に保存
+      smt_output = `dune exec tptp2coqp "#{path}" s | sed -e 's/G/Z/g' -e 's/=/=?/g'`
+      File.write(File.join(relative_dir, 'Smt.v'), smt_output)
     end
   end
 end
