@@ -140,25 +140,34 @@ let rec occurs x t =
   | App (f, ts) ->
     List.exists (occurs x) ts
 
+let rec subterms = function
+| Var _ as t -> [t]
+| App (_, ts) as t -> t :: List.flatten (List.map subterms (List.sort_uniq compare ts))
+
+let is_subterm s t = List.mem s (subterms t)
+
 let rec lpo ord (s, t) =
-  match s, t with
-  | _, Var x -> if s = t then EQ
-                else if occurs x s then GR
+  if is_subterm s t then NGE (* maybe EQ *)
+  else if is_subterm t s then GR
+  else
+    match s, t with
+    | _, Var x -> if s = t then EQ
+                  else if occurs x s then GR
+                  else NGE
+    | Var _, App _ -> NGE
+    | App (f, ss), App (g, ts) ->
+      let forall f ls = not (List.exists (fun e -> not (f e)) ls) in
+      if forall (fun si -> lpo ord (si, t) = NGE) ss
+      then
+        begin match ord (f, g) with
+        | GR -> if forall (fun ti -> lpo ord (s, ti) = GR) ts
+                then GR else NGE
+        | EQ -> if forall (fun ti -> lpo ord (s, ti) = GR) ts
+                then lex (lpo ord) (ss, ts)
                 else NGE
-  | Var _, App _ -> NGE
-  | App (f, ss), App (g, ts) ->
-    let forall f ls = not (List.exists (fun e -> not (f e)) ls) in
-    if forall (fun si -> lpo ord (si, t) = NGE) ss
-    then
-      begin match ord (f, g) with
-      | GR -> if forall (fun ti -> lpo ord (s, ti) = GR) ts
-              then GR else NGE
-      | EQ -> if forall (fun ti -> lpo ord (s, ti) = GR) ts
-              then lex (lpo ord) (ss, ts)
-              else NGE
-      | NGE -> NGE
-      end
-    else GR
+        | NGE -> NGE
+        end
+      else GR
 
 let rec skolemize = function
 | Var x -> App (x, [])
@@ -198,28 +207,12 @@ let tclMAP_rev f args =
 exception NotReducingOrder
 let tclVALIDATE_LPO t =
   Proofview.Goal.enter (fun pre -> 
-  Tacticals.tclTHEN t (
-    Proofview.Goal.enter (fun gl -> 
-      match lpogt (eq_of_goal pre) (eq_of_goal gl) with
-      | GR ->  tclIDTAC
-      | _ -> raise NotReducingOrder
-      )))
-
-let tclPROTECT_LPO t =
-  let open Proofview in
-  let open Proofview.Notations in
-  let t = 
-    Proofview.Goal.enter (fun pre -> 
     Tacticals.tclTHEN t (
       Proofview.Goal.enter (fun gl -> 
         match lpogt (eq_of_goal pre) (eq_of_goal gl) with
-        | GR -> tclIDTAC
-        | _ -> Tacticals.tclFAIL (Pp.str "Not reducing rewriting"
-        ))))
-      in
-    Proofview.tclIFCATCH t
-      (fun () -> tclIDTAC)
-      (fun e -> catch_failerror e <*> tclUNIT ())
+        | GR ->  tclIDTAC
+        | _ -> raise NotReducingOrder
+        )))
 
 let one_base where conds tac_main bas =
   let lrul = find_rewrites bas in
@@ -259,8 +252,7 @@ let one_base where conds tac_main bas =
       Ftactic.run (Geninterp.interp wit ist tac) (fun _ -> Proofview.tclUNIT ())
     in
     Tacticals.tclREPEAT_MAIN @@
-      tclPROTECT_LPO @@
-        (Tacticals.tclTHENFIRST (try_rewrite h tac) tac_main)
+      (Tacticals.tclTHENFIRST (try_rewrite h tac) tac_main)
   in
   let lrul = tclMAP_rev eval lrul in
   Tacticals.tclREPEAT_MAIN (Proofview.tclPROGRESS lrul)
