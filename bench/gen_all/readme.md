@@ -14,11 +14,9 @@ Each example is tested with a timeout of 60 seconds.
 | [./AGT042-10](./AGT042-10) | 🟡 TIMEOUT | 🔴 FAIL | 🟡 TIMEOUT | 🟡 TIMEOUT |
 | [./ALG006-1](./ALG006-1) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL |
 | [./ALG235-1](./ALG235-1) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL |
-| [./BOO001-1-env-test](./BOO001-1-env-test) | 🟢 OK | 🟢 OK | 🟢 OK | N/A |
 | [./BOO001-1](./BOO001-1) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL |
 | [./I](./I) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL |
 | [./LCL292-10](./LCL292-10) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL |
-| [./PUZ054-10](./PUZ054-10) | 🟢 OK | 🟢 OK | 🟢 OK | N/A |
 | [./PUZ054-10_eq](./PUZ054-10_eq) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL |
 | [./SWB004-10](./SWB004-10) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL |
 | [./U](./U) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL |
@@ -26,7 +24,6 @@ Each example is tested with a timeout of 60 seconds.
 | [./add](./add) | 🟢 OK | 🟢 OK | 🟢 OK | 🟢 OK |
 | [./add2](./add2) | 🟢 OK | 🟢 OK | 🟢 OK | 🟢 OK |
 | [./add_on_z](./add_on_z) | 🔴 FAIL | 🟢 OK | 🟢 OK | 🟢 OK |
-| [./com_sat](./com_sat) | 🟢 OK | 🟢 OK | 🟢 OK | N/A |
 | [./div/roundup_division_100_10_10](./div/roundup_division_100_10_10) | 🟡 TIMEOUT | 🔴 FAIL | 🟡 TIMEOUT | 🟡 TIMEOUT |
 | [./div/roundup_division_100_2_50](./div/roundup_division_100_2_50) | 🟢 OK | 🔴 FAIL | 🟢 OK | 🟡 TIMEOUT |
 | [./div/roundup_division_16_4_4](./div/roundup_division_16_4_4) | 🟢 OK | 🔴 FAIL | 🟢 OK | 🟢 OK |
@@ -76,5 +73,4 @@ Each example is tested with a timeout of 60 seconds.
 | [./sp_com_unsat](./sp_com_unsat) | 🟢 OK | 🟢 OK | 🟢 OK | 🟢 OK |
 | [./sp_sat](./sp_sat) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🟡 TIMEOUT |
 | [./sp_unsat](./sp_unsat) | 🟢 OK | 🟢 OK | 🟢 OK | 🟢 OK |
-| [./triv](./triv) | 🟢 OK | 🟢 OK | 🟢 OK | N/A |
 | [./trivial_unsat](./trivial_unsat) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL |
