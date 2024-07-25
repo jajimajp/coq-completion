@@ -207,12 +207,28 @@ let tclMAP_rev f args =
 exception NotReducingOrder
 let tclVALIDATE_LPO t =
   Proofview.Goal.enter (fun pre -> 
+  Tacticals.tclTHEN t (
+    Proofview.Goal.enter (fun gl -> 
+      match lpogt (eq_of_goal pre) (eq_of_goal gl) with
+      | GR ->  tclIDTAC
+      | _ -> raise NotReducingOrder
+      )))
+
+let tclPROTECT_LPO t =
+  let open Proofview in
+  let open Proofview.Notations in
+  let t = 
+    Proofview.Goal.enter (fun pre -> 
     Tacticals.tclTHEN t (
       Proofview.Goal.enter (fun gl -> 
         match lpogt (eq_of_goal pre) (eq_of_goal gl) with
-        | GR ->  tclIDTAC
-        | _ -> raise NotReducingOrder
-        )))
+        | GR -> tclIDTAC
+        | _ -> Tacticals.tclFAIL (Pp.str "Not reducing rewriting"
+        ))))
+      in
+    Proofview.tclIFCATCH t
+      (fun () -> tclIDTAC)
+      (fun e -> catch_failerror e <*> tclUNIT ())
 
 let one_base where conds tac_main bas =
   let lrul = find_rewrites bas in
@@ -252,7 +268,8 @@ let one_base where conds tac_main bas =
       Ftactic.run (Geninterp.interp wit ist tac) (fun _ -> Proofview.tclUNIT ())
     in
     Tacticals.tclREPEAT_MAIN @@
-      (Tacticals.tclTHENFIRST (try_rewrite h tac) tac_main)
+      tclPROTECT_LPO @@
+        (Tacticals.tclTHENFIRST (try_rewrite h tac) tac_main)
   in
   let lrul = tclMAP_rev eval lrul in
   Tacticals.tclREPEAT_MAIN (Proofview.tclPROGRESS lrul)
