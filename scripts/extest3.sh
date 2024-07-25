@@ -14,8 +14,8 @@ echo "- 🟡 TIMEOUT: timeout ($TIMEOUT s)."
 echo ""
 echo "## Results"
 echo ""
-echo "| File | Compl.v | Ham.v | ComplLPO.v |"
-echo "|---|---|---|---|"
+echo "| File | Compl.v | Ham.v | ComplLPO.v | Smt.v |"
+echo "|---|---|---|---|---|"
 
 # ファイルごとに結果を表示する関数
 process_file() {
@@ -40,8 +40,9 @@ find . -type d | while read -r dir; do
     compl_file="$dir/Compl.v"
     ham_file="$dir/Ham.v"
     compllpo_file="$dir/ComplLPO.v"
+    smt_file="$dir/Smt.v"
 
-    if [ -f "$compl_file" ] || [ -f "$ham_file" ] || [ -f "$compllpo_file" ]; then
+    if [ -f "$compl_file" ] || [ -f "$ham_file" ] || [ -f "$compllpo_file" ] || [ -f "$smt_file" ]; then
         echo -n "| [$dir]($dir) |"
 
         if [ -f "$compl_file" ]; then
@@ -58,6 +59,12 @@ find . -type d | while read -r dir; do
 
         if [ -f "$compllpo_file" ]; then
             echo -n " $(process_file "$compllpo_file") |"
+        else
+            echo -n " N/A |"
+        fi
+
+        if [ -f "$smt_file" ]; then
+            echo -n " $(process_file "$smt_file") |"
         else
             echo -n " N/A |"
         fi
