@@ -20,7 +20,7 @@ Each example is tested with a timeout of 60 seconds.
 | [./PUZ054-10_eq](./PUZ054-10_eq) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL |
 | [./SWB004-10](./SWB004-10) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL |
 | [./U](./U) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL |
-| [./U_lemma](./U_lemma) | 🟢 OK | 🟢 OK | 🔴 FAIL | 🟢 OK |
+| [./U_lemma](./U_lemma) | 🟢 OK | 🟢 OK | 🟢 OK | 🟢 OK |
 | [./add](./add) | 🟢 OK | 🟢 OK | 🟢 OK | 🟢 OK |
 | [./add2](./add2) | 🟢 OK | 🟢 OK | 🟢 OK | 🟢 OK |
 | [./add_on_z](./add_on_z) | 🔴 FAIL | 🟢 OK | 🟢 OK | 🟢 OK |
@@ -42,8 +42,8 @@ Each example is tested with a timeout of 60 seconds.
 | [./div/roundup_division_unsat2](./div/roundup_division_unsat2) | 🟢 OK | 🟢 OK | 🟢 OK | 🟢 OK |
 | [./gcd/gcd_sat](./gcd/gcd_sat) | 🟡 TIMEOUT | 🔴 FAIL | 🟡 TIMEOUT | 🔴 FAIL |
 | [./gcd/gcd_unsat](./gcd/gcd_unsat) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🟢 OK |
-| [./gcd/gcd_unsat2](./gcd/gcd_unsat2) | 🟢 OK | 🟢 OK | 🔴 FAIL | 🟢 OK |
-| [./gcd/gcd_unsat3](./gcd/gcd_unsat3) | 🟢 OK | 🟢 OK | 🔴 FAIL | 🟢 OK |
+| [./gcd/gcd_unsat2](./gcd/gcd_unsat2) | 🟢 OK | 🟢 OK | 🟢 OK | 🟢 OK |
+| [./gcd/gcd_unsat3](./gcd/gcd_unsat3) | 🟢 OK | 🟢 OK | 🟢 OK | 🟢 OK |
 | [./gcd/gcd_unsat4](./gcd/gcd_unsat4) | 🟡 TIMEOUT | 🟢 OK | 🟡 TIMEOUT | 🟢 OK |
 | [./group/commutation](./group/commutation) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL |
 | [./group/inverse_unit](./group/inverse_unit) | 🟢 OK | 🔴 FAIL | 🟢 OK | 🟡 TIMEOUT |
@@ -60,11 +60,11 @@ Each example is tested with a timeout of 60 seconds.
 | [./mult/mult_5_5_25](./mult/mult_5_5_25) | 🟢 OK | 🔴 FAIL | 🟢 OK | 🟢 OK |
 | [./mult/mult_7_7_49](./mult/mult_7_7_49) | 🟢 OK | 🔴 FAIL | 🟢 OK | 🟡 TIMEOUT |
 | [./rev_list/rev_list_sat](./rev_list/rev_list_sat) | 🟡 TIMEOUT | 🔴 FAIL | 🟡 TIMEOUT | 🟡 TIMEOUT |
-| [./rev_list/rev_list_unsat](./rev_list/rev_list_unsat) | 🟢 OK | 🟢 OK | 🔴 FAIL | 🟢 OK |
-| [./rev_list/rev_list_unsat2](./rev_list/rev_list_unsat2) | 🟢 OK | 🟢 OK | 🔴 FAIL | 🟢 OK |
+| [./rev_list/rev_list_unsat](./rev_list/rev_list_unsat) | 🟢 OK | 🟢 OK | 🟢 OK | 🟢 OK |
+| [./rev_list/rev_list_unsat2](./rev_list/rev_list_unsat2) | 🟢 OK | 🟢 OK | 🟢 OK | 🟢 OK |
 | [./rev_list_sat](./rev_list_sat) | 🟡 TIMEOUT | 🔴 FAIL | 🟡 TIMEOUT | 🟡 TIMEOUT |
-| [./rev_list_unsat](./rev_list_unsat) | 🟢 OK | 🟢 OK | 🔴 FAIL | 🟢 OK |
-| [./rev_list_unsat2](./rev_list_unsat2) | 🟢 OK | 🟢 OK | 🔴 FAIL | 🟢 OK |
+| [./rev_list_unsat](./rev_list_unsat) | 🟢 OK | 🟢 OK | 🟢 OK | 🟢 OK |
+| [./rev_list_unsat2](./rev_list_unsat2) | 🟢 OK | 🟢 OK | 🟢 OK | 🟢 OK |
 | [./single_quote/ANA133-1](./single_quote/ANA133-1) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL |
 | [./single_quote/LCL897-10](./single_quote/LCL897-10) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL |
 | [./single_quote/NUN133-1](./single_quote/NUN133-1) | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL | 🔴 FAIL |
