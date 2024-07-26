@@ -13,6 +13,13 @@ let mkTermApp f args = App (f, args)
 
 let mkVar x = Var x
 
+let rec eq_term t1 t2 =
+  match (t1, t2) with
+  | (App (f1, args1), App (f2, args2)) ->
+    f1 = f2 && List.for_all2 eq_term args1 args2
+  | (Var x1, Var x2) -> x1 = x2
+  | _ -> false
+
 type constants = SS.t
 let empty_constants = SS.empty
 let default_constants_list = ["eq"; "e"; "G"; "f"; "AutoEqProver.Test.e"; "AutoEqProver.Test.f"; "Test.e"; "Test.f"] (* TODO *)

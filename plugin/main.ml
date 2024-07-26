@@ -147,7 +147,8 @@ let rec subterms = function
 let is_subterm s t = List.mem s (subterms t)
 
 let rec lpo ord (s, t) =
-  if is_subterm s t then NGE (* maybe EQ *)
+  if eq_term s t then EQ
+  else if is_subterm s t then NGE
   else if is_subterm t s then GR
   else
     match s, t with
@@ -168,7 +169,7 @@ let rec lpo ord (s, t) =
         | NGE -> NGE
         end
       else GR
-
+  
 let rec skolemize = function
 | Var x -> App (x, [])
 | App (f, ts) -> App (f, List.map skolemize ts)
