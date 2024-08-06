@@ -1,0 +1,108 @@
+File "./GRP672-10/SMT.v", line 6, characters 0-33:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP672-10/SMT.v", line 7, characters 0-26:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP672-10/SMT.v", line 8, characters 0-28:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP672-10/SMT.v", line 9, characters 0-18:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP672-10/SMT.v", line 10, characters 0-18:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP672-10/SMT.v", line 11, characters 0-18:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP672-10/SMT.v", line 12, characters 0-18:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP672-10/SMT.v", line 13, characters 0-26:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP672-10/SMT.v", line 14, characters 0-18:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP672-10/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(mult op_z (asoc op_x op_y op_t) = mult (asoc op_x op_y op_t) op_z)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP672-10/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z, asoc A B C = ld (mult A (mult B C)) (mult (mult A B) C))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP672-10/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z, mult A (mult B (mult C A)) = mult (mult (mult A B) C) A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP672-10/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, mult unit A = A) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP672-10/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, mult A unit = A) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP672-10/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, rd (mult A B) B = A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP672-10/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, mult (rd A B) B = A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP672-10/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, ld A (mult A B) = B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP672-10/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, mult A (ld A B) = B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqa46a26.vtlog /tmp/verit_coqa46a26.smt2 2> /tmp/warnings_verita396bf.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00006
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_3 () Int)
+(declare-fun op_4 (Int Int Int ) Int)
+(declare-fun op_2 () Int)
+(declare-fun op_5 (Int Int ) Int)
+(declare-fun op_0 () Int)
+(declare-fun op_1 () Int)
+(assert (not (= (op_5 op_0 (op_4 op_1 op_2 op_3)) (op_5 (op_4 op_1 op_2 op_3) op_0))))
+(check-sat)
+(get-model)
+File "./GRP672-10/SMT.v", line 30, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+op_t := -1
+op_x := 2
+op_y := 1
+op_z := 0
+asoc := fun _ _ _ => -2
+mult := fun BOUND_VARIABLE_320 BOUND_VARIABLE_321 => if BOUND_VARIABLE_320 = -1 then if BOUND_VARIABLE_321 = -2 then 3 else -3 else -3
+

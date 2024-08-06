@@ -1,0 +1,7 @@
+toma --parsable "LPO.multiply (X, X) -> LPO.identity" /tmp/tmp.6a8zva5hzK
+File "./GRP001-4/LPO.v", line 12, characters 0-112:
+Error:
+Anomaly
+"Uncaught exception Failure("expect: Unexpected output Completed, expected Success")."
+Please report at http://coq.inria.fr/bugs/.
+

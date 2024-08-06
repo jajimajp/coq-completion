@@ -1,0 +1,1 @@
+toma --parsable "LPO.ifeq (LPO.product (X, X, Y), LPO.true, LPO.product (X, Y, LPO.identity), LPO.true) -> LPO.true" /tmp/tmp.Dl26r9rwmr

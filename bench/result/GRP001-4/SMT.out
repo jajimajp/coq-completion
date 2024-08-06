@@ -1,0 +1,45 @@
+File "./GRP001-4/SMT.v", line 6, characters 0-22:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP001-4/SMT.v", line 7, characters 0-32:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP001-4/SMT.v", line 16, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, multiply identity X = X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP001-4/SMT.v", line 16, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z, multiply (multiply X Y) Z0 = multiply X (multiply Y Z0))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqc30d2a.vtlog /tmp/verit_coqc30d2a.smt2 2> /tmp/warnings_verit530d88.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00007
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_0 () Int)
+(declare-fun op_2 () Int)
+(declare-fun op_1 (Int Int ) Int)
+(assert (not (= (op_1 op_0 op_0) op_2)))
+(check-sat)
+(get-model)
+File "./GRP001-4/SMT.v", line 16, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+X := 0
+multiply := fun _ _ => -1
+identity := 1
+

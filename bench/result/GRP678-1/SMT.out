@@ -1,0 +1,27 @@
+File "./GRP678-1/SMT.v", line 6, characters 0-33:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP678-1/SMT.v", line 7, characters 0-26:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP678-1/SMT.v", line 8, characters 0-28:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP678-1/SMT.v", line 9, characters 0-18:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP678-1/SMT.v", line 10, characters 0-26:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP678-1/SMT.v", line 11, characters 0-18:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP678-1/SMT.v", line 28, characters 28-29:
+Error: The reference a was not found in the current environment.
+

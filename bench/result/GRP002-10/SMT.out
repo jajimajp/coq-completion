@@ -1,0 +1,112 @@
+File "./GRP002-10/SMT.v", line 6, characters 0-22:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP002-10/SMT.v", line 7, characters 0-38:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP002-10/SMT.v", line 8, characters 0-39:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP002-10/SMT.v", line 9, characters 0-26:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP002-10/SMT.v", line 10, characters 0-32:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP002-10/SMT.v", line 11, characters 0-36:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP002-10/SMT.v", line 12, characters 0-18:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP002-10/SMT.v", line 29, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall U V W X Y Z0 : Z,
+ ifeq (product Y Z0 V) true
+   (ifeq (product X V W) true
+      (ifeq (product X Y U) true (product U Z0 W) true) true) true = true)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP002-10/SMT.v", line 29, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall U V W X Y Z0 : Z,
+ ifeq (product U Z0 W) true
+   (ifeq (product Y Z0 V) true
+      (ifeq (product X Y U) true (product X V W) true) true) true = true)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP002-10/SMT.v", line 29, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall W X Y Z0 : Z,
+ ifeq2 (product X Y W) true (ifeq2 (product X Y Z0) true Z0 W) W = W)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP002-10/SMT.v", line 29, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y : Z, product X Y (multiply X Y) = true)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP002-10/SMT.v", line 29, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, product X (inverse X) identity = true)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP002-10/SMT.v", line 29, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, product (inverse X) X identity = true)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP002-10/SMT.v", line 29, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, product X identity X = true)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP002-10/SMT.v", line 29, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, product identity X X = true)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP002-10/SMT.v", line 29, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z, ifeq A A B C = B) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP002-10/SMT.v", line 29, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z, ifeq2 A A B C = B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq73c116.vtlog /tmp/verit_coq73c116.smt2 2> /tmp/warnings_verit03fc26.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00008
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_0 () Int)
+(declare-fun op_3 () Int)
+(declare-fun op_4 () Int)
+(declare-fun op_2 (Int Int Int ) Int)
+(declare-fun op_1 () Int)
+(declare-fun op_5 (Int Int Int Int ) Int)
+(assert (not (= (op_5 (op_2 op_0 op_0 op_1) op_3 (op_2 op_0 op_1 op_4) op_3) op_3)))
+(check-sat)
+(get-model)
+File "./GRP002-10/SMT.v", line 29, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+X := 0
+Y := 2
+product := fun BOUND_VARIABLE_316 BOUND_VARIABLE_317 BOUND_VARIABLE_318 => if BOUND_VARIABLE_316 = 0 then if BOUND_VARIABLE_317 = 0 then if BOUND_VARIABLE_318 = 2 then -2 else 3 else 3 else 3
+true := 1
+identity := -1
+ifeq := fun _ _ _ _ => -3
+

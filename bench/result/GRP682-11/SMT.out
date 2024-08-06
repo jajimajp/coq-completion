@@ -1,0 +1,15 @@
+File "./GRP682-11/SMT.v", line 6, characters 0-26:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP682-11/SMT.v", line 7, characters 0-28:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP682-11/SMT.v", line 8, characters 0-26:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP682-11/SMT.v", line 20, characters 24-26:
+Error: The reference x0 was not found in the current environment.
+
