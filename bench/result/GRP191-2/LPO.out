@@ -1,0 +1,1 @@
+toma --parsable "LPO.least_upper_bound (LPO.inverse (LPO.a), LPO.inverse (LPO.b)) -> LPO.inverse (LPO.b)" /tmp/tmp.XMhdzLu2Yc

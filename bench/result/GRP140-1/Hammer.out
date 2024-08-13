@@ -1,0 +1,17 @@
+Detecting provers...
+Eprover found
+Vampire found
+z3_tptp: symbol lookup error: /usr/local/lib/libz3.so: undefined symbol: pthread_create
+Z3 not found
+CVC4 found
+Extracting features...
+Running provers (8 threads)...
+CVC4 (knn-256) succeeded
+- dependencies: Hammer.ax_glb1c_1, Hammer.associativity_of_glb, Hammer.ax_glb1c_2, Hammer.symmetry_of_glb, Hammer.lub_absorbtion
+Reconstructing the proof...
+Tactic scongruence succeeded.
+Replace the hammer tactic with:
+	scongruence use: ax_glb1c_1, associativity_of_glb, ax_glb1c_2, symmetry_of_glb, lub_absorbtion.
+check
+     : least_upper_bound (greatest_lower_bound a b) c =
+       greatest_lower_bound a b

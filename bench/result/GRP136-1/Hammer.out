@@ -1,0 +1,16 @@
+Detecting provers...
+Eprover found
+Vampire found
+z3_tptp: symbol lookup error: /usr/local/lib/libz3.so: undefined symbol: pthread_create
+Z3 not found
+CVC4 found
+Extracting features...
+Running provers (8 threads)...
+Vampire (knn-64) succeeded
+- dependencies: Hammer.ax_antisyma_2, Hammer.ax_antisyma_1
+Reconstructing the proof...
+Tactic scongruence succeeded.
+Replace the hammer tactic with:
+	scongruence use: ax_antisyma_2, ax_antisyma_1.
+check
+     : a = b

@@ -68,7 +68,7 @@ File "./GRP673-11/SMT.v", line 30, characters 2-6:
 Warning: Discarding the following lemma (unsupported):
 (forall A B : Z, mult A (ld A B) = B)
 [SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq9de25a.vtlog /tmp/verit_coq9de25a.smt2 2> /tmp/warnings_verit32aa73.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq64d928.vtlog /tmp/verit_coq64d928.smt2 2> /tmp/warnings_verita28fee.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success

@@ -1,1 +1,3 @@
-toma --parsable "LPO.ifeq (LPO.product (X, X, Y), LPO.true, LPO.product (X, Y, LPO.identity), LPO.true) -> LPO.true" /tmp/tmp.Dl26r9rwmr
+File "./GRP002-10/LPO.v", line 28, characters 16-17:
+Error: The reference a was not found in the current environment.
+

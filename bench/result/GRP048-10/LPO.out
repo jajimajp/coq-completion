@@ -1,3 +1,1 @@
-File "./GRP048-10/LPO.v", line 24, characters 17-18:
-Error: The reference a was not found in the current environment.
-
+toma --parsable "LPO.equalish (LPO.inverse (LPO.a), LPO.inverse (LPO.b)) -> LPO.true" /tmp/tmp.NZAUhQX7qc

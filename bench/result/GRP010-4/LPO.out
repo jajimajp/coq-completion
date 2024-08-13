@@ -1,3 +1,4 @@
-File "./GRP010-4/LPO.v", line 15, characters 17-18:
-Error: The reference c was not found in the current environment.
-
+toma --parsable "LPO.multiply (LPO.b, LPO.c) -> LPO.identity" /tmp/tmp.VtLI843pDW
+Finish
+check
+     : multiply b c = identity

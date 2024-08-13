@@ -1,15 +1,64 @@
-File "./GRP011-4/SMT.v", line 6, characters 0-22:
+File "./GRP011-4/SMT.v", line 6, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP011-4/SMT.v", line 7, characters 0-26:
+File "./GRP011-4/SMT.v", line 7, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP011-4/SMT.v", line 8, characters 0-32:
+File "./GRP011-4/SMT.v", line 8, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP011-4/SMT.v", line 16, characters 26-27:
-Error: The reference b was not found in the current environment.
+File "./GRP011-4/SMT.v", line 9, characters 0-22:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP011-4/SMT.v", line 10, characters 0-26:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP011-4/SMT.v", line 11, characters 0-32:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP011-4/SMT.v", line 22, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(multiply b c = multiply d c) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP011-4/SMT.v", line 22, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, multiply (inverse X) X = identity)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP011-4/SMT.v", line 22, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, multiply identity X = X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP011-4/SMT.v", line 22, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z, multiply (multiply X Y) Z0 = multiply X (multiply Y Z0))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq8295a7.vtlog /tmp/verit_coq8295a7.smt2 2> /tmp/warnings_verit98d1d2.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00005
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_1 () Int)
+(declare-fun op_0 () Int)
+(assert (not (= op_0 op_1)))
+(check-sat)
+(get-model)
+File "./GRP011-4/SMT.v", line 22, characters 2-5:
+Error: CVC4 returned sat. Here is the model:
+
+b := 1
+d := 0
 

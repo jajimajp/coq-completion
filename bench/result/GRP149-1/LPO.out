@@ -1,0 +1,6 @@
+toma --parsable "LPO.least_upper_bound (LPO.least_upper_bound (LPO.a, LPO.b), LPO.c) -> LPO.c" /tmp/tmp.egC7BZ3B62
+Finish
+File "./GRP149-1/LPO.v", line 40, characters 2-13:
+Error: Unable to unify "c" with
+ "least_upper_bound c (least_upper_bound a b)".
+

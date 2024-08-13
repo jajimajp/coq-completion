@@ -1,3 +1,4 @@
-File "./GRP011-4/LPO.v", line 15, characters 17-18:
-Error: The reference b was not found in the current environment.
-
+toma --parsable "LPO.b -> LPO.d" /tmp/tmp.feC6ny3IKq
+Finish
+check
+     : b = d
