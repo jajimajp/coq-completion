@@ -4,13 +4,6 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
-Parameter minus : G -> G.
-Parameter mult : G -> G -> G.
-Parameter op_0 : G.
-Parameter op_a : G.
-Parameter op_b : G.
-Parameter plus : G -> G -> G.
-Parameter unit : G.
 Axiom f11 : (mult op_b op_a) = unit.
 Axiom f10 : (mult op_a op_b) = unit.
 Axiom f09 : forall A : G, (mult unit A) = A.
@@ -23,7 +16,7 @@ Axiom f03 : forall A : G, (plus A op_0) = A.
 Axiom f02 : forall A B : G, (plus A B) = (plus B A).
 Axiom f01 : forall A B C : G, (plus (plus A B) C) = (plus A (plus B C)).
 
-Complete f11 f10 f09 f08 f07 f06 f05 f04 f03 f02 f01 : minus mult op_0 op_a op_b plus unit : hint
+Complete f11 f10 f09 f08 f07 f06 f05 f04 f03 f02 f01 :  : hint
   for ((mult (mult x0 op_a) op_b) = x0).
 
 (* Goal *)

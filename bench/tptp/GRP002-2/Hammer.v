@@ -4,8 +4,14 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
-Parameter identity : G.
+Parameter a : G.
+Parameter b : G.
+Parameter c : G.
+Parameter d : G.
+Parameter h : G.
 Parameter inverse : G -> G.
+Parameter j : G.
+Parameter k : G.
 Parameter multiply : G -> G -> G.
 Axiom x_cubed_is_identity : forall X : G, (multiply X (multiply X X)) = identity.
 Axiom right_inverse : forall X : G, (multiply X (inverse X)) = identity.

@@ -4,14 +4,6 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
-Parameter difference : G -> G -> G.
-Parameter eta : G -> G.
-Parameter i : G -> G.
-Parameter j : G -> G.
-Parameter one : G.
-Parameter product : G -> G -> G.
-Parameter quotient : G -> G -> G.
-Parameter t : G -> G -> G.
 Axiom sos19 : forall A B : G, (t A B) = (quotient (product A B) A).
 Axiom sos18 : forall A B C : G, (product (product (product (quotient (j A) A) (product A A)) B) C) = (product (product (quotient (j A) A) (product A A)) (product B C)).
 Axiom sos17 : forall A : G, (quotient (j A) A) = (product (j A) (i A)).
@@ -32,7 +24,7 @@ Axiom sos03 : forall A B : G, (product A (difference A B)) = B.
 Axiom sos02 : forall A : G, (product one A) = A.
 Axiom sos01 : forall A : G, (product A one) = A.
 
-Complete sos19 sos18 sos17 sos16 sos15 sos14 sos13 sos12 sos11 sos10 sos09 sos08 sos07 sos06 sos05 sos04 sos03 sos02 sos01 : difference eta i j one product quotient t : hint
+Complete sos19 sos18 sos17 sos16 sos15 sos14 sos13 sos12 sos11 sos10 sos09 sos08 sos07 sos06 sos05 sos04 sos03 sos02 sos01 :  : hint
   for ((t (eta x0) (product x1 x2)) = (product (t (eta x0) x1) (t (eta x0) x2))).
 
 (* Goal *)

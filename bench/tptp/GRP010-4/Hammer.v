@@ -4,11 +4,6 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
-Parameter b : G.
-Parameter c : G.
-Parameter identity : G.
-Parameter inverse : G -> G.
-Parameter multiply : G -> G -> G.
 Axiom c_times_b_is_e : (multiply c b) = identity.
 Axiom left_inverse : forall X : G, (multiply (inverse X) X) = identity.
 Axiom left_identity : forall X : G, (multiply identity X) = X.

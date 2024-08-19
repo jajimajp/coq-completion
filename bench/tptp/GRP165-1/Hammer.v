@@ -4,12 +4,6 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
-Parameter a : G.
-Parameter greatest_lower_bound : G -> G -> G.
-Parameter identity : G.
-Parameter inverse : G -> G.
-Parameter least_upper_bound : G -> G -> G.
-Parameter multiply : G -> G -> G.
 Axiom lat1a_1 : (least_upper_bound a identity) = a.
 Axiom monotony_glb2 : forall X Y Z : G, (multiply (greatest_lower_bound Y Z) X) = (greatest_lower_bound (multiply Y X) (multiply Z X)).
 Axiom monotony_lub2 : forall X Y Z : G, (multiply (least_upper_bound Y Z) X) = (least_upper_bound (multiply Y X) (multiply Z X)).

@@ -4,11 +4,6 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
-Parameter greatest_lower_bound : G -> G -> G.
-Parameter identity : G.
-Parameter inverse : G -> G.
-Parameter least_upper_bound : G -> G -> G.
-Parameter multiply : G -> G -> G.
 Axiom p21x_5 : forall X Y : G, (inverse (least_upper_bound X Y)) = (greatest_lower_bound (inverse X) (inverse Y)).
 Axiom p21x_4 : forall X Y : G, (inverse (greatest_lower_bound X Y)) = (least_upper_bound (inverse X) (inverse Y)).
 Axiom p21x_3 : forall X Y : G, (inverse (multiply X Y)) = (multiply (inverse Y) (inverse X)).
@@ -30,7 +25,7 @@ Axiom associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply 
 Axiom left_inverse : forall X : G, (multiply (inverse X) X) = identity.
 Axiom left_identity : forall X : G, (multiply identity X) = X.
 
-Complete p21x_5 p21x_4 p21x_3 p21x_2 p21x_1 monotony_glb2 monotony_lub2 monotony_glb1 monotony_lub1 glb_absorbtion lub_absorbtion idempotence_of_gld idempotence_of_lub associativity_of_lub associativity_of_glb symmetry_of_lub symmetry_of_glb associativity left_inverse left_identity : greatest_lower_bound identity inverse least_upper_bound multiply : hint
+Complete p21x_5 p21x_4 p21x_3 p21x_2 p21x_1 monotony_glb2 monotony_lub2 monotony_glb1 monotony_lub1 glb_absorbtion lub_absorbtion idempotence_of_gld idempotence_of_lub associativity_of_lub associativity_of_glb symmetry_of_lub symmetry_of_glb associativity left_inverse left_identity :  : hint
   for ((multiply (least_upper_bound a identity) (inverse (greatest_lower_bound a identity))) = (multiply (inverse (greatest_lower_bound a identity)) (least_upper_bound a identity))).
 
 (* Goal *)

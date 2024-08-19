@@ -3,13 +3,6 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
-Variable a : Z.
-Variable b : Z.
-Variable bigC : Z -> Z -> Z -> Z.
-Variable c : Z.
-Variable difference : Z -> Z -> Z.
-Variable product : Z -> Z -> Z.
-Variable quotient : Z -> Z -> Z.
 Axiom sos09 : (product (product a c) (product c b)) = (product a b).
 Axiom sos08 : forall A B C : Z, (bigC A B C) = (product (product A B) (product C A)).
 Axiom sos07 : forall A B : Z, (product (product (product A B) B) (product B (product B A))) = B.

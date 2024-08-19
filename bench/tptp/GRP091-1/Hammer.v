@@ -4,10 +4,6 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
-Parameter divide : G -> G -> G.
-Parameter identity : G.
-Parameter inverse : G -> G.
-Parameter multiply : G -> G -> G.
 Axiom identity : forall X : G, identity = (divide X X).
 Axiom inverse : forall X Z : G, (inverse X) = (divide (divide Z Z) X).
 Axiom multiply : forall X Y Z : G, (multiply X Y) = (divide X (divide (divide Z Z) Y)).

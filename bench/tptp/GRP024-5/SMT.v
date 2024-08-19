@@ -3,10 +3,6 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
-Variable commutator : Z -> Z -> Z.
-Variable identity : Z.
-Variable inverse : Z -> Z.
-Variable multiply : Z -> Z -> Z.
 Axiom associativity_of_commutator : forall X Y Z : Z, (commutator (commutator X Y) Z) = (commutator X (commutator Y Z)).
 Axiom name : forall X Y : Z, (commutator X Y) = (multiply (inverse X) (multiply (inverse Y) (multiply X Y))).
 Axiom associativity : forall X Y Z : Z, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).

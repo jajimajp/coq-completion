@@ -3,10 +3,6 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
-Variable divide : Z -> Z -> Z.
-Variable identity : Z.
-Variable inverse : Z -> Z.
-Variable multiply : Z -> Z -> Z.
 Axiom identity : forall A : Z, identity = (divide A A).
 Axiom inverse : forall A B : Z, (inverse A) = (divide (divide B B) A).
 Axiom multiply : forall A B C : Z, (multiply A B) = (divide A (divide (divide C C) B)).

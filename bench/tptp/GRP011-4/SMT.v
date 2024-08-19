@@ -3,12 +3,6 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
-Variable b : Z.
-Variable c : Z.
-Variable d : Z.
-Variable identity : Z.
-Variable inverse : Z -> Z.
-Variable multiply : Z -> Z -> Z.
 Axiom product_equality : (multiply b c) = (multiply d c).
 Axiom left_inverse : forall X : Z, (multiply (inverse X) X) = identity.
 Axiom left_identity : forall X : Z, (multiply identity X) = X.

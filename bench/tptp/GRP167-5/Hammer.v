@@ -4,13 +4,6 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
-Parameter greatest_lower_bound : G -> G -> G.
-Parameter identity : G.
-Parameter inverse : G -> G.
-Parameter least_upper_bound : G -> G -> G.
-Parameter multiply : G -> G -> G.
-Parameter negative_part : G -> G.
-Parameter positive_part : G -> G.
 Axiom lat4_4 : forall X Y Z : G, (greatest_lower_bound X (least_upper_bound Y Z)) = (least_upper_bound (greatest_lower_bound X Y) (greatest_lower_bound X Z)).
 Axiom lat4_3 : forall X Y Z : G, (least_upper_bound X (greatest_lower_bound Y Z)) = (greatest_lower_bound (least_upper_bound X Y) (least_upper_bound X Z)).
 Axiom lat4_2 : forall X : G, (negative_part X) = (greatest_lower_bound X identity).

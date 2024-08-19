@@ -4,11 +4,6 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
-Parameter greatest_lower_bound : G -> G -> G.
-Parameter identity : G.
-Parameter inverse : G -> G.
-Parameter least_upper_bound : G -> G -> G.
-Parameter multiply : G -> G -> G.
 Axiom p21x_5 : forall X Y : G, (inverse (least_upper_bound X Y)) = (greatest_lower_bound (inverse X) (inverse Y)).
 Axiom p21x_4 : forall X Y : G, (inverse (greatest_lower_bound X Y)) = (least_upper_bound (inverse X) (inverse Y)).
 Axiom p21x_3 : forall X Y : G, (inverse (multiply X Y)) = (multiply (inverse Y) (inverse X)).

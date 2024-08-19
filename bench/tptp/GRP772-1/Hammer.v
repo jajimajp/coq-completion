@@ -4,16 +4,6 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
-Parameter a : G -> G -> G -> G.
-Parameter c : G -> G -> G.
-Parameter difference : G -> G -> G.
-Parameter eta : G -> G.
-Parameter i : G -> G.
-Parameter j : G -> G.
-Parameter one : G.
-Parameter product : G -> G -> G.
-Parameter quotient : G -> G -> G.
-Parameter t : G -> G -> G.
 Axiom sos32 : forall A B C : G, (a (j A) B C) = (a B C A).
 Axiom sos31 : forall A B C : G, (a (i A) B C) = (a (j A) B C).
 Axiom sos30 : forall A B C : G, (a A (i B) C) = (a A (j B) C).

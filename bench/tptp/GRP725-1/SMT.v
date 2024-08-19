@@ -3,14 +3,6 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
-Variable ld : Z -> Z -> Z.
-Variable mult : Z -> Z -> Z.
-Variable op_l : Z -> Z -> Z -> Z.
-Variable op_r : Z -> Z -> Z -> Z.
-Variable op_t : Z -> Z -> Z.
-Variable rd : Z -> Z -> Z.
-Variable s : Z -> Z.
-Variable unit : Z.
 Axiom c20 : forall A B C : Z, (op_l (op_l A B C) B C) = A.
 Axiom c19 : forall A B C : Z, (op_r (op_r A B C) B C) = A.
 Axiom c18 : forall A B : Z, (op_t (op_t A B) B) = A.

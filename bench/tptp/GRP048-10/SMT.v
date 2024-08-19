@@ -3,15 +3,6 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
-Variable a : Z.
-Variable b : Z.
-Variable equalish : Z -> Z -> Z.
-Variable identity : Z.
-Variable ifeq : Z -> Z -> Z -> Z -> Z.
-Variable inverse : Z -> Z.
-Variable multiply : Z -> Z -> Z.
-Variable product : Z -> Z -> Z -> Z.
-Variable true : Z.
 Axiom a_equals_b : (equalish a b) = true.
 Axiom product_substitution3 : forall W X Y Z : Z, (ifeq (equalish X Y) true (ifeq (product W Z X) true (product W Z Y) true) true) = true.
 Axiom associativity2 : forall U V W X Y Z : Z, (ifeq (product Y Z V) true (ifeq (product X V W) true (ifeq (product X Y U) true (product U Z W) true) true) true) = true.

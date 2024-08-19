@@ -4,9 +4,13 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter a : G.
+Parameter b : G.
+Parameter c : G.
 Parameter commutator : G -> G -> G.
-Parameter identity : G.
-Parameter inverse : G -> G.
+Parameter e : G.
+Parameter f : G.
+Parameter g : G.
 Parameter multiply : G -> G -> G.
 Axiom commutator : forall X Y : G, (commutator X Y) = (multiply X (multiply Y (multiply (inverse X) (inverse Y)))).
 Axiom right_inverse : forall X : G, (multiply X (inverse X)) = identity.

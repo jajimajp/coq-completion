@@ -4,11 +4,14 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
-Parameter identity : G.
-Parameter ifeq : G -> G -> G -> G -> G.
-Parameter ifeq2 : G -> G -> G -> G -> G.
+Parameter a : G.
+Parameter b : G.
+Parameter c : G.
+Parameter d : G.
+Parameter h : G.
 Parameter inverse : G -> G.
-Parameter multiply : G -> G -> G.
+Parameter j : G.
+Parameter k : G.
 Parameter product : G -> G -> G -> G.
 Parameter true : G.
 Axiom x_cubed_is_identity_2 : forall X Y : G, (ifeq (product X X Y) true (product Y X identity) true) = true.
@@ -24,7 +27,7 @@ Axiom left_identity : forall X : G, (product identity X X) = true.
 Axiom ifeq_axiom_001 : forall A B C : G, (ifeq A A B C) = B.
 Axiom ifeq_axiom : forall A B C : G, (ifeq2 A A B C) = B.
 
-Complete x_cubed_is_identity_2 x_cubed_is_identity_1 associativity2 associativity1 total_function2 total_function1 right_inverse left_inverse right_identity left_identity ifeq_axiom_001 ifeq_axiom : identity ifeq ifeq2 inverse multiply product true : hint
+Complete x_cubed_is_identity_2 x_cubed_is_identity_1 associativity2 associativity1 total_function2 total_function1 right_inverse left_inverse right_identity left_identity ifeq_axiom_001 ifeq_axiom : a b c d h inverse j k product true : hint
   for ((product a b c) = true).
 
 (* Goal *)

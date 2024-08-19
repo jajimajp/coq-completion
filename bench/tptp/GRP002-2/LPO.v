@@ -4,8 +4,14 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
-Parameter identity : G.
+Parameter a : G.
+Parameter b : G.
+Parameter c : G.
+Parameter d : G.
+Parameter h : G.
 Parameter inverse : G -> G.
+Parameter j : G.
+Parameter k : G.
 Parameter multiply : G -> G -> G.
 Axiom x_cubed_is_identity : forall X : G, (multiply X (multiply X X)) = identity.
 Axiom right_inverse : forall X : G, (multiply X (inverse X)) = identity.
@@ -14,7 +20,7 @@ Axiom associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply 
 Axiom left_inverse : forall X : G, (multiply (inverse X) X) = identity.
 Axiom left_identity : forall X : G, (multiply identity X) = X.
 
-Complete x_cubed_is_identity right_inverse right_identity associativity left_inverse left_identity : identity inverse multiply : hint
+Complete x_cubed_is_identity right_inverse right_identity associativity left_inverse left_identity : a b c d h inverse j k multiply : hint
   for ((multiply a b) = c).
 
 (* Goal *)

@@ -3,13 +3,6 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
-Variable a : Z.
-Variable b : Z.
-Variable greatest_lower_bound : Z -> Z -> Z.
-Variable identity : Z.
-Variable inverse : Z -> Z.
-Variable least_upper_bound : Z -> Z -> Z.
-Variable multiply : Z -> Z -> Z.
 Axiom ax_antisyma_2 : (least_upper_bound a b) = a.
 Axiom ax_antisyma_1 : (least_upper_bound a b) = b.
 Axiom monotony_glb2 : forall X Y Z : Z, (multiply (greatest_lower_bound Y Z) X) = (greatest_lower_bound (multiply Y X) (multiply Z X)).

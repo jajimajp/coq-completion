@@ -4,10 +4,6 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
-Parameter f : G -> G -> G.
-Parameter ld : G -> G -> G.
-Parameter mult : G -> G -> G.
-Parameter unit : G.
 Axiom c09 : forall A B : G, (f A B) = (ld B (ld (mult A B) B)).
 Axiom c08 : forall A : G, (mult A A) = unit.
 Axiom c07 : forall A B C : G, (ld A (mult (mult B C) A)) = (mult (ld A (mult B A)) (ld A (mult C A))).

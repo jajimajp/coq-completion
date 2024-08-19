@@ -4,14 +4,6 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
-Parameter ld : G -> G -> G.
-Parameter mult : G -> G -> G.
-Parameter op_l : G -> G -> G -> G.
-Parameter op_r : G -> G -> G -> G.
-Parameter op_t : G -> G -> G.
-Parameter rd : G -> G -> G.
-Parameter s : G -> G.
-Parameter unit : G.
 Axiom c20 : forall A B C : G, (op_l (op_l A B C) B C) = A.
 Axiom c19 : forall A B C : G, (op_r (op_r A B C) B C) = A.
 Axiom c18 : forall A B : G, (op_t (op_t A B) B) = A.

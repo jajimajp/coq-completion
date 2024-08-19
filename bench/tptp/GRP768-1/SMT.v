@@ -3,14 +3,6 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
-Variable difference : Z -> Z -> Z.
-Variable eta : Z -> Z.
-Variable i : Z -> Z.
-Variable j : Z -> Z.
-Variable one : Z.
-Variable product : Z -> Z -> Z.
-Variable quotient : Z -> Z -> Z.
-Variable t : Z -> Z -> Z.
 Axiom sos19 : forall A B : Z, (t A B) = (quotient (product A B) A).
 Axiom sos18 : forall A B C : Z, (product (product (product (quotient (j A) A) (product A A)) B) C) = (product (product (quotient (j A) A) (product A A)) (product B C)).
 Axiom sos17 : forall A : Z, (quotient (j A) A) = (product (j A) (i A)).

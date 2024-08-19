@@ -4,16 +4,6 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
-Parameter a : G -> G -> G -> G.
-Parameter c : G -> G -> G.
-Parameter difference : G -> G -> G.
-Parameter eta : G -> G.
-Parameter i : G -> G.
-Parameter j : G -> G.
-Parameter one : G.
-Parameter product : G -> G -> G.
-Parameter quotient : G -> G -> G.
-Parameter t : G -> G -> G.
 Axiom sos24 : forall A B : G, (product (product A B) (c B A)) = (product B A).
 Axiom sos23 : forall A B C : G, (product (product A (product B C)) (a A B C)) = (product (product A B) C).
 Axiom sos22 : forall A B : G, (product (j (j A)) (j (product B A))) = (j B).

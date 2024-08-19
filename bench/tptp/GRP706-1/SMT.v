@@ -3,11 +3,6 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
-Variable f : Z -> Z -> Z.
-Variable ld : Z -> Z -> Z.
-Variable mult : Z -> Z -> Z.
-Variable op_c : Z.
-Variable rd : Z -> Z -> Z.
 Axiom c07 : forall A B : Z, (f A B) = (mult (rd A op_c) (ld op_c B)).
 Axiom c06 : forall A B C : Z, (mult (mult A B) C) = (mult (mult A (rd C C)) (mult B C)).
 Axiom c05 : forall A B C : Z, (mult A (mult B C)) = (mult (mult A B) (mult (ld A A) C)).

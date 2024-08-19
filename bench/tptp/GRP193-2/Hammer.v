@@ -4,14 +4,6 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
-Parameter a : G.
-Parameter b : G.
-Parameter c : G.
-Parameter greatest_lower_bound : G -> G -> G.
-Parameter identity : G.
-Parameter inverse : G -> G.
-Parameter least_upper_bound : G -> G -> G.
-Parameter multiply : G -> G -> G.
 Axiom p8_9b_5 : (greatest_lower_bound (greatest_lower_bound a (multiply b c)) (multiply (greatest_lower_bound a b) (greatest_lower_bound a c))) = (greatest_lower_bound a (multiply b c)).
 Axiom p8_9b_4 : (greatest_lower_bound a b) = identity.
 Axiom p8_9b_3 : (greatest_lower_bound identity c) = identity.

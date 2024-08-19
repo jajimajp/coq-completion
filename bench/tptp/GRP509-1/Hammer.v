@@ -4,8 +4,6 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
-Parameter inverse : G -> G.
-Parameter multiply : G -> G -> G.
 Axiom single_axiom : forall A B C : G, (multiply (multiply (multiply A B) C) (inverse (multiply A C))) = B.
 
 

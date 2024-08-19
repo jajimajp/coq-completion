@@ -3,13 +3,6 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
-Variable identity : Z.
-Variable intersection : Z -> Z -> Z.
-Variable inverse : Z -> Z.
-Variable multiply : Z -> Z -> Z.
-Variable negative_part : Z -> Z.
-Variable positive_part : Z -> Z.
-Variable union : Z -> Z -> Z.
 Axiom negative_part : forall X : Z, (negative_part X) = (intersection X identity).
 Axiom positive_part : forall X : Z, (positive_part X) = (union X identity).
 Axiom multiply_intersection2 : forall X Y Z : Z, (multiply (intersection Y Z) X) = (intersection (multiply Y X) (multiply Z X)).

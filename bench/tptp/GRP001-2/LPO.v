@@ -4,12 +4,6 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
-Parameter a : G.
-Parameter b : G.
-Parameter c : G.
-Parameter identity : G.
-Parameter inverse : G -> G.
-Parameter multiply : G -> G -> G.
 Axiom a_times_b_is_c : (multiply a b) = c.
 Axiom squareness : forall X : G, (multiply X X) = identity.
 Axiom right_inverse : forall X : G, (multiply X (inverse X)) = identity.
@@ -18,7 +12,7 @@ Axiom associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply 
 Axiom left_inverse : forall X : G, (multiply (inverse X) X) = identity.
 Axiom left_identity : forall X : G, (multiply identity X) = X.
 
-Complete a_times_b_is_c squareness right_inverse right_identity associativity left_inverse left_identity : a b c identity inverse multiply : hint
+Complete a_times_b_is_c squareness right_inverse right_identity associativity left_inverse left_identity :  : hint
   for ((multiply b a) = c).
 
 (* Goal *)

@@ -3,11 +3,14 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
-Variable identity : Z.
-Variable ifeq : Z -> Z -> Z -> Z -> Z.
-Variable ifeq2 : Z -> Z -> Z -> Z -> Z.
+Variable a : Z.
+Variable b : Z.
+Variable c : Z.
+Variable d : Z.
+Variable h : Z.
 Variable inverse : Z -> Z.
-Variable multiply : Z -> Z -> Z.
+Variable j : Z.
+Variable k : Z.
 Variable product : Z -> Z -> Z -> Z.
 Variable true : Z.
 Axiom x_cubed_is_identity_2 : forall X Y : Z, (ifeq (product X X Y) true (product Y X identity) true) = true.

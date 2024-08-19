@@ -4,11 +4,6 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
-Parameter i : G -> G.
-Parameter ld : G -> G -> G.
-Parameter mult : G -> G -> G.
-Parameter rd : G -> G -> G.
-Parameter unit : G.
 Axiom c11 : forall A B : G, (mult (mult A B) (i B)) = A.
 Axiom c10 : forall A B : G, (mult (i A) (mult A B)) = B.
 Axiom c09 : forall A B C : G, (ld A (mult (mult B C) A)) = (mult (ld A (mult B A)) (ld A (mult C A))).
@@ -21,7 +16,7 @@ Axiom c03 : forall A B : G, (mult (rd A B) B) = A.
 Axiom c02 : forall A B : G, (ld A (mult A B)) = B.
 Axiom c01 : forall A B : G, (mult A (ld A B)) = B.
 
-Complete c11 c10 c09 c08 c07 c06 c05 c04 c03 c02 c01 : i ld mult rd unit : hint
+Complete c11 c10 c09 c08 c07 c06 c05 c04 c03 c02 c01 :  : hint
   for ((mult a (mult b (mult a c))) = (mult (mult (mult a b) a) c)).
 
 (* Goal *)
