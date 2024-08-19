@@ -4,6 +4,12 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
+Parameter identity : G.
+Parameter left_division : G -> G -> G.
+Parameter left_inverse : G -> G.
+Parameter multiply : G -> G -> G.
+Parameter right_division : G -> G -> G.
+Parameter right_inverse : G -> G.
 Axiom moufang1 : forall X Y Z : G, (multiply (multiply X (multiply Y Z)) X) = (multiply (multiply X Y) (multiply Z X)).
 Axiom left_inverse : forall X : G, (multiply (left_inverse X) X) = identity.
 Axiom right_inverse : forall X : G, (multiply X (right_inverse X)) = identity.
@@ -14,7 +20,7 @@ Axiom multiply_left_division : forall X Y : G, (multiply X (left_division X Y)) 
 Axiom right_identity : forall X : G, (multiply X identity) = X.
 Axiom left_identity : forall X : G, (multiply identity X) = X.
 
-Complete moufang1 left_inverse right_inverse right_division_multiply multiply_right_division left_division_multiply multiply_left_division right_identity left_identity :  : hint
+Complete moufang1 left_inverse right_inverse right_division_multiply multiply_right_division left_division_multiply multiply_left_division right_identity left_identity : identity left_division left_inverse multiply right_division right_inverse : hint
   for ((multiply (multiply (multiply a b) c) b) = (multiply a (multiply b (multiply c b)))).
 
 (* Goal *)

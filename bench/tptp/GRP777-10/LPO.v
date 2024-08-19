@@ -4,6 +4,13 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
+Parameter a : G.
+Parameter b : G.
+Parameter bigC : G -> G -> G -> G.
+Parameter c : G.
+Parameter difference : G -> G -> G.
+Parameter product : G -> G -> G.
+Parameter quotient : G -> G -> G.
 Axiom sos09 : (product (product a c) (product c b)) = (product a b).
 Axiom sos08 : forall A B C : G, (bigC A B C) = (product (product A B) (product C A)).
 Axiom sos07 : forall A B : G, (product (product (product A B) B) (product B (product B A))) = B.
@@ -14,7 +21,7 @@ Axiom sos03 : forall A B : G, (quotient (product A B) B) = A.
 Axiom sos02 : forall A B : G, (product A (difference A B)) = B.
 Axiom sos01 : forall A B : G, (difference A (product A B)) = B.
 
-Complete sos09 sos08 sos07 sos06 sos05 sos04 sos03 sos02 sos01 :  : hint
+Complete sos09 sos08 sos07 sos06 sos05 sos04 sos03 sos02 sos01 : a b bigC c difference product quotient : hint
   for ((bigC a b x0) = (bigC c c x0)).
 
 (* Goal *)

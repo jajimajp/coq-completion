@@ -4,3 +4,9 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter a : G.
+Parameter b : G.
+Parameter c : G.
+Parameter identity : G.
+Parameter inverse : G -> G.
+Parameter multiply : G -> G -> G.

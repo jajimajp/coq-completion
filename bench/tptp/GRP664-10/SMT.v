@@ -3,7 +3,9 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
+Variable ld : Z -> Z -> Z.
 Variable mult : Z -> Z -> Z.
+Variable rd : Z -> Z -> Z.
 Variable unit : Z.
 Variable x0 : Z.
 Variable x1 : Z.

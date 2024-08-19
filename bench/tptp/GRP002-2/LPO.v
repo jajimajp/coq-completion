@@ -9,6 +9,7 @@ Parameter b : G.
 Parameter c : G.
 Parameter d : G.
 Parameter h : G.
+Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter j : G.
 Parameter k : G.
@@ -20,7 +21,7 @@ Axiom associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply 
 Axiom left_inverse : forall X : G, (multiply (inverse X) X) = identity.
 Axiom left_identity : forall X : G, (multiply identity X) = X.
 
-Complete x_cubed_is_identity right_inverse right_identity associativity left_inverse left_identity : a b c d h inverse j k multiply : hint
+Complete x_cubed_is_identity right_inverse right_identity associativity left_inverse left_identity : a b c d h identity inverse j k multiply : hint
   for ((multiply a b) = c).
 
 (* Goal *)

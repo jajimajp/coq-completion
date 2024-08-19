@@ -3,6 +3,11 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
+Variable greatest_lower_bound : Z -> Z -> Z.
+Variable identity : Z.
+Variable inverse : Z -> Z.
+Variable least_upper_bound : Z -> Z -> Z.
+Variable multiply : Z -> Z -> Z.
 Axiom p17b_3 : forall X Y : Z, (inverse (multiply X Y)) = (multiply (inverse Y) (inverse X)).
 Axiom p17b_2 : forall X : Z, (inverse (inverse X)) = X.
 Axiom p17b_1 : (inverse identity) = identity.

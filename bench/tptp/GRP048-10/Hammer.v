@@ -4,6 +4,15 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter a : G.
+Parameter b : G.
+Parameter equalish : G -> G -> G.
+Parameter identity : G.
+Parameter ifeq : G -> G -> G -> G -> G.
+Parameter inverse : G -> G.
+Parameter multiply : G -> G -> G.
+Parameter product : G -> G -> G -> G.
+Parameter true : G.
 Axiom a_equals_b : (equalish a b) = true.
 Axiom product_substitution3 : forall W X Y Z : G, (ifeq (equalish X Y) true (ifeq (product W Z X) true (product W Z Y) true) true) = true.
 Axiom associativity2 : forall U V W X Y Z : G, (ifeq (product Y Z V) true (ifeq (product X V W) true (ifeq (product X Y U) true (product U Z W) true) true) true) = true.

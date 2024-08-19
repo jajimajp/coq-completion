@@ -4,6 +4,9 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter identity : G.
+Parameter left_inverse : G -> G.
+Parameter multiply : G -> G -> G.
 Axiom moufang3 : forall X Y Z : G, (multiply (multiply (multiply X Y) X) Z) = (multiply X (multiply Y (multiply X Z))).
 Axiom left_inverse : forall X : G, (multiply (left_inverse X) X) = identity.
 Axiom left_identity : forall X : G, (multiply identity X) = X.

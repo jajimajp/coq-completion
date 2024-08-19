@@ -3,6 +3,13 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
+Variable greatest_lower_bound : Z -> Z -> Z.
+Variable identity : Z.
+Variable inverse : Z -> Z.
+Variable least_upper_bound : Z -> Z -> Z.
+Variable multiply : Z -> Z -> Z.
+Variable negative_part : Z -> Z.
+Variable positive_part : Z -> Z.
 Axiom lat4_4 : forall X Y Z : Z, (greatest_lower_bound X (least_upper_bound Y Z)) = (least_upper_bound (greatest_lower_bound X Y) (greatest_lower_bound X Z)).
 Axiom lat4_3 : forall X Y Z : Z, (least_upper_bound X (greatest_lower_bound Y Z)) = (greatest_lower_bound (least_upper_bound X Y) (least_upper_bound X Z)).
 Axiom lat4_2 : forall X : Z, (negative_part X) = (greatest_lower_bound X identity).

@@ -8,6 +8,7 @@ Variable b : Z.
 Variable c : Z.
 Variable d : Z.
 Variable h : Z.
+Variable identity : Z.
 Variable inverse : Z -> Z.
 Variable j : Z.
 Variable k : Z.

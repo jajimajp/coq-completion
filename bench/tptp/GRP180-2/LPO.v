@@ -4,6 +4,11 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
+Parameter greatest_lower_bound : G -> G -> G.
+Parameter identity : G.
+Parameter inverse : G -> G.
+Parameter least_upper_bound : G -> G -> G.
+Parameter multiply : G -> G -> G.
 Axiom p11_3 : forall X Y : G, (inverse (multiply X Y)) = (multiply (inverse Y) (inverse X)).
 Axiom p11_2 : forall X : G, (inverse (inverse X)) = X.
 Axiom p11_1 : (inverse identity) = identity.
@@ -23,7 +28,7 @@ Axiom associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply 
 Axiom left_inverse : forall X : G, (multiply (inverse X) X) = identity.
 Axiom left_identity : forall X : G, (multiply identity X) = X.
 
-Complete p11_3 p11_2 p11_1 monotony_glb2 monotony_lub2 monotony_glb1 monotony_lub1 glb_absorbtion lub_absorbtion idempotence_of_gld idempotence_of_lub associativity_of_lub associativity_of_glb symmetry_of_lub symmetry_of_glb associativity left_inverse left_identity :  : hint
+Complete p11_3 p11_2 p11_1 monotony_glb2 monotony_lub2 monotony_glb1 monotony_lub1 glb_absorbtion lub_absorbtion idempotence_of_gld idempotence_of_lub associativity_of_lub associativity_of_glb symmetry_of_lub symmetry_of_glb associativity left_inverse left_identity : greatest_lower_bound identity inverse least_upper_bound multiply : hint
   for ((multiply a (multiply (inverse (greatest_lower_bound a b)) b)) = (least_upper_bound a b)).
 
 (* Goal *)

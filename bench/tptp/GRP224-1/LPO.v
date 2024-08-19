@@ -4,6 +4,7 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
+Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
 Parameter sk_c1 : G.
@@ -21,7 +22,7 @@ Axiom associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply 
 Axiom left_inverse : forall X : G, (multiply (inverse X) X) = identity.
 Axiom left_identity : forall X : G, (multiply identity X) = X.
 
-Complete associativity left_inverse left_identity : inverse multiply sk_c1 sk_c10 sk_c11 sk_c2 sk_c3 sk_c4 sk_c5 sk_c6 sk_c7 sk_c8 sk_c9 : hint
+Complete associativity left_inverse left_identity : identity inverse multiply sk_c1 sk_c10 sk_c11 sk_c2 sk_c3 sk_c4 sk_c5 sk_c6 sk_c7 sk_c8 sk_c9 : hint
   for ((inverse sk_c1) = sk_c11).
 
 (* Goal *)

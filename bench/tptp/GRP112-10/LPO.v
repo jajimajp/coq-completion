@@ -4,9 +4,10 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
+Parameter multiply : G -> G -> G.
 Axiom single_axiom : forall X Y Z : G, (multiply (multiply (multiply X Y) Z) (multiply X Z)) = Y.
 
-Complete single_axiom :  : hint
+Complete single_axiom : multiply : hint
   for ((tuple (multiply (multiply (inverse b2) b2) a2) (multiply (multiply a3 b3) c3) (multiply (inverse a1) a1) (multiply a4 a4)) = (tuple a2 (multiply a3 (multiply b3 c3)) (multiply (inverse b1) b1) (multiply b4 b4))).
 
 (* Goal *)

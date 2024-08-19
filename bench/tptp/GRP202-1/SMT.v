@@ -3,6 +3,12 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
+Variable identity : Z.
+Variable left_division : Z -> Z -> Z.
+Variable left_inverse : Z -> Z.
+Variable multiply : Z -> Z -> Z.
+Variable right_division : Z -> Z -> Z.
+Variable right_inverse : Z -> Z.
 Axiom moufang3 : forall X Y Z : Z, (multiply (multiply (multiply X Y) X) Z) = (multiply X (multiply Y (multiply X Z))).
 Axiom left_inverse : forall X : Z, (multiply (left_inverse X) X) = identity.
 Axiom right_inverse : forall X : Z, (multiply X (right_inverse X)) = identity.

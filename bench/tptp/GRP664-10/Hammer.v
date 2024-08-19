@@ -4,7 +4,9 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter ld : G -> G -> G.
 Parameter mult : G -> G -> G.
+Parameter rd : G -> G -> G.
 Parameter unit : G.
 Parameter x0 : G.
 Parameter x1 : G.

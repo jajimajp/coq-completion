@@ -4,6 +4,10 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter commutator : G -> G -> G.
+Parameter identity : G.
+Parameter inverse : G -> G.
+Parameter multiply : G -> G -> G.
 Axiom x_cubed_is_identity : forall X : G, (multiply X (multiply X X)) = identity.
 Axiom commutator : forall X Y : G, (commutator X Y) = (multiply X (multiply Y (multiply (inverse X) (inverse Y)))).
 Axiom associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).

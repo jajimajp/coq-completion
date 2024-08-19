@@ -4,9 +4,11 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
+Parameter inverse : G -> G.
+Parameter multiply : G -> G -> G.
 Axiom single_axiom : forall A B C D E F : G, (multiply (inverse (multiply (inverse (multiply (inverse (multiply A B)) (multiply B A))) (multiply (inverse (multiply C D)) (multiply C (inverse (multiply (multiply E (inverse F)) (inverse D))))))) F) = E.
 
-Complete single_axiom :  : hint
+Complete single_axiom : inverse multiply : hint
   for ((multiply a b) = (multiply b a)).
 
 (* Goal *)

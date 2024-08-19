@@ -4,6 +4,7 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
 Parameter sk_c1 : G.

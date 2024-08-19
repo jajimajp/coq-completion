@@ -9,6 +9,7 @@ Parameter b : G.
 Parameter c : G.
 Parameter d : G.
 Parameter h : G.
+Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter j : G.
 Parameter k : G.

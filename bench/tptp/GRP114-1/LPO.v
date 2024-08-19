@@ -4,6 +4,13 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
+Parameter identity : G.
+Parameter intersection : G -> G -> G.
+Parameter inverse : G -> G.
+Parameter multiply : G -> G -> G.
+Parameter negative_part : G -> G.
+Parameter positive_part : G -> G.
+Parameter union : G -> G -> G.
 Axiom negative_part : forall X : G, (negative_part X) = (intersection X identity).
 Axiom positive_part : forall X : G, (positive_part X) = (union X identity).
 Axiom multiply_intersection2 : forall X Y Z : G, (multiply (intersection Y Z) X) = (intersection (multiply Y X) (multiply Z X)).
@@ -25,7 +32,7 @@ Axiom associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply 
 Axiom left_inverse : forall X : G, (multiply (inverse X) X) = identity.
 Axiom left_identity : forall X : G, (multiply identity X) = X.
 
-Complete negative_part positive_part multiply_intersection2 multiply_union2 multiply_intersection1 multiply_union1 intersection_union_absorbtion union_intersection_absorbtion union_associative intersection_associative union_commutative intersection_commutative union_idempotent intersection_idempotent inverse_product_lemma inverse_involution inverse_of_identity associativity left_inverse left_identity :  : hint
+Complete negative_part positive_part multiply_intersection2 multiply_union2 multiply_intersection1 multiply_union1 intersection_union_absorbtion union_intersection_absorbtion union_associative intersection_associative union_commutative intersection_commutative union_idempotent intersection_idempotent inverse_product_lemma inverse_involution inverse_of_identity associativity left_inverse left_identity : identity intersection inverse multiply negative_part positive_part union : hint
   for ((multiply (positive_part a) (negative_part a)) = a).
 
 (* Goal *)

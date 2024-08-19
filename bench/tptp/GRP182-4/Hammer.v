@@ -4,6 +4,11 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter greatest_lower_bound : G -> G -> G.
+Parameter identity : G.
+Parameter inverse : G -> G.
+Parameter least_upper_bound : G -> G -> G.
+Parameter multiply : G -> G -> G.
 Axiom p17b_3 : forall X Y : G, (inverse (multiply X Y)) = (multiply (inverse Y) (inverse X)).
 Axiom p17b_2 : forall X : G, (inverse (inverse X)) = X.
 Axiom p17b_1 : (inverse identity) = identity.

@@ -4,6 +4,15 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter i : G -> G.
+Parameter ld : G -> G -> G.
+Parameter mult : G -> G -> G.
+Parameter op_c : G.
+Parameter op_d : G.
+Parameter op_e : G.
+Parameter op_f : G.
+Parameter rd : G -> G -> G.
+Parameter unit : G.
 Axiom c13 : (mult op_e op_e) = op_f.
 Axiom c12 : (mult op_d op_d) = op_e.
 Axiom c11 : (mult op_c (mult op_c op_c)) = op_d.

@@ -11,6 +11,8 @@ Parameter commutator : G -> G -> G.
 Parameter e : G.
 Parameter f : G.
 Parameter g : G.
+Parameter identity : G.
+Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
 Axiom commutator : forall X Y : G, (commutator X Y) = (multiply X (multiply Y (multiply (inverse X) (inverse Y)))).
 Axiom right_inverse : forall X : G, (multiply X (inverse X)) = identity.
@@ -19,7 +21,7 @@ Axiom associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply 
 Axiom left_inverse : forall X : G, (multiply (inverse X) X) = identity.
 Axiom left_identity : forall X : G, (multiply identity X) = X.
 
-Complete commutator right_inverse right_identity associativity left_inverse left_identity : a b c commutator e f g multiply : hint
+Complete commutator right_inverse right_identity associativity left_inverse left_identity : a b c commutator e f g identity inverse multiply : hint
   for ((commutator (commutator a b) c) = (commutator a (commutator b c))).
 
 (* Goal *)

@@ -4,10 +4,13 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
+Parameter divide : G -> G -> G.
+Parameter inverse : G -> G.
+Parameter multiply : G -> G -> G.
 Axiom multiply : forall X Y : G, (multiply X Y) = (divide X (inverse Y)).
 Axiom single_axiom : forall U X Y Z : G, (divide (inverse (divide (divide (divide X Y) Z) (divide U Z))) (divide Y X)) = U.
 
-Complete multiply single_axiom :  : hint
+Complete multiply single_axiom : divide inverse multiply : hint
   for ((multiply (inverse a1) a1) = (multiply (inverse b1) b1)).
 
 (* Goal *)

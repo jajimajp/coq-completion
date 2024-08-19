@@ -4,6 +4,9 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter identity : G.
+Parameter inverse : G -> G.
+Parameter multiply : G -> G -> G.
 Axiom right_inverse : forall X : G, (multiply X (inverse X)) = identity.
 Axiom right_identity : forall X : G, (multiply X identity) = X.
 Axiom associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).

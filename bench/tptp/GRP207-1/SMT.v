@@ -3,6 +3,8 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
+Variable inverse : Z -> Z.
+Variable multiply : Z -> Z -> Z.
 Axiom single_non_axiom : forall U Y Z : Z, (multiply U (inverse (multiply Y (multiply (multiply (multiply Z (inverse Z)) (inverse (multiply U Y))) U)))) = U.
 
 Add_lemmas single_non_axiom.

@@ -4,5 +4,7 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
+Parameter commutator : G -> G -> G.
+Parameter multiply : G -> G -> G.
 Axiom nilpotency : forall A B C : G, (multiply (commutator A B) C) = (multiply C (commutator A B)).
 Axiom commutator : forall A B : G, (multiply A B) = (multiply B (multiply A (commutator A B))).

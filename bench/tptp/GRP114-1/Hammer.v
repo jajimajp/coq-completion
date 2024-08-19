@@ -4,6 +4,13 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter identity : G.
+Parameter intersection : G -> G -> G.
+Parameter inverse : G -> G.
+Parameter multiply : G -> G -> G.
+Parameter negative_part : G -> G.
+Parameter positive_part : G -> G.
+Parameter union : G -> G -> G.
 Axiom negative_part : forall X : G, (negative_part X) = (intersection X identity).
 Axiom positive_part : forall X : G, (positive_part X) = (union X identity).
 Axiom multiply_intersection2 : forall X Y Z : G, (multiply (intersection Y Z) X) = (intersection (multiply Y X) (multiply Z X)).

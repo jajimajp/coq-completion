@@ -4,4 +4,5 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
+Parameter multiply : G -> G -> G.
 Axiom condition : forall X Y : G, (multiply X (multiply X (multiply X (multiply Y Y)))) = (multiply Y (multiply X (multiply X (multiply Y X)))).

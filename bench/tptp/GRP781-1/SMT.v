@@ -3,5 +3,7 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
+Variable c : Z -> Z -> Z.
+Variable m : Z -> Z -> Z.
 Axiom assumption : forall X Y Z : Z, (m X (m Y (m Z (m Y X)))) = (m Y (m X (m Z (m X Y)))).
 Axiom commutator : forall X Y : Z, (m Y (m X (c X Y))) = (m X Y).

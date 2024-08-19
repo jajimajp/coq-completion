@@ -3,6 +3,7 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
+Variable multiply : Z -> Z -> Z.
 Axiom condition : forall X Y : Z, (multiply X (multiply Y Y)) = (multiply Y (multiply Y X)).
 Axiom associativity_of_multiply : forall X Y Z : Z, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
 
