@@ -9,12 +9,12 @@ Variable d : Z.
 Variable identity : Z.
 Variable inverse : Z -> Z.
 Variable multiply : Z -> Z -> Z.
-Axiom product_equality : (multiply b c) = (multiply d c).
-Axiom left_inverse : forall X : Z, (multiply (inverse X) X) = identity.
-Axiom left_identity : forall X : Z, (multiply identity X) = X.
-Axiom associativity : forall X Y Z : Z, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
+Axiom ax_product_equality : (multiply b c) = (multiply d c).
+Axiom ax_left_inverse : forall X : Z, (multiply (inverse X) X) = identity.
+Axiom ax_left_identity : forall X : Z, (multiply identity X) = X.
+Axiom ax_associativity : forall X Y Z : Z, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
 
-Add_lemmas product_equality left_inverse left_identity associativity.
+Add_lemmas ax_product_equality ax_left_inverse ax_left_identity ax_associativity.
 
 (* Goal *)
 Theorem check : b = d.

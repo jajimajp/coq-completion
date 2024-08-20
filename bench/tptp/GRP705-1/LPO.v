@@ -4,23 +4,24 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
+Parameter a : G.
 Parameter ld : G -> G -> G.
 Parameter mult : G -> G -> G.
 Parameter op_a : G.
 Parameter op_b : G.
 Parameter rd : G -> G -> G.
 Parameter unit : G.
-Axiom c09 : (mult op_b (mult op_b (mult op_b (mult op_b (mult op_b (mult op_b (mult op_b (mult op_b op_b)))))))) = unit.
-Axiom c08 : (mult op_a (mult op_a (mult op_a op_a))) = unit.
-Axiom c07 : forall A B C : G, (mult A (mult B (mult B C))) = (mult (mult (mult A B) B) C).
-Axiom c06 : forall A : G, (mult unit A) = A.
-Axiom c05 : forall A : G, (mult A unit) = A.
-Axiom c04 : forall A B : G, (rd (mult A B) B) = A.
-Axiom c03 : forall A B : G, (mult (rd A B) B) = A.
-Axiom c02 : forall A B : G, (ld A (mult A B)) = B.
-Axiom c01 : forall A B : G, (mult A (ld A B)) = B.
+Axiom ax_c09 : (mult op_b (mult op_b (mult op_b (mult op_b (mult op_b (mult op_b (mult op_b (mult op_b op_b)))))))) = unit.
+Axiom ax_c08 : (mult op_a (mult op_a (mult op_a op_a))) = unit.
+Axiom ax_c07 : forall A B C : G, (mult A (mult B (mult B C))) = (mult (mult (mult A B) B) C).
+Axiom ax_c06 : forall A : G, (mult unit A) = A.
+Axiom ax_c05 : forall A : G, (mult A unit) = A.
+Axiom ax_c04 : forall A B : G, (rd (mult A B) B) = A.
+Axiom ax_c03 : forall A B : G, (mult (rd A B) B) = A.
+Axiom ax_c02 : forall A B : G, (ld A (mult A B)) = B.
+Axiom ax_c01 : forall A B : G, (mult A (ld A B)) = B.
 
-Complete c09 c08 c07 c06 c05 c04 c03 c02 c01 : ld mult op_a op_b rd unit : hint
+Complete ax_c09 ax_c08 ax_c07 ax_c06 ax_c05 ax_c04 ax_c03 ax_c02 ax_c01 : a ld mult op_a op_b rd unit : hint
   for ((mult op_a (mult op_b a)) = (mult (mult op_a op_b) a)).
 
 (* Goal *)

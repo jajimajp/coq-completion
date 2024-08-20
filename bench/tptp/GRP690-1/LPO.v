@@ -11,19 +11,19 @@ Parameter op_c : G.
 Parameter op_d : G.
 Parameter rd : G -> G -> G.
 Parameter unit : G.
-Axiom c11 : (mult op_d (mult op_d (mult op_d (mult op_d (mult op_d (mult op_d (mult op_d (mult op_d op_d)))))))) = unit.
-Axiom c10 : (mult op_c (mult op_c (mult op_c (mult op_c (mult op_c (mult op_c (mult op_c op_c))))))) = unit.
-Axiom c09 : forall A B : G, (i (mult A B)) = (mult (i A) (i B)).
-Axiom c08 : forall A B : G, (mult (i A) (mult A B)) = B.
-Axiom c07 : forall A B C : G, (mult A (mult B (mult A C))) = (mult (mult A (mult B A)) C).
-Axiom c06 : forall A : G, (mult unit A) = A.
-Axiom c05 : forall A : G, (mult A unit) = A.
-Axiom c04 : forall A B : G, (rd (mult A B) B) = A.
-Axiom c03 : forall A B : G, (mult (rd A B) B) = A.
-Axiom c02 : forall A B : G, (ld A (mult A B)) = B.
-Axiom c01 : forall A B : G, (mult A (ld A B)) = B.
+Axiom ax_c11 : (mult op_d (mult op_d (mult op_d (mult op_d (mult op_d (mult op_d (mult op_d (mult op_d op_d)))))))) = unit.
+Axiom ax_c10 : (mult op_c (mult op_c (mult op_c (mult op_c (mult op_c (mult op_c (mult op_c op_c))))))) = unit.
+Axiom ax_c09 : forall A B : G, (i (mult A B)) = (mult (i A) (i B)).
+Axiom ax_c08 : forall A B : G, (mult (i A) (mult A B)) = B.
+Axiom ax_c07 : forall A B C : G, (mult A (mult B (mult A C))) = (mult (mult A (mult B A)) C).
+Axiom ax_c06 : forall A : G, (mult unit A) = A.
+Axiom ax_c05 : forall A : G, (mult A unit) = A.
+Axiom ax_c04 : forall A B : G, (rd (mult A B) B) = A.
+Axiom ax_c03 : forall A B : G, (mult (rd A B) B) = A.
+Axiom ax_c02 : forall A B : G, (ld A (mult A B)) = B.
+Axiom ax_c01 : forall A B : G, (mult A (ld A B)) = B.
 
-Complete c11 c10 c09 c08 c07 c06 c05 c04 c03 c02 c01 : i ld mult op_c op_d rd unit : hint
+Complete ax_c11 ax_c10 ax_c09 ax_c08 ax_c07 ax_c06 ax_c05 ax_c04 ax_c03 ax_c02 ax_c01 : i ld mult op_c op_d rd unit : hint
   for ((mult op_c op_d) = (mult op_d op_c)).
 
 (* Goal *)

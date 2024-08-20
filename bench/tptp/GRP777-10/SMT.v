@@ -10,17 +10,18 @@ Variable c : Z.
 Variable difference : Z -> Z -> Z.
 Variable product : Z -> Z -> Z.
 Variable quotient : Z -> Z -> Z.
-Axiom sos09 : (product (product a c) (product c b)) = (product a b).
-Axiom sos08 : forall A B C : Z, (bigC A B C) = (product (product A B) (product C A)).
-Axiom sos07 : forall A B : Z, (product (product (product A B) B) (product B (product B A))) = B.
-Axiom sos06 : forall A : Z, (product A A) = A.
-Axiom sos05 : forall A B C D : Z, (product (product A B) (product C D)) = (product (product A C) (product B D)).
-Axiom sos04 : forall A B : Z, (product (quotient A B) B) = A.
-Axiom sos03 : forall A B : Z, (quotient (product A B) B) = A.
-Axiom sos02 : forall A B : Z, (product A (difference A B)) = B.
-Axiom sos01 : forall A B : Z, (difference A (product A B)) = B.
+Variable x0 : Z.
+Axiom ax_sos09 : (product (product a c) (product c b)) = (product a b).
+Axiom ax_sos08 : forall A B C : Z, (bigC A B C) = (product (product A B) (product C A)).
+Axiom ax_sos07 : forall A B : Z, (product (product (product A B) B) (product B (product B A))) = B.
+Axiom ax_sos06 : forall A : Z, (product A A) = A.
+Axiom ax_sos05 : forall A B C D : Z, (product (product A B) (product C D)) = (product (product A C) (product B D)).
+Axiom ax_sos04 : forall A B : Z, (product (quotient A B) B) = A.
+Axiom ax_sos03 : forall A B : Z, (quotient (product A B) B) = A.
+Axiom ax_sos02 : forall A B : Z, (product A (difference A B)) = B.
+Axiom ax_sos01 : forall A B : Z, (difference A (product A B)) = B.
 
-Add_lemmas sos09 sos08 sos07 sos06 sos05 sos04 sos03 sos02 sos01.
+Add_lemmas ax_sos09 ax_sos08 ax_sos07 ax_sos06 ax_sos05 ax_sos04 ax_sos03 ax_sos02 ax_sos01.
 
 (* Goal *)
 Theorem check : (bigC a b x0) = (bigC c c x0).

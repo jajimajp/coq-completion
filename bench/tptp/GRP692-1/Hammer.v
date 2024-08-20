@@ -4,6 +4,8 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter a : G.
+Parameter b : G.
 Parameter i : G -> G.
 Parameter ld : G -> G -> G.
 Parameter mult : G -> G -> G.
@@ -13,19 +15,19 @@ Parameter op_e : G.
 Parameter op_f : G.
 Parameter rd : G -> G -> G.
 Parameter unit : G.
-Axiom c13 : (mult op_e op_e) = op_f.
-Axiom c12 : (mult op_d op_d) = op_e.
-Axiom c11 : (mult op_c (mult op_c op_c)) = op_d.
-Axiom c10 : forall A : G, (mult A (i A)) = unit.
-Axiom c09 : forall A : G, (mult (i A) A) = unit.
-Axiom c08 : forall A B C : G, (mult (mult A B) C) = (mult (mult A C) (ld C (mult B C))).
-Axiom c07 : forall A B C : G, (mult A (mult B C)) = (mult (rd (mult A B) A) (mult A C)).
-Axiom c06 : forall A : G, (mult unit A) = A.
-Axiom c05 : forall A : G, (mult A unit) = A.
-Axiom c04 : forall A B : G, (rd (mult A B) B) = A.
-Axiom c03 : forall A B : G, (mult (rd A B) B) = A.
-Axiom c02 : forall A B : G, (ld A (mult A B)) = B.
-Axiom c01 : forall A B : G, (mult A (ld A B)) = B.
+Axiom ax_c13 : (mult op_e op_e) = op_f.
+Axiom ax_c12 : (mult op_d op_d) = op_e.
+Axiom ax_c11 : (mult op_c (mult op_c op_c)) = op_d.
+Axiom ax_c10 : forall A : G, (mult A (i A)) = unit.
+Axiom ax_c09 : forall A : G, (mult (i A) A) = unit.
+Axiom ax_c08 : forall A B C : G, (mult (mult A B) C) = (mult (mult A C) (ld C (mult B C))).
+Axiom ax_c07 : forall A B C : G, (mult A (mult B C)) = (mult (rd (mult A B) A) (mult A C)).
+Axiom ax_c06 : forall A : G, (mult unit A) = A.
+Axiom ax_c05 : forall A : G, (mult A unit) = A.
+Axiom ax_c04 : forall A B : G, (rd (mult A B) B) = A.
+Axiom ax_c03 : forall A B : G, (mult (rd A B) B) = A.
+Axiom ax_c02 : forall A B : G, (ld A (mult A B)) = B.
+Axiom ax_c01 : forall A B : G, (mult A (ld A B)) = B.
 
 
 (* Goal *)

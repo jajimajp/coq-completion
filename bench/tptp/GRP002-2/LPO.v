@@ -14,19 +14,19 @@ Parameter inverse : G -> G.
 Parameter j : G.
 Parameter k : G.
 Parameter multiply : G -> G -> G.
-Axiom j_times_inverse_h_is_k : (multiply j (inverse h)) = k.
-Axiom h_times_b_is_j : (multiply h b) = j.
-Axiom d_times_inverse_b_is_h : (multiply d (inverse b)) = h.
-Axiom c_times_inverse_a_is_d : (multiply c (inverse a)) = d.
-Axiom a_times_b_is_c : (multiply a b) = c.
-Axiom x_cubed_is_identity : forall X : G, (multiply X (multiply X X)) = identity.
-Axiom right_inverse : forall X : G, (multiply X (inverse X)) = identity.
-Axiom right_identity : forall X : G, (multiply X identity) = X.
-Axiom associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
-Axiom left_inverse : forall X : G, (multiply (inverse X) X) = identity.
-Axiom left_identity : forall X : G, (multiply identity X) = X.
+Axiom ax_j_times_inverse_h_is_k : (multiply j (inverse h)) = k.
+Axiom ax_h_times_b_is_j : (multiply h b) = j.
+Axiom ax_d_times_inverse_b_is_h : (multiply d (inverse b)) = h.
+Axiom ax_c_times_inverse_a_is_d : (multiply c (inverse a)) = d.
+Axiom ax_a_times_b_is_c : (multiply a b) = c.
+Axiom ax_x_cubed_is_identity : forall X : G, (multiply X (multiply X X)) = identity.
+Axiom ax_right_inverse : forall X : G, (multiply X (inverse X)) = identity.
+Axiom ax_right_identity : forall X : G, (multiply X identity) = X.
+Axiom ax_associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
+Axiom ax_left_inverse : forall X : G, (multiply (inverse X) X) = identity.
+Axiom ax_left_identity : forall X : G, (multiply identity X) = X.
 
-Complete j_times_inverse_h_is_k h_times_b_is_j d_times_inverse_b_is_h c_times_inverse_a_is_d a_times_b_is_c x_cubed_is_identity right_inverse right_identity associativity left_inverse left_identity : a b c d h identity inverse j k multiply : hint
+Complete ax_j_times_inverse_h_is_k ax_h_times_b_is_j ax_d_times_inverse_b_is_h ax_c_times_inverse_a_is_d ax_a_times_b_is_c ax_x_cubed_is_identity ax_right_inverse ax_right_identity ax_associativity ax_left_inverse ax_left_identity : a b c d h identity inverse j k multiply : hint
   for ((multiply k (inverse b)) = identity).
 
 (* Goal *)

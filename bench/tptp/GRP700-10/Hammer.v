@@ -7,15 +7,17 @@ Parameter G : Set.
 Parameter ld : G -> G -> G.
 Parameter mult : G -> G -> G.
 Parameter rd : G -> G -> G.
+Parameter tuple : G -> G -> G.
 Parameter unit : G.
-Axiom f08 : forall A B C : G, (mult (mult A B) (mult B (mult C B))) = (mult (mult A (mult B (mult B C))) B).
-Axiom f07 : forall A B C : G, (mult (mult (mult A B) A) (mult A C)) = (mult A (mult (mult (mult B A) A) C)).
-Axiom f06 : forall A : G, (mult unit A) = A.
-Axiom f05 : forall A : G, (mult A unit) = A.
-Axiom f04 : forall A B : G, (rd (mult A B) B) = A.
-Axiom f03 : forall A B : G, (mult (rd A B) B) = A.
-Axiom f02 : forall A B : G, (ld A (mult A B)) = B.
-Axiom f01 : forall A B : G, (mult A (ld A B)) = B.
+Parameter x0 : G.
+Axiom ax_f08 : forall A B C : G, (mult (mult A B) (mult B (mult C B))) = (mult (mult A (mult B (mult B C))) B).
+Axiom ax_f07 : forall A B C : G, (mult (mult (mult A B) A) (mult A C)) = (mult A (mult (mult (mult B A) A) C)).
+Axiom ax_f06 : forall A : G, (mult unit A) = A.
+Axiom ax_f05 : forall A : G, (mult A unit) = A.
+Axiom ax_f04 : forall A B : G, (rd (mult A B) B) = A.
+Axiom ax_f03 : forall A B : G, (mult (rd A B) B) = A.
+Axiom ax_f02 : forall A B : G, (ld A (mult A B)) = B.
+Axiom ax_f01 : forall A B : G, (mult A (ld A B)) = B.
 
 
 (* Goal *)

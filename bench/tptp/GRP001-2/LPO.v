@@ -10,15 +10,15 @@ Parameter c : G.
 Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
-Axiom a_times_b_is_c : (multiply a b) = c.
-Axiom squareness : forall X : G, (multiply X X) = identity.
-Axiom right_inverse : forall X : G, (multiply X (inverse X)) = identity.
-Axiom right_identity : forall X : G, (multiply X identity) = X.
-Axiom associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
-Axiom left_inverse : forall X : G, (multiply (inverse X) X) = identity.
-Axiom left_identity : forall X : G, (multiply identity X) = X.
+Axiom ax_a_times_b_is_c : (multiply a b) = c.
+Axiom ax_squareness : forall X : G, (multiply X X) = identity.
+Axiom ax_right_inverse : forall X : G, (multiply X (inverse X)) = identity.
+Axiom ax_right_identity : forall X : G, (multiply X identity) = X.
+Axiom ax_associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
+Axiom ax_left_inverse : forall X : G, (multiply (inverse X) X) = identity.
+Axiom ax_left_identity : forall X : G, (multiply identity X) = X.
 
-Complete a_times_b_is_c squareness right_inverse right_identity associativity left_inverse left_identity : a b c identity inverse multiply : hint
+Complete ax_a_times_b_is_c ax_squareness ax_right_inverse ax_right_identity ax_associativity ax_left_inverse ax_left_identity : a b c identity inverse multiply : hint
   for ((multiply b a) = c).
 
 (* Goal *)

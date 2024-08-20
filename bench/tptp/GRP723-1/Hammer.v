@@ -4,19 +4,22 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter a : G.
+Parameter b : G.
+Parameter c : G.
 Parameter f : G -> G -> G.
 Parameter ld : G -> G -> G.
 Parameter mult : G -> G -> G.
 Parameter unit : G.
-Axiom c09 : forall A B : G, (f A B) = (ld B (ld (mult A B) B)).
-Axiom c08 : forall A : G, (mult A A) = unit.
-Axiom c07 : forall A B C : G, (ld A (mult (mult B C) A)) = (mult (ld A (mult B A)) (ld A (mult C A))).
-Axiom c06 : forall A B C D : G, (ld (mult A B) (mult A (mult B (mult C D)))) = (mult (ld (mult A B) (mult A (mult B C))) (ld (mult A B) (mult A (mult B D)))).
-Axiom c05 : forall A B : G, (mult A B) = (mult B A).
-Axiom c04 : forall A B : G, (ld A (mult A B)) = B.
-Axiom c03 : forall A B : G, (mult A (ld A B)) = B.
-Axiom c02 : forall A : G, (mult unit A) = A.
-Axiom c01 : forall A : G, (mult A unit) = A.
+Axiom ax_c09 : forall A B : G, (f A B) = (ld B (ld (mult A B) B)).
+Axiom ax_c08 : forall A : G, (mult A A) = unit.
+Axiom ax_c07 : forall A B C : G, (ld A (mult (mult B C) A)) = (mult (ld A (mult B A)) (ld A (mult C A))).
+Axiom ax_c06 : forall A B C D : G, (ld (mult A B) (mult A (mult B (mult C D)))) = (mult (ld (mult A B) (mult A (mult B C))) (ld (mult A B) (mult A (mult B D)))).
+Axiom ax_c05 : forall A B : G, (mult A B) = (mult B A).
+Axiom ax_c04 : forall A B : G, (ld A (mult A B)) = B.
+Axiom ax_c03 : forall A B : G, (mult A (ld A B)) = B.
+Axiom ax_c02 : forall A : G, (mult unit A) = A.
+Axiom ax_c01 : forall A : G, (mult A unit) = A.
 
 
 (* Goal *)

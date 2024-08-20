@@ -3,18 +3,21 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
+Variable a : Z.
+Variable b : Z.
+Variable c : Z.
 Variable ld : Z -> Z -> Z.
 Variable mult : Z -> Z -> Z.
 Variable rd : Z -> Z -> Z.
-Axiom f07 : forall A B C : Z, (mult (mult A B) (mult C C)) = (mult (mult A C) (mult B C)).
-Axiom f06 : forall A B C : Z, (mult (mult A A) (mult B C)) = (mult (mult A B) (mult A C)).
-Axiom f05 : forall A B C : Z, (mult (mult A (mult A A)) (mult B C)) = (mult (mult A B) (mult (mult A A) C)).
-Axiom f04 : forall A B : Z, (rd (mult A B) B) = A.
-Axiom f03 : forall A B : Z, (mult (rd A B) B) = A.
-Axiom f02 : forall A B : Z, (ld A (mult A B)) = B.
-Axiom f01 : forall A B : Z, (mult A (ld A B)) = B.
+Axiom ax_f07 : forall A B C : Z, (mult (mult A B) (mult C C)) = (mult (mult A C) (mult B C)).
+Axiom ax_f06 : forall A B C : Z, (mult (mult A A) (mult B C)) = (mult (mult A B) (mult A C)).
+Axiom ax_f05 : forall A B C : Z, (mult (mult A (mult A A)) (mult B C)) = (mult (mult A B) (mult (mult A A) C)).
+Axiom ax_f04 : forall A B : Z, (rd (mult A B) B) = A.
+Axiom ax_f03 : forall A B : Z, (mult (rd A B) B) = A.
+Axiom ax_f02 : forall A B : Z, (ld A (mult A B)) = B.
+Axiom ax_f01 : forall A B : Z, (mult A (ld A B)) = B.
 
-Add_lemmas f07 f06 f05 f04 f03 f02 f01.
+Add_lemmas ax_f07 ax_f06 ax_f05 ax_f04 ax_f03 ax_f02 ax_f01.
 
 (* Goal *)
 Theorem check : (mult a (mult b c)) = (mult (mult (rd a a) b) (mult a c)).

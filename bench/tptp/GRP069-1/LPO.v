@@ -4,16 +4,21 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
+Parameter a1 : G.
+Parameter a2 : G.
+Parameter a3 : G.
+Parameter b3 : G.
+Parameter c3 : G.
 Parameter divide : G -> G -> G.
 Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
-Axiom identity : forall X : G, identity = (divide X X).
-Axiom inverse : forall X : G, (inverse X) = (divide identity X).
-Axiom multiply : forall X Y : G, (multiply X Y) = (divide X (divide identity Y)).
-Axiom single_axiom : forall X Y Z : G, (divide X (divide (divide (divide (divide X X) Y) Z) (divide (divide identity X) Z))) = Y.
+Axiom ax_identity : forall X : G, identity = (divide X X).
+Axiom ax_inverse : forall X : G, (inverse X) = (divide identity X).
+Axiom ax_multiply : forall X Y : G, (multiply X Y) = (divide X (divide identity Y)).
+Axiom ax_single_axiom : forall X Y Z : G, (divide X (divide (divide (divide (divide X X) Y) Z) (divide (divide identity X) Z))) = Y.
 
-Complete identity inverse multiply single_axiom : divide identity inverse multiply : hint
+Complete ax_identity ax_inverse ax_multiply ax_single_axiom : a1 a2 a3 b3 c3 divide identity inverse multiply : hint
   for ((multiply (inverse a1) a1) = identity).
 
 (* Goal *)

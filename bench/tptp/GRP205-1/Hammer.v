@@ -10,15 +10,18 @@ Parameter left_inverse : G -> G.
 Parameter multiply : G -> G -> G.
 Parameter right_division : G -> G -> G.
 Parameter right_inverse : G -> G.
-Axiom moufang3 : forall X Y Z : G, (multiply (multiply (multiply X Y) X) Z) = (multiply X (multiply Y (multiply X Z))).
-Axiom left_inverse : forall X : G, (multiply (left_inverse X) X) = identity.
-Axiom right_inverse : forall X : G, (multiply X (right_inverse X)) = identity.
-Axiom right_division_multiply : forall X Y : G, (right_division (multiply X Y) Y) = X.
-Axiom multiply_right_division : forall X Y : G, (multiply (right_division X Y) Y) = X.
-Axiom left_division_multiply : forall X Y : G, (left_division X (multiply X Y)) = Y.
-Axiom multiply_left_division : forall X Y : G, (multiply X (left_division X Y)) = Y.
-Axiom right_identity : forall X : G, (multiply X identity) = X.
-Axiom left_identity : forall X : G, (multiply identity X) = X.
+Parameter x : G.
+Parameter y : G.
+Parameter z : G.
+Axiom ax_moufang3 : forall X Y Z : G, (multiply (multiply (multiply X Y) X) Z) = (multiply X (multiply Y (multiply X Z))).
+Axiom ax_left_inverse : forall X : G, (multiply (left_inverse X) X) = identity.
+Axiom ax_right_inverse : forall X : G, (multiply X (right_inverse X)) = identity.
+Axiom ax_right_division_multiply : forall X Y : G, (right_division (multiply X Y) Y) = X.
+Axiom ax_multiply_right_division : forall X Y : G, (multiply (right_division X Y) Y) = X.
+Axiom ax_left_division_multiply : forall X Y : G, (left_division X (multiply X Y)) = Y.
+Axiom ax_multiply_left_division : forall X Y : G, (multiply X (left_division X Y)) = Y.
+Axiom ax_right_identity : forall X : G, (multiply X identity) = X.
+Axiom ax_left_identity : forall X : G, (multiply identity X) = X.
 
 
 (* Goal *)

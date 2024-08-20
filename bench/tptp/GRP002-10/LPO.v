@@ -18,25 +18,25 @@ Parameter k : G.
 Parameter multiply : G -> G -> G.
 Parameter product : G -> G -> G -> G.
 Parameter true : G.
-Axiom j_times_inverse_h_is_k : (product j (inverse h) k) = true.
-Axiom h_times_b_is_j : (product h b j) = true.
-Axiom d_times_inverse_b_is_h : (product d (inverse b) h) = true.
-Axiom c_times_inverse_a_is_d : (product c (inverse a) d) = true.
-Axiom a_times_b_is_c : (product a b c) = true.
-Axiom x_cubed_is_identity_2 : forall X Y : G, (ifeq (product X X Y) true (product Y X identity) true) = true.
-Axiom x_cubed_is_identity_1 : forall X Y : G, (ifeq (product X X Y) true (product X Y identity) true) = true.
-Axiom associativity2 : forall U V W X Y Z : G, (ifeq (product Y Z V) true (ifeq (product X V W) true (ifeq (product X Y U) true (product U Z W) true) true) true) = true.
-Axiom associativity1 : forall U V W X Y Z : G, (ifeq (product U Z W) true (ifeq (product Y Z V) true (ifeq (product X Y U) true (product X V W) true) true) true) = true.
-Axiom total_function2 : forall W X Y Z : G, (ifeq2 (product X Y W) true (ifeq2 (product X Y Z) true Z W) W) = W.
-Axiom total_function1 : forall X Y : G, (product X Y (multiply X Y)) = true.
-Axiom right_inverse : forall X : G, (product X (inverse X) identity) = true.
-Axiom left_inverse : forall X : G, (product (inverse X) X identity) = true.
-Axiom right_identity : forall X : G, (product X identity X) = true.
-Axiom left_identity : forall X : G, (product identity X X) = true.
-Axiom ifeq_axiom_001 : forall A B C : G, (ifeq A A B C) = B.
-Axiom ifeq_axiom : forall A B C : G, (ifeq2 A A B C) = B.
+Axiom ax_j_times_inverse_h_is_k : (product j (inverse h) k) = true.
+Axiom ax_h_times_b_is_j : (product h b j) = true.
+Axiom ax_d_times_inverse_b_is_h : (product d (inverse b) h) = true.
+Axiom ax_c_times_inverse_a_is_d : (product c (inverse a) d) = true.
+Axiom ax_a_times_b_is_c : (product a b c) = true.
+Axiom ax_x_cubed_is_identity_2 : forall X Y : G, (ifeq (product X X Y) true (product Y X identity) true) = true.
+Axiom ax_x_cubed_is_identity_1 : forall X Y : G, (ifeq (product X X Y) true (product X Y identity) true) = true.
+Axiom ax_associativity2 : forall U V W X Y Z : G, (ifeq (product Y Z V) true (ifeq (product X V W) true (ifeq (product X Y U) true (product U Z W) true) true) true) = true.
+Axiom ax_associativity1 : forall U V W X Y Z : G, (ifeq (product U Z W) true (ifeq (product Y Z V) true (ifeq (product X Y U) true (product X V W) true) true) true) = true.
+Axiom ax_total_function2 : forall W X Y Z : G, (ifeq2 (product X Y W) true (ifeq2 (product X Y Z) true Z W) W) = W.
+Axiom ax_total_function1 : forall X Y : G, (product X Y (multiply X Y)) = true.
+Axiom ax_right_inverse : forall X : G, (product X (inverse X) identity) = true.
+Axiom ax_left_inverse : forall X : G, (product (inverse X) X identity) = true.
+Axiom ax_right_identity : forall X : G, (product X identity X) = true.
+Axiom ax_left_identity : forall X : G, (product identity X X) = true.
+Axiom ax_ifeq_axiom_001 : forall A B C : G, (ifeq A A B C) = B.
+Axiom ax_ifeq_axiom : forall A B C : G, (ifeq2 A A B C) = B.
 
-Complete j_times_inverse_h_is_k h_times_b_is_j d_times_inverse_b_is_h c_times_inverse_a_is_d a_times_b_is_c x_cubed_is_identity_2 x_cubed_is_identity_1 associativity2 associativity1 total_function2 total_function1 right_inverse left_inverse right_identity left_identity ifeq_axiom_001 ifeq_axiom : a b c d h identity ifeq ifeq2 inverse j k multiply product true : hint
+Complete ax_j_times_inverse_h_is_k ax_h_times_b_is_j ax_d_times_inverse_b_is_h ax_c_times_inverse_a_is_d ax_a_times_b_is_c ax_x_cubed_is_identity_2 ax_x_cubed_is_identity_1 ax_associativity2 ax_associativity1 ax_total_function2 ax_total_function1 ax_right_inverse ax_left_inverse ax_right_identity ax_left_identity ax_ifeq_axiom_001 ax_ifeq_axiom : a b c d h identity ifeq ifeq2 inverse j k multiply product true : hint
   for ((product k (inverse b) identity) = true).
 
 (* Goal *)

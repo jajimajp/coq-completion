@@ -3,7 +3,10 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
+Variable a : Z.
+Variable b : Z.
+Variable c : Z.
 Variable commutator : Z -> Z -> Z.
 Variable multiply : Z -> Z -> Z.
-Axiom nilpotency : forall A B C : Z, (multiply (commutator A B) C) = (multiply C (commutator A B)).
-Axiom commutator : forall A B : Z, (multiply A B) = (multiply B (multiply A (commutator A B))).
+Axiom ax_nilpotency : forall A B C : Z, (multiply (commutator A B) C) = (multiply C (commutator A B)).
+Axiom ax_commutator : forall A B : Z, (multiply A B) = (multiply B (multiply A (commutator A B))).

@@ -11,17 +11,18 @@ Parameter op_a : G.
 Parameter op_b : G.
 Parameter plus : G -> G -> G.
 Parameter unit : G.
-Axiom f11 : (mult op_b op_a) = unit.
-Axiom f10 : (mult op_a op_b) = unit.
-Axiom f09 : forall A : G, (mult unit A) = A.
-Axiom f08 : forall A : G, (mult A unit) = A.
-Axiom f07 : forall A B : G, (mult A (mult B B)) = (mult (mult A B) B).
-Axiom f06 : forall A B C : G, (mult (mult (mult A B) C) B) = (mult A (mult (mult B C) B)).
-Axiom f05 : forall A B C : G, (mult A (plus B C)) = (plus (mult A B) (mult A C)).
-Axiom f04 : forall A : G, (plus A (minus A)) = op_0.
-Axiom f03 : forall A : G, (plus A op_0) = A.
-Axiom f02 : forall A B : G, (plus A B) = (plus B A).
-Axiom f01 : forall A B C : G, (plus (plus A B) C) = (plus A (plus B C)).
+Parameter x0 : G.
+Axiom ax_f11 : (mult op_b op_a) = unit.
+Axiom ax_f10 : (mult op_a op_b) = unit.
+Axiom ax_f09 : forall A : G, (mult unit A) = A.
+Axiom ax_f08 : forall A : G, (mult A unit) = A.
+Axiom ax_f07 : forall A B : G, (mult A (mult B B)) = (mult (mult A B) B).
+Axiom ax_f06 : forall A B C : G, (mult (mult (mult A B) C) B) = (mult A (mult (mult B C) B)).
+Axiom ax_f05 : forall A B C : G, (mult A (plus B C)) = (plus (mult A B) (mult A C)).
+Axiom ax_f04 : forall A : G, (plus A (minus A)) = op_0.
+Axiom ax_f03 : forall A : G, (plus A op_0) = A.
+Axiom ax_f02 : forall A B : G, (plus A B) = (plus B A).
+Axiom ax_f01 : forall A B C : G, (plus (plus A B) C) = (plus A (plus B C)).
 
 
 (* Goal *)

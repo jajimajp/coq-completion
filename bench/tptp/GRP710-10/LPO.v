@@ -7,13 +7,15 @@ Parameter G : Set.
 Parameter i : G -> G.
 Parameter mult : G -> G -> G.
 Parameter unit : G.
-Axiom f05 : forall A : G, (mult (i A) A) = unit.
-Axiom f04 : forall A : G, (mult A (i A)) = unit.
-Axiom f03 : forall A B C : G, (mult A (mult B (mult B C))) = (mult (mult (mult A B) B) C).
-Axiom f02 : forall A : G, (mult unit A) = A.
-Axiom f01 : forall A : G, (mult A unit) = A.
+Parameter x0 : G.
+Parameter x1 : G.
+Axiom ax_f05 : forall A : G, (mult (i A) A) = unit.
+Axiom ax_f04 : forall A : G, (mult A (i A)) = unit.
+Axiom ax_f03 : forall A B C : G, (mult A (mult B (mult B C))) = (mult (mult (mult A B) B) C).
+Axiom ax_f02 : forall A : G, (mult unit A) = A.
+Axiom ax_f01 : forall A : G, (mult A unit) = A.
 
-Complete f05 f04 f03 f02 f01 : i mult unit : hint
+Complete ax_f05 ax_f04 ax_f03 ax_f02 ax_f01 : i mult unit x0 x1 : hint
   for (forall X2 : G, (mult x0 X2) = x1).
 
 (* Goal *)

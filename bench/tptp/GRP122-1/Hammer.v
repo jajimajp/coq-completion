@@ -4,10 +4,13 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter a : G.
+Parameter b : G.
+Parameter c : G.
 Parameter identity : G.
 Parameter multiply : G -> G -> G.
-Axiom single_axiom2 : (multiply identity identity) = identity.
-Axiom single_axiom : forall X Y Z : G, (multiply Y (multiply (multiply Y (multiply (multiply Y Y) (multiply X Z))) (multiply Z (multiply Z Z)))) = X.
+Axiom ax_single_axiom2 : (multiply identity identity) = identity.
+Axiom ax_single_axiom : forall X Y Z : G, (multiply Y (multiply (multiply Y (multiply (multiply Y Y) (multiply X Z))) (multiply Z (multiply Z Z)))) = X.
 
 
 (* Goal *)

@@ -13,7 +13,7 @@ Parameter c0 : G.
 Parameter d : G.
 Parameter d0 : G.
 Parameter multiply : G -> G -> G.
-Axiom prove_quotient3 : (multiply b d0) = (multiply a c0).
-Axiom prove_quotient2 : (multiply d b0) = (multiply c a0).
-Axiom prove_quotient1 : (multiply b b0) = (multiply a a0).
-Axiom nilpotency : forall X Y Z : G, (multiply X (multiply Y (multiply Z (multiply Y X)))) = (multiply Y (multiply X (multiply Z (multiply X Y)))).
+Axiom ax_prove_quotient3 : (multiply b d0) = (multiply a c0).
+Axiom ax_prove_quotient2 : (multiply d b0) = (multiply c a0).
+Axiom ax_prove_quotient1 : (multiply b b0) = (multiply a a0).
+Axiom ax_nilpotency : forall X Y Z : G, (multiply X (multiply Y (multiply Z (multiply Y X)))) = (multiply Y (multiply X (multiply Z (multiply X Y)))).

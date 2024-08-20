@@ -4,5 +4,7 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter a : G.
+Parameter b : G.
 Parameter multiply : G -> G -> G.
-Axiom condition : forall X Y : G, (multiply X (multiply Y (multiply Y (multiply Y (multiply X Y))))) = (multiply Y (multiply Y (multiply Y (multiply Y (multiply X X))))).
+Axiom ax_condition : forall X Y : G, (multiply X (multiply Y (multiply Y (multiply Y (multiply X Y))))) = (multiply Y (multiply Y (multiply Y (multiply Y (multiply X X))))).

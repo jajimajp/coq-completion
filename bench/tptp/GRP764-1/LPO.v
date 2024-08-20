@@ -11,20 +11,22 @@ Parameter j : G -> G.
 Parameter one : G.
 Parameter product : G -> G -> G.
 Parameter quotient : G -> G -> G.
-Axiom sos12 : forall A : G, (eta A) = (product (i A) A).
-Axiom sos11 : forall A : G, (product (i A) A) = (product A (j A)).
-Axiom sos10 : forall A : G, (j A) = (quotient one A).
-Axiom sos09 : forall A : G, (i A) = (difference A one).
-Axiom sos08 : forall A B C : G, (difference (product A B) (product A (product B C))) = (quotient (quotient (product C (product A B)) B) A).
-Axiom sos07 : forall A B C : G, (difference A (product (product A B) C)) = (quotient (product B (product C A)) A).
-Axiom sos06 : forall A B : G, (product (quotient A B) B) = A.
-Axiom sos05 : forall A B : G, (quotient (product A B) B) = A.
-Axiom sos04 : forall A B : G, (difference A (product A B)) = B.
-Axiom sos03 : forall A B : G, (product A (difference A B)) = B.
-Axiom sos02 : forall A : G, (product one A) = A.
-Axiom sos01 : forall A : G, (product A one) = A.
+Parameter x0 : G.
+Parameter x1 : G.
+Axiom ax_sos12 : forall A : G, (eta A) = (product (i A) A).
+Axiom ax_sos11 : forall A : G, (product (i A) A) = (product A (j A)).
+Axiom ax_sos10 : forall A : G, (j A) = (quotient one A).
+Axiom ax_sos09 : forall A : G, (i A) = (difference A one).
+Axiom ax_sos08 : forall A B C : G, (difference (product A B) (product A (product B C))) = (quotient (quotient (product C (product A B)) B) A).
+Axiom ax_sos07 : forall A B C : G, (difference A (product (product A B) C)) = (quotient (product B (product C A)) A).
+Axiom ax_sos06 : forall A B : G, (product (quotient A B) B) = A.
+Axiom ax_sos05 : forall A B : G, (quotient (product A B) B) = A.
+Axiom ax_sos04 : forall A B : G, (difference A (product A B)) = B.
+Axiom ax_sos03 : forall A B : G, (product A (difference A B)) = B.
+Axiom ax_sos02 : forall A : G, (product one A) = A.
+Axiom ax_sos01 : forall A : G, (product A one) = A.
 
-Complete sos12 sos11 sos10 sos09 sos08 sos07 sos06 sos05 sos04 sos03 sos02 sos01 : difference eta i j one product quotient : hint
+Complete ax_sos12 ax_sos11 ax_sos10 ax_sos09 ax_sos08 ax_sos07 ax_sos06 ax_sos05 ax_sos04 ax_sos03 ax_sos02 ax_sos01 : difference eta i j one product quotient x0 x1 : hint
   for ((product x0 (product (eta x0) x1)) = (product (j (j x0)) x1)).
 
 (* Goal *)

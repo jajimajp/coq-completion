@@ -4,12 +4,13 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
+Parameter a : G.
 Parameter identity : G.
 Parameter multiply : G -> G -> G.
-Axiom single_axiom2 : (multiply identity identity) = identity.
-Axiom single_axiom : forall X Y Z : G, (multiply Y (multiply (multiply Y (multiply (multiply Y Y) (multiply X Z))) (multiply Z (multiply Z Z)))) = X.
+Axiom ax_single_axiom2 : (multiply identity identity) = identity.
+Axiom ax_single_axiom : forall X Y Z : G, (multiply Y (multiply (multiply Y (multiply (multiply Y Y) (multiply X Z))) (multiply Z (multiply Z Z)))) = X.
 
-Complete single_axiom2 single_axiom : identity multiply : hint
+Complete ax_single_axiom2 ax_single_axiom : a identity multiply : hint
   for ((multiply a (multiply a (multiply a a))) = identity).
 
 (* Goal *)

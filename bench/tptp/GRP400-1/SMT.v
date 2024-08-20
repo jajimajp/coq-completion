@@ -3,7 +3,10 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
+Variable a : Z.
+Variable b : Z.
+Variable c : Z.
 Variable commutator : Z -> Z -> Z.
 Variable multiply : Z -> Z -> Z.
-Axiom associativity_of_commutator : forall A B C : Z, (commutator (commutator A B) C) = (commutator A (commutator B C)).
-Axiom commutator : forall A B : Z, (multiply A B) = (multiply B (multiply A (commutator A B))).
+Axiom ax_associativity_of_commutator : forall A B C : Z, (commutator (commutator A B) C) = (commutator A (commutator B C)).
+Axiom ax_commutator : forall A B : Z, (multiply A B) = (multiply B (multiply A (commutator A B))).

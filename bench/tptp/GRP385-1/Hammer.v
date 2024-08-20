@@ -17,10 +17,10 @@ Parameter sk_c6 : G.
 Parameter sk_c7 : G.
 Parameter sk_c8 : G.
 Parameter sk_c9 : G.
-Axiom prove_this_1 : (inverse sk_c10) = sk_c9.
-Axiom associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
-Axiom left_inverse : forall X : G, (multiply (inverse X) X) = identity.
-Axiom left_identity : forall X : G, (multiply identity X) = X.
+Axiom ax_prove_this_1 : (inverse sk_c10) = sk_c9.
+Axiom ax_associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
+Axiom ax_left_inverse : forall X : G, (multiply (inverse X) X) = identity.
+Axiom ax_left_identity : forall X : G, (multiply identity X) = X.
 
 
 (* Goal *)

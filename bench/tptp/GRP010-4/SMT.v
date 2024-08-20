@@ -8,12 +8,12 @@ Variable c : Z.
 Variable identity : Z.
 Variable inverse : Z -> Z.
 Variable multiply : Z -> Z -> Z.
-Axiom c_times_b_is_e : (multiply c b) = identity.
-Axiom left_inverse : forall X : Z, (multiply (inverse X) X) = identity.
-Axiom left_identity : forall X : Z, (multiply identity X) = X.
-Axiom associativity : forall X Y Z : Z, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
+Axiom ax_c_times_b_is_e : (multiply c b) = identity.
+Axiom ax_left_inverse : forall X : Z, (multiply (inverse X) X) = identity.
+Axiom ax_left_identity : forall X : Z, (multiply identity X) = X.
+Axiom ax_associativity : forall X Y Z : Z, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
 
-Add_lemmas c_times_b_is_e left_inverse left_identity associativity.
+Add_lemmas ax_c_times_b_is_e ax_left_inverse ax_left_identity ax_associativity.
 
 (* Goal *)
 Theorem check : (multiply b c) = identity.

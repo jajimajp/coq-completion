@@ -3,17 +3,19 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
+Variable a : Z.
+Variable b : Z.
 Variable commutator : Z -> Z -> Z.
 Variable identity : Z.
 Variable inverse : Z -> Z.
 Variable multiply : Z -> Z -> Z.
-Axiom x_cubed_is_identity : forall X : Z, (multiply X (multiply X X)) = identity.
-Axiom commutator : forall X Y : Z, (commutator X Y) = (multiply X (multiply Y (multiply (inverse X) (inverse Y)))).
-Axiom associativity : forall X Y Z : Z, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
-Axiom left_inverse : forall X : Z, (multiply (inverse X) X) = identity.
-Axiom left_identity : forall X : Z, (multiply identity X) = X.
+Axiom ax_x_cubed_is_identity : forall X : Z, (multiply X (multiply X X)) = identity.
+Axiom ax_commutator : forall X Y : Z, (commutator X Y) = (multiply X (multiply Y (multiply (inverse X) (inverse Y)))).
+Axiom ax_associativity : forall X Y Z : Z, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
+Axiom ax_left_inverse : forall X : Z, (multiply (inverse X) X) = identity.
+Axiom ax_left_identity : forall X : Z, (multiply identity X) = X.
 
-Add_lemmas x_cubed_is_identity commutator associativity left_inverse left_identity.
+Add_lemmas ax_x_cubed_is_identity ax_commutator ax_associativity ax_left_inverse ax_left_identity.
 
 (* Goal *)
 Theorem check : (commutator (commutator a b) b) = identity.

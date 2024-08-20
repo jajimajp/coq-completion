@@ -3,16 +3,17 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
+Variable a : Z.
 Variable identity : Z.
 Variable inverse : Z -> Z.
 Variable multiply : Z -> Z -> Z.
-Axiom right_inverse : forall X : Z, (multiply X (inverse X)) = identity.
-Axiom right_identity : forall X : Z, (multiply X identity) = X.
-Axiom associativity : forall X Y Z : Z, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
-Axiom left_inverse : forall X : Z, (multiply (inverse X) X) = identity.
-Axiom left_identity : forall X : Z, (multiply identity X) = X.
+Axiom ax_right_inverse : forall X : Z, (multiply X (inverse X)) = identity.
+Axiom ax_right_identity : forall X : Z, (multiply X identity) = X.
+Axiom ax_associativity : forall X Y Z : Z, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
+Axiom ax_left_inverse : forall X : Z, (multiply (inverse X) X) = identity.
+Axiom ax_left_identity : forall X : Z, (multiply identity X) = X.
 
-Add_lemmas right_inverse right_identity associativity left_inverse left_identity.
+Add_lemmas ax_right_inverse ax_right_identity ax_associativity ax_left_inverse ax_left_identity.
 
 (* Goal *)
 Theorem check : (inverse (inverse a)) = a.

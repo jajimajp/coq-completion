@@ -9,10 +9,10 @@ Parameter c : G.
 Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
-Axiom c_times_b_is_e : (multiply c b) = identity.
-Axiom left_inverse : forall X : G, (multiply (inverse X) X) = identity.
-Axiom left_identity : forall X : G, (multiply identity X) = X.
-Axiom associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
+Axiom ax_c_times_b_is_e : (multiply c b) = identity.
+Axiom ax_left_inverse : forall X : G, (multiply (inverse X) X) = identity.
+Axiom ax_left_identity : forall X : G, (multiply identity X) = X.
+Axiom ax_associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
 
 
 (* Goal *)

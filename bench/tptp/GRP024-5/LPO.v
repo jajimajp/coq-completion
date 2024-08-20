@@ -4,17 +4,20 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
+Parameter a : G.
+Parameter b : G.
+Parameter c : G.
 Parameter commutator : G -> G -> G.
 Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
-Axiom associativity_of_commutator : forall X Y Z : G, (commutator (commutator X Y) Z) = (commutator X (commutator Y Z)).
-Axiom name : forall X Y : G, (commutator X Y) = (multiply (inverse X) (multiply (inverse Y) (multiply X Y))).
-Axiom associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
-Axiom left_inverse : forall X : G, (multiply (inverse X) X) = identity.
-Axiom left_identity : forall X : G, (multiply identity X) = X.
+Axiom ax_associativity_of_commutator : forall X Y Z : G, (commutator (commutator X Y) Z) = (commutator X (commutator Y Z)).
+Axiom ax_name : forall X Y : G, (commutator X Y) = (multiply (inverse X) (multiply (inverse Y) (multiply X Y))).
+Axiom ax_associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
+Axiom ax_left_inverse : forall X : G, (multiply (inverse X) X) = identity.
+Axiom ax_left_identity : forall X : G, (multiply identity X) = X.
 
-Complete associativity_of_commutator name associativity left_inverse left_identity : commutator identity inverse multiply : hint
+Complete ax_associativity_of_commutator ax_name ax_associativity ax_left_inverse ax_left_identity : a b c commutator identity inverse multiply : hint
   for ((multiply a (commutator b c)) = (multiply (commutator b c) a)).
 
 (* Goal *)

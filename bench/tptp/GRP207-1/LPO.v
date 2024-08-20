@@ -6,9 +6,13 @@ From Completion Require Import Plugin.
 Parameter G : Set.
 Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
-Axiom single_non_axiom : forall U Y Z : G, (multiply U (inverse (multiply Y (multiply (multiply (multiply Z (inverse Z)) (inverse (multiply U Y))) U)))) = U.
+Parameter u : G.
+Parameter x : G.
+Parameter y : G.
+Parameter z : G.
+Axiom ax_single_non_axiom : forall U Y Z : G, (multiply U (inverse (multiply Y (multiply (multiply (multiply Z (inverse Z)) (inverse (multiply U Y))) U)))) = U.
 
-Complete single_non_axiom : inverse multiply : hint
+Complete ax_single_non_axiom : inverse multiply u x y z : hint
   for ((multiply x (inverse (multiply y (multiply (multiply (multiply z (inverse z)) (inverse (multiply u y))) x)))) = u).
 
 (* Goal *)

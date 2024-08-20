@@ -4,11 +4,13 @@ From Completion Require Import Plugin.
 
 (* axioms *)
 Parameter G : Set.
+Parameter a : G.
+Parameter b : G.
 Parameter multiply : G -> G -> G.
-Axiom condition : forall X Y : G, (multiply X (multiply Y Y)) = (multiply Y (multiply Y X)).
-Axiom associativity_of_multiply : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
+Axiom ax_condition : forall X Y : G, (multiply X (multiply Y Y)) = (multiply Y (multiply Y X)).
+Axiom ax_associativity_of_multiply : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
 
-Complete condition associativity_of_multiply : multiply : hint
+Complete ax_condition ax_associativity_of_multiply : a b multiply : hint
   for ((multiply a (multiply b (multiply a (multiply b (multiply a (multiply b (multiply a b))))))) = (multiply a (multiply a (multiply a (multiply a (multiply b (multiply b (multiply b b)))))))).
 
 (* Goal *)

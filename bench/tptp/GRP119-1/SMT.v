@@ -3,12 +3,13 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
+Variable a : Z.
 Variable identity : Z.
 Variable multiply : Z -> Z -> Z.
-Axiom single_axiom2 : (multiply identity identity) = identity.
-Axiom single_axiom : forall X Y Z : Z, (multiply Y (multiply (multiply Y (multiply (multiply Y Y) (multiply X Z))) (multiply Z (multiply Z Z)))) = X.
+Axiom ax_single_axiom2 : (multiply identity identity) = identity.
+Axiom ax_single_axiom : forall X Y Z : Z, (multiply Y (multiply (multiply Y (multiply (multiply Y Y) (multiply X Z))) (multiply Z (multiply Z Z)))) = X.
 
-Add_lemmas single_axiom2 single_axiom.
+Add_lemmas ax_single_axiom2 ax_single_axiom.
 
 (* Goal *)
 Theorem check : (multiply a (multiply a (multiply a a))) = identity.

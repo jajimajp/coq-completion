@@ -3,11 +3,13 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
+Variable a2 : Z.
+Variable b2 : Z.
 Variable inverse : Z -> Z.
 Variable multiply : Z -> Z -> Z.
-Axiom single_axiom : forall A B C D : Z, (inverse (multiply A (multiply B (multiply (multiply C (inverse C)) (inverse (multiply D (multiply A B))))))) = D.
+Axiom ax_single_axiom : forall A B C D : Z, (inverse (multiply A (multiply B (multiply (multiply C (inverse C)) (inverse (multiply D (multiply A B))))))) = D.
 
-Add_lemmas single_axiom.
+Add_lemmas ax_single_axiom.
 
 (* Goal *)
 Theorem check : (multiply (multiply (inverse b2) b2) a2) = a2.

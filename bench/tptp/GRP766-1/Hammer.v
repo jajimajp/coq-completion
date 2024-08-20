@@ -13,25 +13,28 @@ Parameter one : G.
 Parameter product : G -> G -> G.
 Parameter quotient : G -> G -> G.
 Parameter t : G -> G -> G.
-Axiom sos19 : forall A B C : G, (t (eta A) (product B C)) = (product (t (eta A) B) (t (eta A) C)).
-Axiom sos18 : forall A B : G, (t A B) = (quotient (product A B) A).
-Axiom sos17 : forall A B : G, (product A (product B (eta A))) = (product (product A B) (eta A)).
-Axiom sos16 : forall A B : G, (product A (product (eta A) B)) = (product (j (j A)) B).
-Axiom sos15 : forall A B : G, (product (i (i A)) B) = (product (eta A) (product A B)).
-Axiom sos14 : forall A B C : G, (l A A (product B C)) = (product (l A A B) (l A A C)).
-Axiom sos13 : forall A B C : G, (l A B C) = (difference (product A B) (product A (product B C))).
-Axiom sos12 : forall A : G, (eta A) = (product (i A) A).
-Axiom sos11 : forall A : G, (product (i A) A) = (product A (j A)).
-Axiom sos10 : forall A : G, (j A) = (quotient one A).
-Axiom sos09 : forall A : G, (i A) = (difference A one).
-Axiom sos08 : forall A B C : G, (difference (product A B) (product A (product B C))) = (quotient (quotient (product C (product A B)) B) A).
-Axiom sos07 : forall A B C : G, (difference A (product (product A B) C)) = (quotient (product B (product C A)) A).
-Axiom sos06 : forall A B : G, (product (quotient A B) B) = A.
-Axiom sos05 : forall A B : G, (quotient (product A B) B) = A.
-Axiom sos04 : forall A B : G, (difference A (product A B)) = B.
-Axiom sos03 : forall A B : G, (product A (difference A B)) = B.
-Axiom sos02 : forall A : G, (product one A) = A.
-Axiom sos01 : forall A : G, (product A one) = A.
+Parameter x0 : G.
+Parameter x1 : G.
+Parameter x2 : G.
+Axiom ax_sos19 : forall A B C : G, (t (eta A) (product B C)) = (product (t (eta A) B) (t (eta A) C)).
+Axiom ax_sos18 : forall A B : G, (t A B) = (quotient (product A B) A).
+Axiom ax_sos17 : forall A B : G, (product A (product B (eta A))) = (product (product A B) (eta A)).
+Axiom ax_sos16 : forall A B : G, (product A (product (eta A) B)) = (product (j (j A)) B).
+Axiom ax_sos15 : forall A B : G, (product (i (i A)) B) = (product (eta A) (product A B)).
+Axiom ax_sos14 : forall A B C : G, (l A A (product B C)) = (product (l A A B) (l A A C)).
+Axiom ax_sos13 : forall A B C : G, (l A B C) = (difference (product A B) (product A (product B C))).
+Axiom ax_sos12 : forall A : G, (eta A) = (product (i A) A).
+Axiom ax_sos11 : forall A : G, (product (i A) A) = (product A (j A)).
+Axiom ax_sos10 : forall A : G, (j A) = (quotient one A).
+Axiom ax_sos09 : forall A : G, (i A) = (difference A one).
+Axiom ax_sos08 : forall A B C : G, (difference (product A B) (product A (product B C))) = (quotient (quotient (product C (product A B)) B) A).
+Axiom ax_sos07 : forall A B C : G, (difference A (product (product A B) C)) = (quotient (product B (product C A)) A).
+Axiom ax_sos06 : forall A B : G, (product (quotient A B) B) = A.
+Axiom ax_sos05 : forall A B : G, (quotient (product A B) B) = A.
+Axiom ax_sos04 : forall A B : G, (difference A (product A B)) = B.
+Axiom ax_sos03 : forall A B : G, (product A (difference A B)) = B.
+Axiom ax_sos02 : forall A : G, (product one A) = A.
+Axiom ax_sos01 : forall A : G, (product A one) = A.
 
 
 (* Goal *)

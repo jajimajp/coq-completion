@@ -4,17 +4,19 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter a : G.
+Parameter b : G.
 Parameter commutator : G -> G -> G.
 Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
-Axiom x_cubed_is_identity : forall X : G, (multiply X (multiply X X)) = identity.
-Axiom commutator : forall X Y : G, (commutator X Y) = (multiply X (multiply Y (multiply (inverse X) (inverse Y)))).
-Axiom right_inverse : forall X : G, (multiply X (inverse X)) = identity.
-Axiom right_identity : forall X : G, (multiply X identity) = X.
-Axiom associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
-Axiom left_inverse : forall X : G, (multiply (inverse X) X) = identity.
-Axiom left_identity : forall X : G, (multiply identity X) = X.
+Axiom ax_x_cubed_is_identity : forall X : G, (multiply X (multiply X X)) = identity.
+Axiom ax_commutator : forall X Y : G, (commutator X Y) = (multiply X (multiply Y (multiply (inverse X) (inverse Y)))).
+Axiom ax_right_inverse : forall X : G, (multiply X (inverse X)) = identity.
+Axiom ax_right_identity : forall X : G, (multiply X identity) = X.
+Axiom ax_associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
+Axiom ax_left_inverse : forall X : G, (multiply (inverse X) X) = identity.
+Axiom ax_left_identity : forall X : G, (multiply identity X) = X.
 
 
 (* Goal *)

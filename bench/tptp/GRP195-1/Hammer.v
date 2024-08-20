@@ -4,9 +4,11 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter a : G.
+Parameter b : G.
 Parameter multiply : G -> G -> G.
-Axiom condition : forall X Y : G, (multiply X (multiply Y Y)) = (multiply Y (multiply Y X)).
-Axiom associativity_of_multiply : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
+Axiom ax_condition : forall X Y : G, (multiply X (multiply Y Y)) = (multiply Y (multiply Y X)).
+Axiom ax_associativity_of_multiply : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
 
 
 (* Goal *)

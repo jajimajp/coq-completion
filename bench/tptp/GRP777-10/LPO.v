@@ -11,17 +11,18 @@ Parameter c : G.
 Parameter difference : G -> G -> G.
 Parameter product : G -> G -> G.
 Parameter quotient : G -> G -> G.
-Axiom sos09 : (product (product a c) (product c b)) = (product a b).
-Axiom sos08 : forall A B C : G, (bigC A B C) = (product (product A B) (product C A)).
-Axiom sos07 : forall A B : G, (product (product (product A B) B) (product B (product B A))) = B.
-Axiom sos06 : forall A : G, (product A A) = A.
-Axiom sos05 : forall A B C D : G, (product (product A B) (product C D)) = (product (product A C) (product B D)).
-Axiom sos04 : forall A B : G, (product (quotient A B) B) = A.
-Axiom sos03 : forall A B : G, (quotient (product A B) B) = A.
-Axiom sos02 : forall A B : G, (product A (difference A B)) = B.
-Axiom sos01 : forall A B : G, (difference A (product A B)) = B.
+Parameter x0 : G.
+Axiom ax_sos09 : (product (product a c) (product c b)) = (product a b).
+Axiom ax_sos08 : forall A B C : G, (bigC A B C) = (product (product A B) (product C A)).
+Axiom ax_sos07 : forall A B : G, (product (product (product A B) B) (product B (product B A))) = B.
+Axiom ax_sos06 : forall A : G, (product A A) = A.
+Axiom ax_sos05 : forall A B C D : G, (product (product A B) (product C D)) = (product (product A C) (product B D)).
+Axiom ax_sos04 : forall A B : G, (product (quotient A B) B) = A.
+Axiom ax_sos03 : forall A B : G, (quotient (product A B) B) = A.
+Axiom ax_sos02 : forall A B : G, (product A (difference A B)) = B.
+Axiom ax_sos01 : forall A B : G, (difference A (product A B)) = B.
 
-Complete sos09 sos08 sos07 sos06 sos05 sos04 sos03 sos02 sos01 : a b bigC c difference product quotient : hint
+Complete ax_sos09 ax_sos08 ax_sos07 ax_sos06 ax_sos05 ax_sos04 ax_sos03 ax_sos02 ax_sos01 : a b bigC c difference product quotient x0 : hint
   for ((bigC a b x0) = (bigC c c x0)).
 
 (* Goal *)

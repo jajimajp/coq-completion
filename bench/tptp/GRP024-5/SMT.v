@@ -3,17 +3,20 @@ Require Import SMTCoq.SMTCoq ZArith.
 Local Open Scope Z_scope.
 
 (* axioms *)
+Variable a : Z.
+Variable b : Z.
+Variable c : Z.
 Variable commutator : Z -> Z -> Z.
 Variable identity : Z.
 Variable inverse : Z -> Z.
 Variable multiply : Z -> Z -> Z.
-Axiom associativity_of_commutator : forall X Y Z : Z, (commutator (commutator X Y) Z) = (commutator X (commutator Y Z)).
-Axiom name : forall X Y : Z, (commutator X Y) = (multiply (inverse X) (multiply (inverse Y) (multiply X Y))).
-Axiom associativity : forall X Y Z : Z, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
-Axiom left_inverse : forall X : Z, (multiply (inverse X) X) = identity.
-Axiom left_identity : forall X : Z, (multiply identity X) = X.
+Axiom ax_associativity_of_commutator : forall X Y Z : Z, (commutator (commutator X Y) Z) = (commutator X (commutator Y Z)).
+Axiom ax_name : forall X Y : Z, (commutator X Y) = (multiply (inverse X) (multiply (inverse Y) (multiply X Y))).
+Axiom ax_associativity : forall X Y Z : Z, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
+Axiom ax_left_inverse : forall X : Z, (multiply (inverse X) X) = identity.
+Axiom ax_left_identity : forall X : Z, (multiply identity X) = X.
 
-Add_lemmas associativity_of_commutator name associativity left_inverse left_identity.
+Add_lemmas ax_associativity_of_commutator ax_name ax_associativity ax_left_inverse ax_left_identity.
 
 (* Goal *)
 Theorem check : (multiply a (commutator b c)) = (multiply (commutator b c) a).

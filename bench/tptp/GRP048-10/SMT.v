@@ -12,17 +12,17 @@ Variable inverse : Z -> Z.
 Variable multiply : Z -> Z -> Z.
 Variable product : Z -> Z -> Z -> Z.
 Variable true : Z.
-Axiom a_equals_b : (equalish a b) = true.
-Axiom product_substitution3 : forall W X Y Z : Z, (ifeq (equalish X Y) true (ifeq (product W Z X) true (product W Z Y) true) true) = true.
-Axiom associativity2 : forall U V W X Y Z : Z, (ifeq (product Y Z V) true (ifeq (product X V W) true (ifeq (product X Y U) true (product U Z W) true) true) true) = true.
-Axiom associativity1 : forall U V W X Y Z : Z, (ifeq (product U Z W) true (ifeq (product Y Z V) true (ifeq (product X Y U) true (product X V W) true) true) true) = true.
-Axiom total_function2 : forall W X Y Z : Z, (ifeq (product X Y W) true (ifeq (product X Y Z) true (equalish Z W) true) true) = true.
-Axiom total_function1 : forall X Y : Z, (product X Y (multiply X Y)) = true.
-Axiom left_inverse : forall X : Z, (product (inverse X) X identity) = true.
-Axiom left_identity : forall X : Z, (product identity X X) = true.
-Axiom ifeq_axiom : forall A B C : Z, (ifeq A A B C) = B.
+Axiom ax_a_equals_b : (equalish a b) = true.
+Axiom ax_product_substitution3 : forall W X Y Z : Z, (ifeq (equalish X Y) true (ifeq (product W Z X) true (product W Z Y) true) true) = true.
+Axiom ax_associativity2 : forall U V W X Y Z : Z, (ifeq (product Y Z V) true (ifeq (product X V W) true (ifeq (product X Y U) true (product U Z W) true) true) true) = true.
+Axiom ax_associativity1 : forall U V W X Y Z : Z, (ifeq (product U Z W) true (ifeq (product Y Z V) true (ifeq (product X Y U) true (product X V W) true) true) true) = true.
+Axiom ax_total_function2 : forall W X Y Z : Z, (ifeq (product X Y W) true (ifeq (product X Y Z) true (equalish Z W) true) true) = true.
+Axiom ax_total_function1 : forall X Y : Z, (product X Y (multiply X Y)) = true.
+Axiom ax_left_inverse : forall X : Z, (product (inverse X) X identity) = true.
+Axiom ax_left_identity : forall X : Z, (product identity X X) = true.
+Axiom ax_ifeq_axiom : forall A B C : Z, (ifeq A A B C) = B.
 
-Add_lemmas a_equals_b product_substitution3 associativity2 associativity1 total_function2 total_function1 left_inverse left_identity ifeq_axiom.
+Add_lemmas ax_a_equals_b ax_product_substitution3 ax_associativity2 ax_associativity1 ax_total_function2 ax_total_function1 ax_left_inverse ax_left_identity ax_ifeq_axiom.
 
 (* Goal *)
 Theorem check : (equalish (inverse a) (inverse b)) = true.

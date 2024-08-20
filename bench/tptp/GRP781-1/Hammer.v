@@ -6,5 +6,8 @@ From Hammer Require Import Hammer.
 Parameter G : Set.
 Parameter c : G -> G -> G.
 Parameter m : G -> G -> G.
-Axiom assumption : forall X Y Z : G, (m X (m Y (m Z (m Y X)))) = (m Y (m X (m Z (m X Y)))).
-Axiom commutator : forall X Y : G, (m Y (m X (c X Y))) = (m X Y).
+Parameter x : G.
+Parameter y : G.
+Parameter z : G.
+Axiom ax_assumption : forall X Y Z : G, (m X (m Y (m Z (m Y X)))) = (m Y (m X (m Z (m X Y)))).
+Axiom ax_commutator : forall X Y : G, (m Y (m X (c X Y))) = (m X Y).

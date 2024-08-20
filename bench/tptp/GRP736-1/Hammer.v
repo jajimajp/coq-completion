@@ -4,12 +4,16 @@ From Hammer Require Import Hammer.
 
 (* axioms *)
 Parameter G : Set.
+Parameter a : G.
+Parameter b : G.
+Parameter c : G.
+Parameter d : G.
 Parameter mult : G -> G -> G.
 Parameter rd : G -> G -> G.
-Axiom c04 : forall A B : G, (mult A (mult A (mult A B))) = B.
-Axiom c03 : forall A B : G, (mult (rd A B) B) = A.
-Axiom c02 : forall A B : G, (rd (mult A B) B) = A.
-Axiom c01 : forall A B C : G, (mult A (mult B C)) = (mult (mult A B) (mult A C)).
+Axiom ax_c04 : forall A B : G, (mult A (mult A (mult A B))) = B.
+Axiom ax_c03 : forall A B : G, (mult (rd A B) B) = A.
+Axiom ax_c02 : forall A B : G, (rd (mult A B) B) = A.
+Axiom ax_c01 : forall A B C : G, (mult A (mult B C)) = (mult (mult A B) (mult A C)).
 
 
 (* Goal *)
