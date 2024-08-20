@@ -1,3 +1,18 @@
-File "./GRP493-1/Hammer.v", line 11, characters 0-72:
-Error: identity already exists.
-
+Detecting provers...
+Eprover found
+Vampire found
+z3_tptp: symbol lookup error: /usr/local/lib/libz3.so: undefined symbol: pthread_create
+Z3 not found
+CVC4 found
+Extracting features...
+Running provers (8 threads)...
+CVC4 (knn-256) succeeded
+- dependencies: Hammer.ax_single_axiom, Hammer.ax_multiply, Hammer.ax_inverse, Hammer.ax_identity
+Reconstructing the proof...
+Trying reconstruction batch 1...
+Trying reconstruction batch 2...
+Tactic hauto lq: on drew: off succeeded.
+Replace the hammer tactic with:
+	hauto lq: on drew: off use: ax_single_axiom, ax_multiply, ax_inverse, ax_identity.
+check
+     : multiply (inverse a1) a1 = identity

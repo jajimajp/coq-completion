@@ -1,3 +1,1 @@
-File "./GRP664-10/LPO.v", line 24, characters 32-34:
-Error: The reference x2 was not found in the current environment.
-
+toma --parsable "LPO.mult (LPO.mult (LPO.x1, LPO.x0), LPO.mult (LPO.x2, LPO.x3)) -> LPO.mult (LPO.mult (LPO.mult (LPO.x1, LPO.x0), LPO.x2), LPO.x3)" /tmp/tmp.MazXHihumC

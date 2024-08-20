@@ -1,7 +1,51 @@
-File "./GRP196-1/SMT.v", line 6, characters 0-32:
+File "./GRP196-1/SMT.v", line 6, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP196-1/SMT.v", line 13, characters 26-27:
-Error: The reference a was not found in the current environment.
+File "./GRP196-1/SMT.v", line 7, characters 0-15:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP196-1/SMT.v", line 8, characters 0-32:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP196-1/SMT.v", line 17, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y : Z,
+ multiply X (multiply Y (multiply Y Y)) =
+ multiply Y (multiply Y (multiply Y X)))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP196-1/SMT.v", line 17, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z, multiply (multiply X Y) Z0 = multiply X (multiply Y Z0))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq58ab91.vtlog /tmp/verit_coq58ab91.smt2 2> /tmp/warnings_verit8ed430.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00009
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_0 () Int)
+(declare-fun op_1 () Int)
+(declare-fun op_2 (Int Int ) Int)
+(assert (not (= (op_2 op_0 (op_2 op_1 (op_2 op_0 (op_2 op_1 (op_2 op_0 (op_2 op_1 (op_2 op_0 (op_2 op_1 (op_2 op_0 (op_2 op_1 (op_2 op_0 (op_2 op_1 (op_2 op_0 (op_2 op_1 (op_2 op_0 (op_2 op_1 (op_2 op_0 op_1))))))))))))))))) (op_2 op_0 (op_2 op_0 (op_2 op_0 (op_2 op_0 (op_2 op_0 (op_2 op_0 (op_2 op_0 (op_2 op_0 (op_2 op_0 (op_2 op_1 (op_2 op_1 (op_2 op_1 (op_2 op_1 (op_2 op_1 (op_2 op_1 (op_2 op_1 (op_2 op_1 op_1))))))))))))))))))))
+(check-sat)
+(get-model)
+File "./GRP196-1/SMT.v", line 17, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+a := 0
+b := 1
+multiply := fun BOUND_VARIABLE_547 BOUND_VARIABLE_548 => if BOUND_VARIABLE_547 = 1 then if BOUND_VARIABLE_548 = 13 then -13 else if BOUND_VARIABLE_548 = -12 then 13 else if BOUND_VARIABLE_548 = 12 then -12 else if BOUND_VARIABLE_548 = -11 then 12 else if BOUND_VARIABLE_548 = 11 then -11 else if BOUND_VARIABLE_548 = -10 then 11 else if BOUND_VARIABLE_548 = 10 then -10 else if BOUND_VARIABLE_548 = -8 then 9 else if BOUND_VARIABLE_548 = -7 then 8 else if BOUND_VARIABLE_548 = -6 then 7 else if BOUND_VARIABLE_548 = -5 then 6 else if BOUND_VARIABLE_548 = -4 then 5 else if BOUND_VARIABLE_548 = -3 then 4 else if BOUND_VARIABLE_548 = -2 then 3 else if BOUND_VARIABLE_548 = -1 then 2 else if BOUND_VARIABLE_548 = 1 then 10 else 18 else if BOUND_VARIABLE_547 = 0 then if BOUND_VARIABLE_548 = 17 then -17 else if BOUND_VARIABLE_548 = -16 then 17 else if BOUND_VARIABLE_548 = 16 then -16 else if BOUND_VARIABLE_548 = -15 then 16 else if BOUND_VARIABLE_548 = 15 then -15 else if BOUND_VARIABLE_548 = -14 then 15 else if BOUND_VARIABLE_548 = 14 then -14 else if BOUND_VARIABLE_548 = -13 then 14 else if BOUND_VARIABLE_548 = 9 then -9 else if BOUND_VARIABLE_548 = 8 then -8 else if BOUND_VARIABLE_548 = 7 then -7 else if BOUND_VARIABLE_548 = 6 then -6 else if BOUND_VARIABLE_548 = 5 then -5 else if BOUND_VARIABLE_548 = 4 then -4 else if BOUND_VARIABLE_548 = 3 then -3 else if BOUND_VARIABLE_548 = 2 then -2 else if BOUND_VARIABLE_548 = 1 then -1 else 18 else 18
 

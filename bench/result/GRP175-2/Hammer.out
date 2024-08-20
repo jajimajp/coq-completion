@@ -1,3 +1,18 @@
-File "./GRP175-2/Hammer.v", line 32, characters 66-67:
-Error: The reference a was not found in the current environment.
+Detecting provers...
+Eprover found
+Vampire found
+z3_tptp: symbol lookup error: /usr/local/lib/libz3.so: undefined symbol: pthread_create
+Z3 not found
+CVC4 found
+Extracting features...
+Running provers (8 threads)...
+CVC4 (knn-256) succeeded
+- dependencies: Hammer.ax_left_identity, Hammer.ax_monotony_glb2, Hammer.ax_p06b_1, Hammer.ax_associativity, Hammer.ax_left_inverse, Hammer.ax_symmetry_of_glb, Hammer.ax_monotony_glb1
+Reconstructing the proof...
+Trying reconstruction batch 1...
+Tactic hauto succeeded.
+Replace the hammer tactic with:
+	hauto use: ax_left_identity, ax_monotony_glb2, ax_p06b_1, ax_associativity, ax_left_inverse, ax_symmetry_of_glb, ax_monotony_glb1.
+File "./GRP175-2/Hammer.v", line 36, characters 0-4:
+Error:  (in proof check): Attempt to save an incomplete proof
 

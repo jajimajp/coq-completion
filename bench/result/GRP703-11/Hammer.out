@@ -1,3 +1,17 @@
-File "./GRP703-11/Hammer.v", line 31, characters 22-24:
-Error: The reference x2 was not found in the current environment.
-
+Detecting provers...
+Eprover found
+Vampire found
+z3_tptp: symbol lookup error: /usr/local/lib/libz3.so: undefined symbol: pthread_create
+Z3 not found
+CVC4 found
+Extracting features...
+Running provers (8 threads)...
+Eprover (nbayes-64) succeeded
+- dependencies: Hammer.ax_f12, Hammer.ax_f04, Hammer.ax_f06, Hammer.ax_f05, Hammer.ax_f09
+Reconstructing the proof...
+Trying reconstruction batch 1...
+Tactic qauto succeeded.
+Replace the hammer tactic with:
+	qauto use: ax_f12, ax_f04, ax_f06, ax_f05, ax_f09.
+check
+     : mult x2 (mult x3 op_e) = mult (mult x2 x3) op_e

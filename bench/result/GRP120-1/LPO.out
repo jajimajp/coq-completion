@@ -1,3 +1,1 @@
-File "./GRP120-1/LPO.v", line 13, characters 26-27:
-Error: The reference a was not found in the current environment.
-
+toma --parsable "LPO.multiply (LPO.identity, LPO.a) -> LPO.a" /tmp/tmp.1qp4tEGFih

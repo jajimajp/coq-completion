@@ -1,3 +1,2 @@
-File "./GRP002-3/LPO.v", line 12, characters 0-115:
-Error: commutator already exists.
-
+toma --parsable "LPO.commutator (LPO.commutator (LPO.a, LPO.b), LPO.b) -> LPO.identity" /tmp/tmp.PeGh61l0AV
+Finish

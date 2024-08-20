@@ -7,11 +7,11 @@ CVC4 found
 Extracting features...
 Running provers (8 threads)...
 CVC4 (knn-256) succeeded
-- dependencies: Hammer.p03b_2, Hammer.monotony_glb2, Hammer.p03b_1, Hammer.associativity_of_glb, Hammer.symmetry_of_glb, Hammer.monotony_glb1
+- dependencies: Hammer.ax_p03b_2, Hammer.ax_monotony_glb2, Hammer.ax_p03b_1, Hammer.ax_associativity_of_glb, Hammer.ax_symmetry_of_glb, Hammer.ax_monotony_glb1
 Reconstructing the proof...
 Tactic scongruence succeeded.
 Replace the hammer tactic with:
-	scongruence use: p03b_2, monotony_glb2, p03b_1, associativity_of_glb, symmetry_of_glb, monotony_glb1.
+	scongruence use: ax_p03b_2, ax_monotony_glb2, ax_p03b_1, ax_associativity_of_glb, ax_symmetry_of_glb, ax_monotony_glb1.
 check
      : greatest_lower_bound (multiply a c) (multiply b d) = multiply a c
 Killed

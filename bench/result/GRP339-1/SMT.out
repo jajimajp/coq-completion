@@ -61,7 +61,7 @@ File "./GRP339-1/SMT.v", line 28, characters 2-6:
 Warning: Discarding the following lemma (unsupported):
 (forall X : Z, multiply identity X = X)
 [SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq14d51f.vtlog /tmp/verit_coq14d51f.smt2 2> /tmp/warnings_verit9575a3.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqb40327.vtlog /tmp/verit_coqb40327.smt2 2> /tmp/warnings_verit3799c7.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success
@@ -71,7 +71,7 @@ success
 unknown
 success
 success
-Verit = 0.00007
+Verit = 0.00009
 (set-option :print-success true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)

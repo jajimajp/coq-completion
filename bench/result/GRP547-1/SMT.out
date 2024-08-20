@@ -1,19 +1,77 @@
-File "./GRP547-1/SMT.v", line 6, characters 0-30:
+File "./GRP547-1/SMT.v", line 6, characters 0-16:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP547-1/SMT.v", line 7, characters 0-22:
+File "./GRP547-1/SMT.v", line 7, characters 0-16:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP547-1/SMT.v", line 8, characters 0-26:
+File "./GRP547-1/SMT.v", line 8, characters 0-16:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP547-1/SMT.v", line 9, characters 0-32:
+File "./GRP547-1/SMT.v", line 9, characters 0-30:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP547-1/SMT.v", line 10, characters 0-55:
-Error: identity already exists.
+File "./GRP547-1/SMT.v", line 10, characters 0-22:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP547-1/SMT.v", line 11, characters 0-26:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP547-1/SMT.v", line 12, characters 0-32:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP547-1/SMT.v", line 23, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, identity = divide A A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP547-1/SMT.v", line 23, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, inverse A = divide identity A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP547-1/SMT.v", line 23, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, multiply A B = divide A (divide identity B))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP547-1/SMT.v", line 23, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z,
+ divide (divide identity (divide A B)) (divide (divide B C) A) = C)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq9a6b27.vtlog /tmp/verit_coq9a6b27.smt2 2> /tmp/warnings_verit59f441.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00007
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_0 () Int)
+(declare-fun op_3 () Int)
+(declare-fun op_2 (Int Int ) Int)
+(declare-fun op_1 () Int)
+(assert (not (= (op_2 (op_2 op_0 op_1) op_3) (op_2 op_0 (op_2 op_1 op_3)))))
+(check-sat)
+(get-model)
+File "./GRP547-1/SMT.v", line 23, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+a3 := 0
+b3 := -1
+multiply := fun BOUND_VARIABLE_315 BOUND_VARIABLE_316 => if BOUND_VARIABLE_315 = 2 then if BOUND_VARIABLE_316 = 1 then -2 else -3 else if BOUND_VARIABLE_315 = -1 then if BOUND_VARIABLE_316 = 1 then 3 else -3 else if BOUND_VARIABLE_315 = 0 then if BOUND_VARIABLE_316 = -1 then 2 else -3 else -3
+c3 := 1
 

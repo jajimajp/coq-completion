@@ -7,10 +7,10 @@ CVC4 found
 Extracting features...
 Running provers (8 threads)...
 CVC4 (knn-256) succeeded
-- dependencies: Hammer.symmetry_of_glb, Hammer.lat3b_2, Hammer.left_identity, Hammer.monotony_glb2
+- dependencies: Hammer.ax_symmetry_of_glb, Hammer.ax_lat3b_2, Hammer.ax_left_identity, Hammer.ax_monotony_glb2
 Reconstructing the proof...
 Tactic scongruence succeeded.
 Replace the hammer tactic with:
-	scongruence use: symmetry_of_glb, lat3b_2, left_identity, monotony_glb2.
+	scongruence use: ax_symmetry_of_glb, ax_lat3b_2, ax_left_identity, ax_monotony_glb2.
 check
      : greatest_lower_bound a (multiply b a) = a

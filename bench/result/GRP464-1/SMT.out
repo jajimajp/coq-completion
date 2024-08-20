@@ -1,19 +1,68 @@
-File "./GRP464-1/SMT.v", line 6, characters 0-30:
+File "./GRP464-1/SMT.v", line 6, characters 0-16:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP464-1/SMT.v", line 7, characters 0-22:
+File "./GRP464-1/SMT.v", line 7, characters 0-30:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP464-1/SMT.v", line 8, characters 0-26:
+File "./GRP464-1/SMT.v", line 8, characters 0-22:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP464-1/SMT.v", line 9, characters 0-32:
+File "./GRP464-1/SMT.v", line 9, characters 0-26:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP464-1/SMT.v", line 10, characters 0-55:
-Error: identity already exists.
+File "./GRP464-1/SMT.v", line 10, characters 0-32:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP464-1/SMT.v", line 21, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, identity = divide A A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP464-1/SMT.v", line 21, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, inverse A = divide identity A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP464-1/SMT.v", line 21, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, multiply A B = divide A (divide identity B))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP464-1/SMT.v", line 21, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z,
+ divide A
+   (divide (divide (divide (divide A A) B) C) (divide (divide identity A) C)) =
+ B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq1432fc.vtlog /tmp/verit_coq1432fc.smt2 2> /tmp/warnings_verit6f2b44.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00006
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_0 () Int)
+(declare-fun op_2 (Int Int ) Int)
+(declare-fun op_1 () Int)
+(assert (not (= (op_2 op_0 op_1) op_1)))
+(check-sat)
+(get-model)
+File "./GRP464-1/SMT.v", line 21, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+identity := 0
+a2 := 1
+multiply := fun _ _ => -1
 

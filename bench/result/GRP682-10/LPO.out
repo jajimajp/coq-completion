@@ -1,3 +1,4 @@
-File "./GRP682-10/LPO.v", line 19, characters 15-17:
-Error: The reference x0 was not found in the current environment.
-
+toma --parsable "LPO.ld (LPO.ld (LPO.x0, LPO.x1), LPO.mult (LPO.ld (LPO.x0, LPO.x1), LPO.x2)) -> LPO.ld (LPO.x0, LPO.mult (LPO.x0, LPO.x2))" /tmp/tmp.nst3Bfcbkv
+Finish
+check
+     : ld (ld x0 x1) (mult (ld x0 x1) x2) = ld x0 (mult x0 x2)

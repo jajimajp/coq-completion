@@ -1,5 +1,5 @@
-toma --parsable "LPO.greatest_lower_bound (LPO.a, LPO.multiply (LPO.b, LPO.c)) -> LPO.greatest_lower_bound (LPO.a, LPO.c)" /tmp/tmp.0myMqcZVaq
-File "./GRP193-2/LPO.v", line 36, characters 0-445:
+toma --parsable "LPO.greatest_lower_bound (LPO.a, LPO.multiply (LPO.b, LPO.c)) -> LPO.greatest_lower_bound (LPO.a, LPO.c)" /tmp/tmp.HIb1bXeeuz
+File "./GRP193-2/LPO.v", line 36, characters 0-505:
 Error:
 Anomaly "Uncaught exception Failure("Could not prove goal by reduction.")."
 Please report at http://coq.inria.fr/bugs/.

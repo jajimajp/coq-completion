@@ -1,3 +1,17 @@
-File "./GRP682-10/Hammer.v", line 20, characters 24-26:
-Error: The reference x0 was not found in the current environment.
-
+Detecting provers...
+Eprover found
+Vampire found
+z3_tptp: symbol lookup error: /usr/local/lib/libz3.so: undefined symbol: pthread_create
+Z3 not found
+CVC4 found
+Extracting features...
+Running provers (8 threads)...
+CVC4 (knn-256) succeeded
+- dependencies: Hammer.ax_f04, Hammer.ax_f01, Hammer.ax_f05, Hammer.ax_f03, Hammer.ax_f02, Hammer.ax_f07
+Reconstructing the proof...
+Tactic scongruence succeeded.
+Replace the hammer tactic with:
+	scongruence use: ax_f04, ax_f01, ax_f05, ax_f03, ax_f02, ax_f07.
+check
+     : ld (ld x0 x1) (mult (ld x0 x1) x2) = ld x0 (mult x0 x2)
+Killed

@@ -1,3 +1,8 @@
-File "./GRP683-11/Hammer.v", line 20, characters 32-34:
-Error: The reference x3 was not found in the current environment.
-
+Detecting provers...
+Eprover found
+Vampire found
+z3_tptp: symbol lookup error: /usr/local/lib/libz3.so: undefined symbol: pthread_create
+Z3 not found
+CVC4 found
+Extracting features...
+Running provers (8 threads)...

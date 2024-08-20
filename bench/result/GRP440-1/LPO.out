@@ -1,3 +1,14 @@
-File "./GRP440-1/LPO.v", line 12, characters 36-38:
-Error: The reference b2 was not found in the current environment.
+toma --parsable "LPO.multiply (LPO.multiply (LPO.inverse (LPO.b2), LPO.b2), LPO.a2) -> LPO.a2" /tmp/tmp.g38QkTaoOq
+File "./GRP440-1/LPO.v", line 13, characters 0-111:
+Warning:
+Solve Obligations tactic returned error: Anomaly
+                                         "Uncaught exception Failure("fail: Too many pairs.")."
+Please report at http://coq.inria.fr/bugs/.
+This will become an error in the future
+[solve_obligation_error,tactics,default]
+File "./GRP440-1/LPO.v", line 13, characters 0-111:
+Error:
+Anomaly
+"Uncaught exception Failure("Could not prove goal by crit: t_hint_148")."
+Please report at http://coq.inria.fr/bugs/.
 

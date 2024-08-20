@@ -1,3 +1,4 @@
-File "./GRP155-1/LPO.v", line 32, characters 41-42:
-Error: The reference c was not found in the current environment.
-
+toma --parsable "LPO.greatest_lower_bound (LPO.multiply (LPO.a, LPO.c), LPO.multiply (LPO.b, LPO.c)) -> LPO.multiply (LPO.a, LPO.c)" /tmp/tmp.LBUnRKvQu7
+Finish
+check
+     : greatest_lower_bound (multiply a c) (multiply b c) = multiply a c

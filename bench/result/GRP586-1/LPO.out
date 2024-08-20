@@ -1,3 +1,14 @@
-File "./GRP586-1/LPO.v", line 10, characters 0-80:
-Error: multiply already exists.
+toma --parsable "LPO.multiply (LPO.multiply (LPO.inverse (LPO.b2), LPO.b2), LPO.a2) -> LPO.a2" /tmp/tmp.n1Nh6PrLER
+File "./GRP586-1/LPO.v", line 15, characters 0-137:
+Warning:
+Solve Obligations tactic returned error: Anomaly
+                                         "Uncaught exception Failure("fail: Too many pairs.")."
+Please report at http://coq.inria.fr/bugs/.
+This will become an error in the future
+[solve_obligation_error,tactics,default]
+File "./GRP586-1/LPO.v", line 15, characters 0-137:
+Error:
+Anomaly
+"Uncaught exception Failure("Could not prove goal by crit: t_hint_7")."
+Please report at http://coq.inria.fr/bugs/.
 

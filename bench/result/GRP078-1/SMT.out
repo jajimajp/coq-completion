@@ -1,19 +1,88 @@
-File "./GRP078-1/SMT.v", line 6, characters 0-37:
+File "./GRP078-1/SMT.v", line 6, characters 0-16:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP078-1/SMT.v", line 7, characters 0-22:
+File "./GRP078-1/SMT.v", line 7, characters 0-16:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP078-1/SMT.v", line 8, characters 0-26:
+File "./GRP078-1/SMT.v", line 8, characters 0-16:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP078-1/SMT.v", line 9, characters 0-32:
+File "./GRP078-1/SMT.v", line 9, characters 0-16:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP078-1/SMT.v", line 10, characters 0-72:
-Error: identity already exists.
+File "./GRP078-1/SMT.v", line 10, characters 0-16:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP078-1/SMT.v", line 11, characters 0-37:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP078-1/SMT.v", line 12, characters 0-22:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP078-1/SMT.v", line 13, characters 0-26:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP078-1/SMT.v", line 14, characters 0-32:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP078-1/SMT.v", line 25, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, identity = double_divide X (inverse X))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP078-1/SMT.v", line 25, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, inverse X = double_divide X identity)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP078-1/SMT.v", line 25, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y : Z, multiply X Y = double_divide (double_divide Y X) identity)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP078-1/SMT.v", line 25, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z,
+ double_divide (double_divide identity X)
+   (double_divide identity
+      (double_divide (double_divide (double_divide X Y) identity)
+         (double_divide Z0 Y))) = Z0)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqd65063.vtlog /tmp/verit_coqd65063.smt2 2> /tmp/warnings_verit9727e8.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00007
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_3 () Int)
+(declare-fun op_0 () Int)
+(declare-fun op_1 (Int ) Int)
+(declare-fun op_2 (Int Int ) Int)
+(assert (not (= (op_2 (op_1 op_0) op_0) op_3)))
+(check-sat)
+(get-model)
+File "./GRP078-1/SMT.v", line 25, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+a1 := 1
+inverse := fun _ => -1
+multiply := fun _ _ => 2
+identity := 0
 

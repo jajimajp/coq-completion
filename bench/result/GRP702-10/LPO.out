@@ -1,3 +1,6 @@
-File "./GRP702-10/LPO.v", line 30, characters 24-26:
-Error: The reference x0 was not found in the current environment.
+toma --parsable "LPO.mult (LPO.op_d, LPO.mult (LPO.x0, LPO.x1)) -> LPO.mult (LPO.mult (LPO.op_d, LPO.x0), LPO.x1)" /tmp/tmp.1BxU35VrxV
+File "./GRP702-10/LPO.v", line 31, characters 0-211:
+Error:
+Anomaly "Uncaught exception Failure("Could not prove goal by reduction.")."
+Please report at http://coq.inria.fr/bugs/.
 

@@ -1,3 +1,16 @@
-File "./GRP748-2/Hammer.v", line 26, characters 22-23:
-Error: The reference a was not found in the current environment.
-
+Detecting provers...
+Eprover found
+Vampire found
+z3_tptp: symbol lookup error: /usr/local/lib/libz3.so: undefined symbol: pthread_create
+Z3 not found
+CVC4 found
+Extracting features...
+Running provers (8 threads)...
+CVC4 (knn-256) succeeded
+- dependencies: Hammer.ax_f07, Hammer.ax_f11
+Reconstructing the proof...
+Tactic scongruence succeeded.
+Replace the hammer tactic with:
+	scongruence use: ax_f07, ax_f11.
+check
+     : mult a (mult b (mult a c)) = mult (mult (mult a b) a) c

@@ -18,6 +18,77 @@ File "./GRP665-11/SMT.v", line 10, characters 0-18:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP665-11/SMT.v", line 24, characters 28-30:
-Error: The reference x0 was not found in the current environment.
+File "./GRP665-11/SMT.v", line 11, characters 0-16:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP665-11/SMT.v", line 12, characters 0-16:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP665-11/SMT.v", line 28, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, mult op_c A = mult A op_c)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP665-11/SMT.v", line 28, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z, mult (mult A B) C = mult (mult A C) (ld C (mult B C)))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP665-11/SMT.v", line 28, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z, mult A (mult B C) = mult (rd (mult A B) A) (mult A C))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP665-11/SMT.v", line 28, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, mult unit A = A) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP665-11/SMT.v", line 28, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, mult A unit = A) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP665-11/SMT.v", line 28, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, rd (mult A B) B = A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP665-11/SMT.v", line 28, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, mult (rd A B) B = A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP665-11/SMT.v", line 28, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, ld A (mult A B) = B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP665-11/SMT.v", line 28, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, mult A (ld A B) = B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqa3555e.vtlog /tmp/verit_coqa3555e.smt2 2> /tmp/warnings_verit143ba6.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00007
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_2 (Int Int ) Int)
+(declare-fun op_1 () Int)
+(declare-fun op_3 () Int)
+(declare-fun op_0 () Int)
+(assert (not (= (op_2 (op_2 op_0 op_1) op_3) (op_2 op_0 (op_2 op_1 op_3)))))
+(check-sat)
+(get-model)
+File "./GRP665-11/SMT.v", line 28, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+x0 := -1
+op_c := 0
+mult := fun BOUND_VARIABLE_314 BOUND_VARIABLE_315 => if BOUND_VARIABLE_314 = 2 then if BOUND_VARIABLE_315 = 1 then -2 else -3 else if BOUND_VARIABLE_314 = -1 then if BOUND_VARIABLE_315 = 0 then 2 else -3 else if BOUND_VARIABLE_314 = 0 then if BOUND_VARIABLE_315 = 1 then 3 else -3 else -3
+x1 := 1
 

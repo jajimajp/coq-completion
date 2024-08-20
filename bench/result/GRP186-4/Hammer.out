@@ -1,3 +1,17 @@
-File "./GRP186-4/Hammer.v", line 33, characters 45-46:
-Error: The reference a was not found in the current environment.
-
+Detecting provers...
+Eprover found
+Vampire found
+z3_tptp: symbol lookup error: /usr/local/lib/libz3.so: undefined symbol: pthread_create
+Z3 not found
+CVC4 found
+Extracting features...
+Running provers (8 threads)...
+CVC4 (knn-256) succeeded
+- dependencies: Hammer.ax_left_inverse, Hammer.ax_p23x_2, Hammer.ax_symmetry_of_lub, Hammer.ax_monotony_lub1
+Reconstructing the proof...
+Tactic scongruence succeeded.
+Replace the hammer tactic with:
+	scongruence use: ax_left_inverse, ax_p23x_2, ax_symmetry_of_lub, ax_monotony_lub1.
+check
+     : least_upper_bound (multiply a b) identity =
+       multiply a (least_upper_bound (inverse a) b)

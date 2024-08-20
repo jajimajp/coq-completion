@@ -1,3 +1,18 @@
-File "./GRP176-2/Hammer.v", line 31, characters 26-27:
-Error: The reference c was not found in the current environment.
-
+Detecting provers...
+Eprover found
+Vampire found
+z3_tptp: symbol lookup error: /usr/local/lib/libz3.so: undefined symbol: pthread_create
+Z3 not found
+CVC4 found
+Extracting features...
+Running provers (8 threads)...
+CVC4 (knn-256) succeeded
+- dependencies: Hammer.ax_monotony_lub2, Hammer.ax_monotony_lub1
+Reconstructing the proof...
+Tactic scongruence succeeded.
+Replace the hammer tactic with:
+	scongruence use: ax_monotony_lub2, ax_monotony_lub1.
+check
+     : multiply c (multiply (least_upper_bound a b) d) =
+       least_upper_bound (multiply c (multiply a d))
+         (multiply c (multiply b d))

@@ -1,3 +1,1 @@
-File "./GRP167-3/LPO.v", line 29, characters 7-8:
-Error: The reference a was not found in the current environment.
-
+toma --parsable "LPO.a -> LPO.multiply (LPO.least_upper_bound (LPO.a, LPO.identity), LPO.greatest_lower_bound (LPO.a, LPO.identity))" /tmp/tmp.EpdxrpKEwO

@@ -1,7 +1,108 @@
-File "./GRP112-10/SMT.v", line 6, characters 0-32:
+File "./GRP112-10/SMT.v", line 6, characters 0-16:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP112-10/SMT.v", line 12, characters 17-22:
-Error: The reference tuple was not found in the current environment.
+File "./GRP112-10/SMT.v", line 7, characters 0-16:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP112-10/SMT.v", line 8, characters 0-16:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP112-10/SMT.v", line 9, characters 0-16:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP112-10/SMT.v", line 10, characters 0-16:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP112-10/SMT.v", line 11, characters 0-16:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP112-10/SMT.v", line 12, characters 0-16:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP112-10/SMT.v", line 13, characters 0-16:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP112-10/SMT.v", line 14, characters 0-16:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP112-10/SMT.v", line 15, characters 0-26:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP112-10/SMT.v", line 16, characters 0-32:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP112-10/SMT.v", line 17, characters 0-39:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP112-10/SMT.v", line 25, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z, multiply (multiply (multiply X Y) Z0) (multiply X Z0) = Y)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqcb7d6f.vtlog /tmp/verit_coqcb7d6f.smt2 2> /tmp/warnings_verit54193e.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00007
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_4 () Int)
+(declare-fun op_0 () Int)
+(declare-fun op_8 () Int)
+(declare-fun op_7 () Int)
+(declare-fun op_9 (Int Int Int Int ) Int)
+(declare-fun op_6 () Int)
+(declare-fun op_1 (Int ) Int)
+(declare-fun op_2 (Int Int ) Int)
+(declare-fun op_5 () Int)
+(declare-fun op_3 () Int)
+(declare-fun op_10 () Int)
+(declare-fun op_11 () Int)
+(assert (not (= (op_9 (op_2 (op_2 (op_1 op_0) op_0) op_3) (op_2 (op_2 op_4 op_5) op_6) (op_2 (op_1 op_7) op_7) (op_2 op_8 op_8)) (op_9 op_3 (op_2 op_4 (op_2 op_5 op_6)) (op_2 (op_1 op_10) op_10) (op_2 op_11 op_11)))))
+(check-sat)
+(get-model)
+File "./GRP112-10/SMT.v", line 25, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+b2 := 1
+inverse := fun BOUND_VARIABLE_490 => if BOUND_VARIABLE_490 = 2 then -7 else if BOUND_VARIABLE_490 = 1 then 5 else -10
+multiply := fun BOUND_VARIABLE_533 BOUND_VARIABLE_534 => if BOUND_VARIABLE_533 = -10 then if BOUND_VARIABLE_534 = 4 then 11 else -11 else if BOUND_VARIABLE_533 = -7 then if BOUND_VARIABLE_534 = 2 then 8 else -11 else if BOUND_VARIABLE_533 = -6 then if BOUND_VARIABLE_534 = -2 then 7 else -11 else if BOUND_VARIABLE_533 = -5 then if BOUND_VARIABLE_534 = -3 then 6 else -11 else if BOUND_VARIABLE_533 = 5 then if BOUND_VARIABLE_534 = 1 then -5 else -11 else if BOUND_VARIABLE_533 = 3 then if BOUND_VARIABLE_534 = -2 then -9 else -11 else if BOUND_VARIABLE_533 = -1 then if BOUND_VARIABLE_534 = -1 then -8 else -11 else if BOUND_VARIABLE_533 = 0 then if BOUND_VARIABLE_534 = -9 then 10 else if BOUND_VARIABLE_534 = 3 then -6 else -11 else -11
+a2 := -3
+a3 := 0
+b3 := 3
+c3 := -2
+a1 := 2
+a4 := -1
+tuple := fun BOUND_VARIABLE_452 BOUND_VARIABLE_453 BOUND_VARIABLE_454 BOUND_VARIABLE_455 => if BOUND_VARIABLE_452 = 6 then if BOUND_VARIABLE_453 = 7 then if BOUND_VARIABLE_454 = 8 then if BOUND_VARIABLE_455 = -8 then 9 else 12 else 12 else 12 else 12
+b1 := 4
+b4 := -4
 

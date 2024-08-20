@@ -1,3 +1,6 @@
-File "./GRP540-1/LPO.v", line 11, characters 0-55:
-Error: identity already exists.
+toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.jOOtNfW8lA
+File "./GRP540-1/LPO.v", line 18, characters 0-146:
+Error:
+Anomaly "Uncaught exception Failure("Could not prove goal by reduction.")."
+Please report at http://coq.inria.fr/bugs/.
 

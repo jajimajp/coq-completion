@@ -1,3 +1,1 @@
-File "./GRP024-5/LPO.v", line 18, characters 17-18:
-Error: The reference a was not found in the current environment.
-
+toma --parsable "LPO.multiply (LPO.a, LPO.commutator (LPO.b, LPO.c)) -> LPO.multiply (LPO.commutator (LPO.b, LPO.c), LPO.a)" /tmp/tmp.D5hSZqxBje

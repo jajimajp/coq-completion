@@ -1,3 +1,4 @@
-File "./GRP012-4/LPO.v", line 17, characters 26-27:
-Error: The reference a was not found in the current environment.
-
+toma --parsable "LPO.inverse (LPO.multiply (LPO.a, LPO.b)) -> LPO.multiply (LPO.inverse (LPO.b), LPO.inverse (LPO.a))" /tmp/tmp.UqaUfMfgFo
+Finish
+check
+     : inverse (multiply a b) = multiply (inverse b) (inverse a)

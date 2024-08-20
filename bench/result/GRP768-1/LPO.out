@@ -1,3 +1,1 @@
-File "./GRP768-1/LPO.v", line 36, characters 15-17:
-Error: The reference x0 was not found in the current environment.
-
+toma --parsable "LPO.t (LPO.eta (LPO.x0), LPO.product (LPO.x1, LPO.x2)) -> LPO.product (LPO.t (LPO.eta (LPO.x0), LPO.x1), LPO.t (LPO.eta (LPO.x0), LPO.x2))" /tmp/tmp.rkMGZocFMv

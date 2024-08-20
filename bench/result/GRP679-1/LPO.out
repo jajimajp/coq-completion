@@ -1,3 +1,6 @@
-File "./GRP679-1/LPO.v", line 22, characters 30-31:
-Error: The reference a was not found in the current environment.
+toma --parsable "LPO.mult (LPO.mult (LPO.op_c, LPO.op_c), LPO.a) -> LPO.mult (LPO.a, LPO.mult (LPO.op_c, LPO.op_c))" /tmp/tmp.4Fk7Gb2ToU
+Finish
+File "./GRP679-1/LPO.v", line 29, characters 2-13:
+Error: Unable to unify "mult a (mult op_c op_c)" with
+ "mult op_c (mult op_c a)".
 

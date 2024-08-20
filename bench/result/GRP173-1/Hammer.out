@@ -7,10 +7,10 @@ CVC4 found
 Extracting features...
 Running provers (8 threads)...
 CVC4 (knn-256) succeeded
-- dependencies: Hammer.left_inverse, Hammer.p05a_1, Hammer.left_identity, Hammer.p05a_2, Hammer.symmetry_of_lub, Hammer.monotony_lub2
+- dependencies: Hammer.ax_left_inverse, Hammer.ax_p05a_1, Hammer.ax_left_identity, Hammer.ax_p05a_2, Hammer.ax_symmetry_of_lub, Hammer.ax_monotony_lub2
 Reconstructing the proof...
 Tactic scongruence succeeded.
 Replace the hammer tactic with:
-	scongruence use: left_inverse, p05a_1, left_identity, p05a_2, symmetry_of_lub, monotony_lub2.
+	scongruence use: ax_left_inverse, ax_p05a_1, ax_left_identity, ax_p05a_2, ax_symmetry_of_lub, ax_monotony_lub2.
 check
      : identity = a

@@ -1,3 +1,1 @@
-File "./GRP684-1/LPO.v", line 19, characters 17-18:
-Error: The reference a was not found in the current environment.
-
+toma --parsable "LPO.rd (LPO.mult (LPO.a, LPO.mult (LPO.b, LPO.c)), LPO.mult (LPO.b, LPO.c)) -> LPO.rd (LPO.mult (LPO.a, LPO.c), LPO.c)" /tmp/tmp.vH4OvHtk39

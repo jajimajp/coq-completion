@@ -1,5 +1,5 @@
-toma --parsable "LPO.multiply (LPO.sk_c1, LPO.sk_c7) -> LPO.sk_c6" /tmp/tmp.4DyOOkvPF8
-File "./GRP274-1/LPO.v", line 21, characters 0-166:
+toma --parsable "LPO.multiply (LPO.sk_c1, LPO.sk_c7) -> LPO.sk_c6" /tmp/tmp.OjcUCGi9fY
+File "./GRP274-1/LPO.v", line 21, characters 0-175:
 Error:
 Anomaly
 "Uncaught exception Failure("expect: Unexpected output Completed, expected Success")."

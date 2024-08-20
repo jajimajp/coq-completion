@@ -1,3 +1,8 @@
-File "./GRP485-1/Hammer.v", line 11, characters 0-72:
-Error: identity already exists.
-
+Detecting provers...
+Eprover found
+Vampire found
+z3_tptp: symbol lookup error: /usr/local/lib/libz3.so: undefined symbol: pthread_create
+Z3 not found
+CVC4 found
+Extracting features...
+Running provers (8 threads)...

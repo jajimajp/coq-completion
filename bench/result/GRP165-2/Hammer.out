@@ -6,11 +6,11 @@ Z3 not found
 CVC4 found
 Extracting features...
 Running provers (8 threads)...
-CVC4 (knn-64) succeeded
-- dependencies: Hammer.monotony_glb2, Hammer.symmetry_of_glb, Hammer.lat1b_1, Hammer.left_identity
+Eprover (nbayes-64) succeeded
+- dependencies: Hammer.ax_monotony_glb2, Hammer.ax_symmetry_of_glb, Hammer.ax_left_identity, Hammer.ax_lat1b_1
 Reconstructing the proof...
 Tactic scongruence succeeded.
 Replace the hammer tactic with:
-	scongruence use: monotony_glb2, symmetry_of_glb, lat1b_1, left_identity.
+	scongruence use: ax_monotony_glb2, ax_symmetry_of_glb, ax_left_identity, ax_lat1b_1.
 check
      : greatest_lower_bound a (multiply a a) = a

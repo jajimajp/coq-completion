@@ -1,3 +1,1 @@
-File "./GRP710-11/LPO.v", line 17, characters 31-33:
-Error: The reference x4 was not found in the current environment.
-
+toma --parsable "LPO.mult (X5, LPO.x4) -> LPO.x3" /tmp/tmp.p4vovPzH69

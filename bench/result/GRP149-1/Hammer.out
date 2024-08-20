@@ -7,10 +7,10 @@ CVC4 found
 Extracting features...
 Running provers (8 threads)...
 CVC4 (knn-256) succeeded
-- dependencies: Hammer.ax_lub1d_1, Hammer.symmetry_of_lub, Hammer.ax_lub1d_2, Hammer.lub_absorbtion, Hammer.symmetry_of_glb, Hammer.associativity_of_lub
+- dependencies: Hammer.ax_ax_lub1d_1, Hammer.ax_symmetry_of_lub, Hammer.ax_ax_lub1d_2, Hammer.ax_lub_absorbtion, Hammer.ax_symmetry_of_glb, Hammer.ax_associativity_of_lub
 Reconstructing the proof...
 Tactic scongruence succeeded.
 Replace the hammer tactic with:
-	scongruence use: ax_lub1d_1, symmetry_of_lub, ax_lub1d_2, lub_absorbtion, symmetry_of_glb, associativity_of_lub.
+	scongruence use: ax_ax_lub1d_1, ax_symmetry_of_lub, ax_ax_lub1d_2, ax_lub_absorbtion, ax_symmetry_of_glb, ax_associativity_of_lub.
 check
      : least_upper_bound (least_upper_bound a b) c = c

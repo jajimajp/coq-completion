@@ -1,3 +1,1 @@
-File "./GRP700-10/LPO.v", line 21, characters 23-28:
-Error: The reference tuple was not found in the current environment.
-
+toma --parsable "LPO.tuple (LPO.mult (X1, LPO.x0), LPO.mult (LPO.x0, X1)) -> LPO.tuple (LPO.unit, LPO.unit)" /tmp/tmp.IhVDSi4vCk

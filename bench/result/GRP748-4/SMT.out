@@ -1,23 +1,104 @@
-File "./GRP748-4/SMT.v", line 6, characters 0-20:
+File "./GRP748-4/SMT.v", line 6, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP748-4/SMT.v", line 7, characters 0-26:
+File "./GRP748-4/SMT.v", line 7, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP748-4/SMT.v", line 8, characters 0-28:
+File "./GRP748-4/SMT.v", line 8, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP748-4/SMT.v", line 9, characters 0-26:
+File "./GRP748-4/SMT.v", line 9, characters 0-20:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP748-4/SMT.v", line 10, characters 0-18:
+File "./GRP748-4/SMT.v", line 10, characters 0-26:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP748-4/SMT.v", line 26, characters 28-29:
-Error: The reference a was not found in the current environment.
+File "./GRP748-4/SMT.v", line 11, characters 0-28:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP748-4/SMT.v", line 12, characters 0-26:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP748-4/SMT.v", line 13, characters 0-18:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP748-4/SMT.v", line 31, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, mult A B = mult B A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP748-4/SMT.v", line 31, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, mult (i A) A = unit) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP748-4/SMT.v", line 31, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, mult A (i A) = unit) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP748-4/SMT.v", line 31, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, mult (mult A B) (i B) = A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP748-4/SMT.v", line 31, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z, mult (mult (mult A B) C) B = mult A (mult (mult B C) B))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP748-4/SMT.v", line 31, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, mult unit A = A) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP748-4/SMT.v", line 31, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, mult A unit = A) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP748-4/SMT.v", line 31, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, rd (mult A B) B = A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP748-4/SMT.v", line 31, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, mult (rd A B) B = A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP748-4/SMT.v", line 31, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, ld A (mult A B) = B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP748-4/SMT.v", line 31, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, mult A (ld A B) = B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq1d8a29.vtlog /tmp/verit_coq1d8a29.smt2 2> /tmp/warnings_verit8d1fd5.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00007
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_3 () Int)
+(declare-fun op_0 () Int)
+(declare-fun op_2 (Int Int ) Int)
+(declare-fun op_1 () Int)
+(assert (not (= (op_2 (op_2 op_0 op_1) (op_2 op_3 op_0)) (op_2 (op_2 op_0 (op_2 op_1 op_3)) op_0))))
+(check-sat)
+(get-model)
+File "./GRP748-4/SMT.v", line 31, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+a := 1
+b := -1
+mult := fun BOUND_VARIABLE_339 BOUND_VARIABLE_340 => if BOUND_VARIABLE_339 = 2 then if BOUND_VARIABLE_340 = -2 then 3 else -4 else if BOUND_VARIABLE_339 = -1 then if BOUND_VARIABLE_340 = 0 then -3 else -4 else if BOUND_VARIABLE_339 = 1 then if BOUND_VARIABLE_340 = -3 then 4 else if BOUND_VARIABLE_340 = -1 then 2 else -4 else if BOUND_VARIABLE_339 = 0 then if BOUND_VARIABLE_340 = 1 then -2 else -4 else -4
+c := 0
 

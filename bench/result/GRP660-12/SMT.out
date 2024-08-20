@@ -10,6 +10,63 @@ File "./GRP660-12/SMT.v", line 8, characters 0-26:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP660-12/SMT.v", line 18, characters 26-28:
-Error: The reference x1 was not found in the current environment.
+File "./GRP660-12/SMT.v", line 9, characters 0-16:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP660-12/SMT.v", line 10, characters 0-16:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP660-12/SMT.v", line 22, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z, mult (mult (mult A B) C) A = mult A (mult B (mult C A)))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP660-12/SMT.v", line 22, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, rd (mult A B) B = A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP660-12/SMT.v", line 22, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, mult (rd A B) B = A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP660-12/SMT.v", line 22, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, ld A (mult A B) = B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP660-12/SMT.v", line 22, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, mult A (ld A B) = B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq81ec25.vtlog /tmp/verit_coq81ec25.smt2 2> /tmp/warnings_veritbbe63e.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00006
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_1 (Int Int ) Int)
+(declare-fun op_3 (Int Int ) Int)
+(declare-fun op_0 () Int)
+(declare-fun op_2 () Int)
+(assert (not (= (op_3 (op_1 op_0 op_0) op_2) op_2)))
+(check-sat)
+(get-model)
+File "./GRP660-12/SMT.v", line 22, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+x1 := 0
+rd := fun _ _ => -1
+x0 := 1
+mult := fun _ _ => 2
 

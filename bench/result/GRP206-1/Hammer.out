@@ -1,3 +1,17 @@
-File "./GRP206-1/Hammer.v", line 14, characters 0-76:
-Error: left_inverse already exists.
-
+Detecting provers...
+Eprover found
+Vampire found
+z3_tptp: symbol lookup error: /usr/local/lib/libz3.so: undefined symbol: pthread_create
+Z3 not found
+CVC4 found
+Extracting features...
+Running provers (8 threads)...
+CVC4 (knn-256) succeeded
+- dependencies: Hammer.ax_right_identity, Hammer.ax_left_identity, Hammer.ax_moufang4
+Reconstructing the proof...
+Tactic scongruence succeeded.
+Replace the hammer tactic with:
+	scongruence use: ax_right_identity, ax_left_identity, ax_moufang4.
+check
+     : multiply (multiply a (multiply b c)) a =
+       multiply (multiply a b) (multiply c a)

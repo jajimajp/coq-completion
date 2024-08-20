@@ -1,3 +1,6 @@
-File "./GRP560-1/LPO.v", line 10, characters 0-73:
-Error: multiply already exists.
+toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.CIBsUaAtyt
+File "./GRP560-1/LPO.v", line 15, characters 0-114:
+Error:
+Anomaly "Uncaught exception Failure("Could not prove goal by reduction.")."
+Please report at http://coq.inria.fr/bugs/.
 

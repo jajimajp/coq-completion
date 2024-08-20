@@ -1,3 +1,1 @@
-File "./GRP179-1/LPO.v", line 29, characters 35-36:
-Error: The reference a was not found in the current environment.
-
+toma --parsable "LPO.inverse (LPO.least_upper_bound (LPO.a, LPO.b)) -> LPO.greatest_lower_bound (LPO.inverse (LPO.a), LPO.inverse (LPO.b))" /tmp/tmp.K8FmDRd1yg

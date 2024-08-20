@@ -1,3 +1,8 @@
-File "./GRP049-1/Hammer.v", line 13, characters 35-37:
-Error: The reference a1 was not found in the current environment.
-
+Detecting provers...
+Eprover found
+Vampire found
+z3_tptp: symbol lookup error: /usr/local/lib/libz3.so: undefined symbol: pthread_create
+Z3 not found
+CVC4 found
+Extracting features...
+Running provers (8 threads)...

@@ -1,3 +1,5 @@
-File "./GRP192-1/LPO.v", line 30, characters 17-18:
-Error: The reference a was not found in the current environment.
+toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.0bTQCmCIKz
+Finish
+File "./GRP192-1/LPO.v", line 38, characters 2-13:
+Error: Unable to unify "multiply b a" with "identity".
 

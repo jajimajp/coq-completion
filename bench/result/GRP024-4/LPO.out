@@ -1,3 +1,7 @@
-File "./GRP024-4/LPO.v", line 17, characters 0-115:
-Error: commutator already exists.
+toma --parsable "LPO.commutator (LPO.commutator (LPO.a, LPO.b), LPO.c) -> LPO.commutator (LPO.a, LPO.commutator (LPO.b, LPO.c))" /tmp/tmp.TWccEDThnf
+File "./GRP024-4/LPO.v", line 24, characters 0-240:
+Error:
+Anomaly
+"Uncaught exception Failure("expect: Unexpected output Completed, expected Success")."
+Please report at http://coq.inria.fr/bugs/.
 

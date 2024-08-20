@@ -1,3 +1,1 @@
-File "./GRP207-1/LPO.v", line 12, characters 17-18:
-Error: The reference x was not found in the current environment.
-
+toma --parsable "LPO.multiply (LPO.x, LPO.inverse (LPO.multiply (LPO.y, LPO.multiply (LPO.multiply (LPO.multiply (LPO.z, LPO.inverse (LPO.z)), LPO.inverse (LPO.multiply (LPO.u, LPO.y))), LPO.x)))) -> LPO.u" /tmp/tmp.lIK0YvUKmN

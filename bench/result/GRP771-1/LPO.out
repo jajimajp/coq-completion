@@ -1,3 +1,1 @@
-File "./GRP771-1/LPO.v", line 43, characters 25-27:
-Error: The reference x0 was not found in the current environment.
-
+toma --parsable "LPO.product (LPO.product (LPO.x0, LPO.x1), LPO.c (LPO.x2, LPO.x3)) -> LPO.product (LPO.x0, LPO.product (LPO.x1, LPO.c (LPO.x2, LPO.x3)))" /tmp/tmp.60vLq7nVLX

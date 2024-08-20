@@ -1,3 +1,1 @@
-File "./GRP167-5/LPO.v", line 36, characters 7-8:
-Error: The reference a was not found in the current environment.
-
+toma --parsable "LPO.a -> LPO.multiply (LPO.positive_part (LPO.a), LPO.negative_part (LPO.a))" /tmp/tmp.iDejo2CmJK

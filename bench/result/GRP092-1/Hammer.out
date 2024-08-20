@@ -1,3 +1,22 @@
-File "./GRP092-1/Hammer.v", line 11, characters 0-55:
-Error: identity already exists.
+Detecting provers...
+Eprover found
+Vampire found
+z3_tptp: symbol lookup error: /usr/local/lib/libz3.so: undefined symbol: pthread_create
+Z3 not found
+CVC4 found
+Extracting features...
+Running provers (8 threads)...
+Eprover (nbayes-64) succeeded
+- dependencies: Hammer.ax_inverse, Hammer.ax_identity, Hammer.ax_multiply
+Reconstructing the proof...
+Trying reconstruction batch 1...
+Tactic hauto succeeded.
+Replace the hammer tactic with:
+	hauto use: ax_inverse, ax_identity, ax_multiply.
+File "./GRP092-1/Hammer.v", line 30, characters 0-4:
+Error:  (in proof check): Attempt to save an incomplete proof
 
+Killed
+Killed
+Killed
+Killed

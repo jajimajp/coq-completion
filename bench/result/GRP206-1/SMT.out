@@ -1,27 +1,106 @@
-File "./GRP206-1/SMT.v", line 6, characters 0-22:
+File "./GRP206-1/SMT.v", line 6, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP206-1/SMT.v", line 7, characters 0-37:
+File "./GRP206-1/SMT.v", line 7, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP206-1/SMT.v", line 8, characters 0-31:
+File "./GRP206-1/SMT.v", line 8, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP206-1/SMT.v", line 9, characters 0-32:
+File "./GRP206-1/SMT.v", line 9, characters 0-22:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP206-1/SMT.v", line 10, characters 0-38:
+File "./GRP206-1/SMT.v", line 10, characters 0-37:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP206-1/SMT.v", line 11, characters 0-32:
+File "./GRP206-1/SMT.v", line 11, characters 0-31:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP206-1/SMT.v", line 13, characters 0-76:
-Error: left_inverse already exists.
+File "./GRP206-1/SMT.v", line 12, characters 0-32:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP206-1/SMT.v", line 13, characters 0-38:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP206-1/SMT.v", line 14, characters 0-32:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP206-1/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z,
+ multiply X (multiply (multiply Y Z0) X) =
+ multiply (multiply X Y) (multiply Z0 X))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP206-1/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, multiply (left_inverse X) X = identity)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP206-1/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, multiply X (right_inverse X) = identity)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP206-1/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y : Z, right_division (multiply X Y) Y = X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP206-1/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y : Z, multiply (right_division X Y) Y = X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP206-1/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y : Z, left_division X (multiply X Y) = Y)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP206-1/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y : Z, multiply X (left_division X Y) = Y)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP206-1/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, multiply X identity = X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP206-1/SMT.v", line 30, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, multiply identity X = X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqc6439e.vtlog /tmp/verit_coqc6439e.smt2 2> /tmp/warnings_verit625ec6.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00006
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_2 () Int)
+(declare-fun op_0 () Int)
+(declare-fun op_1 () Int)
+(declare-fun op_3 (Int Int ) Int)
+(assert (not (= (op_3 (op_3 op_0 (op_3 op_1 op_2)) op_0) (op_3 (op_3 op_0 op_1) (op_3 op_2 op_0)))))
+(check-sat)
+(get-model)
+File "./GRP206-1/SMT.v", line 30, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+a := 1
+b := -1
+c := 0
+multiply := fun BOUND_VARIABLE_336 BOUND_VARIABLE_337 => if BOUND_VARIABLE_336 = -2 then if BOUND_VARIABLE_337 = 1 then 3 else -4 else if BOUND_VARIABLE_336 = -1 then if BOUND_VARIABLE_337 = 0 then 2 else -4 else if BOUND_VARIABLE_336 = 1 then if BOUND_VARIABLE_337 = 2 then -2 else if BOUND_VARIABLE_337 = -1 then -3 else -4 else if BOUND_VARIABLE_336 = 0 then if BOUND_VARIABLE_337 = 1 then 4 else -4 else -4
 

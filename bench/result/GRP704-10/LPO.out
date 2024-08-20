@@ -1,3 +1,6 @@
-File "./GRP704-10/LPO.v", line 30, characters 24-26:
-Error: The reference x4 was not found in the current environment.
+toma --parsable "LPO.mult (LPO.op_f, LPO.mult (LPO.x4, LPO.x5)) -> LPO.mult (LPO.mult (LPO.op_f, LPO.x4), LPO.x5)" /tmp/tmp.QdDoW6IOH5
+File "./GRP704-10/LPO.v", line 31, characters 0-211:
+Error:
+Anomaly "Uncaught exception Failure("Could not prove goal by reduction.")."
+Please report at http://coq.inria.fr/bugs/.
 

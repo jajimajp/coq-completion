@@ -1,15 +1,70 @@
-File "./GRP203-1/SMT.v", line 6, characters 0-22:
+File "./GRP203-1/SMT.v", line 6, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP203-1/SMT.v", line 7, characters 0-31:
+File "./GRP203-1/SMT.v", line 7, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP203-1/SMT.v", line 8, characters 0-32:
+File "./GRP203-1/SMT.v", line 8, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP203-1/SMT.v", line 10, characters 0-76:
-Error: left_inverse already exists.
+File "./GRP203-1/SMT.v", line 9, characters 0-22:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP203-1/SMT.v", line 10, characters 0-31:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP203-1/SMT.v", line 11, characters 0-32:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP203-1/SMT.v", line 21, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z,
+ multiply (multiply (multiply X Y) X) Z0 =
+ multiply X (multiply Y (multiply X Z0)))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP203-1/SMT.v", line 21, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, multiply (left_inverse X) X = identity)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP203-1/SMT.v", line 21, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, multiply identity X = X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq2ae00d.vtlog /tmp/verit_coq2ae00d.smt2 2> /tmp/warnings_veritb5f01f.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00007
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_3 () Int)
+(declare-fun op_0 () Int)
+(declare-fun op_1 () Int)
+(declare-fun op_2 (Int Int ) Int)
+(assert (not (= (op_2 (op_2 (op_2 op_0 op_1) op_3) op_1) (op_2 op_0 (op_2 op_1 (op_2 op_3 op_1))))))
+(check-sat)
+(get-model)
+File "./GRP203-1/SMT.v", line 21, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+a := 1
+b := -1
+multiply := fun BOUND_VARIABLE_339 BOUND_VARIABLE_340 => if BOUND_VARIABLE_339 = -2 then if BOUND_VARIABLE_340 = -1 then 3 else -4 else if BOUND_VARIABLE_339 = 2 then if BOUND_VARIABLE_340 = 0 then -2 else -4 else if BOUND_VARIABLE_339 = -1 then if BOUND_VARIABLE_340 = -3 then 4 else -4 else if BOUND_VARIABLE_339 = 1 then if BOUND_VARIABLE_340 = -1 then 2 else -4 else if BOUND_VARIABLE_339 = 0 then if BOUND_VARIABLE_340 = -1 then -3 else -4 else -4
+c := 0
 

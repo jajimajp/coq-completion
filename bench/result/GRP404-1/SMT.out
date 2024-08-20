@@ -1,11 +1,56 @@
-File "./GRP404-1/SMT.v", line 6, characters 0-26:
+File "./GRP404-1/SMT.v", line 6, characters 0-16:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP404-1/SMT.v", line 7, characters 0-32:
+File "./GRP404-1/SMT.v", line 7, characters 0-16:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP404-1/SMT.v", line 13, characters 45-47:
-Error: The reference b2 was not found in the current environment.
+File "./GRP404-1/SMT.v", line 8, characters 0-26:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP404-1/SMT.v", line 9, characters 0-32:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP404-1/SMT.v", line 17, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z,
+ multiply A
+   (inverse
+      (multiply (inverse (multiply (inverse (multiply A B)) C))
+         (inverse (multiply B (multiply (inverse B) B))))) = C)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqc1c87f.vtlog /tmp/verit_coqc1c87f.smt2 2> /tmp/warnings_verit6e1f87.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00009
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_0 () Int)
+(declare-fun op_1 (Int ) Int)
+(declare-fun op_2 (Int Int ) Int)
+(declare-fun op_3 () Int)
+(assert (not (= (op_2 (op_2 (op_1 op_0) op_0) op_3) op_3)))
+(check-sat)
+(get-model)
+File "./GRP404-1/SMT.v", line 17, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+b2 := 0
+inverse := fun _ => -1
+multiply := fun BOUND_VARIABLE_302 BOUND_VARIABLE_303 => if BOUND_VARIABLE_302 = -1 then if BOUND_VARIABLE_303 = 0 then 2 else -2 else -2
+a2 := 1
 

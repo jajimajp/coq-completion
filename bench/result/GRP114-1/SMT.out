@@ -1,16 +1,16 @@
-File "./GRP114-1/SMT.v", line 6, characters 0-22:
+File "./GRP114-1/SMT.v", line 6, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP114-1/SMT.v", line 7, characters 0-36:
+File "./GRP114-1/SMT.v", line 7, characters 0-22:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP114-1/SMT.v", line 8, characters 0-26:
+File "./GRP114-1/SMT.v", line 8, characters 0-36:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP114-1/SMT.v", line 9, characters 0-32:
+File "./GRP114-1/SMT.v", line 9, characters 0-26:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
@@ -22,10 +22,125 @@ File "./GRP114-1/SMT.v", line 11, characters 0-32:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP114-1/SMT.v", line 12, characters 0-29:
+File "./GRP114-1/SMT.v", line 12, characters 0-32:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP114-1/SMT.v", line 13, characters 0-82:
-Error: negative_part already exists.
+File "./GRP114-1/SMT.v", line 13, characters 0-29:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, negative_part X = intersection X identity)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, positive_part X = union X identity)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z,
+ multiply (intersection Y Z0) X = intersection (multiply Y X) (multiply Z0 X))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z,
+ multiply (union Y Z0) X = union (multiply Y X) (multiply Z0 X))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z,
+ multiply X (intersection Y Z0) = intersection (multiply X Y) (multiply X Z0))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z,
+ multiply X (union Y Z0) = union (multiply X Y) (multiply X Z0))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y : Z, intersection (union X Y) Y = Y)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y : Z, union (intersection X Y) Y = Y)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z, union X (union Y Z0) = union (union X Y) Z0)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z,
+ intersection X (intersection Y Z0) = intersection (intersection X Y) Z0)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y : Z, union X Y = union Y X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y : Z, intersection X Y = intersection Y X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, union X X = X) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, intersection X X = X) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y : Z, inverse (multiply X Y) = multiply (inverse Y) (inverse X))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, inverse (inverse X) = X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(inverse identity = identity) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z, multiply (multiply X Y) Z0 = multiply X (multiply Y Z0))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, multiply (inverse X) X = identity)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP114-1/SMT.v", line 40, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, multiply identity X = X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq902377.vtlog /tmp/verit_coq902377.smt2 2> /tmp/warnings_verit21d465.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00008
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_0 () Int)
+(declare-fun op_3 (Int Int ) Int)
+(declare-fun op_2 (Int ) Int)
+(declare-fun op_1 (Int ) Int)
+(assert (not (= (op_3 (op_1 op_0) (op_2 op_0)) op_0)))
+(check-sat)
+(get-model)
+File "./GRP114-1/SMT.v", line 40, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+a := 0
+positive_part := fun _ => 1
+negative_part := fun _ => -1
+multiply := fun _ _ => 2
 

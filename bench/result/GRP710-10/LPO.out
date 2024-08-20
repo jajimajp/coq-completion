@@ -1,3 +1,1 @@
-File "./GRP710-10/LPO.v", line 17, characters 28-30:
-Error: The reference x0 was not found in the current environment.
-
+toma --parsable "LPO.mult (LPO.x0, X2) -> LPO.x1" /tmp/tmp.iysxjnihGZ

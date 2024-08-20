@@ -1,3 +1,1 @@
-File "./GRP196-1/LPO.v", line 12, characters 17-18:
-Error: The reference a was not found in the current environment.
-
+toma --parsable "LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.b))))))))))))))))) -> LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.b, LPO.multiply (LPO.b, LPO.multiply (LPO.b, LPO.multiply (LPO.b, LPO.multiply (LPO.b, LPO.multiply (LPO.b, LPO.multiply (LPO.b, LPO.b)))))))))))))))))" /tmp/tmp.kNWYUwaorD

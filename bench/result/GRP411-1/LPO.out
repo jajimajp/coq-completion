@@ -1,3 +1,1 @@
-File "./GRP411-1/LPO.v", line 12, characters 27-29:
-Error: The reference a3 was not found in the current environment.
-
+toma --parsable "LPO.multiply (LPO.multiply (LPO.a3, LPO.b3), LPO.c3) -> LPO.multiply (LPO.a3, LPO.multiply (LPO.b3, LPO.c3))" /tmp/tmp.1a30X8qbUH

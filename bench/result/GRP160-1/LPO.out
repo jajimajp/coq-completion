@@ -1,3 +1,4 @@
-File "./GRP160-1/LPO.v", line 29, characters 26-27:
-Error: The reference a was not found in the current environment.
-
+toma --parsable "LPO.least_upper_bound (LPO.a, LPO.a) -> LPO.a" /tmp/tmp.g6ZXz5BFQu
+Finish
+check
+     : least_upper_bound a a = a

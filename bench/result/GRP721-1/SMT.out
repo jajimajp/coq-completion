@@ -1,19 +1,89 @@
-File "./GRP721-1/SMT.v", line 6, characters 0-25:
+File "./GRP721-1/SMT.v", line 6, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP721-1/SMT.v", line 7, characters 0-26:
+File "./GRP721-1/SMT.v", line 7, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP721-1/SMT.v", line 8, characters 0-28:
+File "./GRP721-1/SMT.v", line 8, characters 0-25:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP721-1/SMT.v", line 9, characters 0-18:
+File "./GRP721-1/SMT.v", line 9, characters 0-26:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP721-1/SMT.v", line 22, characters 28-29:
-Error: The reference a was not found in the current environment.
+File "./GRP721-1/SMT.v", line 10, characters 0-28:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP721-1/SMT.v", line 11, characters 0-18:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP721-1/SMT.v", line 26, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, f A B = ld (mult (ld (mult A B) A) (ld (mult A B) B)) unit)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP721-1/SMT.v", line 26, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z,
+ ld A (mult (mult B C) A) = mult (ld A (mult B A)) (ld A (mult C A)))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP721-1/SMT.v", line 26, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C D : Z,
+ ld (mult A B) (mult A (mult B (mult C D))) =
+ mult (ld (mult A B) (mult A (mult B C))) (ld (mult A B) (mult A (mult B D))))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP721-1/SMT.v", line 26, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, mult A B = mult B A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP721-1/SMT.v", line 26, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, ld A (mult A B) = B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP721-1/SMT.v", line 26, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, mult A (ld A B) = B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP721-1/SMT.v", line 26, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, mult unit A = A) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP721-1/SMT.v", line 26, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, mult A unit = A) [SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq35a9dc.vtlog /tmp/verit_coq35a9dc.smt2 2> /tmp/warnings_verit731092.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00008
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_0 () Int)
+(declare-fun op_3 (Int Int ) Int)
+(declare-fun op_1 (Int Int ) Int)
+(declare-fun op_2 () Int)
+(assert (not (= (op_1 (op_1 op_0 op_0) (op_1 op_2 op_2)) (op_1 (op_3 op_0 op_2) (op_3 op_0 op_2)))))
+(check-sat)
+(get-model)
+File "./GRP721-1/SMT.v", line 26, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+a := 0
+mult := fun BOUND_VARIABLE_314 BOUND_VARIABLE_315 => if BOUND_VARIABLE_314 = -1 then if BOUND_VARIABLE_315 = 2 then -2 else -3 else if BOUND_VARIABLE_314 = 1 then if BOUND_VARIABLE_315 = 1 then 2 else -3 else if BOUND_VARIABLE_314 = 0 then if BOUND_VARIABLE_315 = 0 then -1 else -3 else -3
+b := 1
+f := fun _ _ => 3
 

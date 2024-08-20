@@ -1,24 +1,24 @@
-File "./GRP731-1/SMT.v", line 6, characters 0-33:
+File "./GRP731-1/SMT.v", line 6, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP731-1/SMT.v", line 7, characters 0-20:
+File "./GRP731-1/SMT.v", line 7, characters 0-33:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP731-1/SMT.v", line 8, characters 0-28:
+File "./GRP731-1/SMT.v", line 8, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP731-1/SMT.v", line 9, characters 0-28:
+File "./GRP731-1/SMT.v", line 9, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP731-1/SMT.v", line 10, characters 0-33:
+File "./GRP731-1/SMT.v", line 10, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP731-1/SMT.v", line 11, characters 0-33:
+File "./GRP731-1/SMT.v", line 11, characters 0-20:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
@@ -26,14 +26,152 @@ File "./GRP731-1/SMT.v", line 12, characters 0-28:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP731-1/SMT.v", line 13, characters 0-26:
+File "./GRP731-1/SMT.v", line 13, characters 0-28:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP731-1/SMT.v", line 14, characters 0-18:
+File "./GRP731-1/SMT.v", line 14, characters 0-33:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP731-1/SMT.v", line 41, characters 28-29:
-Error: The reference a was not found in the current environment.
+File "./GRP731-1/SMT.v", line 15, characters 0-33:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP731-1/SMT.v", line 16, characters 0-28:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP731-1/SMT.v", line 17, characters 0-26:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP731-1/SMT.v", line 18, characters 0-18:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C D E : Z, asoc A B (asoc C D E) = unit)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C D E : Z, asoc (asoc A B C) D E = unit)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z, op_t (op_t A B) C = op_t (op_t A C) B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C D : Z, op_t (op_l A B C) D = op_l (op_t A D) B C)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C D : Z, op_t (op_r A B C) D = op_r (op_t A D) B C)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C D E : Z, op_l (op_l A B C) D E = op_l (op_l A D E) B C)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C D E : Z, op_l (op_r A B C) D E = op_r (op_l A D E) B C)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C D E : Z, op_r (op_r A B C) D E = op_r (op_r A D E) B C)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, op_t A B = mult (i B) (mult A B))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z, op_r A B C = rd (mult (mult A B) C) (mult B C))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z, op_l A B C = mult (i (mult C B)) (mult C (mult B A)))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, mult A B = mult (mult B A) (op_k A B))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z, mult (mult A B) C = mult (mult A (mult B C)) (asoc A B C))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z, mult (mult A (mult B A)) C = mult A (mult B (mult A C)))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, mult (rd A B) B = A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, rd (mult A B) B = A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, mult (i A) (mult A B) = B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, i (mult A B) = mult (i A) (i B))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, mult (i A) A = unit) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, mult A (i A) = unit) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, mult A unit = A) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP731-1/SMT.v", line 47, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, mult unit A = A) [SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqb50ac3.vtlog /tmp/verit_coqb50ac3.smt2 2> /tmp/warnings_verit8b2d8a.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00008
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_2 () Int)
+(declare-fun op_0 () Int)
+(declare-fun op_3 (Int Int Int ) Int)
+(declare-fun op_6 () Int)
+(declare-fun op_4 () Int)
+(declare-fun op_1 () Int)
+(declare-fun op_5 (Int Int ) Int)
+(assert (not (= (op_5 (op_3 op_0 op_1 op_2) op_4) op_6)))
+(check-sat)
+(get-model)
+File "./GRP731-1/SMT.v", line 47, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+a := 1
+b := -2
+c := 0
+asoc := fun _ _ _ => 3
+d := 2
+op_k := fun _ _ => -3
+unit := -1
 

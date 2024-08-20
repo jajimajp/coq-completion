@@ -1,3 +1,16 @@
-File "./GRP153-1/Hammer.v", line 30, characters 38-39:
-Error: The reference b was not found in the current environment.
-
+Detecting provers...
+Eprover found
+Vampire found
+z3_tptp: symbol lookup error: /usr/local/lib/libz3.so: undefined symbol: pthread_create
+Z3 not found
+CVC4 found
+Extracting features...
+Running provers (8 threads)...
+CVC4 (knn-256) succeeded
+- dependencies: Hammer.ax_glb_absorbtion, Hammer.ax_symmetry_of_lub, Hammer.ax_idempotence_of_gld
+Reconstructing the proof...
+Tactic scongruence succeeded.
+Replace the hammer tactic with:
+	scongruence use: ax_glb_absorbtion, ax_symmetry_of_lub, ax_idempotence_of_gld.
+check
+     : greatest_lower_bound b (least_upper_bound a b) = b

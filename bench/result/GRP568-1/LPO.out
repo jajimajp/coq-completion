@@ -1,3 +1,4 @@
-File "./GRP568-1/LPO.v", line 11, characters 0-72:
-Error: identity already exists.
-
+toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.03xihhD9kL
+Finish
+check
+     : multiply a b = multiply b a

@@ -7,10 +7,10 @@ CVC4 found
 Extracting features...
 Running provers (8 threads)...
 CVC4 (knn-256) succeeded
-- dependencies: Hammer.symmetry_of_lub, Hammer.left_identity, Hammer.lat3a_2, Hammer.monotony_lub2
+- dependencies: Hammer.ax_symmetry_of_lub, Hammer.ax_left_identity, Hammer.ax_lat3a_2, Hammer.ax_monotony_lub2
 Reconstructing the proof...
 Tactic scongruence succeeded.
 Replace the hammer tactic with:
-	scongruence use: symmetry_of_lub, left_identity, lat3a_2, monotony_lub2.
+	scongruence use: ax_symmetry_of_lub, ax_left_identity, ax_lat3a_2, ax_monotony_lub2.
 check
      : least_upper_bound a (multiply b a) = multiply b a

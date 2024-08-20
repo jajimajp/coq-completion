@@ -1,15 +1,63 @@
-File "./GRP613-1/SMT.v", line 6, characters 0-37:
+File "./GRP613-1/SMT.v", line 6, characters 0-16:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP613-1/SMT.v", line 7, characters 0-26:
+File "./GRP613-1/SMT.v", line 7, characters 0-16:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP613-1/SMT.v", line 8, characters 0-32:
+File "./GRP613-1/SMT.v", line 8, characters 0-37:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP613-1/SMT.v", line 9, characters 0-80:
-Error: multiply already exists.
+File "./GRP613-1/SMT.v", line 9, characters 0-26:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP613-1/SMT.v", line 10, characters 0-32:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP613-1/SMT.v", line 19, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, multiply A B = inverse (double_divide B A))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP613-1/SMT.v", line 19, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z,
+ double_divide
+   (inverse (double_divide (inverse (double_divide A (inverse B))) C))
+   (double_divide A C) = B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq834cc7.vtlog /tmp/verit_coq834cc7.smt2 2> /tmp/warnings_verita66617.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00008
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_0 () Int)
+(declare-fun op_1 (Int ) Int)
+(declare-fun op_2 (Int Int ) Int)
+(declare-fun op_3 () Int)
+(assert (not (= (op_2 (op_1 op_0) op_0) (op_2 (op_1 op_3) op_3))))
+(check-sat)
+(get-model)
+File "./GRP613-1/SMT.v", line 19, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+a1 := 0
+inverse := fun BOUND_VARIABLE_297 => if BOUND_VARIABLE_297 = 0 then -1 else -2
+multiply := fun BOUND_VARIABLE_312 BOUND_VARIABLE_313 => if BOUND_VARIABLE_312 = -1 then if BOUND_VARIABLE_313 = 0 then 2 else 3 else 3
+b1 := 1
 

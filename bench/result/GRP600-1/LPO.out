@@ -1,3 +1,4 @@
-File "./GRP600-1/LPO.v", line 10, characters 0-80:
-Error: multiply already exists.
-
+toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.hypPGD1b0Q
+Finish
+check
+     : multiply a b = multiply b a

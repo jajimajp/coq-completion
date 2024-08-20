@@ -50,7 +50,7 @@ File "./GRP345-1/SMT.v", line 25, characters 2-6:
 Warning: Discarding the following lemma (unsupported):
 (forall X : Z, multiply identity X = X)
 [SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqb88ed1.vtlog /tmp/verit_coqb88ed1.smt2 2> /tmp/warnings_veritd02e21.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq7109ec.vtlog /tmp/verit_coq7109ec.smt2 2> /tmp/warnings_verit14d08f.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success

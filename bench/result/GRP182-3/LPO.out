@@ -1,3 +1,5 @@
-File "./GRP182-3/LPO.v", line 29, characters 57-58:
-Error: The reference a was not found in the current environment.
-
+toma --parsable "LPO.greatest_lower_bound (LPO.identity, LPO.least_upper_bound (LPO.a, LPO.identity)) -> LPO.identity" /tmp/tmp.cU51EQiTDL
+Finish
+check
+     : greatest_lower_bound identity (least_upper_bound a identity) =
+       identity

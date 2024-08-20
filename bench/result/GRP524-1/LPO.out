@@ -1,3 +1,1 @@
-File "./GRP524-1/LPO.v", line 10, characters 0-70:
-Error: inverse already exists.
-
+toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.mFSBUs0t9a

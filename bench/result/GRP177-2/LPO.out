@@ -1,1 +1,1 @@
-toma --parsable "LPO.greatest_lower_bound (LPO.greatest_lower_bound (LPO.a, LPO.multiply (LPO.b, LPO.c)), LPO.multiply (LPO.greatest_lower_bound (LPO.a, LPO.b), LPO.greatest_lower_bound (LPO.a, LPO.c))) -> LPO.greatest_lower_bound (LPO.a, LPO.multiply (LPO.b, LPO.c))" /tmp/tmp.tEBivIw16V
+toma --parsable "LPO.greatest_lower_bound (LPO.greatest_lower_bound (LPO.a, LPO.multiply (LPO.b, LPO.c)), LPO.multiply (LPO.greatest_lower_bound (LPO.a, LPO.b), LPO.greatest_lower_bound (LPO.a, LPO.c))) -> LPO.greatest_lower_bound (LPO.a, LPO.multiply (LPO.b, LPO.c))" /tmp/tmp.OqtI24dPX7

@@ -1,3 +1,1 @@
-File "./GRP201-1/LPO.v", line 14, characters 0-76:
-Error: left_inverse already exists.
-
+toma --parsable "LPO.multiply (LPO.multiply (LPO.multiply (LPO.a, LPO.b), LPO.a), LPO.c) -> LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.c)))" /tmp/tmp.x1gD1H8i4r

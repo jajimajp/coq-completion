@@ -7,10 +7,10 @@ CVC4 found
 Extracting features...
 Running provers (8 threads)...
 CVC4 (knn-256) succeeded
-- dependencies: Hammer.ax_lub1a_1, Hammer.associativity_of_lub, Hammer.ax_lub1a_2
+- dependencies: Hammer.ax_ax_lub1a_1, Hammer.ax_associativity_of_lub, Hammer.ax_ax_lub1a_2
 Reconstructing the proof...
 Tactic scongruence succeeded.
 Replace the hammer tactic with:
-	scongruence use: ax_lub1a_1, associativity_of_lub, ax_lub1a_2.
+	scongruence use: ax_ax_lub1a_1, ax_associativity_of_lub, ax_ax_lub1a_2.
 check
      : least_upper_bound (least_upper_bound a b) c = c

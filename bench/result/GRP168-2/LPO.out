@@ -1,3 +1,6 @@
-File "./GRP168-2/LPO.v", line 32, characters 48-49:
-Error: The reference c was not found in the current environment.
-
+toma --parsable "LPO.greatest_lower_bound (LPO.multiply (LPO.inverse (LPO.c), LPO.multiply (LPO.a, LPO.c)), LPO.multiply (LPO.inverse (LPO.c), LPO.multiply (LPO.b, LPO.c))) -> LPO.multiply (LPO.inverse (LPO.c), LPO.multiply (LPO.a, LPO.c))" /tmp/tmp.gibMS8iApE
+Finish
+check
+     : greatest_lower_bound (multiply (inverse c) (multiply a c))
+         (multiply (inverse c) (multiply b c)) =
+       multiply (inverse c) (multiply a c)

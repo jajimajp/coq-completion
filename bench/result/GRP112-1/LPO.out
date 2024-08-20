@@ -1,3 +1,1 @@
-File "./GRP112-1/LPO.v", line 11, characters 18-25:
-Error: The reference inverse was not found in the current environment.
-
+toma --parsable "LPO.multiply (LPO.inverse (LPO.a1), LPO.a1) -> LPO.multiply (LPO.inverse (LPO.b1), LPO.b1)" /tmp/tmp.Lo206lTdxc

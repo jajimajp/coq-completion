@@ -1,3 +1,1 @@
-File "./GRP436-1/LPO.v", line 12, characters 26-28:
-Error: The reference a1 was not found in the current environment.
-
+toma --parsable "LPO.multiply (LPO.inverse (LPO.a1), LPO.a1) -> LPO.multiply (LPO.inverse (LPO.b1), LPO.b1)" /tmp/tmp.H3qZmpzyrK

@@ -6,26 +6,140 @@ File "./GRP168-2/SMT.v", line 7, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP168-2/SMT.v", line 8, characters 0-44:
+File "./GRP168-2/SMT.v", line 8, characters 0-15:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP168-2/SMT.v", line 9, characters 0-22:
+File "./GRP168-2/SMT.v", line 9, characters 0-44:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP168-2/SMT.v", line 10, characters 0-26:
+File "./GRP168-2/SMT.v", line 10, characters 0-22:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP168-2/SMT.v", line 11, characters 0-41:
+File "./GRP168-2/SMT.v", line 11, characters 0-26:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP168-2/SMT.v", line 12, characters 0-32:
+File "./GRP168-2/SMT.v", line 12, characters 0-41:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP168-2/SMT.v", line 33, characters 57-58:
-Error: The reference c was not found in the current environment.
+File "./GRP168-2/SMT.v", line 13, characters 0-32:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP168-2/SMT.v", line 36, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(greatest_lower_bound a b = a) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP168-2/SMT.v", line 36, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z,
+ multiply (greatest_lower_bound Y Z0) X =
+ greatest_lower_bound (multiply Y X) (multiply Z0 X))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP168-2/SMT.v", line 36, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z,
+ multiply (least_upper_bound Y Z0) X =
+ least_upper_bound (multiply Y X) (multiply Z0 X))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP168-2/SMT.v", line 36, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z,
+ multiply X (greatest_lower_bound Y Z0) =
+ greatest_lower_bound (multiply X Y) (multiply X Z0))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP168-2/SMT.v", line 36, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z,
+ multiply X (least_upper_bound Y Z0) =
+ least_upper_bound (multiply X Y) (multiply X Z0))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP168-2/SMT.v", line 36, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y : Z, greatest_lower_bound X (least_upper_bound X Y) = X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP168-2/SMT.v", line 36, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y : Z, least_upper_bound X (greatest_lower_bound X Y) = X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP168-2/SMT.v", line 36, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, greatest_lower_bound X X = X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP168-2/SMT.v", line 36, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, least_upper_bound X X = X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP168-2/SMT.v", line 36, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z,
+ least_upper_bound X (least_upper_bound Y Z0) =
+ least_upper_bound (least_upper_bound X Y) Z0)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP168-2/SMT.v", line 36, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z,
+ greatest_lower_bound X (greatest_lower_bound Y Z0) =
+ greatest_lower_bound (greatest_lower_bound X Y) Z0)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP168-2/SMT.v", line 36, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y : Z, least_upper_bound X Y = least_upper_bound Y X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP168-2/SMT.v", line 36, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y : Z, greatest_lower_bound X Y = greatest_lower_bound Y X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP168-2/SMT.v", line 36, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X Y Z0 : Z, multiply (multiply X Y) Z0 = multiply X (multiply Y Z0))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP168-2/SMT.v", line 36, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, multiply (inverse X) X = identity)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP168-2/SMT.v", line 36, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall X : Z, multiply identity X = X)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqe6afdf.vtlog /tmp/verit_coqe6afdf.smt2 2> /tmp/warnings_verit9bd213.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00005
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_0 () Int)
+(declare-fun op_2 () Int)
+(declare-fun op_4 () Int)
+(declare-fun op_1 (Int ) Int)
+(declare-fun op_3 (Int Int ) Int)
+(declare-fun op_5 (Int Int ) Int)
+(assert (not (= (op_5 (op_3 (op_1 op_0) (op_3 op_2 op_0)) (op_3 (op_1 op_0) (op_3 op_4 op_0))) (op_3 (op_1 op_0) (op_3 op_2 op_0)))))
+(check-sat)
+(get-model)
+File "./GRP168-2/SMT.v", line 36, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+c := 0
+inverse := fun _ => 2
+a := 1
+multiply := fun BOUND_VARIABLE_337 BOUND_VARIABLE_338 => if BOUND_VARIABLE_337 = 2 then if BOUND_VARIABLE_338 = -2 then 3 else 4 else if BOUND_VARIABLE_337 = -1 then if BOUND_VARIABLE_338 = 0 then -3 else 4 else if BOUND_VARIABLE_337 = 1 then if BOUND_VARIABLE_338 = 0 then -2 else 4 else 4
+b := -1
+greatest_lower_bound := fun _ _ => -4
 

@@ -1,4 +1,4 @@
-toma --parsable "LPO.inverse (LPO.identity) -> LPO.identity" /tmp/tmp.ZPj9KbXxR3
+toma --parsable "LPO.inverse (LPO.identity) -> LPO.identity" /tmp/tmp.OZLA2XG9Lz
 Finish
 check
      : inverse identity = identity

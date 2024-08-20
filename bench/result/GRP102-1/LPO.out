@@ -1,3 +1,14 @@
-File "./GRP102-1/LPO.v", line 11, characters 0-72:
-Error: identity already exists.
+toma --parsable "LPO.multiply (LPO.inverse (LPO.a1), LPO.a1) -> LPO.identity" /tmp/tmp.scOieLWtQT
+File "./GRP102-1/LPO.v", line 23, characters 0-176:
+Warning:
+Solve Obligations tactic returned error: Anomaly
+                                         "Uncaught exception Failure("fail: Too many pairs.")."
+Please report at http://coq.inria.fr/bugs/.
+This will become an error in the future
+[solve_obligation_error,tactics,default]
+File "./GRP102-1/LPO.v", line 23, characters 0-176:
+Error:
+Anomaly
+"Uncaught exception Failure("Could not prove goal by crit: t_hint_8")."
+Please report at http://coq.inria.fr/bugs/.
 

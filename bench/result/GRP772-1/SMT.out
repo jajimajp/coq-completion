@@ -38,6 +38,180 @@ File "./GRP772-1/SMT.v", line 15, characters 0-25:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP772-1/SMT.v", line 52, characters 19-21:
-Error: The reference x0 was not found in the current environment.
+File "./GRP772-1/SMT.v", line 16, characters 0-16:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP772-1/SMT.v", line 17, characters 0-16:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z, a (j A) B C = a B C A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z, a (i A) B C = a (j A) B C)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z, a A (i B) C = a A (j B) C)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z,
+ product (a A B C) (difference C (product (a C A B) C)) = one)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C D E : Z,
+ product (product A B) (a C D E) = product A (product B (a C D E)))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C D E : Z,
+ product (a A B C) (product D E) = product (product (a A B C) D) E)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C D : Z,
+ product (product A B) (c C D) = product A (product B (c C D)))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C D : Z,
+ product (c A B) (product C D) = product (product (c A B) C) D)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, product (product A B) (c B A) = product B A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z,
+ product (product A (product B C)) (a A B C) = product (product A B) C)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, product (j (j A)) (j (product B A)) = j B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, product (i (product A B)) (i (i A)) = i B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z,
+ t (eta A) (product B C) = product (t (eta A) B) (t (eta A) C))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, t A B = quotient (product A B) A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z,
+ product (product (product (quotient (j A) A) (product A A)) B) C =
+ product (product (quotient (j A) A) (product A A)) (product B C))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, quotient (j A) A = product (j A) (i A))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z,
+ product (eta A) (product B C) = product (product (eta A) B) C)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z,
+ product A (product B (eta A)) = product (product A B) (eta A))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, product A (product (eta A) B) = product (j (j A)) B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, product (i (i A)) B = product (eta A) (product A B))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, eta A = product (i A) A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, product (i A) A = product A (j A))
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, j A = quotient one A) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, i A = difference A one)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z,
+ difference (product A B) (product A (product B C)) =
+ quotient (quotient (product C (product A B)) B) A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B C : Z,
+ difference A (product (product A B) C) =
+ quotient (product B (product C A)) A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, product (quotient A B) B = A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, quotient (product A B) B = A)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, difference A (product A B) = B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A B : Z, product A (difference A B) = B)
+[SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, product one A = A) [SMTCoq-discarding-lemma,SMTCoq,default]
+File "./GRP772-1/SMT.v", line 56, characters 2-6:
+Warning: Discarding the following lemma (unsupported):
+(forall A : Z, product A one = A) [SMTCoq-discarding-lemma,SMTCoq,default]
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq7f219e.vtlog /tmp/verit_coq7f219e.smt2 2> /tmp/warnings_veritb8c841.log
+veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+unknown
+success
+success
+Verit = 0.00009
+(set-option :print-success true)
+(set-option :produce-assignments true)
+(set-option :produce-proofs true)
+(set-logic QF_UFLIA)
+(declare-fun op_2 (Int Int Int ) Int)
+(declare-fun op_1 () Int)
+(declare-fun op_0 () Int)
+(assert (not (= (op_2 op_0 op_1 op_1) (op_2 op_1 op_1 op_0))))
+(check-sat)
+(get-model)
+File "./GRP772-1/SMT.v", line 56, characters 2-5:
+Error:
+CVC4 returned sat. Here is the model:
+
+x0 := 1
+x1 := 0
+a := fun BOUND_VARIABLE_299 BOUND_VARIABLE_300 BOUND_VARIABLE_301 => if BOUND_VARIABLE_299 = 1 then if BOUND_VARIABLE_300 = 0 then if BOUND_VARIABLE_301 = 0 then -1 else 2 else 2 else 2
 
