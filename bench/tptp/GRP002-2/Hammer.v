@@ -14,6 +14,11 @@ Parameter inverse : G -> G.
 Parameter j : G.
 Parameter k : G.
 Parameter multiply : G -> G -> G.
+Axiom j_times_inverse_h_is_k : (multiply j (inverse h)) = k.
+Axiom h_times_b_is_j : (multiply h b) = j.
+Axiom d_times_inverse_b_is_h : (multiply d (inverse b)) = h.
+Axiom c_times_inverse_a_is_d : (multiply c (inverse a)) = d.
+Axiom a_times_b_is_c : (multiply a b) = c.
 Axiom x_cubed_is_identity : forall X : G, (multiply X (multiply X X)) = identity.
 Axiom right_inverse : forall X : G, (multiply X (inverse X)) = identity.
 Axiom right_identity : forall X : G, (multiply X identity) = X.
@@ -23,7 +28,7 @@ Axiom left_identity : forall X : G, (multiply identity X) = X.
 
 
 (* Goal *)
-Theorem check : (multiply a b) = c.
+Theorem check : (multiply k (inverse b)) = identity.
 Proof.
   hammer.
 Qed.

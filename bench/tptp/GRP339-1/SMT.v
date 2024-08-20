@@ -15,14 +15,15 @@ Variable sk_c6 : Z.
 Variable sk_c7 : Z.
 Variable sk_c8 : Z.
 Variable sk_c9 : Z.
+Axiom prove_this_1 : (multiply sk_c8 sk_c9) = sk_c7.
 Axiom associativity : forall X Y Z : Z, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
 Axiom left_inverse : forall X : Z, (multiply (inverse X) X) = identity.
 Axiom left_identity : forall X : Z, (multiply identity X) = X.
 
-Add_lemmas associativity left_inverse left_identity.
+Add_lemmas prove_this_1 associativity left_inverse left_identity.
 
 (* Goal *)
-Theorem check : (multiply sk_c8 sk_c9) = sk_c7.
+Theorem check : (inverse sk_c1) = sk_c9.
 Proof.
   smt.
 Qed.

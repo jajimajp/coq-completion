@@ -12,4 +12,7 @@ Variable c0 : Z.
 Variable d : Z.
 Variable d0 : Z.
 Variable multiply : Z -> Z -> Z.
+Axiom prove_quotient3 : (multiply b d0) = (multiply a c0).
+Axiom prove_quotient2 : (multiply d b0) = (multiply c a0).
+Axiom prove_quotient1 : (multiply b b0) = (multiply a a0).
 Axiom nilpotency : forall X Y Z : Z, (multiply X (multiply Y (multiply Z (multiply Y X)))) = (multiply Y (multiply X (multiply Z (multiply X Y)))).

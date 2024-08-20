@@ -17,13 +17,14 @@ Parameter sk_c6 : G.
 Parameter sk_c7 : G.
 Parameter sk_c8 : G.
 Parameter sk_c9 : G.
+Axiom prove_this_1 : (multiply sk_c9 sk_c10) = sk_c8.
 Axiom associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
 Axiom left_inverse : forall X : G, (multiply (inverse X) X) = identity.
 Axiom left_identity : forall X : G, (multiply identity X) = X.
 
 
 (* Goal *)
-Theorem check : (multiply sk_c9 sk_c10) = sk_c8.
+Theorem check : (multiply sk_c1 sk_c9) = sk_c10.
 Proof.
   hammer.
 Qed.

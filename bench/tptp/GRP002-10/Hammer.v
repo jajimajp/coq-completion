@@ -18,6 +18,11 @@ Parameter k : G.
 Parameter multiply : G -> G -> G.
 Parameter product : G -> G -> G -> G.
 Parameter true : G.
+Axiom j_times_inverse_h_is_k : (product j (inverse h) k) = true.
+Axiom h_times_b_is_j : (product h b j) = true.
+Axiom d_times_inverse_b_is_h : (product d (inverse b) h) = true.
+Axiom c_times_inverse_a_is_d : (product c (inverse a) d) = true.
+Axiom a_times_b_is_c : (product a b c) = true.
 Axiom x_cubed_is_identity_2 : forall X Y : G, (ifeq (product X X Y) true (product Y X identity) true) = true.
 Axiom x_cubed_is_identity_1 : forall X Y : G, (ifeq (product X X Y) true (product X Y identity) true) = true.
 Axiom associativity2 : forall U V W X Y Z : G, (ifeq (product Y Z V) true (ifeq (product X V W) true (ifeq (product X Y U) true (product U Z W) true) true) true) = true.
@@ -33,7 +38,7 @@ Axiom ifeq_axiom : forall A B C : G, (ifeq2 A A B C) = B.
 
 
 (* Goal *)
-Theorem check : (product a b c) = true.
+Theorem check : (product k (inverse b) identity) = true.
 Proof.
   hammer.
 Qed.

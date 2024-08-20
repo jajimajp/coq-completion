@@ -13,6 +13,11 @@ Variable inverse : Z -> Z.
 Variable j : Z.
 Variable k : Z.
 Variable multiply : Z -> Z -> Z.
+Axiom j_times_inverse_h_is_k : (multiply j (inverse h)) = k.
+Axiom h_times_b_is_j : (multiply h b) = j.
+Axiom d_times_inverse_b_is_h : (multiply d (inverse b)) = h.
+Axiom c_times_inverse_a_is_d : (multiply c (inverse a)) = d.
+Axiom a_times_b_is_c : (multiply a b) = c.
 Axiom x_cubed_is_identity : forall X : Z, (multiply X (multiply X X)) = identity.
 Axiom right_inverse : forall X : Z, (multiply X (inverse X)) = identity.
 Axiom right_identity : forall X : Z, (multiply X identity) = X.
@@ -20,10 +25,10 @@ Axiom associativity : forall X Y Z : Z, (multiply (multiply X Y) Z) = (multiply 
 Axiom left_inverse : forall X : Z, (multiply (inverse X) X) = identity.
 Axiom left_identity : forall X : Z, (multiply identity X) = X.
 
-Add_lemmas x_cubed_is_identity right_inverse right_identity associativity left_inverse left_identity.
+Add_lemmas j_times_inverse_h_is_k h_times_b_is_j d_times_inverse_b_is_h c_times_inverse_a_is_d a_times_b_is_c x_cubed_is_identity right_inverse right_identity associativity left_inverse left_identity.
 
 (* Goal *)
-Theorem check : (multiply a b) = c.
+Theorem check : (multiply k (inverse b)) = identity.
 Proof.
   smt.
 Qed.
