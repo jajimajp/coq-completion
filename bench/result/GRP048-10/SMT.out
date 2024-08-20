@@ -78,7 +78,7 @@ Warning: Discarding the following lemma (unsupported):
 File "./GRP048-10/SMT.v", line 30, characters 2-6:
 Warning: Discarding the following lemma (unsupported):
 (forall A B C : Z, ifeq A A B C = B) [SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq5a4c62.vtlog /tmp/verit_coq5a4c62.smt2 2> /tmp/warnings_veritc29f9f.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq874013.vtlog /tmp/verit_coq874013.smt2 2> /tmp/warnings_veritb8b58b.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success
@@ -90,7 +90,7 @@ success
 unknown
 success
 success
-Verit = 0.00008
+Verit = 0.00006
 (set-option :print-success true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)

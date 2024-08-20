@@ -1,3 +1,8 @@
-File "./GRP383-1/Hammer.v", line 16, characters 25-30:
-Error: The reference sk_c8 was not found in the current environment.
-
+Detecting provers...
+Eprover found
+Vampire found
+z3_tptp: symbol lookup error: /usr/local/lib/libz3.so: undefined symbol: pthread_create
+Z3 not found
+CVC4 found
+Extracting features...
+Running provers (8 threads)...

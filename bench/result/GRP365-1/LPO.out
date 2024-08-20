@@ -1,3 +1,7 @@
-File "./GRP365-1/LPO.v", line 15, characters 17-22:
-Error: The reference sk_c6 was not found in the current environment.
+toma --parsable "LPO.multiply (LPO.sk_c6, LPO.sk_c8) -> LPO.sk_c7" /tmp/tmp.O4ti3cxhHc
+File "./GRP365-1/LPO.v", line 22, characters 0-172:
+Error:
+Anomaly
+"Uncaught exception Failure("expect: Unexpected output Completed, expected Success")."
+Please report at http://coq.inria.fr/bugs/.
 

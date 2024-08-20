@@ -14,6 +14,14 @@ File "./GRP664-10/SMT.v", line 9, characters 0-18:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP664-10/SMT.v", line 22, characters 22-24:
-Error: The reference x0 was not found in the current environment.
+File "./GRP664-10/SMT.v", line 10, characters 0-16:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP664-10/SMT.v", line 11, characters 0-16:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]
+File "./GRP664-10/SMT.v", line 25, characters 41-43:
+Error: The reference x2 was not found in the current environment.
 

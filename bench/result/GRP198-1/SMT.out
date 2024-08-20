@@ -1,0 +1,4 @@
+File "./GRP198-1/SMT.v", line 6, characters 0-32:
+Warning: Interpreting this declaration as if a global declaration prefixed by
+"Local", i.e. as a global declaration which shall not be available without
+qualification when imported. [local-declaration,vernacular,default]

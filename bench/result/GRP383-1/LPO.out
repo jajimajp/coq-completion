@@ -1,3 +1,7 @@
-File "./GRP383-1/LPO.v", line 15, characters 16-21:
-Error: The reference sk_c8 was not found in the current environment.
+toma --parsable "LPO.inverse (LPO.sk_c8) -> LPO.sk_c7" /tmp/tmp.Ydwr1o0t1Q
+File "./GRP383-1/LPO.v", line 22, characters 0-165:
+Error:
+Anomaly
+"Uncaught exception Failure("expect: Unexpected output Completed, expected Success")."
+Please report at http://coq.inria.fr/bugs/.
 

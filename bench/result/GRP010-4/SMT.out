@@ -33,7 +33,7 @@ File "./GRP010-4/SMT.v", line 21, characters 2-6:
 Warning: Discarding the following lemma (unsupported):
 (forall X Y Z0 : Z, multiply (multiply X Y) Z0 = multiply X (multiply Y Z0))
 [SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq9dc0f4.vtlog /tmp/verit_coq9dc0f4.smt2 2> /tmp/warnings_verit315476.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq2df583.vtlog /tmp/verit_coq2df583.smt2 2> /tmp/warnings_verit12c9d2.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success
@@ -44,7 +44,7 @@ success
 unknown
 success
 success
-Verit = 0.00006
+Verit = 0.00005
 (set-option :print-success true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
