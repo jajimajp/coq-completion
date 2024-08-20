@@ -1,4 +1,4 @@
-toma --parsable "LPO.multiply (LPO.multiply (LPO.inverse (LPO.b2), LPO.b2), LPO.a2) -> LPO.a2" /tmp/tmp.lvWFIznYj0
+toma --parsable "LPO.multiply (LPO.multiply (LPO.inverse (LPO.b2), LPO.b2), LPO.a2) -> LPO.a2" /tmp/tmp.XLb0bXeXaI
 File "./GRP522-1/LPO.v", line 16, characters 0-141:
 Error:
 Anomaly "Uncaught exception Failure("Could not prove goal by reduction.")."

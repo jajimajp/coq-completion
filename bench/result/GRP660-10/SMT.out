@@ -22,28 +22,15 @@ File "./GRP660-10/SMT.v", line 11, characters 0-23:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP660-10/SMT.v", line 23, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, mult (mult (mult A B) C) A = mult A (mult B (mult C A)))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP660-10/SMT.v", line 23, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, rd (mult A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP660-10/SMT.v", line 23, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult (rd A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP660-10/SMT.v", line 23, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, ld A (mult A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP660-10/SMT.v", line 23, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult A (ld A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqfc3aa1.vtlog /tmp/verit_coqfc3aa1.smt2 2> /tmp/warnings_veritd8e42d.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq0c749a.vtlog /tmp/verit_coq0c749a.smt2 2> /tmp/warnings_veritb92ee7.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+success
 success
 success
 success
@@ -54,7 +41,7 @@ success
 unknown
 success
 success
-Verit = 0.00008
+Verit = 0.00007
 (set-option :print-success true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)

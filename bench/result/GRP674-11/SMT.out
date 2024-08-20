@@ -34,43 +34,20 @@ File "./GRP674-11/SMT.v", line 14, characters 0-18:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP674-11/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(mult (asoc op_x op_y op_z) (asoc op_x op_y op_t) =
- asoc op_x op_y (mult op_z op_t))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP674-11/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, asoc A B C = ld (mult A (mult B C)) (mult (mult A B) C))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP674-11/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, mult A (mult B (mult C A)) = mult (mult (mult A B) C) A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP674-11/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult unit A = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP674-11/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult A unit = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP674-11/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, rd (mult A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP674-11/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult (rd A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP674-11/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, ld A (mult A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP674-11/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult A (ld A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq7a5549.vtlog /tmp/verit_coq7a5549.smt2 2> /tmp/warnings_veritd0c898.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqf7af99.vtlog /tmp/verit_coqf7af99.smt2 2> /tmp/warnings_veritc0d304.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
 success
 success
 success

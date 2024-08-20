@@ -1,4 +1,4 @@
-toma --parsable "LPO.rd (LPO.mult (LPO.x6, LPO.rd (LPO.x7, LPO.x8)), LPO.rd (LPO.x7, LPO.x8)) -> LPO.rd (LPO.mult (LPO.x6, LPO.x8), LPO.x8)" /tmp/tmp.IHNiJqyV02
+toma --parsable "LPO.rd (LPO.mult (LPO.x6, LPO.rd (LPO.x7, LPO.x8)), LPO.rd (LPO.x7, LPO.x8)) -> LPO.rd (LPO.mult (LPO.x6, LPO.x8), LPO.x8)" /tmp/tmp.zvyp3DUi1W
 Finish
 check
      : rd (mult x6 (rd x7 x8)) (rd x7 x8) = rd (mult x6 x8) x8

@@ -34,52 +34,21 @@ File "./GRP048-10/SMT.v", line 14, characters 0-18:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP048-10/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported): (equalish a b = true)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP048-10/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall W X Y Z0 : Z,
- ifeq (equalish X Y) true (ifeq (product W Z0 X) true (product W Z0 Y) true)
-   true = true)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP048-10/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall U V W X Y Z0 : Z,
- ifeq (product Y Z0 V) true
-   (ifeq (product X V W) true
-      (ifeq (product X Y U) true (product U Z0 W) true) true) true = true)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP048-10/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall U V W X Y Z0 : Z,
- ifeq (product U Z0 W) true
-   (ifeq (product Y Z0 V) true
-      (ifeq (product X Y U) true (product X V W) true) true) true = true)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP048-10/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall W X Y Z0 : Z,
- ifeq (product X Y W) true (ifeq (product X Y Z0) true (equalish Z0 W) true)
-   true = true)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP048-10/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y : Z, product X Y (multiply X Y) = true)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP048-10/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, product (inverse X) X identity = true)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP048-10/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, product identity X X = true)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP048-10/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, ifeq A A B C = B) [SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq05117f.vtlog /tmp/verit_coq05117f.smt2 2> /tmp/warnings_veritc8f345.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq22f0e5.vtlog /tmp/verit_coq22f0e5.smt2 2> /tmp/warnings_verit675f8b.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
 success
 success
 success

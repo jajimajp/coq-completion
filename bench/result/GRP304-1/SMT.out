@@ -38,23 +38,14 @@ File "./GRP304-1/SMT.v", line 15, characters 0-19:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP304-1/SMT.v", line 26, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(multiply sk_c7 sk_c6 = sk_c5) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP304-1/SMT.v", line 26, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y Z0 : Z, multiply (multiply X Y) Z0 = multiply X (multiply Y Z0))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP304-1/SMT.v", line 26, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, multiply (inverse X) X = identity)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP304-1/SMT.v", line 26, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, multiply identity X = X)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqe60777.vtlog /tmp/verit_coqe60777.smt2 2> /tmp/warnings_verit63b368.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq356cd1.vtlog /tmp/verit_coq356cd1.smt2 2> /tmp/warnings_verit5ef02b.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
 success
 success
 success

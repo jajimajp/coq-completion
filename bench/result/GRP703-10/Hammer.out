@@ -17,3 +17,4 @@ Replace the hammer tactic with:
 	qauto depth: 4 l: on use: ax_f12, ax_f04, ax_f06, ax_f05, ax_f08.
 check
      : mult op_e (mult x2 x3) = mult (mult op_e x2) x3
+Killed

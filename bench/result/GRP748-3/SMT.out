@@ -30,47 +30,7 @@ File "./GRP748-3/SMT.v", line 13, characters 0-18:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP748-3/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult A B = mult B A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP748-3/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult (i A) A = unit) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP748-3/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult A (i A) = unit) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP748-3/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult (mult A B) (i B) = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP748-3/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, mult (mult (mult A B) C) B = mult A (mult (mult B C) B))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP748-3/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult unit A = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP748-3/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult A unit = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP748-3/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, rd (mult A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP748-3/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult (rd A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP748-3/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, ld A (mult A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP748-3/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult A (ld A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqb91e6f.vtlog /tmp/verit_coqb91e6f.smt2 2> /tmp/warnings_verit7b66cb.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq868dc1.vtlog /tmp/verit_coq868dc1.smt2 2> /tmp/warnings_veriteb45f1.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success
@@ -78,27 +38,27 @@ success
 success
 success
 success
-unknown
 success
 success
-Verit = 0.00008
-(set-option :print-success true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-logic QF_UFLIA)
-(declare-fun op_2 () Int)
-(declare-fun op_0 () Int)
-(declare-fun op_3 (Int Int ) Int)
-(declare-fun op_1 () Int)
-(assert (not (= (op_3 op_0 (op_3 op_1 (op_3 op_2 op_1))) (op_3 (op_3 (op_3 op_0 op_1) op_2) op_1))))
-(check-sat)
-(get-model)
-File "./GRP748-3/SMT.v", line 31, characters 2-5:
-Error:
-CVC4 returned sat. Here is the model:
-
-a := 1
-b := -1
-c := 0
-mult := fun BOUND_VARIABLE_336 BOUND_VARIABLE_337 => if BOUND_VARIABLE_336 = -3 then if BOUND_VARIABLE_337 = 0 then 4 else -4 else if BOUND_VARIABLE_336 = -1 then if BOUND_VARIABLE_337 = 2 then -2 else -4 else if BOUND_VARIABLE_336 = 1 then if BOUND_VARIABLE_337 = -2 then 3 else if BOUND_VARIABLE_337 = -1 then -3 else -4 else if BOUND_VARIABLE_336 = 0 then if BOUND_VARIABLE_337 = -1 then 2 else -4 else -4
-
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+unsat
+success
+success
+Verit = 0.00005
+File "./GRP748-3/SMT.v", line 31, characters 2-6:
+Warning: Bytecode compiler failed, falling back to standard conversion
+[bytecode-compiler-failed,bytecode-compiler,default]
+check
+     : mult a (mult b (mult c b)) =? mult (mult (mult a b) c) b

@@ -34,85 +34,7 @@ File "./GRP170-1/SMT.v", line 14, characters 0-32:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP170-1/SMT.v", line 38, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(least_upper_bound c d = d) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP170-1/SMT.v", line 38, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(least_upper_bound a b = b) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP170-1/SMT.v", line 38, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y Z0 : Z,
- multiply (greatest_lower_bound Y Z0) X =
- greatest_lower_bound (multiply Y X) (multiply Z0 X))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP170-1/SMT.v", line 38, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y Z0 : Z,
- multiply (least_upper_bound Y Z0) X =
- least_upper_bound (multiply Y X) (multiply Z0 X))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP170-1/SMT.v", line 38, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y Z0 : Z,
- multiply X (greatest_lower_bound Y Z0) =
- greatest_lower_bound (multiply X Y) (multiply X Z0))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP170-1/SMT.v", line 38, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y Z0 : Z,
- multiply X (least_upper_bound Y Z0) =
- least_upper_bound (multiply X Y) (multiply X Z0))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP170-1/SMT.v", line 38, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y : Z, greatest_lower_bound X (least_upper_bound X Y) = X)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP170-1/SMT.v", line 38, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y : Z, least_upper_bound X (greatest_lower_bound X Y) = X)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP170-1/SMT.v", line 38, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, greatest_lower_bound X X = X)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP170-1/SMT.v", line 38, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, least_upper_bound X X = X)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP170-1/SMT.v", line 38, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y Z0 : Z,
- least_upper_bound X (least_upper_bound Y Z0) =
- least_upper_bound (least_upper_bound X Y) Z0)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP170-1/SMT.v", line 38, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y Z0 : Z,
- greatest_lower_bound X (greatest_lower_bound Y Z0) =
- greatest_lower_bound (greatest_lower_bound X Y) Z0)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP170-1/SMT.v", line 38, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y : Z, least_upper_bound X Y = least_upper_bound Y X)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP170-1/SMT.v", line 38, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y : Z, greatest_lower_bound X Y = greatest_lower_bound Y X)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP170-1/SMT.v", line 38, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y Z0 : Z, multiply (multiply X Y) Z0 = multiply X (multiply Y Z0))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP170-1/SMT.v", line 38, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, multiply (inverse X) X = identity)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP170-1/SMT.v", line 38, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, multiply identity X = X)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq9b357b.vtlog /tmp/verit_coq9b357b.smt2 2> /tmp/warnings_veritd8b376.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqeed474.vtlog /tmp/verit_coqeed474.smt2 2> /tmp/warnings_veritdcbade.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success
@@ -122,31 +44,32 @@ success
 success
 success
 success
-unknown
 success
 success
-Verit = 0.00005
-(set-option :print-success true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-logic QF_UFLIA)
-(declare-fun op_5 (Int Int ) Int)
-(declare-fun op_1 () Int)
-(declare-fun op_0 () Int)
-(declare-fun op_4 () Int)
-(declare-fun op_3 () Int)
-(declare-fun op_2 (Int Int ) Int)
-(assert (not (= (op_5 (op_2 op_0 op_1) (op_2 op_3 op_4)) (op_2 op_3 op_4))))
-(check-sat)
-(get-model)
-File "./GRP170-1/SMT.v", line 38, characters 2-5:
-Error:
-CVC4 returned sat. Here is the model:
-
-a := 1
-c := 0
-multiply := fun BOUND_VARIABLE_300 BOUND_VARIABLE_301 => if BOUND_VARIABLE_300 = 2 then if BOUND_VARIABLE_301 = -1 then 3 else -2 else -2
-b := 2
-d := -1
-least_upper_bound := fun _ _ => -3
-
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+unsat
+success
+success
+Verit = 0.00006
+File "./GRP170-1/SMT.v", line 38, characters 2-6:
+Warning: Bytecode compiler failed, falling back to standard conversion
+[bytecode-compiler-failed,bytecode-compiler,default]
+check
+     : least_upper_bound (multiply a c) (multiply b d) =? multiply b d

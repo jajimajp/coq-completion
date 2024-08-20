@@ -1,4 +1,4 @@
-toma --parsable "LPO.mult (LPO.x0, LPO.mult (LPO.op_d, LPO.x1)) -> LPO.mult (LPO.mult (LPO.x0, LPO.op_d), LPO.x1)" /tmp/tmp.59LvGvnb8D
+toma --parsable "LPO.mult (LPO.x0, LPO.mult (LPO.op_d, LPO.x1)) -> LPO.mult (LPO.mult (LPO.x0, LPO.op_d), LPO.x1)" /tmp/tmp.B3MdFxii5Y
 File "./GRP702-12/LPO.v", line 31, characters 0-211:
 Error:
 Anomaly "Uncaught exception Failure("Could not prove goal by reduction.")."

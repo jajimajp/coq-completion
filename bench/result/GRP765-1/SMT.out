@@ -34,57 +34,24 @@ File "./GRP765-1/SMT.v", line 14, characters 0-16:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP765-1/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, eta A = product (i A) A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP765-1/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, product (i A) A = product A (j A))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP765-1/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, j A = quotient one A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP765-1/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, i A = difference A one)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP765-1/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z,
- difference (product A B) (product A (product B C)) =
- quotient (quotient (product C (product A B)) B) A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP765-1/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z,
- difference A (product (product A B) C) =
- quotient (product B (product C A)) A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP765-1/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, product (quotient A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP765-1/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, quotient (product A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP765-1/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, difference A (product A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP765-1/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, product A (difference A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP765-1/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, product one A = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP765-1/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, product A one = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq9e05e1.vtlog /tmp/verit_coq9e05e1.smt2 2> /tmp/warnings_verite5988e.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq910068.vtlog /tmp/verit_coq910068.smt2 2> /tmp/warnings_verit9f0b53.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
 success
 success
 success
@@ -95,7 +62,7 @@ success
 unknown
 success
 success
-Verit = 0.00007
+Verit = 0.00010
 (set-option :print-success true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)

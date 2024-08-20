@@ -1,4 +1,4 @@
-toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.0OYSfielvd
+toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.ouSYLUngbS
 File "./GRP552-1/LPO.v", line 18, characters 0-146:
 Warning:
 Solve Obligations tactic returned error: Anomaly

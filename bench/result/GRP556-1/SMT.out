@@ -18,40 +18,21 @@ File "./GRP556-1/SMT.v", line 10, characters 0-32:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP556-1/SMT.v", line 19, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, multiply A B = divide A (inverse B))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP556-1/SMT.v", line 19, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, divide (divide A (inverse (divide B (divide A C)))) C = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq41d42e.vtlog /tmp/verit_coq41d42e.smt2 2> /tmp/warnings_veritc61326.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqeeb4ff.vtlog /tmp/verit_coqeeb4ff.smt2 2> /tmp/warnings_verit5a68d8.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success
 success
 success
 success
-unknown
 success
 success
-Verit = 0.00008
-(set-option :print-success true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-logic QF_UFLIA)
-(declare-fun op_0 () Int)
-(declare-fun op_1 () Int)
-(declare-fun op_2 (Int Int ) Int)
-(assert (not (= (op_2 op_0 op_1) (op_2 op_1 op_0))))
-(check-sat)
-(get-model)
-File "./GRP556-1/SMT.v", line 19, characters 2-5:
-Error:
-CVC4 returned sat. Here is the model:
-
-a := 0
-b := 1
-multiply := fun BOUND_VARIABLE_288 BOUND_VARIABLE_289 => if BOUND_VARIABLE_288 = 0 then if BOUND_VARIABLE_289 = 1 then -1 else 2 else 2
-
+success
+success
+unsat
+success
+success
+Verit = 0.00006
+File "./GRP556-1/SMT.v", line 19, characters 2-6:
+Warning: Bytecode compiler failed, falling back to standard conversion
+[bytecode-compiler-failed,bytecode-compiler,default]

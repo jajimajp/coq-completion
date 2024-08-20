@@ -22,35 +22,7 @@ File "./GRP682-10/SMT.v", line 11, characters 0-16:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP682-10/SMT.v", line 25, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, ld A (mult A (ld B B)) = rd (mult (rd A A) B) B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP682-10/SMT.v", line 25, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C D : Z,
- rd (mult (mult A B) (rd C D)) (rd C D) = mult A (rd (mult B D) D))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP682-10/SMT.v", line 25, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C D : Z,
- ld (ld A B) (mult (ld A B) (mult C D)) = mult (ld A (mult A C)) D)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP682-10/SMT.v", line 25, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult (rd A B) B = rd (mult A B) B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP682-10/SMT.v", line 25, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult A (ld A B) = ld A (mult A B))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP682-10/SMT.v", line 25, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, rd (mult A A) A = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP682-10/SMT.v", line 25, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, ld A (mult A A) = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq379905.vtlog /tmp/verit_coq379905.smt2 2> /tmp/warnings_verit789feb.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqa6b0ad.vtlog /tmp/verit_coqa6b0ad.smt2 2> /tmp/warnings_verit652776.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success
@@ -59,29 +31,20 @@ success
 success
 success
 success
-unknown
 success
 success
-Verit = 0.00005
-(set-option :print-success true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-logic QF_UFLIA)
-(declare-fun op_3 () Int)
-(declare-fun op_4 (Int Int ) Int)
-(declare-fun op_1 () Int)
-(declare-fun op_2 (Int Int ) Int)
-(declare-fun op_0 () Int)
-(assert (not (= (op_2 (op_2 op_0 op_1) (op_4 (op_2 op_0 op_1) op_3)) (op_2 op_0 (op_4 op_0 op_3)))))
-(check-sat)
-(get-model)
-File "./GRP682-10/SMT.v", line 25, characters 2-5:
-Error:
-CVC4 returned sat. Here is the model:
-
-x0 := -1
-x1 := 1
-ld := fun BOUND_VARIABLE_322 BOUND_VARIABLE_323 => if BOUND_VARIABLE_322 = 2 then if BOUND_VARIABLE_323 = -2 then 3 else 4 else if BOUND_VARIABLE_322 = -1 then if BOUND_VARIABLE_323 = 1 then 2 else 4 else 4
-x2 := 0
-mult := fun BOUND_VARIABLE_322 BOUND_VARIABLE_323 => if BOUND_VARIABLE_322 = 2 then if BOUND_VARIABLE_323 = 0 then -2 else -3 else -3
-
+success
+success
+success
+success
+success
+success
+unsat
+success
+success
+Verit = 0.00006
+File "./GRP682-10/SMT.v", line 25, characters 2-6:
+Warning: Bytecode compiler failed, falling back to standard conversion
+[bytecode-compiler-failed,bytecode-compiler,default]
+check
+     : ld (ld x0 x1) (mult (ld x0 x1) x2) =? ld x0 (mult x0 x2)

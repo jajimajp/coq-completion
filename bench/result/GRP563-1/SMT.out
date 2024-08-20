@@ -22,16 +22,12 @@ File "./GRP563-1/SMT.v", line 11, characters 0-32:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP563-1/SMT.v", line 20, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, multiply A B = divide A (inverse B))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP563-1/SMT.v", line 20, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, divide (divide (divide A (inverse B)) C) (divide A C) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqf55a20.vtlog /tmp/verit_coqf55a20.smt2 2> /tmp/warnings_verit3f6742.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqe67b85.vtlog /tmp/verit_coqe67b85.smt2 2> /tmp/warnings_verit6a0c9b.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
 success
 success
 success
@@ -41,7 +37,7 @@ success
 unknown
 success
 success
-Verit = 0.00007
+Verit = 0.00008
 (set-option :print-success true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)

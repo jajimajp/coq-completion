@@ -18,28 +18,7 @@ File "./GRP581-1/SMT.v", line 10, characters 0-32:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP581-1/SMT.v", line 21, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, identity = double_divide A (inverse A))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP581-1/SMT.v", line 21, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, inverse A = double_divide A identity)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP581-1/SMT.v", line 21, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, multiply A B = double_divide (double_divide B A) identity)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP581-1/SMT.v", line 21, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z,
- double_divide
-   (double_divide A
-      (double_divide (double_divide identity B)
-         (double_divide C (double_divide B A))))
-   (double_divide identity identity) = C)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqec382a.vtlog /tmp/verit_coqec382a.smt2 2> /tmp/warnings_verit3d5dd6.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq19bdbb.vtlog /tmp/verit_coq19bdbb.smt2 2> /tmp/warnings_verit6627df.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success
@@ -47,27 +26,17 @@ success
 success
 success
 success
-unknown
 success
 success
-Verit = 0.00005
-(set-option :print-success true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-logic QF_UFLIA)
-(declare-fun op_3 () Int)
-(declare-fun op_0 () Int)
-(declare-fun op_1 (Int ) Int)
-(declare-fun op_2 (Int Int ) Int)
-(assert (not (= (op_2 (op_1 op_0) op_0) op_3)))
-(check-sat)
-(get-model)
-File "./GRP581-1/SMT.v", line 21, characters 2-5:
-Error:
-CVC4 returned sat. Here is the model:
-
-a1 := 1
-inverse := fun _ => -1
-multiply := fun _ _ => 2
-identity := 0
-
+success
+success
+success
+unsat
+success
+success
+Verit = 0.00012
+File "./GRP581-1/SMT.v", line 21, characters 2-6:
+Warning: Bytecode compiler failed, falling back to standard conversion
+[bytecode-compiler-failed,bytecode-compiler,default]
+check
+     : multiply (inverse a1) a1 =? identity

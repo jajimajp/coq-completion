@@ -1,4 +1,4 @@
-toma --parsable "LPO.multiply (LPO.sk_c11, LPO.sk_c12) -> LPO.sk_c10" /tmp/tmp.zVg2uhej1S
+toma --parsable "LPO.multiply (LPO.sk_c11, LPO.sk_c12) -> LPO.sk_c10" /tmp/tmp.gXfGC9iI5A
 File "./GRP318-1/LPO.v", line 26, characters 0-211:
 Error:
 Anomaly

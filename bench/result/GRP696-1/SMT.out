@@ -30,47 +30,7 @@ File "./GRP696-1/SMT.v", line 13, characters 0-18:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP696-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult A (i A) = unit) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP696-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult (i A) A = unit) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP696-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, mult (mult A B) C = mult (mult A C) (ld C (mult B C)))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP696-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, mult A (mult B C) = mult (rd (mult A B) A) (mult A C))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP696-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult A (i (mult B A)) = i B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP696-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult unit A = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP696-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult A unit = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP696-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, rd (mult A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP696-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult (rd A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP696-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, ld A (mult A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP696-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult A (ld A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq0d3643.vtlog /tmp/verit_coq0d3643.smt2 2> /tmp/warnings_veritd0887c.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq798b1f.vtlog /tmp/verit_coq798b1f.smt2 2> /tmp/warnings_verit053472.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success
@@ -78,27 +38,25 @@ success
 success
 success
 success
-unknown
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+unsat
 success
 success
 Verit = 0.00007
-(set-option :print-success true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-logic QF_UFLIA)
-(declare-fun op_3 () Int)
-(declare-fun op_0 () Int)
-(declare-fun op_2 (Int Int ) Int)
-(declare-fun op_1 () Int)
-(assert (not (= (op_2 (op_2 (op_2 op_0 op_1) op_0) (op_2 op_0 op_3)) (op_2 op_0 (op_2 (op_2 (op_2 op_1 op_0) op_0) op_3)))))
-(check-sat)
-(get-model)
-File "./GRP696-1/SMT.v", line 31, characters 2-5:
-Error:
-CVC4 returned sat. Here is the model:
-
-a := 1
-b := -1
-mult := fun BOUND_VARIABLE_359 BOUND_VARIABLE_360 => if BOUND_VARIABLE_359 = -4 then if BOUND_VARIABLE_360 = 0 then 5 else -5 else if BOUND_VARIABLE_359 = 4 then if BOUND_VARIABLE_360 = 1 then -4 else -5 else if BOUND_VARIABLE_359 = -2 then if BOUND_VARIABLE_360 = 3 then -3 else -5 else if BOUND_VARIABLE_359 = 2 then if BOUND_VARIABLE_360 = 1 then -2 else -5 else if BOUND_VARIABLE_359 = -1 then if BOUND_VARIABLE_360 = 1 then 4 else -5 else if BOUND_VARIABLE_359 = 1 then if BOUND_VARIABLE_360 = -1 then 2 else if BOUND_VARIABLE_360 = 0 then 3 else -5 else -5
-c := 0
-
+File "./GRP696-1/SMT.v", line 31, characters 2-6:
+Warning: Bytecode compiler failed, falling back to standard conversion
+[bytecode-compiler-failed,bytecode-compiler,default]

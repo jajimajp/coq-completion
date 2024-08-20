@@ -26,40 +26,7 @@ File "./GRP755-1/SMT.v", line 12, characters 0-18:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP755-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, i A = ld A unit) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP755-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, mult A (mult B C) = mult (mult A B) C)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP755-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, mult A (mult B C) = mult (mult A B) C)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP755-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult unit A = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP755-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult A unit = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP755-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, rd (mult A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP755-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult (rd A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP755-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, ld A (mult A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP755-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult A (ld A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqa5ae51.vtlog /tmp/verit_coqa5ae51.smt2 2> /tmp/warnings_verit051e4b.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq48b6aa.vtlog /tmp/verit_coq48b6aa.smt2 2> /tmp/warnings_veritcd4fdb.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success
@@ -67,27 +34,24 @@ success
 success
 success
 success
-unknown
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+unsat
 success
 success
 Verit = 0.00006
-(set-option :print-success true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-logic QF_UFLIA)
-(declare-fun op_0 () Int)
-(declare-fun op_2 (Int Int ) Int)
-(declare-fun op_3 (Int ) Int)
-(declare-fun op_1 () Int)
-(assert (not (= (op_3 (op_2 op_0 op_1)) (op_2 (op_3 op_1) (op_3 op_0)))))
-(check-sat)
-(get-model)
-File "./GRP755-1/SMT.v", line 28, characters 2-5:
-Error:
-CVC4 returned sat. Here is the model:
-
-a := 0
-b := 1
-mult := fun BOUND_VARIABLE_311 BOUND_VARIABLE_312 => if BOUND_VARIABLE_311 = 0 then if BOUND_VARIABLE_312 = 1 then -1 else -3 else -3
-i := fun BOUND_VARIABLE_330 => if BOUND_VARIABLE_330 = -1 then 2 else if BOUND_VARIABLE_330 = 1 then -2 else 3
-
+File "./GRP755-1/SMT.v", line 28, characters 2-6:
+Warning: Bytecode compiler failed, falling back to standard conversion
+[bytecode-compiler-failed,bytecode-compiler,default]
+check
+     : i (mult a b) =? mult (i b) (i a)

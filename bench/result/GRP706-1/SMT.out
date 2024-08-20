@@ -30,36 +30,19 @@ File "./GRP706-1/SMT.v", line 13, characters 0-26:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP706-1/SMT.v", line 27, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, f A B = mult (rd A op_c) (ld op_c B))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP706-1/SMT.v", line 27, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, mult (mult A B) C = mult (mult A (rd C C)) (mult B C))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP706-1/SMT.v", line 27, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, mult A (mult B C) = mult (mult A B) (mult (ld A A) C))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP706-1/SMT.v", line 27, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, rd (mult A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP706-1/SMT.v", line 27, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult (rd A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP706-1/SMT.v", line 27, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, ld A (mult A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP706-1/SMT.v", line 27, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult A (ld A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq0466a6.vtlog /tmp/verit_coq0466a6.smt2 2> /tmp/warnings_veritf70f3d.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq22f8ea.vtlog /tmp/verit_coq22f8ea.smt2 2> /tmp/warnings_veritd3065b.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
 success
 success
 success

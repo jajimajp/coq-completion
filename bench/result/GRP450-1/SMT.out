@@ -22,23 +22,13 @@ File "./GRP450-1/SMT.v", line 11, characters 0-32:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP450-1/SMT.v", line 21, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, inverse A = divide (divide B B) A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP450-1/SMT.v", line 21, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, multiply A B = divide A (divide (divide C C) B))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP450-1/SMT.v", line 21, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z,
- divide A
-   (divide (divide (divide (divide B B) B) C)
-      (divide (divide (divide B B) A) C)) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq4bbb42.vtlog /tmp/verit_coq4bbb42.smt2 2> /tmp/warnings_veritffcf39.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq1585d3.vtlog /tmp/verit_coq1585d3.smt2 2> /tmp/warnings_verit96d0a0.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
 success
 success
 success

@@ -1,4 +1,4 @@
-toma --parsable "LPO.ld (LPO.ld (LPO.x0, LPO.x1), LPO.mult (LPO.ld (LPO.x0, LPO.x1), LPO.x2)) -> LPO.ld (LPO.x0, LPO.mult (LPO.x0, LPO.x2))" /tmp/tmp.nst3Bfcbkv
+toma --parsable "LPO.ld (LPO.ld (LPO.x0, LPO.x1), LPO.mult (LPO.ld (LPO.x0, LPO.x1), LPO.x2)) -> LPO.ld (LPO.x0, LPO.mult (LPO.x0, LPO.x2))" /tmp/tmp.PiADMbHhao
 Finish
 check
      : ld (ld x0 x1) (mult (ld x0 x1) x2) = ld x0 (mult x0 x2)

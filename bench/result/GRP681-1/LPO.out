@@ -1,1 +1,1 @@
-toma --parsable "LPO.mult (LPO.mult (LPO.mult (LPO.op_c, LPO.op_c), LPO.op_d), LPO.a) -> LPO.mult (LPO.a, LPO.mult (LPO.mult (LPO.op_c, LPO.op_c), LPO.op_d))" /tmp/tmp.RSAsu3FzBX
+toma --parsable "LPO.mult (LPO.mult (LPO.mult (LPO.op_c, LPO.op_c), LPO.op_d), LPO.a) -> LPO.mult (LPO.a, LPO.mult (LPO.mult (LPO.op_c, LPO.op_c), LPO.op_d))" /tmp/tmp.Th5rBUzIGc

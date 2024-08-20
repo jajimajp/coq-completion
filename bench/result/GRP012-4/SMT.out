@@ -18,27 +18,7 @@ File "./GRP012-4/SMT.v", line 10, characters 0-32:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP012-4/SMT.v", line 22, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, multiply X (inverse X) = identity)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP012-4/SMT.v", line 22, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, multiply X identity = X)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP012-4/SMT.v", line 22, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y Z0 : Z, multiply (multiply X Y) Z0 = multiply X (multiply Y Z0))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP012-4/SMT.v", line 22, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, multiply (inverse X) X = identity)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP012-4/SMT.v", line 22, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, multiply identity X = X)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq26c791.vtlog /tmp/verit_coq26c791.smt2 2> /tmp/warnings_verit069111.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq3924ad.vtlog /tmp/verit_coq3924ad.smt2 2> /tmp/warnings_verit3fe0a7.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success
@@ -46,27 +26,18 @@ success
 success
 success
 success
-unknown
+success
+success
+success
+success
+success
+success
+unsat
 success
 success
 Verit = 0.00006
-(set-option :print-success true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-logic QF_UFLIA)
-(declare-fun op_0 () Int)
-(declare-fun op_1 () Int)
-(declare-fun op_2 (Int Int ) Int)
-(declare-fun op_3 (Int ) Int)
-(assert (not (= (op_3 (op_2 op_0 op_1)) (op_2 (op_3 op_1) (op_3 op_0)))))
-(check-sat)
-(get-model)
-File "./GRP012-4/SMT.v", line 22, characters 2-5:
-Error:
-CVC4 returned sat. Here is the model:
-
-a := 0
-b := 1
-multiply := fun BOUND_VARIABLE_311 BOUND_VARIABLE_312 => if BOUND_VARIABLE_311 = 0 then if BOUND_VARIABLE_312 = 1 then -1 else -3 else -3
-inverse := fun BOUND_VARIABLE_330 => if BOUND_VARIABLE_330 = -1 then 2 else if BOUND_VARIABLE_330 = 1 then -2 else 3
-
+File "./GRP012-4/SMT.v", line 22, characters 2-6:
+Warning: Bytecode compiler failed, falling back to standard conversion
+[bytecode-compiler-failed,bytecode-compiler,default]
+check
+     : inverse (multiply a b) =? multiply (inverse b) (inverse a)

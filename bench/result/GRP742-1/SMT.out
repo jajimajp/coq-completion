@@ -26,42 +26,20 @@ File "./GRP742-1/SMT.v", line 12, characters 0-18:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP742-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult A (rd unit A) = unit)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP742-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, mult (mult A B) C = mult (mult A C) (ld C (mult B C)))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP742-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, mult A (mult B C) = mult (rd (mult A B) A) (mult A C))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP742-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult unit A = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP742-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult A unit = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP742-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, rd (mult A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP742-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult (rd A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP742-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, ld A (mult A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP742-1/SMT.v", line 28, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult A (ld A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqa4336f.vtlog /tmp/verit_coqa4336f.smt2 2> /tmp/warnings_verit714c85.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq018b5d.vtlog /tmp/verit_coq018b5d.smt2 2> /tmp/warnings_verit47047a.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
 success
 success
 success
@@ -71,7 +49,7 @@ success
 unknown
 success
 success
-Verit = 0.00008
+Verit = 0.00007
 (set-option :print-success true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)

@@ -1,2 +1,2 @@
-toma --parsable "LPO.commutator (LPO.commutator (LPO.a, LPO.b), LPO.b) -> LPO.identity" /tmp/tmp.PeGh61l0AV
+toma --parsable "LPO.commutator (LPO.commutator (LPO.a, LPO.b), LPO.b) -> LPO.identity" /tmp/tmp.xLlyiGPQYD
 Finish

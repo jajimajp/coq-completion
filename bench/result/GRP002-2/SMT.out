@@ -38,46 +38,7 @@ File "./GRP002-2/SMT.v", line 15, characters 0-32:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP002-2/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(multiply j (inverse h) = k) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP002-2/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported): (multiply h b = j)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP002-2/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(multiply d (inverse b) = h) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP002-2/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(multiply c (inverse a) = d) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP002-2/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported): (multiply a b = c)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP002-2/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, multiply X (multiply X X) = identity)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP002-2/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, multiply X (inverse X) = identity)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP002-2/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, multiply X identity = X)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP002-2/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y Z0 : Z, multiply (multiply X Y) Z0 = multiply X (multiply Y Z0))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP002-2/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, multiply (inverse X) X = identity)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP002-2/SMT.v", line 33, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, multiply identity X = X)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq990b40.vtlog /tmp/verit_coq990b40.smt2 2> /tmp/warnings_verit0b04ed.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq2b6e72.vtlog /tmp/verit_coq2b6e72.smt2 2> /tmp/warnings_veritb92c99.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success
@@ -86,29 +47,26 @@ success
 success
 success
 success
-unknown
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+unsat
 success
 success
 Verit = 0.00007
-(set-option :print-success true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-logic QF_UFLIA)
-(declare-fun op_4 () Int)
-(declare-fun op_0 () Int)
-(declare-fun op_1 () Int)
-(declare-fun op_2 (Int ) Int)
-(declare-fun op_3 (Int Int ) Int)
-(assert (not (= (op_3 op_0 (op_2 op_1)) op_4)))
-(check-sat)
-(get-model)
-File "./GRP002-2/SMT.v", line 33, characters 2-5:
-Error:
-CVC4 returned sat. Here is the model:
-
-k := 1
-b := -1
-inverse := fun _ => 2
-multiply := fun _ _ => -2
-identity := 0
-
+File "./GRP002-2/SMT.v", line 33, characters 2-6:
+Warning: Bytecode compiler failed, falling back to standard conversion
+[bytecode-compiler-failed,bytecode-compiler,default]

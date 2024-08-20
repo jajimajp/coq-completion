@@ -30,47 +30,23 @@ File "./GRP716-1/SMT.v", line 13, characters 0-18:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP716-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(mult op_b op_a = unit) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP716-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(mult op_a op_b = unit) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP716-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult unit A = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP716-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult A unit = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP716-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult A (mult B B) = mult (mult A B) B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP716-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, mult (mult (mult A B) C) B = mult A (mult (mult B C) B))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP716-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, mult A (plus B C) = plus (mult A B) (mult A C))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP716-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, plus A (minus A) = op_0)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP716-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, plus A op_0 = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP716-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, plus A B = plus B A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP716-1/SMT.v", line 31, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, plus (plus A B) C = plus A (plus B C))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqc90eff.vtlog /tmp/verit_coqc90eff.smt2 2> /tmp/warnings_verite7956c.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqbf112b.vtlog /tmp/verit_coqbf112b.smt2 2> /tmp/warnings_verita69ca0.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
 success
 success
 success

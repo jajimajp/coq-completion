@@ -38,57 +38,7 @@ File "./GRP702-10/SMT.v", line 15, characters 0-16:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP702-10/SMT.v", line 35, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, op_f = mult A (mult B (ld (mult A B) op_c)))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP702-10/SMT.v", line 35, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, op_e = mult (mult (rd op_c (mult A B)) B) A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP702-10/SMT.v", line 35, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, op_d = ld A (mult op_c A))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP702-10/SMT.v", line 35, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult A (mult op_c B) = mult (mult A op_c) B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP702-10/SMT.v", line 35, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult A (mult B op_c) = mult (mult A B) op_c)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP702-10/SMT.v", line 35, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult op_c (mult A B) = mult (mult op_c A) B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP702-10/SMT.v", line 35, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, mult A (mult B (mult B C)) = mult (mult (mult A B) B) C)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP702-10/SMT.v", line 35, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult unit A = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP702-10/SMT.v", line 35, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A : Z, mult A unit = A) [SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP702-10/SMT.v", line 35, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, rd (mult A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP702-10/SMT.v", line 35, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult (rd A B) B = A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP702-10/SMT.v", line 35, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, ld A (mult A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP702-10/SMT.v", line 35, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, mult A (ld A B) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq398fac.vtlog /tmp/verit_coq398fac.smt2 2> /tmp/warnings_verit3d08b7.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq2f88d0.vtlog /tmp/verit_coq2f88d0.smt2 2> /tmp/warnings_verit7c9266.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success
@@ -96,27 +46,29 @@ success
 success
 success
 success
-unknown
 success
 success
-Verit = 0.00008
-(set-option :print-success true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-logic QF_UFLIA)
-(declare-fun op_3 (Int Int ) Int)
-(declare-fun op_2 () Int)
-(declare-fun op_0 () Int)
-(declare-fun op_1 () Int)
-(assert (not (= (op_3 op_0 (op_3 op_1 op_2)) (op_3 (op_3 op_0 op_1) op_2))))
-(check-sat)
-(get-model)
-File "./GRP702-10/SMT.v", line 35, characters 2-5:
-Error:
-CVC4 returned sat. Here is the model:
-
-op_d := 1
-x0 := -1
-x1 := 0
-mult := fun BOUND_VARIABLE_312 BOUND_VARIABLE_313 => if BOUND_VARIABLE_312 = -1 then if BOUND_VARIABLE_313 = 0 then 2 else -3 else if BOUND_VARIABLE_312 = 1 then if BOUND_VARIABLE_313 = 2 then -2 else if BOUND_VARIABLE_313 = -1 then 3 else -3 else -3
-
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+unsat
+success
+success
+Verit = 0.00005
+File "./GRP702-10/SMT.v", line 35, characters 2-6:
+Warning: Bytecode compiler failed, falling back to standard conversion
+[bytecode-compiler-failed,bytecode-compiler,default]

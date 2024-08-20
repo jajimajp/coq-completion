@@ -1,1 +1,1 @@
-toma --parsable "LPO.greatest_lower_bound (LPO.a, LPO.least_upper_bound (LPO.b, LPO.c)) -> LPO.least_upper_bound (LPO.greatest_lower_bound (LPO.a, LPO.b), LPO.greatest_lower_bound (LPO.a, LPO.c))" /tmp/tmp.bZDtoWxsvz
+toma --parsable "LPO.greatest_lower_bound (LPO.a, LPO.least_upper_bound (LPO.b, LPO.c)) -> LPO.least_upper_bound (LPO.greatest_lower_bound (LPO.a, LPO.b), LPO.greatest_lower_bound (LPO.a, LPO.c))" /tmp/tmp.Mzzx0JxyOi

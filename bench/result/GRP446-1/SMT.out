@@ -18,22 +18,7 @@ File "./GRP446-1/SMT.v", line 10, characters 0-32:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP446-1/SMT.v", line 20, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B : Z, inverse A = divide (divide B B) A)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP446-1/SMT.v", line 20, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z, multiply A B = divide A (divide (divide C C) B))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP446-1/SMT.v", line 20, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall A B C : Z,
- divide A
-   (divide (divide (divide (divide A A) B) C)
-      (divide (divide (divide A A) A) C)) = B)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq781c02.vtlog /tmp/verit_coq781c02.smt2 2> /tmp/warnings_veritbf6b14.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq7d6eac.vtlog /tmp/verit_coq7d6eac.smt2 2> /tmp/warnings_verit26207e.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success
@@ -41,27 +26,16 @@ success
 success
 success
 success
-unknown
+success
+success
+success
+success
+unsat
 success
 success
 Verit = 0.00007
-(set-option :print-success true)
-(set-option :produce-assignments true)
-(set-option :produce-proofs true)
-(set-logic QF_UFLIA)
-(declare-fun op_0 () Int)
-(declare-fun op_1 (Int ) Int)
-(declare-fun op_2 (Int Int ) Int)
-(declare-fun op_3 () Int)
-(assert (not (= (op_2 (op_2 (op_1 op_0) op_0) op_3) op_3)))
-(check-sat)
-(get-model)
-File "./GRP446-1/SMT.v", line 20, characters 2-5:
-Error:
-CVC4 returned sat. Here is the model:
-
-b2 := 0
-inverse := fun _ => -1
-multiply := fun BOUND_VARIABLE_302 BOUND_VARIABLE_303 => if BOUND_VARIABLE_302 = -1 then if BOUND_VARIABLE_303 = 0 then 2 else -2 else -2
-a2 := 1
-
+File "./GRP446-1/SMT.v", line 20, characters 2-6:
+Warning: Bytecode compiler failed, falling back to standard conversion
+[bytecode-compiler-failed,bytecode-compiler,default]
+check
+     : multiply (multiply (inverse b2) b2) a2 =? a2

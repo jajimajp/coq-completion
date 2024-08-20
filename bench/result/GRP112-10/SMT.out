@@ -46,12 +46,9 @@ File "./GRP112-10/SMT.v", line 17, characters 0-39:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP112-10/SMT.v", line 25, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y Z0 : Z, multiply (multiply (multiply X Y) Z0) (multiply X Z0) = Y)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqcb7d6f.vtlog /tmp/verit_coqcb7d6f.smt2 2> /tmp/warnings_verit54193e.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqfc1419.vtlog /tmp/verit_coqfc1419.smt2 2> /tmp/warnings_verit424817.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
 success
 success
 success

@@ -1,4 +1,4 @@
-toma --parsable "LPO.greatest_lower_bound (LPO.b, LPO.least_upper_bound (LPO.a, LPO.b)) -> LPO.b" /tmp/tmp.ZfhTxgNIk8
+toma --parsable "LPO.greatest_lower_bound (LPO.b, LPO.least_upper_bound (LPO.a, LPO.b)) -> LPO.b" /tmp/tmp.taytEbCQDR
 Finish
 check
      : greatest_lower_bound b (least_upper_bound a b) = b

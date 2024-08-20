@@ -34,46 +34,22 @@ File "./GRP200-1/SMT.v", line 14, characters 0-32:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-File "./GRP200-1/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y Z0 : Z,
- multiply (multiply X (multiply Y Z0)) X =
- multiply (multiply X Y) (multiply Z0 X))
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP200-1/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, multiply (left_inverse X) X = identity)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP200-1/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, multiply X (right_inverse X) = identity)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP200-1/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y : Z, right_division (multiply X Y) Y = X)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP200-1/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y : Z, multiply (right_division X Y) Y = X)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP200-1/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y : Z, left_division X (multiply X Y) = Y)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP200-1/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X Y : Z, multiply X (left_division X Y) = Y)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP200-1/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, multiply X identity = X)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-File "./GRP200-1/SMT.v", line 30, characters 2-6:
-Warning: Discarding the following lemma (unsupported):
-(forall X : Z, multiply identity X = X)
-[SMTCoq-discarding-lemma,SMTCoq,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqcd7b5f.vtlog /tmp/verit_coqcd7b5f.smt2 2> /tmp/warnings_verit56a133.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqeaf580.vtlog /tmp/verit_coqeaf580.smt2 2> /tmp/warnings_verit6c23ae.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
+success
 success
 success
 success
@@ -83,7 +59,7 @@ success
 unknown
 success
 success
-Verit = 0.00008
+Verit = 0.00006
 (set-option :print-success true)
 (set-option :produce-assignments true)
 (set-option :produce-proofs true)
