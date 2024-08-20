@@ -11,3 +11,16 @@ Parameter commutator : G -> G -> G.
 Parameter multiply : G -> G -> G.
 Axiom ax_commutator_distributes_over_product : forall A B C : G, (commutator (multiply A B) C) = (multiply (commutator A C) (commutator B C)).
 Axiom ax_commutator : forall A B : G, (multiply A B) = (multiply B (multiply A (commutator A B))).
+Axiom ax_left_cancellation : forall A B C : G, (multiply A B) = (multiply A C).
+Axiom ax_right_cancellation : forall A B C : G, (multiply A B) = (multiply C B).
+Axiom ax_associativity_of_multiply : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
+
+
+(* Goal *)
+Theorem check : (multiply (commutator a b) c) = (multiply c (commutator a b)).
+Proof.
+  hammer.
+Qed.
+
+Check check.
+

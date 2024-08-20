@@ -9,14 +9,14 @@ Variable c : Z.
 Variable identity : Z.
 Variable left_inverse : Z -> Z.
 Variable multiply : Z -> Z -> Z.
-Axiom ax_moufang1 : forall X Y Z : Z, (multiply (multiply X (multiply Y Z)) X) = (multiply (multiply X Y) (multiply Z X)).
-Axiom ax_left_inverse : forall X : Z, (multiply (left_inverse X) X) = identity.
-Axiom ax_left_identity : forall X : Z, (multiply identity X) = X.
+Axiom ax_moufang1 : forall X Y Z : Z, (multiply (multiply X (multiply Y Z)) X) =? (multiply (multiply X Y) (multiply Z X)).
+Axiom ax_left_inverse : forall X : Z, (multiply (left_inverse X) X) =? identity.
+Axiom ax_left_identity : forall X : Z, (multiply identity X) =? X.
 
 Add_lemmas ax_moufang1 ax_left_inverse ax_left_identity.
 
 (* Goal *)
-Theorem check : (multiply (multiply (multiply a b) c) b) = (multiply a (multiply b (multiply c b))).
+Theorem check : (multiply (multiply (multiply a b) c) b) =? (multiply a (multiply b (multiply c b))).
 Proof.
   smt.
 Qed.

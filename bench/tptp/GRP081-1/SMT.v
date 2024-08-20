@@ -13,13 +13,13 @@ Variable c3 : Z.
 Variable double_divide : Z -> Z -> Z.
 Variable inverse : Z -> Z.
 Variable multiply : Z -> Z -> Z.
-Axiom ax_multiply : forall X Y : Z, (multiply X Y) = (inverse (double_divide Y X)).
-Axiom ax_single_axiom : forall U X Y Z : Z, (inverse (double_divide (double_divide X (double_divide (double_divide Y Z) (inverse (double_divide Y (double_divide (inverse U) (inverse Z)))))) X)) = U.
+Axiom ax_multiply : forall X Y : Z, (multiply X Y) =? (inverse (double_divide Y X)).
+Axiom ax_single_axiom : forall U X Y Z : Z, (inverse (double_divide (double_divide X (double_divide (double_divide Y Z) (inverse (double_divide Y (double_divide (inverse U) (inverse Z)))))) X)) =? U.
 
 Add_lemmas ax_multiply ax_single_axiom.
 
 (* Goal *)
-Theorem check : (multiply (inverse a1) a1) = (multiply (inverse b1) b1).
+Theorem check : (multiply (inverse a1) a1) =? (multiply (inverse b1) b1).
 Proof.
   smt.
 Qed.

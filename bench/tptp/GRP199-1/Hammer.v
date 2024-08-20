@@ -17,3 +17,16 @@ Axiom ax_prove_quotient3 : (multiply b d0) = (multiply a c0).
 Axiom ax_prove_quotient2 : (multiply d b0) = (multiply c a0).
 Axiom ax_prove_quotient1 : (multiply b b0) = (multiply a a0).
 Axiom ax_nilpotency : forall X Y Z : G, (multiply X (multiply Y (multiply Z (multiply Y X)))) = (multiply Y (multiply X (multiply Z (multiply X Y)))).
+Axiom ax_left_cancellation : forall A B C : G, (multiply A B) = (multiply A C).
+Axiom ax_right_cancellation : forall A B C : G, (multiply A B) = (multiply C B).
+Axiom ax_associativity_of_multiply : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
+
+
+(* Goal *)
+Theorem check : (multiply d d0) = (multiply c c0).
+Proof.
+  hammer.
+Qed.
+
+Check check.
+

@@ -8,13 +8,13 @@ Variable b : Z.
 Variable c : Z.
 Variable identity : Z.
 Variable multiply : Z -> Z -> Z.
-Axiom ax_single_axiom2 : (multiply identity identity) = identity.
-Axiom ax_single_axiom : forall X Y Z : Z, (multiply Y (multiply (multiply Y (multiply (multiply Y Y) (multiply X Z))) (multiply Z (multiply Z Z)))) = X.
+Axiom ax_single_axiom2 : (multiply identity identity) =? identity.
+Axiom ax_single_axiom : forall X Y Z : Z, (multiply Y (multiply (multiply Y (multiply (multiply Y Y) (multiply X Z))) (multiply Z (multiply Z Z)))) =? X.
 
 Add_lemmas ax_single_axiom2 ax_single_axiom.
 
 (* Goal *)
-Theorem check : (multiply (multiply a b) c) = (multiply a (multiply b c)).
+Theorem check : (multiply (multiply a b) c) =? (multiply a (multiply b c)).
 Proof.
   smt.
 Qed.

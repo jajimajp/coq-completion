@@ -15,13 +15,13 @@ Variable c3 : Z.
 Variable divide : Z -> Z -> Z.
 Variable inverse : Z -> Z.
 Variable multiply : Z -> Z -> Z.
-Axiom ax_multiply : forall X Y : Z, (multiply X Y) = (divide X (inverse Y)).
-Axiom ax_single_axiom : forall X Y Z : Z, (divide (divide (divide X (inverse Y)) Z) (divide X Z)) = Y.
+Axiom ax_multiply : forall X Y : Z, (multiply X Y) =? (divide X (inverse Y)).
+Axiom ax_single_axiom : forall X Y Z : Z, (divide (divide (divide X (inverse Y)) Z) (divide X Z)) =? Y.
 
 Add_lemmas ax_multiply ax_single_axiom.
 
 (* Goal *)
-Theorem check : (multiply (inverse a1) a1) = (multiply (inverse b1) b1).
+Theorem check : (multiply (inverse a1) a1) =? (multiply (inverse b1) b1).
 Proof.
   smt.
 Qed.

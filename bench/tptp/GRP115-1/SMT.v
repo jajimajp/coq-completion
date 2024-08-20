@@ -6,12 +6,12 @@ Local Open Scope Z_scope.
 Variable a : Z.
 Variable identity : Z.
 Variable multiply : Z -> Z -> Z.
-Axiom ax_single_axiom : forall X Y Z : Z, (multiply X (multiply (multiply X (multiply (multiply X Y) Z)) (multiply identity (multiply Z Z)))) = Y.
+Axiom ax_single_axiom : forall X Y Z : Z, (multiply X (multiply (multiply X (multiply (multiply X Y) Z)) (multiply identity (multiply Z Z)))) =? Y.
 
 Add_lemmas ax_single_axiom.
 
 (* Goal *)
-Theorem check : (multiply a (multiply a a)) = identity.
+Theorem check : (multiply a (multiply a a)) =? identity.
 Proof.
   smt.
 Qed.

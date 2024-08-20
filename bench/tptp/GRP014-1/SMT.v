@@ -8,12 +8,12 @@ Variable b : Z.
 Variable c : Z.
 Variable inverse : Z -> Z.
 Variable multiply : Z -> Z -> Z.
-Axiom ax_group_axiom : forall W X Y Z : Z, (multiply X (inverse (multiply (multiply (inverse (multiply (inverse Y) (multiply (inverse X) W))) Z) (inverse (multiply Y Z))))) = W.
+Axiom ax_group_axiom : forall W X Y Z : Z, (multiply X (inverse (multiply (multiply (inverse (multiply (inverse Y) (multiply (inverse X) W))) Z) (inverse (multiply Y Z))))) =? W.
 
 Add_lemmas ax_group_axiom.
 
 (* Goal *)
-Theorem check : (multiply a (multiply b c)) = (multiply (multiply a b) c).
+Theorem check : (multiply a (multiply b c)) =? (multiply (multiply a b) c).
 Proof.
   smt.
 Qed.

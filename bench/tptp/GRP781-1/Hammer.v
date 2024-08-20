@@ -11,3 +11,16 @@ Parameter y : G.
 Parameter z : G.
 Axiom ax_assumption : forall X Y Z : G, (m X (m Y (m Z (m Y X)))) = (m Y (m X (m Z (m X Y)))).
 Axiom ax_commutator : forall X Y : G, (m Y (m X (c X Y))) = (m X Y).
+Axiom ax_cancellation_001 : forall X Y Z : G, (m Z X) = (m Z Y).
+Axiom ax_cancellation : forall X Y Z : G, (m X Z) = (m Y Z).
+Axiom ax_associativity : forall X Y Z : G, (m X (m Y Z)) = (m (m X Y) Z).
+
+
+(* Goal *)
+Theorem check : (c (m x y) z) = (m (c x z) (c y z)).
+Proof.
+  hammer.
+Qed.
+
+Check check.
+

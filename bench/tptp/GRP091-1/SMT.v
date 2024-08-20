@@ -16,15 +16,15 @@ Variable divide : Z -> Z -> Z.
 Variable identity : Z.
 Variable inverse : Z -> Z.
 Variable multiply : Z -> Z -> Z.
-Axiom ax_identity : forall X : Z, identity = (divide X X).
-Axiom ax_inverse : forall X Z : Z, (inverse X) = (divide (divide Z Z) X).
-Axiom ax_multiply : forall X Y Z : Z, (multiply X Y) = (divide X (divide (divide Z Z) Y)).
-Axiom ax_single_axiom : forall X Y Z : Z, (divide (divide X (divide (divide X Y) Z)) Y) = Z.
+Axiom ax_identity : forall X : Z, identity =? (divide X X).
+Axiom ax_inverse : forall X Z : Z, (inverse X) =? (divide (divide Z Z) X).
+Axiom ax_multiply : forall X Y Z : Z, (multiply X Y) =? (divide X (divide (divide Z Z) Y)).
+Axiom ax_single_axiom : forall X Y Z : Z, (divide (divide X (divide (divide X Y) Z)) Y) =? Z.
 
 Add_lemmas ax_identity ax_inverse ax_multiply ax_single_axiom.
 
 (* Goal *)
-Theorem check : (multiply (inverse a1) a1) = (multiply (inverse b1) b1).
+Theorem check : (multiply (inverse a1) a1) =? (multiply (inverse b1) b1).
 Proof.
   smt.
 Qed.

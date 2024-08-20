@@ -15,12 +15,12 @@ Variable c3 : Z.
 Variable inverse : Z -> Z.
 Variable multiply : Z -> Z -> Z.
 Variable tuple : Z -> Z -> Z -> Z -> Z.
-Axiom ax_single_axiom : forall X Y Z : Z, (multiply (multiply (multiply X Y) Z) (multiply X Z)) = Y.
+Axiom ax_single_axiom : forall X Y Z : Z, (multiply (multiply (multiply X Y) Z) (multiply X Z)) =? Y.
 
 Add_lemmas ax_single_axiom.
 
 (* Goal *)
-Theorem check : (tuple (multiply (multiply (inverse b2) b2) a2) (multiply (multiply a3 b3) c3) (multiply (inverse a1) a1) (multiply a4 a4)) = (tuple a2 (multiply a3 (multiply b3 c3)) (multiply (inverse b1) b1) (multiply b4 b4)).
+Theorem check : (tuple (multiply (multiply (inverse b2) b2) a2) (multiply (multiply a3 b3) c3) (multiply (inverse a1) a1) (multiply a4 a4)) =? (tuple a2 (multiply a3 (multiply b3 c3)) (multiply (inverse b1) b1) (multiply b4 b4)).
 Proof.
   smt.
 Qed.

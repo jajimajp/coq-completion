@@ -12,12 +12,12 @@ Variable b3 : Z.
 Variable c3 : Z.
 Variable inverse : Z -> Z.
 Variable multiply : Z -> Z -> Z.
-Axiom ax_single_axiom : forall U X Y Z : Z, (multiply X (inverse (multiply Y (multiply Z (multiply (multiply (inverse Z) (inverse (multiply U Y))) X))))) = U.
+Axiom ax_single_axiom : forall U X Y Z : Z, (multiply X (inverse (multiply Y (multiply Z (multiply (multiply (inverse Z) (inverse (multiply U Y))) X))))) =? U.
 
 Add_lemmas ax_single_axiom.
 
 (* Goal *)
-Theorem check : (multiply (inverse a1) a1) = (multiply (inverse b1) b1).
+Theorem check : (multiply (inverse a1) a1) =? (multiply (inverse b1) b1).
 Proof.
   smt.
 Qed.

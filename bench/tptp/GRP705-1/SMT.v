@@ -10,20 +10,20 @@ Variable op_a : Z.
 Variable op_b : Z.
 Variable rd : Z -> Z -> Z.
 Variable unit : Z.
-Axiom ax_c09 : (mult op_b (mult op_b (mult op_b (mult op_b (mult op_b (mult op_b (mult op_b (mult op_b op_b)))))))) = unit.
-Axiom ax_c08 : (mult op_a (mult op_a (mult op_a op_a))) = unit.
-Axiom ax_c07 : forall A B C : Z, (mult A (mult B (mult B C))) = (mult (mult (mult A B) B) C).
-Axiom ax_c06 : forall A : Z, (mult unit A) = A.
-Axiom ax_c05 : forall A : Z, (mult A unit) = A.
-Axiom ax_c04 : forall A B : Z, (rd (mult A B) B) = A.
-Axiom ax_c03 : forall A B : Z, (mult (rd A B) B) = A.
-Axiom ax_c02 : forall A B : Z, (ld A (mult A B)) = B.
-Axiom ax_c01 : forall A B : Z, (mult A (ld A B)) = B.
+Axiom ax_c09 : (mult op_b (mult op_b (mult op_b (mult op_b (mult op_b (mult op_b (mult op_b (mult op_b op_b)))))))) =? unit.
+Axiom ax_c08 : (mult op_a (mult op_a (mult op_a op_a))) =? unit.
+Axiom ax_c07 : forall A B C : Z, (mult A (mult B (mult B C))) =? (mult (mult (mult A B) B) C).
+Axiom ax_c06 : forall A : Z, (mult unit A) =? A.
+Axiom ax_c05 : forall A : Z, (mult A unit) =? A.
+Axiom ax_c04 : forall A B : Z, (rd (mult A B) B) =? A.
+Axiom ax_c03 : forall A B : Z, (mult (rd A B) B) =? A.
+Axiom ax_c02 : forall A B : Z, (ld A (mult A B)) =? B.
+Axiom ax_c01 : forall A B : Z, (mult A (ld A B)) =? B.
 
 Add_lemmas ax_c09 ax_c08 ax_c07 ax_c06 ax_c05 ax_c04 ax_c03 ax_c02 ax_c01.
 
 (* Goal *)
-Theorem check : (mult op_a (mult op_b a)) = (mult (mult op_a op_b) a).
+Theorem check : (mult op_a (mult op_b a)) =? (mult (mult op_a op_b) a).
 Proof.
   smt.
 Qed.

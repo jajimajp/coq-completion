@@ -9,12 +9,12 @@ Variable u : Z.
 Variable x : Z.
 Variable y : Z.
 Variable z : Z.
-Axiom ax_single_non_axiom : forall U Y Z : Z, (multiply U (inverse (multiply Y (multiply (multiply (multiply Z (inverse Z)) (inverse (multiply U Y))) U)))) = U.
+Axiom ax_single_non_axiom : forall U Y Z : Z, (multiply U (inverse (multiply Y (multiply (multiply (multiply Z (inverse Z)) (inverse (multiply U Y))) U)))) =? U.
 
 Add_lemmas ax_single_non_axiom.
 
 (* Goal *)
-Theorem check : (multiply x (inverse (multiply y (multiply (multiply (multiply z (inverse z)) (inverse (multiply u y))) x)))) = u.
+Theorem check : (multiply x (inverse (multiply y (multiply (multiply (multiply z (inverse z)) (inverse (multiply u y))) x)))) =? u.
 Proof.
   smt.
 Qed.

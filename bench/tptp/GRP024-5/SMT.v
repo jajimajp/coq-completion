@@ -10,16 +10,16 @@ Variable commutator : Z -> Z -> Z.
 Variable identity : Z.
 Variable inverse : Z -> Z.
 Variable multiply : Z -> Z -> Z.
-Axiom ax_associativity_of_commutator : forall X Y Z : Z, (commutator (commutator X Y) Z) = (commutator X (commutator Y Z)).
-Axiom ax_name : forall X Y : Z, (commutator X Y) = (multiply (inverse X) (multiply (inverse Y) (multiply X Y))).
-Axiom ax_associativity : forall X Y Z : Z, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
-Axiom ax_left_inverse : forall X : Z, (multiply (inverse X) X) = identity.
-Axiom ax_left_identity : forall X : Z, (multiply identity X) = X.
+Axiom ax_associativity_of_commutator : forall X Y Z : Z, (commutator (commutator X Y) Z) =? (commutator X (commutator Y Z)).
+Axiom ax_name : forall X Y : Z, (commutator X Y) =? (multiply (inverse X) (multiply (inverse Y) (multiply X Y))).
+Axiom ax_associativity : forall X Y Z : Z, (multiply (multiply X Y) Z) =? (multiply X (multiply Y Z)).
+Axiom ax_left_inverse : forall X : Z, (multiply (inverse X) X) =? identity.
+Axiom ax_left_identity : forall X : Z, (multiply identity X) =? X.
 
 Add_lemmas ax_associativity_of_commutator ax_name ax_associativity ax_left_inverse ax_left_identity.
 
 (* Goal *)
-Theorem check : (multiply a (commutator b c)) = (multiply (commutator b c) a).
+Theorem check : (multiply a (commutator b c)) =? (multiply (commutator b c) a).
 Proof.
   smt.
 Qed.
