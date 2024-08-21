@@ -1,3 +1,5 @@
+Declare ML Module "coq-completion.plugin".
+
 Parameter G : Set.
 Parameter f : G -> G -> G.
 Parameter e : G.

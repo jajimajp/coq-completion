@@ -1,3 +1,5 @@
+Declare ML Module "coq-completion.plugin".
+
 Require Import Coq.Setoids.Setoid.
 
 Parameter S : Set.
