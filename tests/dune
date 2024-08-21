@@ -2,10 +2,3 @@
 (coq.theory
  (name tests)
  (plugins coq-completion.plugin))
-
-; tests with *.ml
-(library
- (name plugin_tests)
- (inline_tests)
- (preprocess (pps ppx_inline_test ppx_expect))
- (libraries coq-completion.plugin))
