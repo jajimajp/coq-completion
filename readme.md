@@ -38,3 +38,17 @@ You can find a lot of example Coq files in ./examples.
 ```bash
 coqc examples/commonoid.v
 ```
+
+## Tests
+
+1. Unit test:
+
+```bash
+dune runtest tests/unit
+```
+
+2. E2E test:
+
+```bash
+dune build tests/e2e
+```

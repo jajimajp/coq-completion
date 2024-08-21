@@ -1,4 +1,4 @@
-; tests with *.v
 (coq.theory
- (name tests)
+ (name e2e_tests)
+ (package coq-completion)
  (plugins coq-completion.plugin))
