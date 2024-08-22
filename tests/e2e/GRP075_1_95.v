@@ -44,11 +44,20 @@ Hypothesis t1 : forall X0 : G, inverse X0 = double_divide X0 identity.
 Hypothesis t79 : forall X5 : G, double_divide (double_divide identity X5) X5 = identity.
 Hypothesis t84 : forall X5, double_divide identity identity = double_divide (double_divide identity X5) X5.
 
+Ltac specialize_until_eq H x :=
+  lazymatch type of H with
+  | ?G -> ?Rest =>
+      specialize (H x);
+      specialize_until_eq H x
+  | _ = _ => idtac
+  | _ => fail "H is not of the form G -> ... or equality"
+  end.
+
 Theorem t95 : inverse identity = identity.
 Proof.
   pose proof (H := t84).
   rewrite_strat innermost <- t1 in H.
   rewrite_strat innermost t79 in H.
-  specialize (H a1).
+  specialize_until_eq H a1.
   auto.
 Qed.
