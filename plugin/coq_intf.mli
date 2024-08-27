@@ -20,3 +20,8 @@ val prove_interreduce :
   rewriters:Libnames.qualid list ->
   applier:Libnames.qualid -> (* apply を行う定理名 *)
   unit
+
+val tclSPECIALIZE_IF_NECESSARY : unit Proofview.tactic -> unit Proofview.tactic
+
+(** [tclPRINT_GOAL label] prints current goal with label. *)
+val tclPRINT_GOAL : string -> unit Proofview.tactic

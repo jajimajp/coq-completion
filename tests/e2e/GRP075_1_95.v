@@ -53,11 +53,16 @@ Ltac specialize_until_eq H x :=
   | _ => fail "H is not of the form G -> ... or equality"
   end.
 
+Create HintDb hint_a1.
+Hint Resolve a1 : hint_a1.
+
 Theorem t95 : inverse identity = identity.
 Proof.
   pose proof (H := t84).
   rewrite_strat innermost <- t1 in H.
   rewrite_strat innermost t79 in H.
-  specialize_until_eq H a1.
-  auto.
+  (* auto using a1. *)
+  (* specialize_until_eq H a1. *)
+  debug auto with hint_a1.
+  (* auto. *)
 Qed.

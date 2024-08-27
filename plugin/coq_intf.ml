@@ -162,6 +162,89 @@ let proof_using_crit ~name ~n1 ~n2 ~l ~r ~crit ~(constants:My_term.constants opt
   | Defined _ -> ()
   | _ -> failwith ("Could not prove goal by crit: " ^ (Names.Id.to_string name))
 
+
+(** [constr_of_s s] は識別子 [s] の項を取得する。
+    HACK: もっと簡潔に書けそう。 *)
+let const_of_s s: Names.Constant.t =
+  let ln = Libnames.qualid_of_string s in
+  let gref = Nametab.global ln in
+  let open Names.GlobRef in
+  match gref with
+  | ConstRef cst ->
+    cst
+  | _ -> failwith "Invalid input"
+
+let hyps_contains_free_prod_env env sigma hyps =
+  (* HACK: econstr としては G -> ... も forall a : G, ... もどちらも Prod になるが、
+     extern すると G -> ... は Notation になることを利用する。 *)
+  Context.Named.fold_inside ~init:false (fun acc pt ->
+    let econstr = Context.Named.Declaration.get_type pt in
+    if not @@ EConstr.isProd sigma econstr then
+      false
+    else
+      let cexpr = Constrextern.extern_constr env sigma econstr in
+      match cexpr.CAst.v with
+      | CNotation _ -> true
+      | _ -> acc) hyps
+
+let const_body_type = function
+| Declarations.Def c -> EConstr.of_constr c
+| Declarations.Undef (None) -> print_endline "GOT UNDEF"; failwith "Invalid input"
+| Declarations.Undef (Some i) -> print_endline "GOT UNDEF"; failwith "Invalid input"
+| Declarations.OpaqueDef _ -> print_endline "GOT OPAQUE"; failwith "Invalid input"
+| Declarations.Primitive _ -> print_endline "GOT PRIMITIVE"; failwith "Invalid input"
+
+let tclSPECIALIZE_IF_NECESSARY next =
+  let open Proofview.Notations in
+  Proofview.Goal.(enter_one (fun gl ->
+    let (sigma, env, hyps) = (sigma gl, env gl, hyps gl) in
+    if hyps_contains_free_prod_env env sigma hyps then
+      let _ = print_endline "P" in
+      let c = try
+        Environ.lookup_constant (const_of_s "a1") env
+      with
+        Not_found -> failwith "Could not find constant a1"
+      in
+      Feedback.msg_notice Pp.(str "Specialize: " ++ Printer.pr_econstr_env env sigma (EConstr.of_constr c.const_type));
+      Auto.h_auto None [(fun env sigma ->
+        let c = Environ.lookup_constant (const_of_s "a1") env in
+        let c = const_body_type c.const_body in
+        Feedback.msg_notice Pp.(str "Specialize: " ++ Printer.pr_econstr_env env sigma c);
+        sigma, c)] None <*>
+      (Proofview.Goal.(enter_one (fun gl ->
+        print_endline "HELLO?";
+        let sigma = sigma gl in
+        let env = env gl in
+        let hyps = hyps gl in
+        let () = hyps |> Context.Named.fold_outside ~init:() (fun pt () ->
+          let id = Context.Named.Declaration.get_id pt in
+          let id = Names.Id.print id in
+          let econstr = Context.Named.Declaration.get_type pt in
+          Feedback.msg_notice Pp.(str "hyp(" ++ id ++ str ") " ++ Printer.pr_econstr_env env sigma econstr)) in
+          if hyps_contains_free_prod_env env sigma hyps then
+            Proofview.tclUNIT (Feedback.msg_notice Pp.(str "YY")) <*>
+            next
+          else
+            Proofview.tclUNIT (Feedback.msg_notice Pp.(str "NN"))))) <*>
+            next
+    else
+      next))
+
+(** [tclPRINT_GOAL] prints current goal. *)
+let tclPRINT_GOAL s =
+  Proofview.Goal.enter (fun gl ->
+    print_endline @@ "PRINT_GOAL " ^ s;
+    let open Proofview.Goal in
+    let (sigma, env, hyps) = (sigma gl, env gl, hyps gl) in
+    let hyps = hyps |> Context.Named.fold_outside ~init:Pp.(str "・") (fun pt acc ->
+      let id = Context.Named.Declaration.get_id pt in
+      let id = Names.Id.print id in
+      let econstr = Context.Named.Declaration.get_type pt in
+      Pp.(acc ++ str ", " ++ id ++ str ": " ++ Printer.pr_econstr_env env sigma econstr)) in
+    let concl = concl gl in
+    Feedback.msg_notice Pp.(str "hyps: " ++ hyps ++ str ", goal: " ++ Printer.pr_econstr_env env sigma concl);
+    Proofview.tclUNIT ())
+
 (** 現在のゴールを冗長な規則の書換によって示す。 *)
 let tac_prove_by_reduction ~(rewriters : Libnames.qualid list)
                            ~(rewritee : Libnames.qualid)
@@ -182,7 +265,8 @@ let tac_prove_by_reduction ~(rewriters : Libnames.qualid list)
       cl_rewrite_clause_innermost rewriter l2r
       ) (List.combine rewriters l2rs)) <*>
   (if use_symmetry then Tactics.symmetry else Tacticals.tclIDTAC) <*>
-  Auto.default_auto
+  (* HACK: G -> a = b の形の解決のために、型 G を持つ Parameter を Resolve Hint にもつ HintDb を追加しておく必要がある. *)
+    Auto.default_full_auto
 
 let prove_interreduce
   ~(name:Names.Id.t) (* 証明する定理名 *)
