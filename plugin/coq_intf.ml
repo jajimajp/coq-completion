@@ -1,5 +1,38 @@
 open Rewrite
 
+(** [tclPRINT_GOAL] prints current goal. *)
+let tclPRINT_GOAL s =
+  Proofview.Goal.enter (fun gl ->
+      print_endline @@ "PRINT_GOAL " ^ s;
+      let open Proofview.Goal in
+      let sigma, env, hyps = (sigma gl, env gl, hyps gl) in
+      let hyps =
+        hyps
+        |> Context.Named.fold_outside
+             ~init:Pp.(str "・")
+             (fun pt acc ->
+               let id = Context.Named.Declaration.get_id pt in
+               let id = Names.Id.print id in
+               let econstr = Context.Named.Declaration.get_type pt in
+               Pp.(
+                 acc ++ str ", " ++ id ++ str ": "
+                 ++ Printer.pr_econstr_env env sigma econstr))
+      in
+      let concl = concl gl in
+      Feedback.msg_notice
+        Pp.(
+          str "hyps: " ++ hyps ++ str ", goal: "
+          ++ Printer.pr_econstr_env env sigma concl);
+      Proofview.tclUNIT ())
+
+(** [constr_of_s s] は識別子 [s] の項を取得する。
+    HACK: もっと簡潔に書けそう。 *)
+let const_of_s s : Names.Constant.t =
+  let ln = Libnames.qualid_of_string s in
+  let gref = Nametab.global ln in
+  let open Names.GlobRef in
+  match gref with ConstRef cst -> cst | _ -> failwith "Invalid input"
+
 let cl_rewrite_clause_innermost ?(hyp : string = "H")
     (rewriter : Libnames.qualid) (left2right : bool) =
   let open Rewrite in
@@ -78,10 +111,19 @@ let tac_prove_by_crit ~evars ~constants ~e1 ~e2 ~r1 ~r2 ~crit ~l ~r =
         このような状況で生じる変数は式変換の一部で現れ、結果に含まれないため、どの変数/定数でも良い。
         よって、定数とGoalの変数のうち一つを採用する。
       *)
+      let rec last = function
+        | [] -> raise Not_found
+        | [ x ] -> x
+        | h :: t -> last t
+      in
+      let slast s = last (String.split_on_char '.' s) in
       let binder = List.hd (evars @ My_term.list_of_constants constants) in
-      CAst.make
-        ( NamedHyp (CAst.make (Names.Id.of_string v)),
-          EConstr.mkVar (Names.Id.of_string binder) )
+      let binder = slast binder in
+      (* FIXME: binder maybe variable *)
+      let const =
+        EConstr.mkConstU (const_of_s binder, EConstr.EInstance.empty)
+      in
+      CAst.make (NamedHyp (CAst.make (Names.Id.of_string v)), const)
   in
   let rewriteLR_with_binds c (vars : string list) =
     let binds = ExplicitBindings (List.map explicit_bind vars) in
@@ -217,14 +259,6 @@ let proof_using_crit ~name ~n1 ~n2 ~l ~r ~crit
   | Defined _ -> ()
   | _ -> failwith ("Could not prove goal by crit: " ^ Names.Id.to_string name)
 
-(** [constr_of_s s] は識別子 [s] の項を取得する。
-    HACK: もっと簡潔に書けそう。 *)
-let const_of_s s : Names.Constant.t =
-  let ln = Libnames.qualid_of_string s in
-  let gref = Nametab.global ln in
-  let open Names.GlobRef in
-  match gref with ConstRef cst -> cst | _ -> failwith "Invalid input"
-
 let hyps_contains_free_prod_env env sigma hyps =
   (* HACK: econstr としては G -> ... も forall a : G, ... もどちらも Prod になるが、
      extern すると G -> ... は Notation になることを利用する。 *)
@@ -303,31 +337,6 @@ let tclSPECIALIZE_IF_NECESSARY next =
                     else Proofview.tclUNIT (Feedback.msg_notice Pp.(str "NN"))))
           <*> next)
         else next))
-
-(** [tclPRINT_GOAL] prints current goal. *)
-let tclPRINT_GOAL s =
-  Proofview.Goal.enter (fun gl ->
-      print_endline @@ "PRINT_GOAL " ^ s;
-      let open Proofview.Goal in
-      let sigma, env, hyps = (sigma gl, env gl, hyps gl) in
-      let hyps =
-        hyps
-        |> Context.Named.fold_outside
-             ~init:Pp.(str "・")
-             (fun pt acc ->
-               let id = Context.Named.Declaration.get_id pt in
-               let id = Names.Id.print id in
-               let econstr = Context.Named.Declaration.get_type pt in
-               Pp.(
-                 acc ++ str ", " ++ id ++ str ": "
-                 ++ Printer.pr_econstr_env env sigma econstr))
-      in
-      let concl = concl gl in
-      Feedback.msg_notice
-        Pp.(
-          str "hyps: " ++ hyps ++ str ", goal: "
-          ++ Printer.pr_econstr_env env sigma concl);
-      Proofview.tclUNIT ())
 
 (** 現在のゴールを冗長な規則の書換によって示す。 *)
 let tac_prove_by_reduction ~(rewriters : Libnames.qualid list)

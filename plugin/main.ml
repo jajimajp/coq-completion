@@ -5,6 +5,22 @@ open Autorewrite
 open Rewrite
 open Coq_intf
 
+let print_term (c : Evd.econstr) : unit Proofview.tactic =
+  Proofview.Goal.enter (fun gl ->
+      let open Proofview.Goal in
+      let env, sigma = (env gl, sigma gl) in
+      if EConstr.isVar sigma c then print_endline "is var"
+      else print_endline "is not var";
+      if EConstr.isConst sigma c then (
+        print_endline "is const";
+        let a, b = EConstr.destConst sigma c in
+        Feedback.msg_notice Pp.(str "a " ++ Names.Constant.print a);
+        if EConstr.EInstance.is_empty b then print_endline "is empty"
+        else print_endline "is not empty")
+      else print_endline "is not const";
+      Feedback.msg_notice Pp.(str "XXX" ++ Printer.pr_econstr_env env sigma c);
+      Proofview.tclUNIT ())
+
 (* for exporting *)
 let prove_interreduce = prove_interreduce
 

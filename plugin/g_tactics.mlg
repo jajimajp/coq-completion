@@ -26,6 +26,12 @@ VERNAC COMMAND EXTEND Complete CLASSIFIED AS QUERY
 }
 END
 
+TACTIC EXTEND print_term
+| [ "print_term" constr(e) ] -> {
+  Main.print_term e
+}
+END
+
 TACTIC EXTEND complete
 | [ "complete" preident_list(axioms) ":" preident_list(constants) clause(cl) ] -> {
   Main.complete_in_tac axioms constants cl

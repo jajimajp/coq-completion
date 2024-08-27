@@ -1,4 +1,5 @@
-Declare ML Module "coq-completion.plugin".
+(* Declare ML Module "coq-completion.plugin". *)
+From Completion Require Import Plugin.
 
 Require Import Coq.Setoids.Setoid.
 
@@ -19,6 +20,16 @@ Axiom assoc : forall a b c, a + b + c = a + (b + c).
 Axiom id_l : forall a, e + a = a.
 (* 左逆元 *)
 Axiom inv_l : forall a, i a + a = e.
+
+Axiom a1 : forall a, a = e.
+
+Goal forall a : G, a = e.
+  Proof.
+    intros.
+    print_term e.
+    print_term f.
+    print_term a.
+  Abort.
 
 Create HintDb hint_compl.
 

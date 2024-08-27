@@ -22,3 +22,6 @@ val complete_in_tac :
 
 val lpo_autorewrite_with : string -> Locus.clause -> unit Proofview.tactic
 (** [lpo_autorewrite_with hintDb] returns tactic to rewrite current goal term. *)
+
+val print_term : Evd.econstr -> unit Proofview.tactic
+(** [print_term e] prints the term [e]. *)
