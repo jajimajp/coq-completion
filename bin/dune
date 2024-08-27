@@ -2,5 +2,7 @@
  (name trs_to_coq)
  (public_name trs_to_coq)
  (libraries core str)
- (preprocess (pps ppx_jane))
- (flags (:standard -thread)))
+ (preprocess
+  (pps ppx_jane))
+ (flags
+  (:standard -thread)))
