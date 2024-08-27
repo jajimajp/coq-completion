@@ -1,1 +1,1 @@
-toma --parsable "LPO.equalish (LPO.inverse (LPO.a), LPO.inverse (LPO.b)) -> LPO.true" /tmp/tmp.mshXEGZl3N
+toma --parsable "LPO.equalish (LPO.inverse (LPO.a), LPO.inverse (LPO.b)) -> LPO.true" /tmp/tmp.n9bNSDhmCd

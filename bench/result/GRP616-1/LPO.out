@@ -1,5 +1,5 @@
-toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.gjEhlJ9zev
-File "./GRP616-1/LPO.v", line 15, characters 0-121:
+toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.bGk1l5Gj5C
+File "./GRP616-1/LPO.v", line 17, characters 0-121:
 Error:
 Anomaly "Uncaught exception Failure("Could not prove goal by reduction.")."
 Please report at http://coq.inria.fr/bugs/.

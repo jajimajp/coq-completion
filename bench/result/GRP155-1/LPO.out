@@ -1,4 +1,4 @@
-toma --parsable "LPO.greatest_lower_bound (LPO.multiply (LPO.a, LPO.c), LPO.multiply (LPO.b, LPO.c)) -> LPO.multiply (LPO.a, LPO.c)" /tmp/tmp.9Yj5yO0Lc3
+toma --parsable "LPO.greatest_lower_bound (LPO.multiply (LPO.a, LPO.c), LPO.multiply (LPO.b, LPO.c)) -> LPO.multiply (LPO.a, LPO.c)" /tmp/tmp.BtciP7vv3F
 Finish
 check
      : greatest_lower_bound (multiply a c) (multiply b c) = multiply a c

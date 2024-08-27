@@ -1,1 +1,1 @@
-toma --parsable "LPO.product (LPO.k, LPO.inverse (LPO.b), LPO.identity) -> LPO.true" /tmp/tmp.CCFoQYXYGc
+toma --parsable "LPO.product (LPO.k, LPO.inverse (LPO.b), LPO.identity) -> LPO.true" /tmp/tmp.4q1KrP6DaL

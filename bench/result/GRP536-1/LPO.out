@@ -1,4 +1,4 @@
-toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.yFQmnprvxg
-Finish
-check
-     : multiply a b = multiply b a
+toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.Zw1Vh3cB5j
+File "./GRP536-1/LPO.v", line 20, characters 0-146:
+Error: The reference X2 was not found in the current environment.
+

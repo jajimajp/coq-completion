@@ -1,4 +1,4 @@
-toma --parsable "LPO.multiply (LPO.multiply (LPO.multiply (LPO.a, LPO.b), LPO.c), LPO.b) -> LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.c, LPO.b)))" /tmp/tmp.hCoFaMcnkR
+toma --parsable "LPO.multiply (LPO.multiply (LPO.multiply (LPO.a, LPO.b), LPO.c), LPO.b) -> LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.c, LPO.b)))" /tmp/tmp.s2Gyg5Dov7
 Finish
 check
      : multiply (multiply (multiply a b) c) b =

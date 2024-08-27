@@ -1,14 +1,1 @@
-toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.lnAMIYuuQ6
-File "./GRP572-1/LPO.v", line 18, characters 0-153:
-Warning:
-Solve Obligations tactic returned error: Anomaly
-                                         "Uncaught exception Failure("fail: Too many pairs.")."
-Please report at http://coq.inria.fr/bugs/.
-This will become an error in the future
-[solve_obligation_error,tactics,default]
-File "./GRP572-1/LPO.v", line 18, characters 0-153:
-Error:
-Anomaly
-"Uncaught exception Failure("Could not prove goal by crit: t_hint_7")."
-Please report at http://coq.inria.fr/bugs/.
-
+toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.axXbCDOWuQ

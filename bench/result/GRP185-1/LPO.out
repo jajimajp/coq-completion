@@ -1,4 +1,4 @@
-toma --parsable "LPO.least_upper_bound (LPO.least_upper_bound (LPO.multiply (LPO.a, LPO.b), LPO.identity), LPO.multiply (LPO.least_upper_bound (LPO.a, LPO.identity), LPO.least_upper_bound (LPO.b, LPO.identity))) -> LPO.multiply (LPO.least_upper_bound (LPO.a, LPO.identity), LPO.least_upper_bound (LPO.b, LPO.identity))" /tmp/tmp.CC8FOnKChb
+toma --parsable "LPO.least_upper_bound (LPO.least_upper_bound (LPO.multiply (LPO.a, LPO.b), LPO.identity), LPO.multiply (LPO.least_upper_bound (LPO.a, LPO.identity), LPO.least_upper_bound (LPO.b, LPO.identity))) -> LPO.multiply (LPO.least_upper_bound (LPO.a, LPO.identity), LPO.least_upper_bound (LPO.b, LPO.identity))" /tmp/tmp.xC4F0mYDTQ
 Finish
 check
      : least_upper_bound (least_upper_bound (multiply a b) identity)

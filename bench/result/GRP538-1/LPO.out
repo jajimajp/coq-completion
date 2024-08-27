@@ -1,4 +1,4 @@
-toma --parsable "LPO.multiply (LPO.multiply (LPO.inverse (LPO.b2), LPO.b2), LPO.a2) -> LPO.a2" /tmp/tmp.BnWeLESLzc
-Finish
-check
-     : multiply (multiply (inverse b2) b2) a2 = a2
+toma --parsable "LPO.multiply (LPO.multiply (LPO.inverse (LPO.b2), LPO.b2), LPO.a2) -> LPO.a2" /tmp/tmp.9Mo0DboXpp
+File "./GRP538-1/LPO.v", line 20, characters 0-162:
+Error: The reference X5 was not found in the current environment.
+

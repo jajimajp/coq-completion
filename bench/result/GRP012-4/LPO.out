@@ -1,4 +1,4 @@
-toma --parsable "LPO.inverse (LPO.multiply (LPO.a, LPO.b)) -> LPO.multiply (LPO.inverse (LPO.b), LPO.inverse (LPO.a))" /tmp/tmp.QxOYewSvvD
+toma --parsable "LPO.inverse (LPO.multiply (LPO.a, LPO.b)) -> LPO.multiply (LPO.inverse (LPO.b), LPO.inverse (LPO.a))" /tmp/tmp.1yfYnDTSb0
 Finish
 check
      : inverse (multiply a b) = multiply (inverse b) (inverse a)

@@ -1,4 +1,4 @@
-toma --parsable "LPO.a -> LPO.b" /tmp/tmp.8HqHu5utgi
+toma --parsable "LPO.a -> LPO.b" /tmp/tmp.ebWxIDmcrY
 Finish
 check
      : a = b

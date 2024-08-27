@@ -1,14 +1,4 @@
-toma --parsable "LPO.multiply (LPO.multiply (LPO.a3, LPO.b3), LPO.c3) -> LPO.multiply (LPO.a3, LPO.multiply (LPO.b3, LPO.c3))" /tmp/tmp.G5VxV4iyuM
-File "./GRP607-1/LPO.v", line 16, characters 0-158:
-Warning:
-Solve Obligations tactic returned error: Anomaly
-                                         "Uncaught exception Failure("fail: Too many pairs.")."
-Please report at http://coq.inria.fr/bugs/.
-This will become an error in the future
-[solve_obligation_error,tactics,default]
-File "./GRP607-1/LPO.v", line 16, characters 0-158:
-Error:
-Anomaly
-"Uncaught exception Failure("Could not prove goal by crit: t_hint_38")."
-Please report at http://coq.inria.fr/bugs/.
+toma --parsable "LPO.multiply (LPO.multiply (LPO.a3, LPO.b3), LPO.c3) -> LPO.multiply (LPO.a3, LPO.multiply (LPO.b3, LPO.c3))" /tmp/tmp.TqaJeyM46l
+File "./GRP607-1/LPO.v", line 18, characters 0-158:
+Error: The reference X1 was not found in the current environment.
 

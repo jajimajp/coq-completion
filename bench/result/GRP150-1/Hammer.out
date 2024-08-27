@@ -6,11 +6,11 @@ Z3 not found
 CVC4 found
 Extracting features...
 Running provers (8 threads)...
-Eprover (nbayes-64) succeeded
-- dependencies: Hammer.ax_idempotence_of_lub, Hammer.ax_associativity_of_lub
+CVC4 (knn-256) succeeded
+- dependencies: Hammer.ax_associativity_of_lub, Hammer.ax_idempotence_of_lub
 Reconstructing the proof...
 Tactic scongruence succeeded.
 Replace the hammer tactic with:
-	scongruence use: ax_idempotence_of_lub, ax_associativity_of_lub.
+	scongruence use: ax_associativity_of_lub, ax_idempotence_of_lub.
 check
      : least_upper_bound a (least_upper_bound a b) = least_upper_bound a b

@@ -1,6 +1,4 @@
-toma --parsable "LPO.multiply (LPO.inverse (LPO.a1), LPO.a1) -> LPO.identity" /tmp/tmp.NapToOybeT
-File "./GRP481-1/LPO.v", line 17, characters 0-158:
-Error:
-Anomaly "Uncaught exception Failure("Could not prove goal by reduction.")."
-Please report at http://coq.inria.fr/bugs/.
-
+toma --parsable "LPO.multiply (LPO.inverse (LPO.a1), LPO.a1) -> LPO.identity" /tmp/tmp.5g1pxWmSkd
+Finish
+check
+     : multiply (inverse a1) a1 = identity

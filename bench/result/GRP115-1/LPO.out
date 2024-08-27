@@ -1,14 +1,4 @@
-toma --parsable "LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.a)) -> LPO.identity" /tmp/tmp.Lt7il8h8HF
-File "./GRP115-1/LPO.v", line 12, characters 0-101:
-Warning:
-Solve Obligations tactic returned error: Anomaly
-                                         "Uncaught exception Failure("fail: Too many pairs.")."
-Please report at http://coq.inria.fr/bugs/.
-This will become an error in the future
-[solve_obligation_error,tactics,default]
-File "./GRP115-1/LPO.v", line 12, characters 0-101:
-Error:
-Anomaly
-"Uncaught exception Failure("Could not prove goal by crit: t_hint_9")."
-Please report at http://coq.inria.fr/bugs/.
+toma --parsable "LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.a)) -> LPO.identity" /tmp/tmp.8SdCL4p4NJ
+File "./GRP115-1/LPO.v", line 14, characters 0-101:
+Error: The reference X6 was not found in the current environment.
 

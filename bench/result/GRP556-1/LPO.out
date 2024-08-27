@@ -1,6 +1,4 @@
-toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.Bk7E2it3eL
-File "./GRP556-1/LPO.v", line 15, characters 0-114:
-Error:
-Anomaly "Uncaught exception Failure("Could not prove goal by reduction.")."
-Please report at http://coq.inria.fr/bugs/.
+toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.ch7Hn2RsGl
+File "./GRP556-1/LPO.v", line 17, characters 0-114:
+Error: The reference X1 was not found in the current environment.
 
