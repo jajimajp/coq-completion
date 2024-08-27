@@ -156,7 +156,7 @@ let tac_prove_by_crit ~evars ~constants ~e1 ~e2 ~r1 ~r2 ~crit ~l ~r =
   (* 例: (1, 1), (1, 2), (2, 2), (2, 1), (1, 3), ... *)
   let next_pair (x, y) =
     (* fail *)
-    if x = 3 then failwith "fail: Too many pairs."
+    if x = 10 then failwith "fail: Too many pairs."
     else if y = 1 then (1, x + 1)
     else if x < y then (* 対角線より左側にある点 *)
       (x + 1, y)
