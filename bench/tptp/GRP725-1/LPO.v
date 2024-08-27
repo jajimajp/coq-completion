@@ -14,6 +14,8 @@ Parameter op_t : G -> G -> G.
 Parameter rd : G -> G -> G.
 Parameter s : G -> G.
 Parameter unit : G.
+(* HACK: for coq-completion *)
+Hint Resolve a : hint_hack_compl.
 Axiom ax_c20 : forall A B C : G, (op_l (op_l A B C) B C) = A.
 Axiom ax_c19 : forall A B C : G, (op_r (op_r A B C) B C) = A.
 Axiom ax_c18 : forall A B : G, (op_t (op_t A B) B) = A.

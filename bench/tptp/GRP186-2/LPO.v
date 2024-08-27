@@ -11,6 +11,8 @@ Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter least_upper_bound : G -> G -> G.
 Parameter multiply : G -> G -> G.
+(* HACK: for coq-completion *)
+Hint Resolve a : hint_hack_compl.
 Axiom ax_p23_3 : forall X Y : G, (inverse (multiply X Y)) = (multiply (inverse Y) (inverse X)).
 Axiom ax_p23_2 : forall X : G, (inverse (inverse X)) = X.
 Axiom ax_p23_1 : (inverse identity) = identity.

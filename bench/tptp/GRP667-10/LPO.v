@@ -13,6 +13,8 @@ Parameter ld : G -> G -> G.
 Parameter mult : G -> G -> G.
 Parameter rd : G -> G -> G.
 Parameter unit : G.
+(* HACK: for coq-completion *)
+Hint Resolve a : hint_hack_compl.
 Axiom ax_f12 : forall X6 X7 X8 : G, (ifeq (mult (mult X6 X7) (mult X8 X6)) (mult X6 (mult (mult X7 X8) X6)) (mult X6 (mult X7 (mult X6 X8))) (mult (mult (mult X6 X7) X6) X8)) = (mult (mult (mult X6 X7) X6) X8).
 Axiom ax_f11 : forall X3 X4 X5 : G, (ifeq (mult (mult X3 X4) (mult X5 X3)) (mult (mult X3 (mult X4 X5)) X3) (mult X3 (mult X4 (mult X3 X5))) (mult (mult (mult X3 X4) X3) X5)) = (mult (mult (mult X3 X4) X3) X5).
 Axiom ax_f10 : forall X0 X1 X2 : G, (ifeq (mult X0 (mult X1 (mult X2 X1))) (mult (mult (mult X0 X1) X2) X1) (mult X1 (mult X0 (mult X1 X2))) (mult (mult (mult X1 X0) X1) X2)) = (mult (mult (mult X1 X0) X1) X2).

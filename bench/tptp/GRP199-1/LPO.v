@@ -13,6 +13,8 @@ Parameter c0 : G.
 Parameter d : G.
 Parameter d0 : G.
 Parameter multiply : G -> G -> G.
+(* HACK: for coq-completion *)
+Hint Resolve a : hint_hack_compl.
 Axiom ax_prove_quotient3 : (multiply b d0) = (multiply a c0).
 Axiom ax_prove_quotient2 : (multiply d b0) = (multiply c a0).
 Axiom ax_prove_quotient1 : (multiply b b0) = (multiply a a0).

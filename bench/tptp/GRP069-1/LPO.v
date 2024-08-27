@@ -13,6 +13,8 @@ Parameter divide : G -> G -> G.
 Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
+(* HACK: for coq-completion *)
+Hint Resolve a1 : hint_hack_compl.
 Axiom ax_identity : forall X : G, identity = (divide X X).
 Axiom ax_inverse : forall X : G, (inverse X) = (divide identity X).
 Axiom ax_multiply : forall X Y : G, (multiply X Y) = (divide X (divide identity Y)).

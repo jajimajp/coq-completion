@@ -10,6 +10,8 @@ Parameter ld : G -> G -> G.
 Parameter mult : G -> G -> G.
 Parameter rd : G -> G -> G.
 Parameter unit : G.
+(* HACK: for coq-completion *)
+Hint Resolve a : hint_hack_compl.
 Axiom ax_c09 : forall A B : G, (mult (mult A A) B) = (mult B (mult A A)).
 Axiom ax_c08 : forall A : G, (mult A (mult A (mult A A))) = unit.
 Axiom ax_c07 : forall A B C : G, (mult A (mult B (mult B C))) = (mult (mult (mult A B) B) C).

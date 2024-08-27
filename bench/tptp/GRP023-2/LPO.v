@@ -7,6 +7,8 @@ Parameter G : Set.
 Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
+(* HACK: for coq-completion *)
+Hint Resolve identity : hint_hack_compl.
 Axiom ax_right_inverse : forall X : G, (multiply X (inverse X)) = identity.
 Axiom ax_right_identity : forall X : G, (multiply X identity) = X.
 Axiom ax_associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).

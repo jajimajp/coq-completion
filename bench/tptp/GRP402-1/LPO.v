@@ -9,6 +9,8 @@ Parameter b : G.
 Parameter c : G.
 Parameter commutator : G -> G -> G.
 Parameter multiply : G -> G -> G.
+(* HACK: for coq-completion *)
+Hint Resolve a : hint_hack_compl.
 Axiom ax_nilpotency : forall A B C : G, (multiply (commutator A B) C) = (multiply C (commutator A B)).
 Axiom ax_commutator : forall A B : G, (multiply A B) = (multiply B (multiply A (commutator A B))).
 Axiom ax_left_cancellation : forall A B C : G, (multiply A B) = (multiply A C).

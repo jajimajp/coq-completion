@@ -10,6 +10,8 @@ Parameter c : G.
 Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
+(* HACK: for coq-completion *)
+Hint Resolve a : hint_hack_compl.
 Axiom ax_c_not_identity : c = identity.
 Axiom ax_b_not_identity : b = identity.
 Axiom ax_b_not_c : b = c.

@@ -13,6 +13,8 @@ Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
 Parameter product : G -> G -> G -> G.
 Parameter true : G.
+(* HACK: for coq-completion *)
+Hint Resolve a : hint_hack_compl.
 Axiom ax_a_equals_b : (equalish a b) = true.
 Axiom ax_product_substitution3 : forall W X Y Z : G, (ifeq (equalish X Y) true (ifeq (product W Z X) true (product W Z Y) true) true) = true.
 Axiom ax_associativity2 : forall U V W X Y Z : G, (ifeq (product Y Z V) true (ifeq (product X V W) true (ifeq (product X Y U) true (product U Z W) true) true) true) = true.

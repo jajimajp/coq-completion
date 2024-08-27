@@ -14,6 +14,8 @@ Parameter g : G.
 Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
+(* HACK: for coq-completion *)
+Hint Resolve a : hint_hack_compl.
 Axiom ax_commutator : forall X Y : G, (commutator X Y) = (multiply X (multiply Y (multiply (inverse X) (inverse Y)))).
 Axiom ax_right_inverse : forall X : G, (multiply X (inverse X)) = identity.
 Axiom ax_right_identity : forall X : G, (multiply X identity) = X.

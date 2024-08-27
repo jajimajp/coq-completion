@@ -16,6 +16,8 @@ Parameter c3 : G.
 Parameter double_divide : G -> G -> G.
 Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
+(* HACK: for coq-completion *)
+Hint Resolve a1 : hint_hack_compl.
 Axiom ax_multiply : forall X Y : G, (multiply X Y) = (inverse (double_divide Y X)).
 Axiom ax_single_axiom : forall X Y Z : G, (inverse (double_divide (inverse (double_divide X (inverse (double_divide Y (double_divide X Z))))) Z)) = Y.
 
