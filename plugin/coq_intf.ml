@@ -111,19 +111,23 @@ let tac_prove_by_crit ~evars ~constants ~e1 ~e2 ~r1 ~r2 ~crit ~l ~r =
         このような状況で生じる変数は式変換の一部で現れ、結果に含まれないため、どの変数/定数でも良い。
         よって、定数とGoalの変数のうち一つを採用する。
       *)
-      let rec last = function
-        | [] -> raise Not_found
-        | [ x ] -> x
-        | h :: t -> last t
+      let binder =
+        match evars with
+        | h :: _ -> EConstr.mkVar (Names.Id.of_string h)
+        | [] -> (
+            (* If there are not evars, use constants. *)
+            let rec last = function
+              | [] -> raise Not_found
+              | [ x ] -> x
+              | h :: t -> last t
+            in
+            match My_term.list_of_constants constants with
+            | [] -> failwith "tac_prove_by_crit: No constants."
+            | h :: _ ->
+                let binder = last (String.split_on_char '.' h) in
+                EConstr.mkConstU (const_of_s binder, EConstr.EInstance.empty))
       in
-      let slast s = last (String.split_on_char '.' s) in
-      let binder = List.hd (evars @ My_term.list_of_constants constants) in
-      let binder = slast binder in
-      (* FIXME: binder maybe variable *)
-      let const =
-        EConstr.mkConstU (const_of_s binder, EConstr.EInstance.empty)
-      in
-      CAst.make (NamedHyp (CAst.make (Names.Id.of_string v)), const)
+      CAst.make (NamedHyp (CAst.make (Names.Id.of_string v)), binder)
   in
   let rewriteLR_with_binds c (vars : string list) =
     let binds = ExplicitBindings (List.map explicit_bind vars) in
