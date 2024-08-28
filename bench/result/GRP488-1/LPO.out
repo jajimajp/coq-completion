@@ -1,4 +1,6 @@
-toma --parsable "LPO.multiply (LPO.identity, LPO.a2) -> LPO.a2" /tmp/tmp.LvFWueS29H
+toma --parsable "LPO.multiply (LPO.identity, LPO.a2) -> LPO.a2" /tmp/tmp.YaOCPbhEfe
 File "./GRP488-1/LPO.v", line 19, characters 0-148:
-Error: The reference X4 was not found in the current environment.
+Error:
+Anomaly "Uncaught exception Failure("Could not prove goal by reduction.")."
+Please report at http://coq.inria.fr/bugs/.
 

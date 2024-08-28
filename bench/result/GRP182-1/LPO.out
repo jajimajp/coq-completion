@@ -1,4 +1,4 @@
-toma --parsable "LPO.least_upper_bound (LPO.identity, LPO.greatest_lower_bound (LPO.a, LPO.identity)) -> LPO.identity" /tmp/tmp.QLW2iKWEFn
+toma --parsable "LPO.least_upper_bound (LPO.identity, LPO.greatest_lower_bound (LPO.a, LPO.identity)) -> LPO.identity" /tmp/tmp.OF4BcS4uqo
 Finish
 check
      : least_upper_bound identity (greatest_lower_bound a identity) =

@@ -6,11 +6,11 @@ Z3 not found
 CVC4 found
 Extracting features...
 Running provers (8 threads)...
-CVC4 (knn-64) succeeded
-- dependencies: Hammer.ax_inverse, Hammer.ax_identity, Hammer.ax_multiply
+CVC4 (knn-256) succeeded
+- dependencies: Hammer.ax_inverse, Hammer.ax_multiply, Hammer.ax_identity
 Reconstructing the proof...
 Tactic scongruence succeeded.
 Replace the hammer tactic with:
-	scongruence use: ax_inverse, ax_identity, ax_multiply.
+	scongruence use: ax_inverse, ax_multiply, ax_identity.
 check
      : multiply (inverse a1) a1 = identity

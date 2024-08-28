@@ -1,5 +1,5 @@
-toma --parsable "LPO.multiply (LPO.commutator (LPO.a, LPO.b), LPO.c) -> LPO.multiply (LPO.c, LPO.commutator (LPO.a, LPO.b))" /tmp/tmp.uTkbSPWSqo
-File "./GRP401-1/LPO.v", line 18, characters 0-239:
+toma --parsable "LPO.multiply (LPO.commutator (LPO.a, LPO.b), LPO.c) -> LPO.multiply (LPO.c, LPO.commutator (LPO.a, LPO.b))" /tmp/tmp.UB3FkwAFNZ
+File "./GRP401-1/LPO.v", line 20, characters 0-239:
 Error:
 Anomaly "Uncaught exception Failure("Could not prove goal by reduction.")."
 Please report at http://coq.inria.fr/bugs/.

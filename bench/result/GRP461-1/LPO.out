@@ -1,4 +1,4 @@
-toma --parsable "LPO.multiply (LPO.identity, LPO.a2) -> LPO.a2" /tmp/tmp.i6MHN8xljl
-File "./GRP461-1/LPO.v", line 19, characters 0-141:
-Error: The reference X1 was not found in the current environment.
-
+toma --parsable "LPO.multiply (LPO.identity, LPO.a2) -> LPO.a2" /tmp/tmp.0sH1zvnvgW
+Finish
+check
+     : multiply identity a2 = a2

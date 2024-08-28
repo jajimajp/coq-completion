@@ -1,4 +1,4 @@
-toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.BAUmDUm19B
-File "./GRP512-1/LPO.v", line 15, characters 0-95:
-Error: The reference X10 was not found in the current environment.
-
+toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.SbHdcLOYKz
+Finish
+check
+     : multiply a b = multiply b a

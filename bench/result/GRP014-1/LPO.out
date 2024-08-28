@@ -1,1 +1,1 @@
-toma --parsable "LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.c)) -> LPO.multiply (LPO.multiply (LPO.a, LPO.b), LPO.c)" /tmp/tmp.E455AErC1u
+toma --parsable "LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.c)) -> LPO.multiply (LPO.multiply (LPO.a, LPO.b), LPO.c)" /tmp/tmp.XZI3bmmsw3

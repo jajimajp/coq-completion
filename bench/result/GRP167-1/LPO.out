@@ -1,1 +1,1 @@
-toma --parsable "LPO.a -> LPO.multiply (LPO.positive_part (LPO.a), LPO.negative_part (LPO.a))" /tmp/tmp.rzczmojWxV
+toma --parsable "LPO.a -> LPO.multiply (LPO.positive_part (LPO.a), LPO.negative_part (LPO.a))" /tmp/tmp.ibgMYNH3O2

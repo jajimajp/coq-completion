@@ -1,1 +1,1 @@
-toma --parsable "LPO.commutator (LPO.multiply (LPO.a, LPO.b), LPO.c) -> LPO.multiply (LPO.commutator (LPO.a, LPO.c), LPO.commutator (LPO.b, LPO.c))" /tmp/tmp.O5Zntgxfb5
+toma --parsable "LPO.commutator (LPO.multiply (LPO.a, LPO.b), LPO.c) -> LPO.multiply (LPO.commutator (LPO.a, LPO.c), LPO.commutator (LPO.b, LPO.c))" /tmp/tmp.qht985xDcm

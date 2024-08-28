@@ -1,4 +1,6 @@
-toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.4FZ6c07vdf
+toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.bsq4gPLsyD
 File "./GRP560-1/LPO.v", line 17, characters 0-114:
-Error: The reference X6 was not found in the current environment.
+Error:
+Anomaly "Uncaught exception Failure("Could not prove goal by reduction.")."
+Please report at http://coq.inria.fr/bugs/.
 

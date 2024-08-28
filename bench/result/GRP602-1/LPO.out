@@ -1,4 +1,6 @@
-toma --parsable "LPO.multiply (LPO.multiply (LPO.inverse (LPO.b2), LPO.b2), LPO.a2) -> LPO.a2" /tmp/tmp.KAB2ktM3Hq
-File "./GRP602-1/LPO.v", line 17, characters 0-137:
-Error: The reference X6 was not found in the current environment.
+toma --parsable "LPO.multiply (LPO.multiply (LPO.inverse (LPO.b2), LPO.b2), LPO.a2) -> LPO.a2" /tmp/tmp.9ntEsnQ6Mp
+Finish
+File "./GRP602-1/LPO.v", line 24, characters 2-13:
+Error: Unable to unify "a2" with
+ "double_divide (double_divide b2 (inverse b2)) (inverse a2)".
 

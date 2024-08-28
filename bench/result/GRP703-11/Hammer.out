@@ -15,4 +15,3 @@ Replace the hammer tactic with:
 	qauto use: ax_f12, ax_f04, ax_f06, ax_f05, ax_f09.
 check
      : mult x2 (mult x3 op_e) = mult (mult x2 x3) op_e
-Killed

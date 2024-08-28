@@ -1,4 +1,4 @@
-toma --parsable "LPO.mult (LPO.mult (LPO.op_c, LPO.op_c), LPO.a) -> LPO.mult (LPO.a, LPO.mult (LPO.op_c, LPO.op_c))" /tmp/tmp.myvFaKxnUQ
+toma --parsable "LPO.mult (LPO.mult (LPO.op_c, LPO.op_c), LPO.a) -> LPO.mult (LPO.a, LPO.mult (LPO.op_c, LPO.op_c))" /tmp/tmp.X1qdv8bQUd
 Finish
 File "./GRP679-1/LPO.v", line 31, characters 2-13:
 Error: Unable to unify "mult a (mult op_c op_c)" with

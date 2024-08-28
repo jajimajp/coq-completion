@@ -6,12 +6,12 @@ Z3 not found
 CVC4 found
 Extracting features...
 Running provers (8 threads)...
-Eprover (nbayes-64) succeeded
-- dependencies: Hammer.ax_symmetry_of_lub, Hammer.ax_glb_absorbtion
+CVC4 (knn-256) succeeded
+- dependencies: Hammer.ax_p17b_1, Hammer.ax_symmetry_of_lub, Hammer.ax_glb_absorbtion
 Reconstructing the proof...
 Tactic scongruence succeeded.
 Replace the hammer tactic with:
-	scongruence use: ax_symmetry_of_lub, ax_glb_absorbtion.
+	scongruence use: ax_p17b_1, ax_symmetry_of_lub, ax_glb_absorbtion.
 check
      : greatest_lower_bound identity (least_upper_bound a identity) =
        identity

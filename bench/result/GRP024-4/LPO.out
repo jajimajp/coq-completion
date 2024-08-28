@@ -1,4 +1,4 @@
-toma --parsable "LPO.commutator (LPO.commutator (LPO.a, LPO.b), LPO.c) -> LPO.commutator (LPO.a, LPO.commutator (LPO.b, LPO.c))" /tmp/tmp.9FSydWcLnN
+toma --parsable "LPO.commutator (LPO.commutator (LPO.a, LPO.b), LPO.c) -> LPO.commutator (LPO.a, LPO.commutator (LPO.b, LPO.c))" /tmp/tmp.06nuTM5Lx4
 File "./GRP024-4/LPO.v", line 26, characters 0-240:
 Error:
 Anomaly

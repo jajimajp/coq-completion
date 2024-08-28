@@ -19,4 +19,3 @@ Replace the hammer tactic with:
 File "./GRP171-2/Hammer.v", line 37, characters 0-4:
 Error:  (in proof check): Attempt to save an incomplete proof
 
-Killed

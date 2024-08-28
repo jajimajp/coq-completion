@@ -10,4 +10,4 @@ File "./GRP119-1/SMT.v", line 8, characters 0-32:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqa969c0.vtlog /tmp/verit_coqa969c0.smt2 2> /tmp/warnings_verit5ded95.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq2f719c.vtlog /tmp/verit_coq2f719c.smt2 2> /tmp/warnings_verit645aa1.log

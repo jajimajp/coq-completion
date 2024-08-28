@@ -1,4 +1,4 @@
-toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.1qZMj1DOJ8
+toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.mwPy8Unbqy
 Finish
 File "./GRP548-1/LPO.v", line 26, characters 2-28:
 Error: Anomaly "in econstr: grounding a non evar-free term"

@@ -6,12 +6,12 @@ Z3 not found
 CVC4 found
 Extracting features...
 Running provers (8 threads)...
-CVC4 (knn-256) succeeded
-- dependencies: Hammer.ax_idempotence_of_gld, Hammer.ax_symmetry_of_glb, Hammer.ax_associativity_of_glb
+CVC4 (knn-64) succeeded
+- dependencies: Hammer.ax_associativity_of_glb, Hammer.ax_idempotence_of_gld, Hammer.ax_symmetry_of_glb
 Reconstructing the proof...
 Tactic scongruence succeeded.
 Replace the hammer tactic with:
-	scongruence use: ax_idempotence_of_gld, ax_symmetry_of_glb, ax_associativity_of_glb.
+	scongruence use: ax_associativity_of_glb, ax_idempotence_of_gld, ax_symmetry_of_glb.
 check
      : greatest_lower_bound (greatest_lower_bound a b) a =
        greatest_lower_bound a b

@@ -18,7 +18,7 @@ File "./GRP573-1/SMT.v", line 10, characters 0-32:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq212a63.vtlog /tmp/verit_coq212a63.smt2 2> /tmp/warnings_verit8f0ccb.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq793dd2.vtlog /tmp/verit_coq793dd2.smt2 2> /tmp/warnings_verit55a3de.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success
@@ -34,7 +34,7 @@ success
 unsat
 success
 success
-Verit = 0.00006
+Verit = 0.00005
 File "./GRP573-1/SMT.v", line 21, characters 2-6:
 Warning: Bytecode compiler failed, falling back to standard conversion
 [bytecode-compiler-failed,bytecode-compiler,default]

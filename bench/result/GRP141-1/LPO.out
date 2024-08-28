@@ -1,4 +1,4 @@
-toma --parsable "LPO.greatest_lower_bound (LPO.greatest_lower_bound (LPO.a, LPO.b), LPO.c) -> LPO.c" /tmp/tmp.tmNXCkkYPK
+toma --parsable "LPO.greatest_lower_bound (LPO.greatest_lower_bound (LPO.a, LPO.b), LPO.c) -> LPO.c" /tmp/tmp.ChbNspJMCQ
 Finish
 File "./GRP141-1/LPO.v", line 42, characters 2-13:
 Error: Unable to unify "c" with

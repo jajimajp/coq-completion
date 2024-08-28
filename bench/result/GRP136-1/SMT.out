@@ -26,7 +26,7 @@ File "./GRP136-1/SMT.v", line 12, characters 0-32:
 Warning: Interpreting this declaration as if a global declaration prefixed by
 "Local", i.e. as a global declaration which shall not be available without
 qualification when imported. [local-declaration,vernacular,default]
-veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coqcc1e19.vtlog /tmp/verit_coqcc1e19.smt2 2> /tmp/warnings_verit00a3b0.log
+veriT --proof-prune --proof-merge --proof-with-sharing --cnf-definitional --disable-ackermann --input=smtlib2 --proof=/tmp/verit_coq5d5bd2.vtlog /tmp/verit_coq5d5bd2.smt2 2> /tmp/warnings_veritdb2b3a.log
 veriT dev - the SMT-solver veriT (UFRN/LORIA).
 success
 success

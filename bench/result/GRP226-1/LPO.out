@@ -1,5 +1,5 @@
-toma --parsable "LPO.inverse (LPO.sk_c1) -> LPO.sk_c7" /tmp/tmp.Vxqd8xkDFg
-File "./GRP226-1/LPO.v", line 21, characters 0-168:
+toma --parsable "LPO.inverse (LPO.sk_c1) -> LPO.sk_c7" /tmp/tmp.lDoW98GVe2
+File "./GRP226-1/LPO.v", line 23, characters 0-168:
 Error:
 Anomaly
 "Uncaught exception Failure("expect: Unexpected output Completed, expected Success")."

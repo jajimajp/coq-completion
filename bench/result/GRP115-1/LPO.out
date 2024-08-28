@@ -1,4 +1,4 @@
-toma --parsable "LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.a)) -> LPO.identity" /tmp/tmp.8SdCL4p4NJ
-File "./GRP115-1/LPO.v", line 14, characters 0-101:
-Error: The reference X6 was not found in the current environment.
-
+toma --parsable "LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.a)) -> LPO.identity" /tmp/tmp.LoAdYBo5xk
+Finish
+check
+     : multiply a (multiply a a) = identity
