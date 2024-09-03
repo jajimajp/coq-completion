@@ -342,6 +342,94 @@ let tclSPECIALIZE_IF_NECESSARY next =
           <*> next)
         else next))
 
+exception Prove_failed
+
+(** 連続する rewrite の [i] 番目でエラーが出たことを表す。 *)
+exception RewriteFailAt of int
+
+(** [tclPROVE_BY_REDUCTION ~name ~goal ~rewritee ~rewrites] proves current goal by rewriting [rewritee] with [rewriters].
+    This tactic is like [tac_prove_by_reduction], but this searches more patterns than [tac_prove_by_reduction].
+    @param name The name of the theorem to prove.
+    @param goal The goal to prove.
+    @rewritee The name of the rewrite rule to use.
+    @rewriters The list of the rewrite rules to use. *)
+let tclPROVE_BY_REDUCTION ~name ~goal ~rewritee ~rewriters =
+  let rewrite c at l2r =
+    cl_rewrite_clause c l2r (OnlyOccurrences [ at ]) (Some (Names.Id.of_string "H")) in
+  (* パラメータを変えながら成功するまで試す。
+     変更する変数は次の通り:
+     - use_symmetry: symmetry を使うかどうか。H と goal の両辺が逆になるケースに対応するため。
+     - l2rs: 各 rewrite rule に対して、左右どちらに書き換えるか。
+     - ats: 各 rewrite rule をどの箇所に適用するか。Coq の rewrite at ... に対応する。
+     use_symmetry, l2rs はタクティクの評価前に列挙できる。ats は（少なくとも現状は）実行するまで何パターンあるかわからない。
+     よって use_symmetry, l2rs は tclOR で列挙し、ats は証明時のエラーを補足して tclIFCATCH で列挙する。 *)
+  let tcl use_symmetry l2rs = (* [tcl use_symmetry l2rs] は引数のパラメータを使って、全ての [ats] に対して証明を試す。 *)
+    let ats_length = List.length rewriters in
+    (* let tclCONCAT ls =
+      List.fold_left (fun acc next -> Proofview.tclTHEN acc next) Proofview.(tclUNIT ()) ls in *)
+    let tclREWRITE_ALL ats = (* [tclREWRITE_ALL ats] rewrites H with given params. *)
+      let rec aux rewriters ats l2rs i = match rewriters, ats, l2rs with
+      | rewriter::rewriters, at::ats, l2r::l2rs ->
+          Proofview.tclIFCATCH
+            (let c = (fun env sigma ->
+              (sigma,
+                ( EConstr.mkRef (Nametab.global rewriter, EConstr.EInstance.empty),
+                  Tactypes.NoBindings ) )) in
+              rewrite c at l2r)
+            (fun _ -> aux rewriters ats l2rs (i + 1))
+            (fun (ex, _) -> Proofview.tclZERO (RewriteFailAt i))
+      | [], [], [] -> Proofview.tclUNIT ()
+      | _, _, _ -> failwith "tclREWRITE_ALL: Inconsistent length rewriters vs ats vs l2rs" in
+      aux rewriters ats l2rs 0 in
+    let tclSINGLE_STEP ats = (* [tclSINGLE_STEP ats] tries proving with given params. *)
+      let open Proofview.Notations in
+      Tactics.intros <*>
+      Tactics.pose_proof (Names.Name (Names.Id.of_string "H")) (EConstr.mkRef (Nametab.global rewritee, EConstr.EInstance.empty)) <*>
+      (* TODO: ats *)
+      (* tclCONCAT (List.map (fun (rewriter, l2r) ->
+        let c = (fun env sigma ->
+          ( sigma,
+            ( EConstr.mkRef (Nametab.global rewriter, EConstr.EInstance.empty),
+              Tactypes.NoBindings ) )) in
+        rewrite c 13 l2r
+      ) (List.combine rewriters l2rs)) <*> *)
+      tclREWRITE_ALL ats <*>
+      (if use_symmetry then Tactics.symmetry else Tacticals.tclIDTAC) <*>
+      (* HACK: G -> a = b の形の解決のために、型 G を持つ Parameter を Resolve Hint にもつ HintDb を追加しておく必要がある. *)
+      Auto.default_full_auto <*>
+      (* Check if goal is cleared *)
+      Proofview.numgoals >>= (function
+        | 0 -> Proofview.tclUNIT ()
+        | _ -> Proofview.tclZERO Prove_failed)
+    in
+    let rec ones_like = function
+      | _ :: t -> 1 :: ones_like t
+      | [] -> [] in
+    let rec inc_at ls i =
+      if i < 0 then failwith "inc_at: Invalid argument" else
+      match ls with
+      | h :: t -> if i = 0 then (h + 1) :: ones_like t else h :: (inc_at t (i - 1))
+      | [] -> failwith "inc_at: Invalid argument" in
+    let rec aux ats =
+      Proofview.tclIFCATCH
+        (tclSINGLE_STEP ats)
+        (fun _ -> Proofview.tclUNIT ())
+        (fun (exn,_) ->
+          match exn with
+          | RewriteFailAt i -> if i = 0 then Proofview.tclZERO Prove_failed else aux (inc_at ats (i - 1))
+          | _ -> aux (inc_at ats (ats_length - 1)))
+      in
+    aux (List.init ats_length (fun _ -> 1)) in
+  let binlss =
+    let rec aux l acc =
+      match Devutil.next_binls l with
+      | None -> acc
+      | Some l -> aux l (l :: acc) in
+    aux (List.init (1 + List.length rewriters) (fun _ -> true)) [(List.init (1 + List.length rewriters) (fun _ -> true))] in
+  List.fold_left (fun acc ls ->
+    Proofview.tclIFCATCH (tcl (List.hd ls) (List.tl ls)) (fun _ -> Proofview.tclUNIT ()) (fun _ -> acc)
+  ) Proofview.(tclUNIT ()) binlss
+      
 (** 現在のゴールを冗長な規則の書換によって示す。 *)
 let tac_prove_by_reduction ~(rewriters : Libnames.qualid list)
     ~(rewritee : Libnames.qualid) ~(l2rs : bool list) =
@@ -408,3 +496,112 @@ let prove_interreduce ~(name : Names.Id.t)
         | Some l2rs -> aux l2rs)
   in
   aux (List.init (List.length rewriters + 1) (fun _ -> true))
+
+let tclPROVE_INTERREDUCE ~(name : Names.Id.t)
+    ~(* 証明する定理名 *)
+    (goal : Constrexpr.constr_expr)
+    ~(* 定理の型 *)
+    (rewriters : Libnames.qualid list) ~(applier : Libnames.qualid) =
+  (* apply を行う定理名 *)
+  let env = Global.env () in
+  let sigma = Evd.from_env env in
+  let sigma, body = Constrintern.interp_constr_evars env sigma goal in
+  let typ = EConstr.to_constr sigma body in
+  let info = Declare.Info.make ~poly:false () in
+  let cinfo = Declare.CInfo.make ~name ~typ () in
+  let t, types, ustate, obl_info =
+    Declare.Obls.prepare_obligation ~name ~types:None ~body sigma
+  in
+  let tactic = tclPROVE_BY_REDUCTION ~name ~goal ~rewritee:applier ~rewriters in
+  let _, progress =
+      Declare.Obls.add_definition ~pm:Declare.OblState.empty ~cinfo ~info
+        ~uctx:ustate ~tactic obl_info in
+  match progress with
+  | Defined _ -> ()
+  | _ -> failwith "Could not prove goal by reduction."
+
+(** [Complete ... for S] の S に当たる、完備化のゴールを証明する。
+    与えられた規則のリストで簡約すると両辺が等しくなることから示す。*)
+let prove_completion_subject ~(name : Names.Id.t)
+  ~(goal : Constrexpr.constr_expr)
+  ~(rewriters : Libnames.qualid list) =
+
+  let rewrite c at l2r =
+    cl_rewrite_clause c l2r (OnlyOccurrences [ at ]) None in
+  let ats_length = List.length rewriters in
+
+  let tcl l2rs = (* [tcl l2rs] は引数のパラメータを使って、全ての [ats] に対して証明を試す。 *)
+    let tclREWRITE_ALL ats = (* [tclREWRITE_ALL ats] rewrites H with given params. *)
+      let rec aux rewriters ats l2rs i = match rewriters, ats, l2rs with
+      | rewriter::rewriters, at::ats, l2r::l2rs ->
+          Proofview.tclIFCATCH
+            (let c = (fun env sigma ->
+              ( sigma,
+                ( EConstr.mkRef (Nametab.global rewriter, EConstr.EInstance.empty),
+                  Tactypes.NoBindings ) )) in
+              rewrite c at l2r)
+            (fun _ -> aux rewriters ats l2rs (i + 1))
+            (fun (ex, _) -> Proofview.tclZERO (RewriteFailAt i))
+      | [], [], [] -> Proofview.tclUNIT ()
+      | _, _, _ -> failwith "tclREWRITE_ALL: Inconsistent length rewriters vs ats vs l2rs" in
+      aux rewriters ats l2rs 0 in
+
+    let tclSINGLE_STEP ats = (* [tclSINGLE_STEP ats] tries proving with given params. *)
+      let open Proofview.Notations in
+      Tactics.intros <*>
+      tclREWRITE_ALL ats <*>
+
+      (* HACK: G -> a = b の形の解決のために、型 G を持つ Parameter を Resolve Hint にもつ HintDb を追加しておく必要がある. *)
+      (* reflexivity だけでも良いかも *)
+      Auto.default_full_auto <*>
+
+      (* Check if goal is cleared *)
+      Proofview.numgoals >>= (function
+        | 0 -> Proofview.tclUNIT ()
+        | _ -> Proofview.tclZERO Prove_failed)
+    in
+    let rec ones_like = function
+      | _ :: t -> 1 :: ones_like t
+      | [] -> [] in
+    let rec inc_at ls i =
+      if i < 0 then failwith "inc_at: Invalid argument" else
+      match ls with
+      | h :: t -> if i = 0 then (h + 1) :: ones_like t else h :: (inc_at t (i - 1))
+      | [] -> failwith "inc_at: Invalid argument" in
+    let rec aux ats =
+      Proofview.tclIFCATCH
+        (tclSINGLE_STEP ats)
+        (fun _ -> Proofview.tclUNIT ())
+        (fun (exn,_) ->
+          match exn with
+          | RewriteFailAt i -> if i = 0 then Proofview.tclZERO Prove_failed else aux (inc_at ats (i - 1))
+          | _ -> aux (inc_at ats (ats_length - 1)))
+      in
+    aux (List.init ats_length (fun _ -> 1)) in
+  let binlss =
+    let rec aux l acc =
+      match Devutil.next_binls l with
+      | None -> acc
+      | Some l -> aux l (l :: acc) in
+    aux (List.init ats_length (fun _ -> true)) [(List.init ats_length (fun _ -> true))] in
+  let tactic = List.fold_left (fun acc ls ->
+      Proofview.tclIFCATCH (tcl ls) (fun _ -> Proofview.tclUNIT ()) (fun _ -> acc)
+    ) Proofview.(tclUNIT ()) binlss in
+
+  (* Definition *)
+  let env = Global.env () in
+  let sigma = Evd.from_env env in
+  let sigma, body = Constrintern.interp_constr_evars env sigma goal in
+  let typ = EConstr.to_constr sigma body in
+  let info = Declare.Info.make ~poly:false () in
+  let cinfo = Declare.CInfo.make ~name ~typ () in
+  let t, types, ustate, obl_info =
+    Declare.Obls.prepare_obligation ~name ~types:None ~body sigma
+  in
+  let _, progress =
+      Declare.Obls.add_definition ~pm:Declare.OblState.empty ~cinfo ~info
+        ~uctx:ustate ~tactic obl_info in
+  match progress with
+  | Defined _ -> ()
+  | _ -> failwith "Could not prove goal by reduction."
+

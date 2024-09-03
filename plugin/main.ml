@@ -18,11 +18,10 @@ let print_term (c : Evd.econstr) : unit Proofview.tactic =
         if EConstr.EInstance.is_empty b then print_endline "is empty"
         else print_endline "is not empty")
       else print_endline "is not const";
-      Feedback.msg_notice Pp.(str "XXX" ++ Printer.pr_econstr_env env sigma c);
       Proofview.tclUNIT ())
 
 (* for exporting *)
-let prove_interreduce = prove_interreduce
+let prove_interreduce = tclPROVE_INTERREDUCE
 
 let add_axiom (rule : rule) (constants : constants option) axioms =
   let name = Names.Id.of_string ("t" ^ fst rule) in
@@ -85,6 +84,7 @@ let proof_using_toma (proc : procedure) (constants : constants option) axioms
   let open Tomaparser in
   let proofs, _, _ = proc in
   let prove (rule, strat) =
+    (* Printf.printf "Proving t%s by %s\n" (fst rule) (match strat with Axiom -> "Axiom" | Crit _ -> "Crit" | Simp _ -> "Simp"); *)
     match strat with
     | Axiom -> add_axiom rule constants axioms
     | Crit (r1, r2, crit) ->
@@ -418,6 +418,22 @@ let complete_for (goal : Constrexpr.constr_expr) rs hint_db_name ops =
   in
   let rules = List.map (fun (r, _) -> r) pl in
   let procedure = (pl, rules, ord) in
-  let constantsopt : constants option = Some (My_term.constants_of_list ops) in
+  let constants = My_term.constants_of_list ops in
+  let constantsopt : constants option = Some constants in
   let outputs = proof_using_toma procedure constantsopt rs hint_db_name in
+
+  (* Prove goal and add as rewrite rule *)
+  let _, (rule, rewriters), _ = proc in
+  ignore
+  @@ prove_completion_subject
+       ~name:(Names.Id.of_string ("t_" ^ hint_db_name ^ "_" ^ fst rule))
+       ~goal:(My_term.to_constrexpr_raw (snd rule) constants)
+       ~rewriters:
+         (List.map
+            (fun id ->
+              Libnames.qualid_of_string ("t_" ^ hint_db_name ^ "_" ^ id))
+            rewriters);
+
+  let prefixed_rule (id, (l, r)) = ("_" ^ hint_db_name ^ "_" ^ id, (l, r)) in
+  add_rules_for_termination [ prefixed_rule rule ] hint_db_name;
   Pp.str @@ String.concat "\n" outputs

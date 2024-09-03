@@ -28,7 +28,25 @@ val prove_interreduce :
   (* apply を行う定理名 *)
   unit
 
+val tclPROVE_INTERREDUCE :
+  name:Names.Id.t ->
+  (* 証明する定理名 *)
+  goal:Constrexpr.constr_expr ->
+  (* 定理の型 *)
+  rewriters:Libnames.qualid list ->
+  applier:Libnames.qualid ->
+  (* apply を行う定理名 *)
+  unit
+
 val tclSPECIALIZE_IF_NECESSARY : unit Proofview.tactic -> unit Proofview.tactic
 
 val tclPRINT_GOAL : string -> unit Proofview.tactic
 (** [tclPRINT_GOAL label] prints current goal with label. *)
+
+val prove_completion_subject :
+  name:Names.Id.t ->
+  (* 証明する定理名 *)
+  goal:Constrexpr.constr_expr ->
+  (* 定理の型 *)
+  rewriters:Libnames.qualid list ->
+  unit
