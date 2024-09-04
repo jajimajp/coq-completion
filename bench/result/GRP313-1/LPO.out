@@ -1,4 +1,4 @@
-toma --parsable "LPO.multiply (LPO.sk_c8, LPO.sk_c9) -> LPO.sk_c7" /tmp/tmp.GKykQJZH2q
+toma --parsable "LPO.multiply (LPO.sk_c8, LPO.sk_c9) -> LPO.sk_c7" /tmp/tmp.A3NsSiGYhz
 File "./GRP313-1/LPO.v", line 25, characters 0-187:
 Error:
 Anomaly

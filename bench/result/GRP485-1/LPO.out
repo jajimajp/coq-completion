@@ -1,6 +1,1 @@
-toma --parsable "LPO.multiply (LPO.identity, LPO.a2) -> LPO.a2" /tmp/tmp.UjLHikvLZd
-File "./GRP485-1/LPO.v", line 19, characters 0-148:
-Error:
-Anomaly "Uncaught exception Failure("Could not prove goal by reduction.")."
-Please report at http://coq.inria.fr/bugs/.
-
+toma --parsable "LPO.multiply (LPO.identity, LPO.a2) -> LPO.a2" /tmp/tmp.hWyZ7JnQvm

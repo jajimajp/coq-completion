@@ -1,1 +1,1 @@
-toma --parsable "LPO.tuple (LPO.mult (X0, LPO.x1 (X0)), LPO.mult (LPO.x1_2 (X0), X0)) -> LPO.tuple (LPO.x1 (X0), LPO.x1_2 (X0))" /tmp/tmp.1Q7txkXj4d
+toma --parsable "LPO.tuple (LPO.mult (X0, LPO.x1 (X0)), LPO.mult (LPO.x1_2 (X0), X0)) -> LPO.tuple (LPO.x1 (X0), LPO.x1_2 (X0))" /tmp/tmp.MOvw142pwZ

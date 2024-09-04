@@ -1,4 +1,4 @@
-toma --parsable "LPO.multiply (LPO.inverse (LPO.a1), LPO.a1) -> LPO.identity" /tmp/tmp.IBDYiVz0Wf
+toma --parsable "LPO.multiply (LPO.inverse (LPO.a1), LPO.a1) -> LPO.identity" /tmp/tmp.YdEzjJPzzb
 Finish
 check
      : multiply (inverse a1) a1 = identity

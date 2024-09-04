@@ -1,12 +1,6 @@
-toma --parsable "LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.b))))))) -> LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.b, LPO.multiply (LPO.b, LPO.b)))))))" /tmp/tmp.AXaesJtGRf
-Finish
-File "./GRP195-1/LPO.v", line 22, characters 2-13:
-Error: Unable to unify
- "multiply a
-    (multiply a
-       (multiply a (multiply a (multiply b (multiply b (multiply b b))))))"
-with
- "multiply a
-    (multiply b
-       (multiply a (multiply a (multiply b (multiply a (multiply b b))))))".
+toma --parsable "LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.b))))))) -> LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.b, LPO.multiply (LPO.b, LPO.b)))))))" /tmp/tmp.xIHNHs5DYy
+File "./GRP195-1/LPO.v", line 15, characters 0-269:
+Error:
+Anomaly "Uncaught exception Failure("Could not prove goal by reduction.")."
+Please report at http://coq.inria.fr/bugs/.
 

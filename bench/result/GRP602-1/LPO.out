@@ -1,6 +1,1 @@
-toma --parsable "LPO.multiply (LPO.multiply (LPO.inverse (LPO.b2), LPO.b2), LPO.a2) -> LPO.a2" /tmp/tmp.9ntEsnQ6Mp
-Finish
-File "./GRP602-1/LPO.v", line 24, characters 2-13:
-Error: Unable to unify "a2" with
- "double_divide (double_divide b2 (inverse b2)) (inverse a2)".
-
+toma --parsable "LPO.multiply (LPO.multiply (LPO.inverse (LPO.b2), LPO.b2), LPO.a2) -> LPO.a2" /tmp/tmp.NxE9JgdTSI

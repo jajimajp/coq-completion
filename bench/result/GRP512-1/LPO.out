@@ -1,4 +1,4 @@
-toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.SbHdcLOYKz
+toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.nKXkCMA44K
 Finish
 check
      : multiply a b = multiply b a

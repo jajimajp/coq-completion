@@ -1,4 +1,4 @@
-toma --parsable "LPO.inverse (LPO.sk_c7) -> LPO.sk_c6" /tmp/tmp.B33Zo7NXLQ
+toma --parsable "LPO.inverse (LPO.sk_c7) -> LPO.sk_c6" /tmp/tmp.SPy7Sfuxmu
 File "./GRP381-1/LPO.v", line 23, characters 0-168:
 Error:
 Anomaly

@@ -1,1 +1,1 @@
-toma --parsable "LPO.multiply (LPO.x, LPO.inverse (LPO.multiply (LPO.y, LPO.multiply (LPO.multiply (LPO.multiply (LPO.z, LPO.inverse (LPO.z)), LPO.inverse (LPO.multiply (LPO.u, LPO.y))), LPO.x)))) -> LPO.u" /tmp/tmp.Nmv2meIphr
+toma --parsable "LPO.multiply (LPO.x, LPO.inverse (LPO.multiply (LPO.y, LPO.multiply (LPO.multiply (LPO.multiply (LPO.z, LPO.inverse (LPO.z)), LPO.inverse (LPO.multiply (LPO.u, LPO.y))), LPO.x)))) -> LPO.u" /tmp/tmp.UEyP6XqWs7

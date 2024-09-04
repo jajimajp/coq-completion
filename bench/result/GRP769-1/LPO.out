@@ -1,1 +1,1 @@
-toma --parsable "LPO.product (LPO.product (LPO.x0, LPO.x1), LPO.x2) -> LPO.product (LPO.product (LPO.x0, LPO.x2), LPO.difference (LPO.x2, LPO.product (LPO.x1, LPO.x2)))" /tmp/tmp.4JyvQdLYZn
+toma --parsable "LPO.product (LPO.product (LPO.x0, LPO.x1), LPO.x2) -> LPO.product (LPO.product (LPO.x0, LPO.x2), LPO.difference (LPO.x2, LPO.product (LPO.x1, LPO.x2)))" /tmp/tmp.oh8gaKFAkc

@@ -1,4 +1,4 @@
-toma --parsable "LPO.least_upper_bound (LPO.multiply (LPO.inverse (LPO.c), LPO.multiply (LPO.a, LPO.c)), LPO.multiply (LPO.inverse (LPO.c), LPO.multiply (LPO.b, LPO.c))) -> LPO.multiply (LPO.inverse (LPO.c), LPO.multiply (LPO.b, LPO.c))" /tmp/tmp.hfho7iAHvv
+toma --parsable "LPO.least_upper_bound (LPO.multiply (LPO.inverse (LPO.c), LPO.multiply (LPO.a, LPO.c)), LPO.multiply (LPO.inverse (LPO.c), LPO.multiply (LPO.b, LPO.c))) -> LPO.multiply (LPO.inverse (LPO.c), LPO.multiply (LPO.b, LPO.c))" /tmp/tmp.Sbmtw20oRG
 Finish
 check
      : least_upper_bound (multiply (inverse c) (multiply a c))

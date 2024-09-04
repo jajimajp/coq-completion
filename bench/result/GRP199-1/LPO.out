@@ -1,4 +1,12 @@
-toma --parsable "LPO.multiply (LPO.d, LPO.d0) -> LPO.multiply (LPO.c, LPO.c0)" /tmp/tmp.Bm02Zhvxfo
+toma --parsable "LPO.multiply (LPO.d, LPO.d0) -> LPO.multiply (LPO.c, LPO.c0)" /tmp/tmp.yV1Biid26g
+File "./GRP199-1/LPO.v", line 26, characters 0-232:
+Warning: The proof has remaining shelved goals
+[remaining-shelved-goals,tactics,default]
+File "./GRP199-1/LPO.v", line 26, characters 0-232:
+Warning:
+Solve Obligations tactic returned error: Some unresolved existential variables remain
+This will become an error in the future
+[solve_obligation_error,tactics,default]
 File "./GRP199-1/LPO.v", line 26, characters 0-232:
 Error:
 Anomaly "Uncaught exception Failure("Could not prove goal by reduction.")."

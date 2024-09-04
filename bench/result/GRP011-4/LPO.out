@@ -1,4 +1,4 @@
-toma --parsable "LPO.b -> LPO.d" /tmp/tmp.ElC7Dt5toU
+toma --parsable "LPO.b -> LPO.d" /tmp/tmp.F1qNH3AToi
 Finish
 check
      : b = d
