@@ -361,9 +361,10 @@ let tclPROVE_BY_REDUCTION ~name ~goal ~rewritee ~rewriters =
      - use_symmetry: symmetry を使うかどうか。H と goal の両辺が逆になるケースに対応するため。
      - l2rs: 各 rewrite rule に対して、左右どちらに書き換えるか。
      - ats: 各 rewrite rule をどの箇所に適用するか。Coq の rewrite at ... に対応する。
+     - full: at を全探索するかどうか。false のときは innermost at 1 のみ行う。
      use_symmetry, l2rs はタクティクの評価前に列挙できる。ats は（少なくとも現状は）実行するまで何パターンあるかわからない。
      よって use_symmetry, l2rs は tclOR で列挙し、ats は証明時のエラーを補足して tclIFCATCH で列挙する。 *)
-  let tcl use_symmetry l2rs = (* [tcl use_symmetry l2rs] は引数のパラメータを使って、全ての [ats] に対して証明を試す。 *)
+  let tcl use_symmetry l2rs full = (* [tcl use_symmetry l2rs] は引数のパラメータを使って、全ての [ats] に対して証明を試す。 *)
     let ats_length = List.length rewriters in
     (* let tclCONCAT ls =
       List.fold_left (fun acc next -> Proofview.tclTHEN acc next) Proofview.(tclUNIT ()) ls in *)
@@ -381,19 +382,23 @@ let tclPROVE_BY_REDUCTION ~name ~goal ~rewritee ~rewriters =
       | [], [], [] -> Proofview.tclUNIT ()
       | _, _, _ -> failwith "tclREWRITE_ALL: Inconsistent length rewriters vs ats vs l2rs" in
       aux rewriters ats l2rs 0 in
-    let tclSINGLE_STEP ats = (* [tclSINGLE_STEP ats] tries proving with given params. *)
+
+    let tclREWRITE_ALL_INNERMOST =
+      let rec aux rewriters l2rs i = match rewriters, l2rs with
+      | rewriter::rewriters, l2r::l2rs ->
+          Proofview.tclIFCATCH
+            (cl_rewrite_clause_innermost rewriter l2r)
+            (fun _ -> aux rewriters l2rs (i + 1))
+            (fun (ex, _) -> Proofview.tclZERO (RewriteFailAt i))
+      | [], [] -> Proofview.tclUNIT ()
+      | _, _ -> failwith "tclREWRITE_ALL_INNERMOST: Inconsistent length rewriters vs ats vs l2rs" in
+      aux rewriters l2rs 0 in
+
+    let tclSINGLE_STEP tclREWRITE_ALL = (* [tclSINGLE_STEP tclREWRITE_ALL] tries proving with given tactic [tclREWRITE_ALL]. *)
       let open Proofview.Notations in
       Tactics.intros <*>
       Tactics.pose_proof (Names.Name (Names.Id.of_string "H")) (EConstr.mkRef (Nametab.global rewritee, EConstr.EInstance.empty)) <*>
-      (* TODO: ats *)
-      (* tclCONCAT (List.map (fun (rewriter, l2r) ->
-        let c = (fun env sigma ->
-          ( sigma,
-            ( EConstr.mkRef (Nametab.global rewriter, EConstr.EInstance.empty),
-              Tactypes.NoBindings ) )) in
-        rewrite c 13 l2r
-      ) (List.combine rewriters l2rs)) <*> *)
-      tclREWRITE_ALL ats <*>
+      tclREWRITE_ALL <*>
       (if use_symmetry then Tactics.symmetry else Tacticals.tclIDTAC) <*>
       (* HACK: G -> a = b の形の解決のために、型 G を持つ Parameter を Resolve Hint にもつ HintDb を追加しておく必要がある. *)
       Auto.default_full_auto <*>
@@ -412,23 +417,35 @@ let tclPROVE_BY_REDUCTION ~name ~goal ~rewritee ~rewriters =
       | [] -> failwith "inc_at: Invalid argument" in
     let rec aux ats =
       Proofview.tclIFCATCH
-        (tclSINGLE_STEP ats)
+        (tclSINGLE_STEP (tclREWRITE_ALL ats))
         (fun _ -> Proofview.tclUNIT ())
         (fun (exn,_) ->
           match exn with
           | RewriteFailAt i -> if i = 0 then Proofview.tclZERO Prove_failed else aux (inc_at ats (i - 1))
           | _ -> aux (inc_at ats (ats_length - 1)))
       in
-    aux (List.init ats_length (fun _ -> 1)) in
+    if full then
+      aux (List.init ats_length (fun _ -> 1))
+    else
+      tclSINGLE_STEP tclREWRITE_ALL_INNERMOST in
   let binlss =
     let rec aux l acc =
       match Devutil.next_binls l with
       | None -> acc
       | Some l -> aux l (l :: acc) in
     aux (List.init (1 + List.length rewriters) (fun _ -> true)) [(List.init (1 + List.length rewriters) (fun _ -> true))] in
+
+  (* HACK: coq の rewrite.mli の都合上、innermost で at n を適用する書き換えが難しい。
+     しかし多くのケースでは Innermost の at 1 が正しい書換になる。このため、最初に Innermost による書換を試し、その後全通りを試す。*)
+  (* 全探索の方 *)
+  let iter_all_patterns = List.fold_left (fun acc ls ->
+      Proofview.tclIFCATCH (tcl (List.hd ls) (List.tl ls) true) (fun _ -> Proofview.tclUNIT ()) (fun _ -> acc)
+    ) Proofview.(tclUNIT ()) binlss in
+  (* innermost. こちらが先に実行されることに注意。 *)
   List.fold_left (fun acc ls ->
-    Proofview.tclIFCATCH (tcl (List.hd ls) (List.tl ls)) (fun _ -> Proofview.tclUNIT ()) (fun _ -> acc)
-  ) Proofview.(tclUNIT ()) binlss
+    Proofview.tclIFCATCH (tcl (List.hd ls) (List.tl ls) false) (fun _ -> Proofview.tclUNIT ()) (fun _ -> acc)
+  ) iter_all_patterns binlss
+
       
 (** 現在のゴールを冗長な規則の書換によって示す。 *)
 let tac_prove_by_reduction ~(rewriters : Libnames.qualid list)
@@ -530,7 +547,8 @@ let prove_completion_subject ~(name : Names.Id.t)
     cl_rewrite_clause c l2r (OnlyOccurrences [ at ]) None in
   let ats_length = List.length rewriters in
 
-  let tcl l2rs = (* [tcl l2rs] は引数のパラメータを使って、全ての [ats] に対して証明を試す。 *)
+  let tcl l2rs full = (* [tcl l2rs full] は引数のパラメータを使って、全ての [ats] に対して証明を試す。
+    full=false のとき、innermost で ats=[1;1;...;1] の実行をする。これは高速で、多くの場合これで成功する。 *)
     let tclREWRITE_ALL ats = (* [tclREWRITE_ALL ats] rewrites H with given params. *)
       let rec aux rewriters ats l2rs i = match rewriters, ats, l2rs with
       | rewriter::rewriters, at::ats, l2r::l2rs ->
@@ -546,10 +564,22 @@ let prove_completion_subject ~(name : Names.Id.t)
       | _, _, _ -> failwith "tclREWRITE_ALL: Inconsistent length rewriters vs ats vs l2rs" in
       aux rewriters ats l2rs 0 in
 
-    let tclSINGLE_STEP ats = (* [tclSINGLE_STEP ats] tries proving with given params. *)
+    let tclREWRITE_ALL_INNERMOST =
+      let rec aux rewriters l2rs i = match rewriters, l2rs with
+      | rewriter::rewriters, l2r::l2rs ->
+          Proofview.tclIFCATCH
+            (cl_rewrite_clause_innermost rewriter l2r)
+            (fun _ -> aux rewriters l2rs (i + 1))
+            (fun (ex, _) -> Proofview.tclZERO (RewriteFailAt i))
+      | [], [] -> Proofview.tclUNIT ()
+      | _, _ -> failwith "tclREWRITE_ALL_INNERMOST: Inconsistent length rewriters vs ats vs l2rs" in
+      aux rewriters l2rs 0 in
+
+
+    let tclSINGLE_STEP tclREWRITE_ALL = (* [tclSINGLE_STEP ats] tries proving with given tactic [tclREWRITE_ALL]. *)
       let open Proofview.Notations in
       Tactics.intros <*>
-      tclREWRITE_ALL ats <*>
+      tclREWRITE_ALL <*>
 
       (* HACK: G -> a = b の形の解決のために、型 G を持つ Parameter を Resolve Hint にもつ HintDb を追加しておく必要がある. *)
       (* reflexivity だけでも良いかも *)
@@ -570,23 +600,32 @@ let prove_completion_subject ~(name : Names.Id.t)
       | [] -> failwith "inc_at: Invalid argument" in
     let rec aux ats =
       Proofview.tclIFCATCH
-        (tclSINGLE_STEP ats)
+        (tclSINGLE_STEP (tclREWRITE_ALL ats))
         (fun _ -> Proofview.tclUNIT ())
         (fun (exn,_) ->
           match exn with
           | RewriteFailAt i -> if i = 0 then Proofview.tclZERO Prove_failed else aux (inc_at ats (i - 1))
           | _ -> aux (inc_at ats (ats_length - 1)))
       in
-    aux (List.init ats_length (fun _ -> 1)) in
+    if full then
+      aux (List.init ats_length (fun _ -> 1))
+    else tclSINGLE_STEP tclREWRITE_ALL_INNERMOST in
   let binlss =
     let rec aux l acc =
       match Devutil.next_binls l with
       | None -> acc
       | Some l -> aux l (l :: acc) in
     aux (List.init ats_length (fun _ -> true)) [(List.init ats_length (fun _ -> true))] in
-  let tactic = List.fold_left (fun acc ls ->
-      Proofview.tclIFCATCH (tcl ls) (fun _ -> Proofview.tclUNIT ()) (fun _ -> acc)
-    ) Proofview.(tclUNIT ()) binlss in
+  let tactic =
+    let tactic_full =
+      List.fold_left (fun acc ls ->
+        Proofview.tclIFCATCH (tcl ls true) (fun _ -> Proofview.tclUNIT ()) (fun _ -> acc)
+      ) Proofview.(tclUNIT ()) binlss in
+    (* innermost. Notice that this runs earlier before [tactic_full] *)
+    List.fold_left (fun acc ls ->
+      Proofview.tclIFCATCH (tcl ls false) (fun _ -> Proofview.tclUNIT ()) (fun _ -> acc)
+    ) tactic_full binlss in
+
 
   (* Definition *)
   let env = Global.env () in
