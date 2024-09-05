@@ -1,4 +1,4 @@
-toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.ZL3xd1wc0N
+toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.V5NZXE8clO
 Finish
 File "./GRP540-1/LPO.v", line 27, characters 2-13:
 Error: Unable to unify "divide b (inverse a)" with "divide a (inverse b)".

@@ -1,4 +1,4 @@
-toma --parsable "LPO.inverse (LPO.inverse (LPO.a)) -> LPO.a" /tmp/tmp.BktEHJdIRM
+toma --parsable "LPO.inverse (LPO.inverse (LPO.a)) -> LPO.a" /tmp/tmp.MOxn8xVbRw
 Finish
 check
      : inverse (inverse a) = a

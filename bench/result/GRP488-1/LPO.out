@@ -1,1 +1,4 @@
-toma --parsable "LPO.multiply (LPO.identity, LPO.a2) -> LPO.a2" /tmp/tmp.T76lvC41ro
+toma --parsable "LPO.multiply (LPO.identity, LPO.a2) -> LPO.a2" /tmp/tmp.4PBl6EceRY
+Finish
+check
+     : multiply identity a2 = a2

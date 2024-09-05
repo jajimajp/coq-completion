@@ -1,4 +1,4 @@
-toma --parsable "LPO.mult (LPO.a, LPO.mult (LPO.b, LPO.mult (LPO.c, LPO.b))) -> LPO.mult (LPO.mult (LPO.mult (LPO.a, LPO.b), LPO.c), LPO.b)" /tmp/tmp.ASDS1zShAx
+toma --parsable "LPO.mult (LPO.a, LPO.mult (LPO.b, LPO.mult (LPO.c, LPO.b))) -> LPO.mult (LPO.mult (LPO.mult (LPO.a, LPO.b), LPO.c), LPO.b)" /tmp/tmp.gaXoF3Snb5
 Finish
 check
      : mult a (mult b (mult c b)) = mult (mult (mult a b) c) b

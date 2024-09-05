@@ -1,1 +1,5 @@
-toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.pMQtn24Iyh
+toma --parsable "LPO.multiply (LPO.a, LPO.b) -> LPO.multiply (LPO.b, LPO.a)" /tmp/tmp.hEdYGEERR1
+Finish
+File "./GRP192-1/LPO.v", line 40, characters 2-13:
+Error: Unable to unify "multiply b a" with "identity".
+

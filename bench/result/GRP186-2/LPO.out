@@ -1,1 +1,1 @@
-toma --parsable "LPO.least_upper_bound (LPO.multiply (LPO.a, LPO.b), LPO.identity) -> LPO.multiply (LPO.a, LPO.inverse (LPO.greatest_lower_bound (LPO.a, LPO.inverse (LPO.b))))" /tmp/tmp.xl2ktAXFTK
+toma --parsable "LPO.least_upper_bound (LPO.multiply (LPO.a, LPO.b), LPO.identity) -> LPO.multiply (LPO.a, LPO.inverse (LPO.greatest_lower_bound (LPO.a, LPO.inverse (LPO.b))))" /tmp/tmp.hFsKDzEZOn

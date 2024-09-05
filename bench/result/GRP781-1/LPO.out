@@ -1,1 +1,1 @@
-toma --parsable "LPO.c (LPO.m (LPO.x, LPO.y), LPO.z) -> LPO.m (LPO.c (LPO.x, LPO.z), LPO.c (LPO.y, LPO.z))" /tmp/tmp.zkXIHeHcDZ
+toma --parsable "LPO.c (LPO.m (LPO.x, LPO.y), LPO.z) -> LPO.m (LPO.c (LPO.x, LPO.z), LPO.c (LPO.y, LPO.z))" /tmp/tmp.jgY1a4WIcS

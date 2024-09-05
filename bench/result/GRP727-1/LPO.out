@@ -1,1 +1,1 @@
-toma --parsable "LPO.asoc (LPO.a, LPO.b, LPO.asoc (LPO.c, LPO.d, LPO.e)) -> LPO.unit" /tmp/tmp.ZoZQnlzMJl
+toma --parsable "LPO.asoc (LPO.a, LPO.b, LPO.asoc (LPO.c, LPO.d, LPO.e)) -> LPO.unit" /tmp/tmp.0BEfDcfDWA

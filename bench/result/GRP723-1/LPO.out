@@ -1,1 +1,1 @@
-toma --parsable "LPO.f (LPO.a, LPO.f (LPO.b, LPO.c)) -> LPO.f (LPO.f (LPO.a, LPO.b), LPO.c)" /tmp/tmp.9LO6rD8w4Y
+toma --parsable "LPO.f (LPO.a, LPO.f (LPO.b, LPO.c)) -> LPO.f (LPO.f (LPO.a, LPO.b), LPO.c)" /tmp/tmp.8VQ0c07YWZ

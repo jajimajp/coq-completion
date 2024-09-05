@@ -1,4 +1,4 @@
-toma --parsable "LPO.multiply (LPO.d, LPO.d0) -> LPO.multiply (LPO.c, LPO.c0)" /tmp/tmp.yV1Biid26g
+toma --parsable "LPO.multiply (LPO.d, LPO.d0) -> LPO.multiply (LPO.c, LPO.c0)" /tmp/tmp.8QyWAdy0oX
 File "./GRP199-1/LPO.v", line 26, characters 0-232:
 Warning: The proof has remaining shelved goals
 [remaining-shelved-goals,tactics,default]

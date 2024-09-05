@@ -1,4 +1,4 @@
-toma --parsable "LPO.multiply (LPO.commutator (LPO.a, LPO.b), LPO.c) -> LPO.multiply (LPO.c, LPO.commutator (LPO.a, LPO.b))" /tmp/tmp.r8Zfe6U8q0
+toma --parsable "LPO.multiply (LPO.commutator (LPO.a, LPO.b), LPO.c) -> LPO.multiply (LPO.c, LPO.commutator (LPO.a, LPO.b))" /tmp/tmp.2TxxbB6x17
 File "./GRP401-1/LPO.v", line 20, characters 0-239:
 Warning: The proof has remaining shelved goals
 [remaining-shelved-goals,tactics,default]

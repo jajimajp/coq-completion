@@ -1,4 +1,4 @@
-toma --parsable "LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.b))))))) -> LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.b, LPO.multiply (LPO.b, LPO.b)))))))" /tmp/tmp.xIHNHs5DYy
+toma --parsable "LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.a, LPO.b))))))) -> LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.a, LPO.multiply (LPO.b, LPO.multiply (LPO.b, LPO.multiply (LPO.b, LPO.b)))))))" /tmp/tmp.OYPLb5AzPU
 File "./GRP195-1/LPO.v", line 15, characters 0-269:
 Error:
 Anomaly "Uncaught exception Failure("Could not prove goal by reduction.")."
