@@ -1,5 +1,5 @@
-(* Declare ML Module "coq-completion.plugin". *)
-From Completion Require Import Plugin.
+Declare ML Module "coq-completion.plugin".
+(* From Completion Require Import Plugin. *)
 
 Require Import Coq.Setoids.Setoid.
 
