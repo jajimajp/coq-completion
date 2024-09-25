@@ -43,3 +43,9 @@ TACTIC EXTEND lpo_rewrite
   Main.lpo_autorewrite_with hint cl
 }
 END
+
+TACTIC EXTEND compl_auto
+| [ "compl_auto" preident_list(fixpoints) ] -> {
+  Main.compl_auto fixpoints
+}
+END

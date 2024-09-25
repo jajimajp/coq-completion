@@ -20,4 +20,6 @@ plugin/tomaparser.ml
 plugin/my_term.ml
 plugin/devutil.ml
 plugin/toma.ml
+plugin/induction.ml
+plugin/induction.mli
 plugin/plugin.mlpack

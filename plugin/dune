@@ -1,7 +1,7 @@
 (library
  (name plugin)
  (public_name coq-completion.plugin)
- (flags :standard -rectypes -w -27 -w -69)
+ (flags :standard -rectypes -w -27 -w -69 -w -9)
  (libraries coq-core.plugins.ltac))
 
 (coq.pp

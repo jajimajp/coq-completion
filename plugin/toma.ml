@@ -83,6 +83,14 @@ let toma axioms =
   let axioms : Equation.t list = List.map Equation.of_constr axioms in
   Exe.toma (trs_of ~axioms)
 
+let toma_eqs axioms =
+  let version = Exe.get_toma_version () in
+  if not (version = acceptable_toma_version) then
+    failwith
+      ("VERSION CHECKED: NG : " ^ version ^ "\nexpected: "
+     ^ acceptable_toma_version);
+  Exe.toma (trs_of ~axioms)
+
 let toma_with_goal ~goal axioms =
   let version = Exe.get_toma_version () in
   if not (version = acceptable_toma_version) then

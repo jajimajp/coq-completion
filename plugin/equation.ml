@@ -36,6 +36,13 @@ module Term = struct
         let args : t list = List.map of_constr (Array.to_list args) in
         mkApp f args
     | Const (k, _) -> mkVar (Names.Constant.to_string k)
+    | Construct (((mutind, mutpos), pos), _) ->
+      let prefix = Names.MutInd.to_string mutind |> String.split_on_char '.' |> List.rev |> List.tl |> List.rev |> String.concat "." in
+      let cases = ComInductive.make_cases (mutind, mutpos) in
+      let case = List.nth cases (pos - 1) in
+      mkVar (prefix ^ "." ^ List.hd case)
+    | Ind _ -> failwith "not implemented ind"
+    | Var x -> Var (Names.Id.to_string x)
     | _ -> failwith "Term.of_constr: not implemented"
 
   let rec to_constr_expr t =

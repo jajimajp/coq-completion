@@ -25,3 +25,6 @@ val lpo_autorewrite_with : string -> Locus.clause -> unit Proofview.tactic
 
 val print_term : Evd.econstr -> unit Proofview.tactic
 (** [print_term e] prints the term [e]. *)
+
+val compl_auto : string list -> unit Proofview.tactic
+(** [compl_auto fixpoints] returns tactic to complete the fixpoints. *)

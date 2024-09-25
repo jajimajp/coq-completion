@@ -437,3 +437,5 @@ let complete_for (goal : Constrexpr.constr_expr) rs hint_db_name ops =
   let prefixed_rule (id, (l, r)) = ("_" ^ hint_db_name ^ "_" ^ id, (l, r)) in
   add_rules_for_termination [ prefixed_rule rule ] hint_db_name;
   Pp.str @@ String.concat "\n" outputs
+
+let compl_auto = Induction.compl_auto
