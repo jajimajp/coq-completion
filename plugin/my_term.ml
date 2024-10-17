@@ -127,6 +127,7 @@ let to_constrexpr_raw (t1, t2) constants =
                  (fun name ->
                    CAst.make (Names.Name.mk_name (Id.of_string name)))
                  vars,
+               None,
                Default Explicit,
                CAst.make (CRef (Libnames.qualid_of_string "G", None)) );
          ],
@@ -196,10 +197,11 @@ let of_constr (c : Constr.t) =
           | Case (_, _, _, _, _, _, _) -> "Case"
           | Fix _ -> "Fix"
           | CoFix _ -> "CoFix"
-          | Proj (_, _) -> "Proj"
+          | Proj (_, _, _) -> "Proj"
           | Int _ -> "Int"
           | Float _ -> "Float"
           | Array _ -> "Array"
+          | String _ -> "String"
         in
         failwith ("Not implemented" ^ pr_label c)
   in

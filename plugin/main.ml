@@ -43,7 +43,7 @@ let add_axiom (rule : rule) (constants : constants option) axioms =
   extratactics.mlg を参考に実装
   簡単のため、"->" のみで、"using"は使わず、local で宣言するようにしている
 *)
-let add_local_rewrite_hint (base : string) (lcsr : Constrexpr.constr_expr) :
+let add_local_rewrite_hint ?(poly=false) (base : string) (lcsr : Constrexpr.constr_expr) :
     Pp.t =
   let env = Global.env () in
   let sigma = Evd.from_env env in
@@ -52,8 +52,10 @@ let add_local_rewrite_hint (base : string) (lcsr : Constrexpr.constr_expr) :
     let c = EConstr.to_constr sigma c in
     let ctx =
       let ctx = UState.context_set ctx in
-      DeclareUctx.declare_universe_context ~poly:false ctx;
-      Univ.ContextSet.empty
+      if poly then ctx
+      else
+        (Global.push_context_set ~strict:true ctx;
+        Univ.ContextSet.empty)
     in
     CAst.make
       ?loc:(Constrexpr_ops.constr_loc ce)
@@ -295,6 +297,7 @@ let one_base where conds tac_main bas =
         let sigma = Proofview.Goal.sigma gl in
         let rew_ctx, rew_lemma = RewRule.rew_lemma h in
         let subst, ctx' = UnivGen.fresh_universe_context_set_instance rew_ctx in
+        let subst = Sorts.QVar.Map.empty, subst in
         let c' = Vars.subst_univs_level_constr subst rew_lemma in
         let sigma = Evd.merge_context_set Evd.univ_flexible sigma ctx' in
         Proofview.tclTHEN

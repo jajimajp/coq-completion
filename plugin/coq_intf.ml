@@ -80,13 +80,13 @@ let prove_by_axiom ~name ~goal ~axioms =
   let typ = EConstr.to_constr sigma body in
   let info = Declare.Info.make ~poly:false () in
   let cinfo = Declare.CInfo.make ~name ~typ () in
-  let t, types, uctx, obl_info =
-    Declare.Obls.prepare_obligation ~name ~types:None ~body sigma
+  let t, types, uctx, _evmap, obl_info =
+    Declare.Obls.prepare_obligations ~name ~body env sigma
   in
   let tactic = tac_prove_by_axiom ~axioms in
   let _, progress =
-    Declare.Obls.add_definition ~pm:Declare.OblState.empty ~cinfo ~info ~uctx
-      ~tactic obl_info
+    Declare.Obls.add_definition
+      ~pm:Declare.OblState.empty ~cinfo ~info ~uctx ~opaque:false ~tactic obl_info
   in
   match progress with
   | Defined _ -> ()
@@ -249,15 +249,15 @@ let proof_using_crit ~name ~n1 ~n2 ~l ~r ~crit
   let typ = EConstr.to_constr sigma body in
   let info = Declare.Info.make ~poly:false () in
   let cinfo = Declare.CInfo.make ~name ~typ () in
-  let t, types, ustate, obl_info =
-    Declare.Obls.prepare_obligation ~name ~types:None ~body sigma
+  let t, types, ustate, _evmap, obl_info =
+    Declare.Obls.prepare_obligations ~name ~body env sigma
   in
   let tactic =
     tac_prove_by_crit ~evars ~constants ~e1 ~e2 ~r1 ~r2 ~crit ~l ~r
   in
   let _, progress =
-    Declare.Obls.add_definition ~pm:Declare.OblState.empty ~cinfo ~info
-      ~uctx:ustate ~tactic obl_info
+    Declare.Obls.add_definition
+      ~pm:Declare.OblState.empty ~cinfo ~info ~opaque:false ~uctx:ustate ~tactic obl_info
   in
   match progress with
   | Defined _ -> ()
@@ -289,6 +289,7 @@ let const_body_type = function
   | Declarations.Primitive _ ->
       print_endline "GOT PRIMITIVE";
       failwith "Invalid input"
+  | Declarations.Symbol _ -> failwith "Invalid input"
 
 let tclSPECIALIZE_IF_NECESSARY next =
   let open Proofview.Notations in
@@ -306,7 +307,7 @@ let tclSPECIALIZE_IF_NECESSARY next =
               str "Specialize: "
               ++ Printer.pr_econstr_env env sigma
                    (EConstr.of_constr c.const_type));
-          Auto.h_auto None
+          Auto.gen_auto None
             [
               (fun env sigma ->
                 let c = Environ.lookup_constant (const_of_s "a1") env in
@@ -401,7 +402,8 @@ let tclPROVE_BY_REDUCTION ~name ~goal ~rewritee ~rewriters =
       tclREWRITE_ALL <*>
       (if use_symmetry then Tactics.symmetry else Tacticals.tclIDTAC) <*>
       (* HACK: G -> a = b の形の解決のために、型 G を持つ Parameter を Resolve Hint にもつ HintDb を追加しておく必要がある. *)
-      Auto.default_full_auto <*>
+      (Auto.gen_auto None [] None) <*>
+(*       Tactics.intros_reflexivity <*> *)
       (* Check if goal is cleared *)
       Proofview.numgoals >>= (function
         | 0 -> Proofview.tclUNIT ()
@@ -471,7 +473,7 @@ let tac_prove_by_reduction ~(rewriters : Libnames.qualid list)
            (List.combine rewriters l2rs))
   <*> (if use_symmetry then Tactics.symmetry else Tacticals.tclIDTAC)
   <*> (* HACK: G -> a = b の形の解決のために、型 G を持つ Parameter を Resolve Hint にもつ HintDb を追加しておく必要がある. *)
-  Auto.default_full_auto
+  (Auto.gen_auto None [] None)
 
 let prove_interreduce ~(name : Names.Id.t)
     ~(* 証明する定理名 *)
@@ -485,8 +487,8 @@ let prove_interreduce ~(name : Names.Id.t)
   let typ = EConstr.to_constr sigma body in
   let info = Declare.Info.make ~poly:false () in
   let cinfo = Declare.CInfo.make ~name ~typ () in
-  let t, types, ustate, obl_info =
-    Declare.Obls.prepare_obligation ~name ~types:None ~body sigma
+  let t, types, ustate, _evmap, obl_info =
+    Declare.Obls.prepare_obligations ~name ~body env sigma
   in
   let rec aux l2rs : unit =
     let tactic = tac_prove_by_reduction ~rewriters ~rewritee:applier ~l2rs in
@@ -498,11 +500,13 @@ let prove_interreduce ~(name : Names.Id.t)
     in
     let _, progress =
       try
-        Declare.Obls.add_definition ~pm:Declare.OblState.empty ~cinfo ~info
+        Declare.Obls.add_definition
+          ~pm:Declare.OblState.empty ~cinfo ~info ~opaque:false
           ~uctx:ustate ~tactic obl_info
       with _ ->
         print_endline "GOT ERR";
-        Declare.Obls.add_definition ~pm:Declare.OblState.empty ~cinfo ~info
+        Declare.Obls.add_definition
+          ~pm:Declare.OblState.empty ~cinfo ~info ~opaque:false
           ~uctx:ustate ~tactic obl_info
     in
     match progress with
@@ -526,12 +530,13 @@ let tclPROVE_INTERREDUCE ~(name : Names.Id.t)
   let typ = EConstr.to_constr sigma body in
   let info = Declare.Info.make ~poly:false () in
   let cinfo = Declare.CInfo.make ~name ~typ () in
-  let t, types, ustate, obl_info =
-    Declare.Obls.prepare_obligation ~name ~types:None ~body sigma
+  let t, types, ustate, _evmap, obl_info =
+    Declare.Obls.prepare_obligations ~name ~body env sigma
   in
   let tactic = tclPROVE_BY_REDUCTION ~name ~goal ~rewritee:applier ~rewriters in
   let _, progress =
-      Declare.Obls.add_definition ~pm:Declare.OblState.empty ~cinfo ~info
+      Declare.Obls.add_definition
+        ~pm:Declare.OblState.empty ~cinfo ~info ~opaque:false
         ~uctx:ustate ~tactic obl_info in
   match progress with
   | Defined _ -> ()
@@ -583,7 +588,7 @@ let prove_completion_subject ~(name : Names.Id.t)
 
       (* HACK: G -> a = b の形の解決のために、型 G を持つ Parameter を Resolve Hint にもつ HintDb を追加しておく必要がある. *)
       (* reflexivity だけでも良いかも *)
-      Auto.default_full_auto <*>
+      (Auto.gen_auto None [] None) <*>
 
       (* Check if goal is cleared *)
       Proofview.numgoals >>= (function
@@ -634,11 +639,12 @@ let prove_completion_subject ~(name : Names.Id.t)
   let typ = EConstr.to_constr sigma body in
   let info = Declare.Info.make ~poly:false () in
   let cinfo = Declare.CInfo.make ~name ~typ () in
-  let t, types, ustate, obl_info =
-    Declare.Obls.prepare_obligation ~name ~types:None ~body sigma
+  let t, types, ustate, _evmap, obl_info =
+    Declare.Obls.prepare_obligations ~name ~body env sigma
   in
   let _, progress =
-      Declare.Obls.add_definition ~pm:Declare.OblState.empty ~cinfo ~info
+      Declare.Obls.add_definition
+        ~pm:Declare.OblState.empty ~cinfo ~info ~opaque:false
         ~uctx:ustate ~tactic obl_info in
   match progress with
   | Defined _ -> ()

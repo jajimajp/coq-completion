@@ -12,4 +12,4 @@
  (depends
   (dune (>= 3.6.1))
   (ocaml (>= 4.12.0))
-  (coq-core (>= 8.20.0))))
+  (coq-stdlib (>= 8.20.0))))

@@ -1,0 +1,5 @@
+theories/Plugin.vo
+theories/Plugin.v
+theories/Plugin.glob
+plugin/plugin.cmxs
+plugin/plugin.cmxs

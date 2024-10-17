@@ -62,14 +62,14 @@ let string_of_constr_expr_label t =
   | _ -> "<Not implemented>"
 
 let rec string_of_local_binder_expr = function
-  | CLocalAssum (ls, bk, ce) ->
+  | CLocalAssum (ls, _rel, bk, ce) ->
       Printf.sprintf "CLocalAssum ((%s), %s, %s)"
         (String.concat "," (List.map string_of_lname ls))
         (string_of_binder_kind bk) (string_of_constr_expr ce)
-  | CLocalDef (ln, ce, None) ->
+  | CLocalDef (ln, _rel, ce, None) ->
       Printf.sprintf "CLocalDef (%s, %s, None)" (string_of_lname ln)
         (string_of_constr_expr ce)
-  | CLocalDef (ln, ce, Some ceo) ->
+  | CLocalDef (ln, _rel, ce, Some ceo) ->
       Printf.sprintf "CLocalDef (%s, %s, Some (%s))" (string_of_lname ln)
         (string_of_constr_expr ce)
         (string_of_constr_expr ceo)

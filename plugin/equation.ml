@@ -177,6 +177,7 @@ let to_constr_expr t =
        ( [
            CLocalAssum
              ( vars,
+               None,
                Default Explicit,
                CAst.make (CRef (Libnames.qualid_of_string "G", None)) );
          ],

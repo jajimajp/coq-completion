@@ -18,10 +18,11 @@ let label_of_constr =
   | Case (_, _, _, _, _, _, _) -> "Case"
   | Fix _ -> "Fix"
   | CoFix _ -> "CoFix"
-  | Proj (_, _)-> "Proj"
+  | Proj (_, _, _)-> "Proj"
   | Int _ -> "Int"
   | Float _ -> "Float"
   | Array (_, _, _, _)-> "Array"
+  | String _ -> "String"
 
 type operator = { name : string; arity : int }
 (* leave this for debug printing *)
@@ -171,7 +172,7 @@ module CompletionInput = struct
       let args = List.mapi (fun i v -> if i = matched_pos then t else v) vars in
       mkTermApp f args in
 
-    let rec aux (acc : t) (branches : Constr.t Constr.pcase_branch list) (cases : string list list) = match branches, cases with
+    let rec aux (acc : t) (branches : (Constr.t, Sorts.relevance) Constr.pcase_branch list) (cases : string list list) = match branches, cases with
     | [], [] -> acc
     | b :: bs, c :: cs -> begin
         let f = List.hd c in
@@ -340,8 +341,8 @@ let debug_add_single_axiom () =
   let typ = EConstr.to_constr sigma body in
   let info = Declare.Info.make ~poly:false () in
   let cinfo = Declare.CInfo.make ~name ~typ () in
-  let t, types, uctx, obl_info =
-    Declare.Obls.prepare_obligation ~name ~types:None ~body sigma
+  let t, types, uctx, _evmap, obl_info =
+    Declare.Obls.prepare_obligations ~name ~body env sigma
   in
   let tactic =
     let open Proofview.Notations in
@@ -349,7 +350,8 @@ let debug_add_single_axiom () =
     Tactics.simpl_in_concl <*>
     Tactics.reflexivity in
   let _, progress =
-    Declare.Obls.add_definition ~pm:Declare.OblState.empty ~cinfo ~info ~uctx
+    Declare.Obls.add_definition
+      ~pm:Declare.OblState.empty ~cinfo ~info ~uctx ~opaque:false
       ~tactic obl_info
   in
   let () = match progress with
@@ -472,7 +474,7 @@ let compl_auto (fixpoints : string list) =
       let tcl1 =
        (Tactics.simpl_in_concl
        <*> Tactics.reflexivity) in
-      let tcl2 = Auto.default_full_auto in
+      let tcl2 = Auto.default_auto in
       Tactics.assert_by
       (Names.Name.mk_name (Names.Id.of_string ("axiom" ^ (fst rule)))) (* TODO: name *)
       goal
