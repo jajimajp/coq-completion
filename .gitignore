@@ -32,3 +32,6 @@ META
 .DS_Store
 .swp
 a.out
+
+# opam local switch
+_opam
