@@ -1,4 +1,0 @@
-toma: File not found: BOO001-0.ax
-CallStack (from HasCallStack):
-  error, called at ./UEQParser.hs:230:16 in main:UEQParser
-source/BOO001-1-env-test.p: Completed in 0.03 seconds

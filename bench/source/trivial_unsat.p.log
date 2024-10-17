@@ -1,6 +1,0 @@
-% SZS status GaveUp : the original goal is not ground
-However the axioms admit the following ground-complete ordered rewrite system:
-LPO with precedence: c2 > c1 > f
-ES:
-
-source/trivial_unsat.p: Completed in 0.04 seconds
