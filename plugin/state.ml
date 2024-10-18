@@ -24,7 +24,7 @@ let current_set_name () = match !_cur_set_name with
   | None -> failwith "Internal error. This error often occurs when you run lpo_autorewrite without executing Complete command."
   | Some name -> name
 
-let current_order_params () = match !_cur_set_name with
+let current_order_params () = match !_cur_order_params with
   | None -> failwith "Internal error: LPO order could not be obtained. This error often occurs when you run lpo_autorewrite without executing Complete command."
   | Some o -> o
 

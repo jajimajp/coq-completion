@@ -120,7 +120,7 @@ let proof_using_toma (proc : procedure) (constants : constants option) axioms
   add_rules_for_termination rules hint_db_name;
   let _, _, op = proc in
   order_params := op;
-  State.register hint_db_name { set_name=State.current_order_params ()
+  State.register hint_db_name { set_name=State.current_set_name ()
                               ; order_params=op };
   State.broadcast hint_db_name;
   []
@@ -450,7 +450,10 @@ let auto_multi_rewrite ?(conds = Naive) lems cl =
   Proofview.wrap_exceptions (fun () ->
       gen_auto_multi_rewrite conds (Proofview.tclUNIT ()) lems cl)
 
-let lpo_autorewrite_with hintDb cl = auto_multi_rewrite [ hintDb ] cl
+let lpo_autorewrite_with hintDb cl =
+  State.broadcast hintDb;
+  order_params := State.current_order_params ();
+  auto_multi_rewrite [ hintDb ] cl
 
 let complete_in_tac axs cs cl =
   let axs = List.map Libnames.qualid_of_string axs in
