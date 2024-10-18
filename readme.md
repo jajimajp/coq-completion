@@ -2,17 +2,24 @@
 
 ## Installation
 
-1. Get toma(v0.7+PARSABLE) from [here](https://github.com/jajimajp/toma.git) and build it.
+1. Install dependencies:
+
+- GNU/Make
+- Glasgow Haskell Compiler 9.2.5 (or higher)
+- Z3 version 4.8.12 (or higher)
+- opam version 2.1.0 (or higher)
+- coq 8.20.0
+
+1. Build toma(v0.7+PARSABLE) in [./toma](./toma)
 
 ```bash
-git clone https://github.com/jajimajp/toma.git
 cd toma
 make
 ```
 
 For more information, see https://github.com/jajimajp/toma
 
-2. Add your toma executable to $PATH.
+2. Add your toma executable to $PATH
 
 ```bash
 export PATH="<your/path/to/toma>:$PATH"
@@ -23,32 +30,29 @@ $ toma -h | head -n1
 toma version 0.7+PARSABLE
 ```
 
-3. Clone this repository and install.
+3. Build and install this plugin
 
 ```bash
-git clone https://github.com/jajimajp/coq-completion.git
 cd coq-completion
-make && make install
 ```
 
-## How to run
+To install opam package dependencies, run:
+```
+opam install . --deps-only
+```
 
-You can find a lot of example Coq files in ./examples.
+To install this plugin, run:
+
+```
+make
+make install
+```
+
+## Usage
+
+You can find an overview of how to use our plugin in (./examples/Demo.v)[./examples/Demo.v].
 
 ```bash
-coqc examples/commonoid.v
+coqc examples/Demo.v
 ```
 
-## Tests
-
-1. Unit test:
-
-```bash
-dune runtest tests/unit
-```
-
-2. E2E test:
-
-```bash
-dune build tests/e2e
-```
