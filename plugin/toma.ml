@@ -54,7 +54,9 @@ end = struct
     let ic = Unix.open_process_in command in
     let output = input_all_lines ic in
     ignore (Unix.close_process_in ic);
-    List.hd output
+    match output with
+    | [] -> failwith "The toma command was not found. Please install toma and ensure it can be located via the PATH environment variable."
+    | h :: _ -> h
 end
 
 (** Toma に入力するための TRS 文字列を返す *)
