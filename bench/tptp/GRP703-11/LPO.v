@@ -14,6 +14,7 @@ Parameter rd : G -> G -> G.
 Parameter unit : G.
 Parameter x2 : G.
 Parameter x3 : G.
+Hint Resolve op_c.
 Axiom ax_f13 : forall A B : G, op_f = (mult A (mult B (ld (mult A B) op_c))).
 Axiom ax_f12 : forall A B : G, op_e = (mult (mult (rd op_c (mult A B)) B) A).
 Axiom ax_f11 : forall A : G, op_d = (ld A (mult op_c A)).

@@ -15,8 +15,7 @@ Parameter op_e : G.
 Parameter op_f : G.
 Parameter rd : G -> G -> G.
 Parameter unit : G.
-(* HACK: for coq-completion *)
-Hint Resolve a : hint_hack_compl.
+Hint Resolve a.
 Axiom ax_c13 : (mult op_e op_e) = op_f.
 Axiom ax_c12 : (mult op_d op_d) = op_e.
 Axiom ax_c11 : (mult op_c (mult op_c op_c)) = op_d.

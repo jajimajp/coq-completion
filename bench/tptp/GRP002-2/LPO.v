@@ -14,8 +14,7 @@ Parameter inverse : G -> G.
 Parameter j : G.
 Parameter k : G.
 Parameter multiply : G -> G -> G.
-(* HACK: for coq-completion *)
-Hint Resolve a : hint_hack_compl.
+Hint Resolve a.
 Axiom ax_j_times_inverse_h_is_k : (multiply j (inverse h)) = k.
 Axiom ax_h_times_b_is_j : (multiply h b) = j.
 Axiom ax_d_times_inverse_b_is_h : (multiply d (inverse b)) = h.

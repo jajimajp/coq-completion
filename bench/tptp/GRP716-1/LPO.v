@@ -12,8 +12,7 @@ Parameter op_a : G.
 Parameter op_b : G.
 Parameter plus : G -> G -> G.
 Parameter unit : G.
-(* HACK: for coq-completion *)
-Hint Resolve a : hint_hack_compl.
+Hint Resolve a.
 Axiom ax_c11 : (mult op_b op_a) = unit.
 Axiom ax_c10 : (mult op_a op_b) = unit.
 Axiom ax_c09 : forall A : G, (mult unit A) = A.

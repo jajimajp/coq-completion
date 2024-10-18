@@ -11,6 +11,7 @@ Parameter op_c : G.
 Parameter op_d : G.
 Parameter rd : G -> G -> G.
 Parameter unit : G.
+Hint Resolve op_c.
 Axiom ax_c11 : (mult op_d (mult op_d op_d)) = unit.
 Axiom ax_c10 : (mult op_c (mult op_c (mult op_c op_c))) = unit.
 Axiom ax_c09 : forall A B : G, (i (mult A B)) = (mult (i A) (i B)).

@@ -12,6 +12,7 @@ Parameter op_b : G.
 Parameter plus : G -> G -> G.
 Parameter unit : G.
 Parameter x0 : G.
+Hint Resolve op_0.
 Axiom ax_f11 : (mult op_b op_a) = unit.
 Axiom ax_f10 : (mult op_a op_b) = unit.
 Axiom ax_f09 : forall A : G, (mult unit A) = A.

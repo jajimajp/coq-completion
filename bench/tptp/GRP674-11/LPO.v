@@ -13,6 +13,7 @@ Parameter op_y : G.
 Parameter op_z : G.
 Parameter rd : G -> G -> G.
 Parameter unit : G.
+Hint Resolve op_t.
 Axiom ax_f09 : (mult (asoc op_x op_y op_z) (asoc op_x op_y op_t)) = (asoc op_x op_y (mult op_z op_t)).
 Axiom ax_f08 : forall A B C : G, (asoc A B C) = (ld (mult A (mult B C)) (mult (mult A B) C)).
 Axiom ax_f07 : forall A B C : G, (mult A (mult B (mult C A))) = (mult (mult (mult A B) C) A).

@@ -10,8 +10,7 @@ Parameter c : G.
 Parameter identity : G.
 Parameter left_inverse : G -> G.
 Parameter multiply : G -> G -> G.
-(* HACK: for coq-completion *)
-Hint Resolve a : hint_hack_compl.
+Hint Resolve a.
 Axiom ax_moufang3 : forall X Y Z : G, (multiply (multiply (multiply X Y) X) Z) = (multiply X (multiply Y (multiply X Z))).
 Axiom ax_left_inverse : forall X : G, (multiply (left_inverse X) X) = identity.
 Axiom ax_left_identity : forall X : G, (multiply identity X) = X.

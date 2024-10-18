@@ -16,6 +16,7 @@ Parameter quotient : G -> G -> G.
 Parameter t : G -> G -> G.
 Parameter x0 : G.
 Parameter x1 : G.
+Hint Resolve one.
 Axiom ax_sos32 : forall A B C : G, (a (j A) B C) = (a B C A).
 Axiom ax_sos31 : forall A B C : G, (a (i A) B C) = (a (j A) B C).
 Axiom ax_sos30 : forall A B C : G, (a A (i B) C) = (a A (j B) C).

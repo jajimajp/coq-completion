@@ -9,6 +9,7 @@ Parameter mult : G -> G -> G.
 Parameter unit : G.
 Parameter x0 : G.
 Parameter x1 : G.
+Hint Resolve unit.
 Axiom ax_f05 : forall A : G, (mult (i A) A) = unit.
 Axiom ax_f04 : forall A : G, (mult A (i A)) = unit.
 Axiom ax_f03 : forall A B C : G, (mult A (mult B (mult B C))) = (mult (mult (mult A B) B) C).

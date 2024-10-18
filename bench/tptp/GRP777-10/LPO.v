@@ -12,8 +12,7 @@ Parameter difference : G -> G -> G.
 Parameter product : G -> G -> G.
 Parameter quotient : G -> G -> G.
 Parameter x0 : G.
-(* HACK: for coq-completion *)
-Hint Resolve a : hint_hack_compl.
+Hint Resolve a.
 Axiom ax_sos09 : (product (product a c) (product c b)) = (product a b).
 Axiom ax_sos08 : forall A B C : G, (bigC A B C) = (product (product A B) (product C A)).
 Axiom ax_sos07 : forall A B : G, (product (product (product A B) B) (product B (product B A))) = B.

@@ -12,6 +12,7 @@ Parameter x0 : G.
 Parameter x1 : G.
 Parameter x2 : G.
 Parameter x3 : G.
+Hint Resolve unit.
 Axiom ax_goal1 : (mult x0 x1) = unit.
 Axiom ax_f08 : forall A B C : G, (mult (mult A B) C) = (mult (mult A C) (ld C (mult B C))).
 Axiom ax_f07 : forall A B C : G, (mult A (mult B C)) = (mult (rd (mult A B) A) (mult A C)).

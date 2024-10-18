@@ -8,8 +8,7 @@ Parameter a1 : G.
 Parameter b1 : G.
 Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
-(* HACK: for coq-completion *)
-Hint Resolve a1 : hint_hack_compl.
+Hint Resolve a1.
 Axiom ax_single_axiom : forall A B C : G, (inverse (multiply (inverse (multiply A (inverse (multiply (inverse B) (multiply (inverse C) (inverse (multiply (inverse C) C))))))) (multiply A C))) = B.
 
 Complete ax_single_axiom : a1 b1 inverse multiply : hint

@@ -7,8 +7,7 @@ Parameter G : Set.
 Parameter a : G.
 Parameter b : G.
 Parameter multiply : G -> G -> G.
-(* HACK: for coq-completion *)
-Hint Resolve a : hint_hack_compl.
+Hint Resolve a.
 Axiom ax_condition : forall X Y : G, (multiply X (multiply X (multiply X (multiply Y Y)))) = (multiply Y (multiply X (multiply X (multiply Y X)))).
 Axiom ax_left_cancellation : forall A B C : G, (multiply A B) = (multiply A C).
 Axiom ax_right_cancellation : forall A B C : G, (multiply A B) = (multiply C B).

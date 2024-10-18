@@ -18,8 +18,7 @@ Parameter k : G.
 Parameter multiply : G -> G -> G.
 Parameter product : G -> G -> G -> G.
 Parameter true : G.
-(* HACK: for coq-completion *)
-Hint Resolve a : hint_hack_compl.
+Hint Resolve a.
 Axiom ax_j_times_inverse_h_is_k : (product j (inverse h) k) = true.
 Axiom ax_h_times_b_is_j : (product h b j) = true.
 Axiom ax_d_times_inverse_b_is_h : (product d (inverse b) h) = true.

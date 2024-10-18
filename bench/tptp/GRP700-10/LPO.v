@@ -10,6 +10,7 @@ Parameter rd : G -> G -> G.
 Parameter tuple : G -> G -> G.
 Parameter unit : G.
 Parameter x0 : G.
+Hint Resolve unit.
 Axiom ax_f08 : forall A B C : G, (mult (mult A B) (mult B (mult C B))) = (mult (mult A (mult B (mult B C))) B).
 Axiom ax_f07 : forall A B C : G, (mult (mult (mult A B) A) (mult A C)) = (mult A (mult (mult (mult B A) A) C)).
 Axiom ax_f06 : forall A : G, (mult unit A) = A.

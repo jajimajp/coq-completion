@@ -12,8 +12,7 @@ Parameter multiply : G -> G -> G.
 Parameter negative_part : G -> G.
 Parameter positive_part : G -> G.
 Parameter union : G -> G -> G.
-(* HACK: for coq-completion *)
-Hint Resolve a : hint_hack_compl.
+Hint Resolve a.
 Axiom ax_negative_part : forall X : G, (negative_part X) = (intersection X identity).
 Axiom ax_positive_part : forall X : G, (positive_part X) = (union X identity).
 Axiom ax_multiply_intersection2 : forall X Y Z : G, (multiply (intersection Y Z) X) = (intersection (multiply Y X) (multiply Z X)).

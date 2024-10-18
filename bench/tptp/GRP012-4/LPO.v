@@ -9,8 +9,7 @@ Parameter b : G.
 Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
-(* HACK: for coq-completion *)
-Hint Resolve a : hint_hack_compl.
+Hint Resolve a.
 Axiom ax_right_inverse : forall X : G, (multiply X (inverse X)) = identity.
 Axiom ax_right_identity : forall X : G, (multiply X identity) = X.
 Axiom ax_associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).

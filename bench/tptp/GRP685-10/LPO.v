@@ -10,6 +10,7 @@ Parameter rd : G -> G -> G.
 Parameter x6 : G.
 Parameter x7 : G.
 Parameter x8 : G.
+Hint Resolve x6.
 Axiom ax_f07 : forall A B : G, (ld A (mult A (ld B B))) = (rd (mult (rd A A) B) B).
 Axiom ax_f06 : forall A B C D : G, (rd (mult (mult A B) (rd C D)) (rd C D)) = (mult A (rd (mult B D) D)).
 Axiom ax_f05 : forall A B C D : G, (ld (ld A B) (mult (ld A B) (mult C D))) = (mult (ld A (mult A C)) D).

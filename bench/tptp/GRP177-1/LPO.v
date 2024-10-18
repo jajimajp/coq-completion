@@ -12,8 +12,7 @@ Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter least_upper_bound : G -> G -> G.
 Parameter multiply : G -> G -> G.
-(* HACK: for coq-completion *)
-Hint Resolve a : hint_hack_compl.
+Hint Resolve a.
 Axiom ax_p08a_3 : (least_upper_bound identity c) = c.
 Axiom ax_p08a_2 : (least_upper_bound identity b) = b.
 Axiom ax_p08a_1 : (least_upper_bound identity a) = a.

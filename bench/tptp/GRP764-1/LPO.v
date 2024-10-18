@@ -13,6 +13,7 @@ Parameter product : G -> G -> G.
 Parameter quotient : G -> G -> G.
 Parameter x0 : G.
 Parameter x1 : G.
+Hint Resolve one.
 Axiom ax_sos12 : forall A : G, (eta A) = (product (i A) A).
 Axiom ax_sos11 : forall A : G, (product (i A) A) = (product A (j A)).
 Axiom ax_sos10 : forall A : G, (j A) = (quotient one A).

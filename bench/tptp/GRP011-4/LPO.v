@@ -10,8 +10,7 @@ Parameter d : G.
 Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
-(* HACK: for coq-completion *)
-Hint Resolve b : hint_hack_compl.
+Hint Resolve b.
 Axiom ax_product_equality : (multiply b c) = (multiply d c).
 Axiom ax_left_inverse : forall X : G, (multiply (inverse X) X) = identity.
 Axiom ax_left_identity : forall X : G, (multiply identity X) = X.

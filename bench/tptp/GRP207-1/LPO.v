@@ -10,6 +10,7 @@ Parameter u : G.
 Parameter x : G.
 Parameter y : G.
 Parameter z : G.
+Hint Resolve u.
 Axiom ax_single_non_axiom : forall U Y Z : G, (multiply U (inverse (multiply Y (multiply (multiply (multiply Z (inverse Z)) (inverse (multiply U Y))) U)))) = U.
 
 Complete ax_single_non_axiom : inverse multiply u x y z : hint

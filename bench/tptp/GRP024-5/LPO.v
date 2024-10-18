@@ -11,8 +11,7 @@ Parameter commutator : G -> G -> G.
 Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter multiply : G -> G -> G.
-(* HACK: for coq-completion *)
-Hint Resolve a : hint_hack_compl.
+Hint Resolve a.
 Axiom ax_associativity_of_commutator : forall X Y Z : G, (commutator (commutator X Y) Z) = (commutator X (commutator Y Z)).
 Axiom ax_name : forall X Y : G, (commutator X Y) = (multiply (inverse X) (multiply (inverse Y) (multiply X Y))).
 Axiom ax_associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).

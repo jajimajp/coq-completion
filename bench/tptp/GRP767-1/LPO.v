@@ -15,6 +15,7 @@ Parameter quotient : G -> G -> G.
 Parameter t : G -> G -> G.
 Parameter x0 : G.
 Parameter x1 : G.
+Hint Resolve one.
 Axiom ax_sos20 : forall A B C : G, (t (eta A) (product B C)) = (product (t (eta A) B) (t (eta A) C)).
 Axiom ax_sos19 : forall A B : G, (t A B) = (quotient (product A B) A).
 Axiom ax_sos18 : forall A B C : G, (l A A (product B C)) = (product (l A A B) (l A A C)).

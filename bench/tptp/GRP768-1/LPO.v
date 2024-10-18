@@ -15,6 +15,7 @@ Parameter t : G -> G -> G.
 Parameter x0 : G.
 Parameter x1 : G.
 Parameter x2 : G.
+Hint Resolve one.
 Axiom ax_sos19 : forall A B : G, (t A B) = (quotient (product A B) A).
 Axiom ax_sos18 : forall A B C : G, (product (product (product (quotient (j A) A) (product A A)) B) C) = (product (product (quotient (j A) A) (product A A)) (product B C)).
 Axiom ax_sos17 : forall A : G, (quotient (j A) A) = (product (j A) (i A)).

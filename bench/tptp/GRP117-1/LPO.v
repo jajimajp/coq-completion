@@ -7,8 +7,7 @@ Parameter G : Set.
 Parameter a : G.
 Parameter identity : G.
 Parameter multiply : G -> G -> G.
-(* HACK: for coq-completion *)
-Hint Resolve a : hint_hack_compl.
+Hint Resolve a.
 Axiom ax_single_axiom : forall X Y Z : G, (multiply X (multiply (multiply X (multiply (multiply X Y) Z)) (multiply identity (multiply Z Z)))) = Y.
 
 Complete ax_single_axiom : a identity multiply : hint

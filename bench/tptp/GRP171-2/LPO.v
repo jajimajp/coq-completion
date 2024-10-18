@@ -11,8 +11,7 @@ Parameter identity : G.
 Parameter inverse : G -> G.
 Parameter least_upper_bound : G -> G -> G.
 Parameter multiply : G -> G -> G.
-(* HACK: for coq-completion *)
-Hint Resolve a : hint_hack_compl.
+Hint Resolve a.
 Axiom ax_p04c_2 : (least_upper_bound identity b) = b.
 Axiom ax_p04c_1 : (least_upper_bound identity a) = a.
 Axiom ax_monotony_glb2 : forall X Y Z : G, (multiply (greatest_lower_bound Y Z) X) = (greatest_lower_bound (multiply Y X) (multiply Z X)).

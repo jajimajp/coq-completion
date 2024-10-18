@@ -14,8 +14,7 @@ Parameter sk_c4 : G.
 Parameter sk_c5 : G.
 Parameter sk_c6 : G.
 Parameter sk_c7 : G.
-(* HACK: for coq-completion *)
-Hint Resolve identity : hint_hack_compl.
+Hint Resolve identity.
 Axiom ax_associativity : forall X Y Z : G, (multiply (multiply X Y) Z) = (multiply X (multiply Y Z)).
 Axiom ax_left_inverse : forall X : G, (multiply (inverse X) X) = identity.
 Axiom ax_left_identity : forall X : G, (multiply identity X) = X.

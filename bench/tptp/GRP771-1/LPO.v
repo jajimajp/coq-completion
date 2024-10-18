@@ -18,6 +18,7 @@ Parameter x0 : G.
 Parameter x1 : G.
 Parameter x2 : G.
 Parameter x3 : G.
+Hint Resolve one.
 Axiom ax_sos24 : forall A B : G, (product (product A B) (c B A)) = (product B A).
 Axiom ax_sos23 : forall A B C : G, (product (product A (product B C)) (a A B C)) = (product (product A B) C).
 Axiom ax_sos22 : forall A B : G, (product (j (j A)) (j (product B A))) = (j B).
