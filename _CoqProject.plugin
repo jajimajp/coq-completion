@@ -5,6 +5,7 @@ plugin/META.coq-completion
 theories/Plugin.v
 
 plugin/devutil.mli
+plugin/state.ml
 plugin/equation.mli
 plugin/equation.ml
 plugin/g_tactics.mlg

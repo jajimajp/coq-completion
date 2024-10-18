@@ -113,6 +113,8 @@ let rec constrexpr_of_term t =
         (CApp (CAst.make (CRef (Libnames.qualid_of_string f, None)), args_constr))
   | Var x -> CAst.make (CRef (Libnames.qualid_of_string x, None))
 
+let set_name = State.current_set_name
+
 (* without proof using force_admit *)
 let to_constrexpr_raw (t1, t2) constants =
   let open Constrexpr in
@@ -129,7 +131,7 @@ let to_constrexpr_raw (t1, t2) constants =
                  vars,
                None,
                Default Explicit,
-               CAst.make (CRef (Libnames.qualid_of_string "G", None)) );
+               CAst.make (CRef (Libnames.qualid_of_string (set_name ()), None)) );
          ],
          CAst.make
            (CApp
