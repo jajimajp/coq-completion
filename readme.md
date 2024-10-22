@@ -56,3 +56,14 @@ You can find an overview of how to use our plugin in (./examples/Demo.v)[./examp
 coqc examples/Demo.v
 ```
 
+## Troubleshooting
+
+**Toma is not recognized**
+
+When executing coqc, coqtop, or emacs from the terminal, the terminal's PATH is used. However, when executing through other means, make sure that the following two paths are registered in your PATH:
+
+- Toma
+- Z3
+
+For example, when opening emacs from outside the terminal, you can use `M-x setenv` to set the PATH.
+
