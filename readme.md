@@ -5,29 +5,35 @@
 1. Install dependencies:
 
 - GNU/Make
-- Glasgow Haskell Compiler 9.2.5 (or higher)
+- Glasgow Haskell Compiler 9.2.5 (or higher) \*
+- Cabal \*
 - Z3 version 4.8.12 (or higher)
 - opam version 2.1.0 (or higher)
 - coq 8.20.0
 
-1. Build toma(v0.7+PARSABLE) in [./toma](./toma)
+\* [GHCup](https://www.haskell.org/ghcup/) is recommended to install GHC and Cabal.
+
+
+1. Build and install toma(v0.7+PARSABLE) in [./toma](./toma)
 
 ```bash
 cd toma
-make
+cabal install
 ```
 
 For more information, see https://github.com/jajimajp/toma
 
-2. Add your toma executable to $PATH
-
-```bash
-export PATH="<your/path/to/toma>:$PATH"
-```
+2. Make sure correct version of toma executable can be found in $PATH.
 
 ```bash
 $ toma -h | head -n1
 toma version 0.7+PARSABLE
+```
+
+If toma could not be found, please add toma executable to $PATH.
+
+```bash
+export PATH="<your/path/to/toma>:$PATH"
 ```
 
 3. Build and install this plugin

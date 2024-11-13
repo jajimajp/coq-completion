@@ -12,10 +12,13 @@ the successor of Tofu.
 1. Install:
 
 - GNU/Make
-- Glasgow Haskell Compiler 9.2.5 (or higher)
+- Glasgow Haskell Compiler 9.2.5 (or higher) *
+- Cabal *
 - Z3 version 4.8.12 (or higher)
 
-2. `$ make` produces the executable `toma`.
+\* [GHCup](https://www.haskell.org/ghcup/) is recommended to install GHC and Cabal.
+
+2. `$ cabal install` builds the executable `toma` and install it.
 
 ## How to run
 
