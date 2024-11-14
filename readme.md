@@ -81,3 +81,6 @@ When executing coqc, coqtop, or emacs from the terminal, the terminal's PATH is 
 
 For example, when opening emacs from outside the terminal, you can use `M-x setenv` to set the PATH.
 
+**Toma cannot be built in Arch Linux**
+
+If you are using Arch Linux and encounter an error when building toma, there have been reports that some errors can be resolved by installing `ghc-static`.
