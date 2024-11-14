@@ -2,7 +2,7 @@
 
 ## Installation
 
-1. Install dependencies:
+0. Install dependencies:
 
 - GNU/Make
 - Glasgow Haskell Compiler 9.2.5 (or higher) \*
@@ -11,7 +11,13 @@
 - opam version 2.1.0 (or higher)
 - coq 8.20.0
 
-\* [GHCup](https://www.haskell.org/ghcup/) is recommended to install GHC and Cabal.
+\* [GHCup](https://www.haskell.org/ghcup/) is recommended to install GHC and Cabal. You can install GHC and Cabal by running:
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+```
+
+See https://www.haskell.org/ghcup/ for more information.
 
 
 1. Build and install toma(v0.7+PARSABLE) in [./toma](./toma)
@@ -33,7 +39,7 @@ toma version 0.7+PARSABLE
 If toma could not be found, please add toma executable to $PATH.
 
 ```bash
-export PATH="<your/path/to/toma>:$PATH"
+export PATH="<your/path/to/toma>":$PATH
 ```
 
 3. Build and install this plugin
@@ -46,6 +52,8 @@ To install opam package dependencies, run:
 ```
 opam install . --deps-only
 ```
+
+Make sure to update environment variables using `eval $(opam env)` after installing opam packages because some tools such as `coq_makefile` and `coqc` are used below.
 
 To install this plugin, run:
 
