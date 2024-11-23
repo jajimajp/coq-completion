@@ -179,7 +179,7 @@ let to_constr_expr t =
              ( vars,
                None,
                Default Explicit,
-               CAst.make (CRef (Libnames.qualid_of_string "G", None)) );
+               CAst.make (CRef (Libnames.qualid_of_string (State.current_set_name ()), None)) );
          ],
          CAst.make
            (CApp

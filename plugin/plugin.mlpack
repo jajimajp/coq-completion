@@ -1,3 +1,4 @@
+State
 Equation
 Devutil
 My_term
@@ -5,5 +6,6 @@ Toma
 Tomaparser
 Coq_intf
 Induction
+Record_ext
 Main
 G_tactics

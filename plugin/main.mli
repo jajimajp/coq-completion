@@ -7,6 +7,10 @@ val prove_interreduce :
 
 val complete : Libnames.qualid list -> string -> Libnames.qualid list -> Pp.t
 
+val complete_record : Libnames.qualid -> string -> unit
+(** [complete_record record_ref hint_db_name] completes axioms defined in
+    Record/Structure. *)
+
 val complete_for :
   Constrexpr.constr_expr ->
   Libnames.qualid list ->

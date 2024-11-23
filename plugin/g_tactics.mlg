@@ -19,6 +19,11 @@ VERNAC COMMAND EXTEND Complete CLASSIFIED AS QUERY
   let _ = Main.complete axioms hint_db_name ops in
   Feedback.msg_notice @@ Pp.str "Finish"
 }
+| [ "Complete" "Record" reference(record) ":" ident(hint) ] -> {
+  let hint_db_name = Names.Id.to_string hint in
+  let _ = Main.complete_record record hint_db_name in
+  Feedback.msg_notice @@ Pp.str "Finish"
+}
 | [ "Complete" reference_list(axioms) ":" reference_list(ops) ":" ident(hint) "for" constr(e) ] -> {
   let hint_db_name = Names.Id.to_string hint in
   let _ = Main.complete_for e axioms hint_db_name ops in

@@ -32,9 +32,10 @@ end = struct
     let argfile = file_with_content input in
     (* tomaへのパスが通っている必要がある *)
     let command = "toma --completion-with-parsable-output " ^ argfile in
-    let ic = Unix.open_process_in command in
+    Feedback.msg_notice Pp.(str command);
+    let ic,oc,ec = Unix.open_process_full command (Unix.environment ()) in
     let output = input_all_lines ic in
-    ignore (Unix.close_process_in ic);
+    ignore (Unix.close_process_full (ic,oc,ec));
     (* 出力の先頭がリストの後ろに入っているので反転して返す *)
     output
 
@@ -42,19 +43,22 @@ end = struct
     let argfile = file_with_content input in
     (* tomaへのパスが通っている必要がある *)
     let command = "toma --parsable \"" ^ goal ^ "\" " ^ argfile in
+    Feedback.msg_notice Pp.(str command);
     print_endline command;
-    let ic = Unix.open_process_in command in
+    let ic,oc,ec = Unix.open_process_full command (Unix.environment ()) in
     let output = input_all_lines ic in
-    ignore (Unix.close_process_in ic);
+    ignore (Unix.close_process_full (ic,oc,ec));
     (* 出力の先頭がリストの後ろに入っているので反転して返す *)
     output
 
   let get_toma_version () =
     let command = "toma -h" in
-    let ic = Unix.open_process_in command in
+    let ic,oc,ec = Unix.open_process_full command (Unix.environment ()) in
     let output = input_all_lines ic in
-    ignore (Unix.close_process_in ic);
-    List.hd output
+    ignore (Unix.close_process_full (ic,oc,ec));
+    match output with
+    | [] -> failwith "The toma command was not found. Please install toma and ensure it can be located via the PATH environment variable."
+    | h :: _ -> h
 end
 
 (** Toma に入力するための TRS 文字列を返す *)
