@@ -54,3 +54,39 @@ TACTIC EXTEND compl_auto
   Main.compl_auto fixpoints
 }
 END
+
+{
+open Locus
+open Extraargs
+
+let wit_glob_constr_with_bindings = G_rewrite.wit_glob_constr_with_bindings
+let cl_rewrite_clause (ist, c) b occ cl =
+  let c env sigma = Tacinterp.interp_open_constr_with_bindings ist env sigma c in
+  Rewrite_pos.cl_rewrite_clause c b occ cl
+
+let rewrite_pos (ist, c) b occ cl poss =
+  let c env sigma = Tacinterp.interp_open_constr_with_bindings ist env sigma c in
+  Rewrite_pos.rewrite_pos c b occ cl poss
+}
+
+TACTIC EXTEND my_setoid_rewrite
+ | [ "my_setoid_rewrite" orient(o) glob_constr_with_bindings(c) ]
+   -> { cl_rewrite_clause c o AllOccurrences None }
+END
+
+TACTIC EXTEND rewrite_pos
+ | [ "rewrite_pos" orient(o) glob_constr_with_bindings(c) "at" ne_nat_list(poss) ]
+   -> { rewrite_pos c o (OnlyOccurrences([1])) None poss }
+ | [ "rewrite_pos" "lhs" orient(o) glob_constr_with_bindings(c) "at" ne_nat_list(poss) ]
+   -> { rewrite_pos c o (OnlyOccurrences([1])) None (1 :: poss) }
+ | [ "rewrite_pos" "rhs" orient(o) glob_constr_with_bindings(c) "at" ne_nat_list(poss) ]
+   -> { rewrite_pos c o (OnlyOccurrences([1])) None (2 :: poss) }
+
+ | [ "rewrite_pos" orient(o) glob_constr_with_bindings(c) ]
+   -> { rewrite_pos c o (OnlyOccurrences([1])) None [] }
+ | [ "rewrite_pos" "lhs" orient(o) glob_constr_with_bindings(c) ]
+   -> { rewrite_pos c o (OnlyOccurrences([1])) None [1] }
+ | [ "rewrite_pos" "rhs" orient(o) glob_constr_with_bindings(c) ]
+   -> { rewrite_pos c o (OnlyOccurrences([1])) None [2] }
+END
+

@@ -5,6 +5,8 @@ plugin/META.coq-completion
 theories/Plugin.v
 
 plugin/devutil.mli
+plugin/rewrite_pos.mli
+plugin/rewrite_pos.ml
 plugin/state.ml
 plugin/equation.mli
 plugin/equation.ml
