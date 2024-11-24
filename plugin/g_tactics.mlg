@@ -88,5 +88,19 @@ TACTIC EXTEND rewrite_pos
    -> { rewrite_pos c o (OnlyOccurrences([1])) None [1] }
  | [ "rewrite_pos" "rhs" orient(o) glob_constr_with_bindings(c) ]
    -> { rewrite_pos c o (OnlyOccurrences([1])) None [2] }
+
+ | [ "rewrite_pos" orient(o) glob_constr_with_bindings(c) "at" ne_nat_list(poss) "in" hyp(id) ]
+   -> { rewrite_pos c o (OnlyOccurrences([1])) (Some id) poss }
+ | [ "rewrite_pos" "lhs" orient(o) glob_constr_with_bindings(c) "at" ne_nat_list(poss) "in" hyp(id) ]
+   -> { rewrite_pos c o (OnlyOccurrences([1])) (Some id) (1 :: poss) }
+ | [ "rewrite_pos" "rhs" orient(o) glob_constr_with_bindings(c) "at" ne_nat_list(poss) "in" hyp(id) ]
+   -> { rewrite_pos c o (OnlyOccurrences([1])) (Some id) (2 :: poss) }
+
+ | [ "rewrite_pos" orient(o) glob_constr_with_bindings(c) "in" hyp(id) ]
+   -> { rewrite_pos c o (OnlyOccurrences([1])) (Some id) [] }
+ | [ "rewrite_pos" "lhs" orient(o) glob_constr_with_bindings(c) "in" hyp(id) ]
+   -> { rewrite_pos c o (OnlyOccurrences([1])) (Some id) [1] }
+ | [ "rewrite_pos" "rhs" orient(o) glob_constr_with_bindings(c) "in" hyp(id) ]
+   -> { rewrite_pos c o (OnlyOccurrences([1])) (Some id) [2] }
 END
 

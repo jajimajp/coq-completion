@@ -55,6 +55,7 @@ let bind_global lib s =
 let coq_eq_ref  () = Coqlib.lib_ref    "core.eq.type"
 let coq_eq      = bind_global "core.eq" "type"
 let coq_f_equal = bind_global "core.eq" "congr"
+let coq_all_ref () = Coqlib.lib_ref "core.all"
 let coq_all     = bind_global "core" "all"
 let impl        = bind_global "core" "impl"
 
@@ -996,22 +997,26 @@ let subterm all flags (s : 'a pure_strategy) : 'a pure_strategy =
             let _i, state, (args', evars', progress) =
               Array.fold_left
                 (fun (i, state, (acc, evars, progress)) arg ->
-
-                  (* Rewrite only specified subterm *)
-                  let cont, poss = 
-                    match poss with
-                    | Some [] -> true, poss
-                    | Some (h :: t) when i = h -> false, Some t
-                    | Some (h :: t) -> true, poss
-                    | None -> false, poss in
-                  if cont then
-                    let progress = if Option.is_empty progress then Some false else progress in
-                    succ i, state, (None :: acc, evars, progress)
-                  else
-
                   if not (Option.is_empty progress) && not all then
                     succ i, state, (None :: acc, evars, progress)
                   else
+                    (* Rewrite only specified subterm *)
+                    let cont, poss = 
+                      let sigma = Evd.from_env env in
+                      if isRefX env sigma (coq_all_ref ()) m then
+                        false, poss
+                      else
+                        match poss with
+                        | Some [] -> true, poss
+                        | Some (h :: t) when i = h -> false, Some t
+                        | Some (h :: t) ->
+                            true, poss
+                        | None -> false, poss in
+                    if cont then
+                      let progress = if Option.is_empty progress then Some false else progress in
+                      succ i, state, (None :: acc, evars, progress)
+                    else
+
                     let evars, argty = get_type_of_refresh env evars arg in
                     let state, res = s.strategy { state ; env ;
                                                   unfresh ;
@@ -1109,9 +1114,12 @@ let subterm all flags (s : 'a pure_strategy) : 'a pure_strategy =
             else TypeGlobal.arrow_morphism
           in
           let (evars', mor), unfold = arr env evars n.binder_name tx tb x b in
-          let state, res = aux { state ; env ; unfresh ;
+          let state, res = s.strategy { state ; env ; unfresh ;
                                  term1 = mor ; ty1 = ty ;
                                  cstr = (prop,cstr) ; evars = evars'; poss } in
+          (* let state, res = aux { state ; env ; unfresh ;
+                                 term1 = mor ; ty1 = ty ;
+                                 cstr = (prop,cstr) ; evars = evars'; poss } in *)
           let res =
             match res with
             | Success r -> Success { r with rew_to = unfold (goalevars r.rew_evars) r.rew_to }
@@ -1127,7 +1135,10 @@ let subterm all flags (s : 'a pure_strategy) : 'a pure_strategy =
               let forall = if prop then PropGlobal.coq_forall else TypeGlobal.coq_forall in
                 (app_poly_sort prop env evars forall [| dom; lam |]), TypeGlobal.unfold_forall
           in
-          let state, res = aux { state ; env ; unfresh ;
+          (* let state, res = aux { state ; env ; unfresh ;
+                                 term1 = app ; ty1 = ty ;
+                                 cstr = (prop,cstr) ; evars = evars'; poss } in *)
+          let state, res = s.strategy { state ; env ; unfresh ;
                                  term1 = app ; ty1 = ty ;
                                  cstr = (prop,cstr) ; evars = evars'; poss } in
           let res =
@@ -1662,7 +1673,14 @@ let rewrite_with_pos l2r flags c occs poss : strategy =
         let (sigma, rew) = refresh_hypinfo env sigma c in
         unify_eqn rew l2r flags env (sigma, cstrs) None t
       in
-      let app = apply_rule unify in
+      let intercept_pos strat : 'a pure_strategy =
+        { strategy = fun inp ->
+          match inp.poss with
+          | None -> strat.strategy inp (* poss is not specified *)
+          | Some [] -> strat.strategy inp (* reached to specified poss *)
+          | _ -> Strategies.id.strategy inp
+        } in
+      let app = apply_rule unify |> intercept_pos in
       let strat =
         Strategies.fix (fun aux ->
           Strategies.choice (Strategies.progress app) (subterm true default_flags aux))
@@ -1949,6 +1967,8 @@ let general_s_rewrite cl l2r occs (c,l) ~new_goals =
     (fun (e, info) -> match e with
     | e -> Proofview.tclZERO ~info e)
   end
+
+let _ = general_s_rewrite (* Avoid build error *)
 
 (* let _ = Hook.set Equality.general_setoid_rewrite_clause general_s_rewrite *)
 
