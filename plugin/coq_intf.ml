@@ -520,13 +520,13 @@ let prove_interreduce ~(name : Names.Id.t)
   aux (List.init (List.length rewriters + 1) (fun _ -> true))
 
 
-
 let proof_of_simp ~(rewritee : Libnames.qualid)
     ~(goal : Constrexpr.constr_expr)
     ~(rewrite_steps : (Libnames.qualid * int list * bool * bool) list)
     use_symmetry swap_side auto_first =
   let open Proofview.Notations in
   let lhs_idx, rhs_idx = if swap_side then 2, 1 else 1, 2 in
+  Tactics.intros <*>
   Tactics.pose_proof
     (Names.Name (Names.Id.of_string "H"))
     (EConstr.mkRef (Nametab.global rewritee, EConstr.EInstance.empty))
@@ -546,23 +546,13 @@ let proof_of_simp ~(rewritee : Libnames.qualid)
            )
            rewrite_steps) <*>
      (if use_symmetry then Tactics.symmetry else Tacticals.tclIDTAC) <*>
-     begin
-       if auto_first then
-         (Auto.gen_auto None [] (Some []))
-       else
-      (Proofview.tclIFCATCH
-        (Proofview.tclTHEN
-          (Tactics.eapply
-            (EConstr.mkVar (Names.Id.of_string "H")))
-          (Proofview.tclORELSE
-            (Auto.gen_auto None [] None)
-            (fun _ -> Proofview.tclUNIT ()))
-        )
-        (fun _ -> Proofview.tclUNIT())
-        (fun (e, _) ->
-          (* <*> (* HACK: G -> a = b の形の解決のために、型 G を持つ Parameter を Resolve Hint にもつ HintDb を追加しておく必要がある. *) *)
-          (Auto.gen_auto None [] None)))
-     end
+
+     (Auto.gen_auto None [] (Some [])) <*>
+      (* Check if goal is cleared *)
+      Proofview.numgoals >>= (function
+        | 0 -> Proofview.tclUNIT ()
+        | _ -> Proofview.tclZERO Prove_failed)
+
 
 let tclPROVE_INTERREDUCE ~(name : Names.Id.t)
     ~(* 証明する定理名 *)
