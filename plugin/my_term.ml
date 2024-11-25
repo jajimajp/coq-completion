@@ -131,7 +131,8 @@ let to_constrexpr_raw (t1, t2) constants =
                  vars,
                None,
                Default Explicit,
-               CAst.make (CRef (Libnames.qualid_of_string (set_name ()), None)) );
+               CAst.make (CRef (Libnames.qualid_of_string (set_name ()), None))
+             );
          ],
          CAst.make
            (CApp

@@ -1,32 +1,30 @@
-let string_of_constr_label constr = match Constr.kind constr with
-  | Constr.Rel       _ -> "Rel"
-  | Var       _ -> "Var"
-  | Meta      _ -> "Meta"
-  | Evar      _ -> "Evar"
-  | Sort      _ -> "Sort"
-  | Cast      _ -> "Cast"
-  | Prod      _ -> "Prod"
-  | Lambda    _ -> "Lambda"
-  | LetIn     _ -> "LetIn"
-  | App       _ -> "App"
-  | Const     _ -> "Const"
-  | Ind       _ -> "Ind"
+let string_of_constr_label constr =
+  match Constr.kind constr with
+  | Constr.Rel _ -> "Rel"
+  | Var _ -> "Var"
+  | Meta _ -> "Meta"
+  | Evar _ -> "Evar"
+  | Sort _ -> "Sort"
+  | Cast _ -> "Cast"
+  | Prod _ -> "Prod"
+  | Lambda _ -> "Lambda"
+  | LetIn _ -> "LetIn"
+  | App _ -> "App"
+  | Const _ -> "Const"
+  | Ind _ -> "Ind"
   | Construct _ -> "Construct"
-  | Case      _ -> "Case"
-  | Fix       _ -> "Fix"
-  | CoFix     _ -> "CoFix"
-  | Proj      _ -> "Proj"
-  | Int       _ -> "Int"
-  | Float     _ -> "Float"
-  | String    _ -> "String"
-  | Array     _ -> "Array"
+  | Case _ -> "Case"
+  | Fix _ -> "Fix"
+  | CoFix _ -> "CoFix"
+  | Proj _ -> "Proj"
+  | Int _ -> "Int"
+  | Float _ -> "Float"
+  | String _ -> "String"
+  | Array _ -> "Array"
 
 module ConstantSort = struct
   type constant = Names.Constant.t
-  type t =
-    | Type
-    | Operator
-    | Axiom
+  type t = Type | Operator | Axiom
 
   let rec of_constant env sigma (const : constant) =
     let is_type (const : constant) =
@@ -37,13 +35,10 @@ module ConstantSort = struct
       | _ -> false
     in
 
-    if is_type const then
-      Type
-    else if is_operator env sigma const then
-      Operator
-    else
-      Axiom (* NOTE: this does not validate [const] has correct axiom form. *)
-
+    if is_type const then Type
+    else if is_operator env sigma const then Operator
+    else Axiom
+  (* NOTE: this does not validate [const] has correct axiom form. *)
 
   and is_operator env sigma const =
     let constant_body = Environ.lookup_constant const env in
@@ -51,8 +46,7 @@ module ConstantSort = struct
 
   and is_operator_constr env sigma constr =
     match Constr.kind constr with
-    | Prod (binder, _, c) ->
-        is_operator_constr env sigma c
+    | Prod (binder, _, c) -> is_operator_constr env sigma c
     | Const _ -> true (* "e" for example *)
     | App _ -> false (* assume _ = _ *)
     | Ind _ -> true
@@ -65,7 +59,6 @@ module ConstantSort = struct
 
   let print t = Pp.str (to_string t)
 end
-
 
 let get_constant_ref = function
   | Names.GlobRef.ConstRef const -> const
@@ -84,32 +77,36 @@ let pr_constant_def_label = function
   | Primitive _prim -> Pp.str "Primitive"
   | Symbol _rules -> Pp.str "Symbol"
 
+type extracted = {
+  typ : Names.Constant.t option;
+      (* "G" for example. NOTE: this is currently not provided because not used. *)
+  ops : Constr.t list (* ["e"; "i"; "f"] for example *);
+  axioms : Names.Constant.t list (* ["id_l"; "inv_l"; "assoc"] for example *);
+}
 (** Extracted constants of given record *)
-type extracted =
-  { typ: Names.Constant.t option
-    (* "G" for example. NOTE: this is currently not provided because not used. *)
-
-  ; ops: Constr.t list (* ["e"; "i"; "f"] for example *)
-  ; axioms: Names.Constant.t list (* ["id_l"; "inv_l"; "assoc"] for example *)
-  }
 
 let sort_constant env sigma (const : Names.Constant.t) =
   let constant_body = Environ.lookup_constant const env in
   let const_typ = constant_body.const_type in
-  Feedback.msg_debug Pp.(str "[sort]: " ++
-    str "; const=" ++ Names.Constant.print const ++
-    str "; const_typ=" ++ (Printer.pr_constr_env env sigma const_typ ++
-    str "; const_typ label=" ++ str (string_of_constr_label const_typ) ++
-    str "; sort=" ++ (ConstantSort.of_constant env sigma const |> ConstantSort.print)
-    ))
-
+  Feedback.msg_debug
+    Pp.(
+      str "[sort]: " ++ str "; const=" ++ Names.Constant.print const
+      ++ str "; const_typ="
+      ++ (Printer.pr_constr_env env sigma const_typ
+         ++ str "; const_typ label="
+         ++ str (string_of_constr_label const_typ)
+         ++ str "; sort="
+         ++ (ConstantSort.of_constant env sigma const |> ConstantSort.print)))
 
 (** [extract env sigma record] extracts type name, function symbols and equations. *)
 let extract : Environ.env -> Evd.evar_map -> Libnames.qualid -> extracted =
-  fun env sigma record ->
-    match Constrintern.locate_reference record with
-    | None -> failwith (Printf.sprintf "extract: record %s not found." (Libnames.string_of_qualid record))
-    | Some gref ->
+ fun env sigma record ->
+  match Constrintern.locate_reference record with
+  | None ->
+      failwith
+        (Printf.sprintf "extract: record %s not found."
+           (Libnames.string_of_qualid record))
+  | Some gref ->
       let const = get_constant_ref gref in
       let constant_body = Environ.lookup_constant const env in
       let constant_def = constant_body.const_body in
@@ -119,27 +116,27 @@ let extract : Environ.env -> Evd.evar_map -> Libnames.qualid -> extracted =
       let typ = ref None in
       let ops = ref [] in
       let axioms = ref [] in
-      let () = Array.iter (fun arg ->
-        match Constr.kind arg with
-        | Const _ -> 
-          let const, _univ = Constr.destConst arg in
-          begin match ConstantSort.of_constant env sigma const with
-          | Type ->
-            if !typ != None then
-              failwith "extract: multiple sorts found."
-            else
-              typ := Some const
-          | Operator -> ops := arg :: !ops
-          | Axiom -> axioms := const :: !axioms
-          end
-        | Ind _ ->
-          (* failwith "extract: not implemented for Ind" *)
-          () (* TODO: Treating Ind as typ and ignore *)
-        | Construct _ ->
-          (* failwith "extract: not implemented for Construct" *)
-          ops := arg :: !ops (* TODO: Treating Construct as ops *)
-        | _ ->
-          failwith "extract: not implemented"
-      ) args in
-      { typ=(!typ); ops=(!ops); axioms=(!axioms) }
-
+      let () =
+        Array.iter
+          (fun arg ->
+            match Constr.kind arg with
+            | Const _ -> (
+                let const, _univ = Constr.destConst arg in
+                match ConstantSort.of_constant env sigma const with
+                | Type ->
+                    if !typ != None then
+                      failwith "extract: multiple sorts found."
+                    else typ := Some const
+                | Operator -> ops := arg :: !ops
+                | Axiom -> axioms := const :: !axioms)
+            | Ind _ ->
+                (* failwith "extract: not implemented for Ind" *)
+                ()
+                (* TODO: Treating Ind as typ and ignore *)
+            | Construct _ ->
+                (* failwith "extract: not implemented for Construct" *)
+                ops := arg :: !ops (* TODO: Treating Construct as ops *)
+            | _ -> failwith "extract: not implemented")
+          args
+      in
+      { typ = !typ; ops = !ops; axioms = !axioms }

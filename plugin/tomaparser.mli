@@ -24,15 +24,15 @@ and strat =
   (* [Simp (r, l)] simplify r by rewriting with [l] *)
   | Simp of rule * rewstep list
 
+and rewstep = {
+  rule : termid;
+  lhs : bool; (* rewrites left-hand side? false means the rhs is rewritten *)
+  pos : position;
+  l2r : bool;
+}
 (** single rewrite step *)
-and rewstep =
-  { rule : termid
-  ; lhs  : bool (* rewrites left-hand side? false means the rhs is rewritten *)
-  ; pos  : position
-  ; l2r  : bool
-  }
-and position = int list (* {example} e is at [0; 1] of f(f(_, e), _) *)
 
+and position = int list (* {example} e is at [0; 1] of f(f(_, e), _) *)
 
 (* example: ["a"; "b"; "c"] implies a > b > c *)
 and order_param = string list

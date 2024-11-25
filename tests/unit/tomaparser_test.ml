@@ -1,9 +1,12 @@
 open Plugin.Tomaparser
 
 let%expect_test "parse_rewstep" =
-  let pr rs = match rs with
+  let pr rs =
+    match rs with
     | None -> print_endline "None"
-    | Some ({ rule; pos; _ }) -> Printf.printf "%s %s\n" rule (String.concat ";" (List.map string_of_int pos))
+    | Some { rule; pos; _ } ->
+        Printf.printf "%s %s\n" rule
+          (String.concat ";" (List.map string_of_int pos))
   in
   let input = "- lhs by equation 0 L->R at [1]" in
   pr (parse_rewstep input);
@@ -14,7 +17,6 @@ let%expect_test "parse_rewstep" =
   let input = "- rhs by equation 0 L->R at []" in
   pr (parse_rewstep input);
   [%expect {| 0 |}]
-
 
 let input =
   {|Completed

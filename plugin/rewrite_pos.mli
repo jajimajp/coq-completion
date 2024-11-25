@@ -16,35 +16,43 @@ open Tactypes
 
 (** TODO: document and clean me! *)
 
-exception RewriteFailure of Environ.env * Evd.evar_map * Pretype_errors.pretype_error
+exception
+  RewriteFailure of Environ.env * Evd.evar_map * Pretype_errors.pretype_error
 
 type unary_strategy =
-    Subterms | Subterm | Innermost | Outermost
-  | Bottomup | Topdown | Progress | Try | Any | Repeat
+  | Subterms
+  | Subterm
+  | Innermost
+  | Outermost
+  | Bottomup
+  | Topdown
+  | Progress
+  | Try
+  | Any
+  | Repeat
 
-type binary_strategy =
-  | Compose
-
+type binary_strategy = Compose
 type nary_strategy = Choice
 
-type ('constr,'redexpr,'id) strategy_ast =
-  | StratId | StratFail | StratRefl
-  | StratUnary of unary_strategy * ('constr,'redexpr,'id) strategy_ast
+type ('constr, 'redexpr, 'id) strategy_ast =
+  | StratId
+  | StratFail
+  | StratRefl
+  | StratUnary of unary_strategy * ('constr, 'redexpr, 'id) strategy_ast
   | StratBinary of
-      binary_strategy * ('constr,'redexpr,'id) strategy_ast * ('constr,'redexpr,'id) strategy_ast
-  | StratNAry of nary_strategy * ('constr,'redexpr,'id) strategy_ast list
+      binary_strategy
+      * ('constr, 'redexpr, 'id) strategy_ast
+      * ('constr, 'redexpr, 'id) strategy_ast
+  | StratNAry of nary_strategy * ('constr, 'redexpr, 'id) strategy_ast list
   | StratConstr of 'constr * bool
   | StratTerms of 'constr list
   | StratHints of bool * string
   | StratEval of 'redexpr
   | StratFold of 'constr
   | StratVar of 'id
-  | StratFix of 'id * ('constr,'redexpr,'id) strategy_ast
+  | StratFix of 'id * ('constr, 'redexpr, 'id) strategy_ast
 
-type rewrite_proof =
-  | RewPrf of constr * constr
-  | RewCast of Constr.cast_kind
-
+type rewrite_proof = RewPrf of constr * constr | RewCast of Constr.cast_kind
 type evars = evar_map * Evar.Set.t (* goal evars, constraint evars *)
 
 type rewrite_result_info = {
@@ -55,51 +63,66 @@ type rewrite_result_info = {
   rew_evars : evars;
 }
 
-type rewrite_result =
-| Fail
-| Identity
-| Success of rewrite_result_info
-
+type rewrite_result = Fail | Identity | Success of rewrite_result_info
 type strategy
 
-val strategy_of_ast : (Glob_term.glob_constr * constr delayed_open, Redexpr.red_expr delayed_open, Id.t) strategy_ast -> strategy
+val strategy_of_ast :
+  ( Glob_term.glob_constr * constr delayed_open,
+    Redexpr.red_expr delayed_open,
+    Id.t )
+  strategy_ast ->
+  strategy
 
-val map_strategy : ('a -> 'b) -> ('c -> 'd) -> ('e -> 'f) ->
-  ('a, 'c, 'e) strategy_ast -> ('b, 'd, 'f) strategy_ast
+val map_strategy :
+  ('a -> 'b) ->
+  ('c -> 'd) ->
+  ('e -> 'f) ->
+  ('a, 'c, 'e) strategy_ast ->
+  ('b, 'd, 'f) strategy_ast
 
-val pr_strategy : ('a -> Pp.t) -> ('b -> Pp.t) -> ('c -> Pp.t) ->
-  ('a, 'b, 'c) strategy_ast -> Pp.t
+val pr_strategy :
+  ('a -> Pp.t) ->
+  ('b -> Pp.t) ->
+  ('c -> Pp.t) ->
+  ('a, 'b, 'c) strategy_ast ->
+  Pp.t
 
-(** Entry point for user-level "rewrite_strat" *)
 val cl_rewrite_clause_strat : strategy -> Id.t option -> unit Proofview.tactic
+(** Entry point for user-level "rewrite_strat" *)
 
-(** Entry point for user-level "setoid_rewrite" *)
 val cl_rewrite_clause :
   EConstr.t with_bindings delayed_open ->
-  bool -> Locus.occurrences -> Id.t option -> unit Proofview.tactic
+  bool ->
+  Locus.occurrences ->
+  Id.t option ->
+  unit Proofview.tactic
+(** Entry point for user-level "setoid_rewrite" *)
 
-(** Entry point for [rewrite_pos] *)
 val rewrite_pos :
   EConstr.t with_bindings delayed_open ->
-    bool -> Locus.occurrences -> Id.t option -> int list -> unit Proofview.tactic
+  bool ->
+  Locus.occurrences ->
+  Id.t option ->
+  int list ->
+  unit Proofview.tactic
+(** Entry point for [rewrite_pos] *)
 
 val is_applied_rewrite_relation :
   env -> evar_map -> rel_context -> constr -> types option
 
-val get_reflexive_proof : env -> evar_map -> constr -> constr -> evar_map * constr
+val get_reflexive_proof :
+  env -> evar_map -> constr -> constr -> evar_map * constr
 
-val get_symmetric_proof : env -> evar_map -> constr -> constr -> evar_map * constr
+val get_symmetric_proof :
+  env -> evar_map -> constr -> constr -> evar_map * constr
 
-val get_transitive_proof : env -> evar_map -> constr -> constr -> evar_map * constr
+val get_transitive_proof :
+  env -> evar_map -> constr -> constr -> evar_map * constr
 
 val setoid_symmetry : unit Proofview.tactic
-
 val setoid_symmetry_in : Id.t -> unit Proofview.tactic
-
 val setoid_reflexivity : unit Proofview.tactic
-
 val setoid_transitivity : constr option -> unit Proofview.tactic
-
 
 val apply_strategy :
   strategy ->
@@ -107,18 +130,25 @@ val apply_strategy :
   Names.Id.Set.t ->
   constr ->
   bool * constr ->
-  evars -> rewrite_result
+  evars ->
+  rewrite_result
 
-module Internal :
-sig
-val build_signature :
-  Environ.env -> Evd.evar_map -> constr ->
-  (types * types option) option list ->
-  (types * types option) option ->
-  Evd.evar_map * constr * (constr * t option) list
-val build_morphism_signature : Environ.env -> Evd.evar_map -> Constrexpr.constr_expr -> Evd.evar_map * t
-val default_morphism : Environ.env -> Evd.evar_map ->
-  (types * types option) option list *
-  (types * types option) option ->
-  constr -> constr * t
+module Internal : sig
+  val build_signature :
+    Environ.env ->
+    Evd.evar_map ->
+    constr ->
+    (types * types option) option list ->
+    (types * types option) option ->
+    Evd.evar_map * constr * (constr * t option) list
+
+  val build_morphism_signature :
+    Environ.env -> Evd.evar_map -> Constrexpr.constr_expr -> Evd.evar_map * t
+
+  val default_morphism :
+    Environ.env ->
+    Evd.evar_map ->
+    (types * types option) option list * (types * types option) option ->
+    constr ->
+    constr * t
 end

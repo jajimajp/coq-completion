@@ -40,8 +40,8 @@ let add_axiom (rule : rule) (constants : constants option) axioms =
   extratactics.mlg を参考に実装
   簡単のため、"->" のみで、"using"は使わず、local で宣言するようにしている
 *)
-let add_local_rewrite_hint ?(poly=false) (base : string) (lcsr : Constrexpr.constr_expr) :
-    Pp.t =
+let add_local_rewrite_hint ?(poly = false) (base : string)
+    (lcsr : Constrexpr.constr_expr) : Pp.t =
   let env = Global.env () in
   let sigma = Evd.from_env env in
   let f ce =
@@ -50,8 +50,8 @@ let add_local_rewrite_hint ?(poly=false) (base : string) (lcsr : Constrexpr.cons
     let ctx =
       let ctx = UState.context_set ctx in
       if poly then ctx
-      else
-        (Global.push_context_set ~strict:true ctx;
+      else (
+        Global.push_context_set ~strict:true ctx;
         Univ.ContextSet.empty)
     in
     CAst.make
@@ -119,8 +119,8 @@ let proof_using_toma (proc : procedure) (constants : constants option) axioms
   add_rules_for_termination rules hint_db_name;
   let _, _, op = proc in
   order_params := op;
-  State.register hint_db_name { set_name=State.current_set_name ()
-                              ; order_params=op };
+  State.register hint_db_name
+    { set_name = State.current_set_name (); order_params = op };
   State.broadcast hint_db_name;
   []
 
@@ -137,74 +137,75 @@ let constr_of_qualid (ln : Libnames.qualid) : Constr.t =
   let cb = get_constant_body gref in
   cb.const_type
 
-
 let label_of_constr =
-  let open Constr in function
+  let open Constr in
+  function
   | Rel _ -> "Rel"
   | Var _ -> "Var"
   | Meta _ -> "Meta"
   | Evar _ -> "Evar"
   | Sort _ -> "Sort"
   | Cast (_, _, _) -> "Cast"
-  | Prod (_, _, _)-> "Prod"
+  | Prod (_, _, _) -> "Prod"
   | Lambda (_, _, _) -> "Lambda"
   | LetIn (_, _, _, _) -> "LetIn"
   | App (_, _) -> "App"
   | Const _ -> "Const"
-  | Ind _-> "Ind"
+  | Ind _ -> "Ind"
   | Construct _ -> "Construct"
   | Case (_, _, _, _, _, _, _) -> "Case"
   | Fix _ -> "Fix"
   | CoFix _ -> "CoFix"
-  | Proj (_, _, _)-> "Proj"
+  | Proj (_, _, _) -> "Proj"
   | Int _ -> "Int"
   | Float _ -> "Float"
-  | Array (_, _, _, _)-> "Array"
+  | Array (_, _, _, _) -> "Array"
   | String _ -> "String"
-
 
 (** [set_name_of_constr c] accepts (G, G -> G, ...) as c and returns "G" *)
 let set_name_of_constr (c : Constr.t) =
   match Constr.kind c with
-  | Prod (_, t, _) ->
-    begin
+  | Prod (_, t, _) -> (
       match Constr.kind t with
       | Const (constant, _univs) ->
-        let name =
-          constant |> Names.Constant.user |> Names.KerName.label
-          |> Names.Label.to_string in
-        let () = Feedback.msg_notice Pp.(str "name const: " ++ str name) in
-        name
+          let name =
+            constant |> Names.Constant.user |> Names.KerName.label
+            |> Names.Label.to_string
+          in
+          let () = Feedback.msg_notice Pp.(str "name const: " ++ str name) in
+          name
       | Ind ((mutind, _), _) ->
           let name = Names.MutInd.print mutind |> Pp.string_of_ppcmds in
           let () = Feedback.msg_notice Pp.(str "name ind: " ++ str name) in
           name
-      | _ -> failwith "type of function symbol should be either constant or inductive"
-    end
+      | _ ->
+          failwith
+            "type of function symbol should be either constant or inductive")
   | Const (constant, _univs) ->
-    let name =
-      constant |> Names.Constant.user |> Names.KerName.label
-      |> Names.Label.to_string in
-    name
-  | _ -> (
-      Feedback.msg_debug Pp.(str "unhandled head. Fallback to G. " ++
-                             str (label_of_constr (Constr.kind c))); "G")
-
+      let name =
+        constant |> Names.Constant.user |> Names.KerName.label
+        |> Names.Label.to_string
+      in
+      name
+  | _ ->
+      Feedback.msg_debug
+        Pp.(
+          str "unhandled head. Fallback to G. "
+          ++ str (label_of_constr (Constr.kind c)));
+      "G"
 
 (** Return sting of set name (like "G") used given constants. *)
 let set_name_of_op (ops : Libnames.qualid list) =
   match ops with
   | [] -> failwith "No constants are given."
   | h :: t ->
-    let gref = Nametab.global h in
-    let cb = get_constant_body gref in
-    set_name_of_constr cb.const_type
-
+      let gref = Nametab.global h in
+      let cb = get_constant_body gref in
+      set_name_of_constr cb.const_type
 
 let complete rs hint_db_name ops =
-
   let set_name = set_name_of_op ops in
-  State.register hint_db_name { set_name; order_params=[] };
+  State.register hint_db_name { set_name; order_params = [] };
   State.broadcast hint_db_name;
 
   let axioms = List.map constr_of_qualid rs in
@@ -212,7 +213,7 @@ let complete rs hint_db_name ops =
   let ops =
     List.map
       (fun op ->
-         op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds)
+        op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds)
       ops
   in
 
@@ -233,54 +234,73 @@ let complete_record record hint_db_name =
   let open Record_ext in
   let { typ; ops; axioms } = extract env sigma record in
 
-  List.iter (fun a ->
-    Feedback.msg_debug Pp.(str "ax " ++
-    Printer.pr_constant env a)
-  ) axioms;
+  List.iter
+    (fun a -> Feedback.msg_debug Pp.(str "ax " ++ Printer.pr_constant env a))
+    axioms;
 
   (* let typ_cb = Environ.lookup_constant typ env in *)
-  let constant = List.find_map (fun op ->
-    Feedback.msg_debug Pp.(str "cs " ++ str (string_of_constr_label op));
-    match Constr.kind op with
-    | Const (c, _) -> Some c
-    | _ -> None) ops in
-  let constant = match constant with Some c -> c | None -> failwith "constant not found." in
+  let constant =
+    List.find_map
+      (fun op ->
+        Feedback.msg_debug Pp.(str "cs " ++ str (string_of_constr_label op));
+        match Constr.kind op with Const (c, _) -> Some c | _ -> None)
+      ops
+  in
+  let constant =
+    match constant with Some c -> c | None -> failwith "constant not found."
+  in
   let typ_cb = Environ.lookup_constant constant env in
   let set_name = set_name_of_constr typ_cb.const_type in
-  State.register hint_db_name { set_name; order_params=[] };
+  State.register hint_db_name { set_name; order_params = [] };
   State.broadcast hint_db_name;
 
-  let rs = (* TODO: this conversion is rough. *)
-    axioms |> List.map (fun op -> Names.Constant.print op |> Pp.string_of_ppcmds |> Libnames.qualid_of_string) in
+  let rs =
+    (* TODO: this conversion is rough. *)
+    axioms
+    |> List.map (fun op ->
+           Names.Constant.print op |> Pp.string_of_ppcmds
+           |> Libnames.qualid_of_string)
+  in
 
-  let () = List.iter (fun r -> Feedback.msg_debug Pp.(str "r: " ++ Libnames.pr_qualid r)) rs in
+  let () =
+    List.iter
+      (fun r -> Feedback.msg_debug Pp.(str "r: " ++ Libnames.pr_qualid r))
+      rs
+  in
 
   let axioms = List.map (constr_of_constant env) axioms in
-  let ops = (* TODO: this conversion is rough. *)
-    List.map (fun op -> match Constr.kind op with
-    | Const (op, _) -> Names.Constant.print op |> Pp.string_of_ppcmds
-    | Ind ((mutind, _), _) ->
-        (* TODO *)
-        Pp.string_of_ppcmds (Printer.pr_constr_env env sigma op)
-        (* Names.MutInd.print mutind |> Pp.string_of_ppcmds *)
-    | Construct (((mutind, _), _), _) ->
-        (* TODO *)
-        Pp.string_of_ppcmds (Printer.pr_constr_env env sigma op)
-        (* Names.MutInd.print mutind |> Pp.string_of_ppcmds *)
-    | _ ->
-        Feedback.msg_debug Pp.(str "ops: " ++ str (string_of_constr_label op));
-        failwith "ops: not implemented") ops in
+  let ops =
+    (* TODO: this conversion is rough. *)
+    List.map
+      (fun op ->
+        match Constr.kind op with
+        | Const (op, _) -> Names.Constant.print op |> Pp.string_of_ppcmds
+        | Ind ((mutind, _), _) ->
+            (* TODO *)
+            Pp.string_of_ppcmds (Printer.pr_constr_env env sigma op)
+            (* Names.MutInd.print mutind |> Pp.string_of_ppcmds *)
+        | Construct (((mutind, _), _), _) ->
+            (* TODO *)
+            Pp.string_of_ppcmds (Printer.pr_constr_env env sigma op)
+            (* Names.MutInd.print mutind |> Pp.string_of_ppcmds *)
+        | _ ->
+            Feedback.msg_debug
+              Pp.(str "ops: " ++ str (string_of_constr_label op));
+            failwith "ops: not implemented")
+      ops
+  in
 
-  let ops = "Z0" :: ops in (* TODO *)
+  let ops = "Z0" :: ops in
 
+  (* TODO *)
   List.iter (fun op -> Feedback.msg_notice Pp.(str "op s: " ++ str op)) ops;
 
   let outputs = Toma.toma axioms in
   let procedure = Tomaparser.parse outputs in
   let procedure = Tomaparser.add_prefix procedure ("_" ^ hint_db_name ^ "_") in
   let constantsopt : constants option = Some (My_term.constants_of_list ops) in
-  let _ = proof_using_toma procedure constantsopt rs hint_db_name in ()
-
+  let _ = proof_using_toma procedure constantsopt rs hint_db_name in
+  ()
 
 open Equality
 open Pp
@@ -313,7 +333,7 @@ let rec occurs x t =
 let rec subterms = function
   | Var _ as t -> [ t ]
   | App (_, ts) as t ->
-    t :: List.flatten (List.map subterms (List.sort_uniq compare ts))
+      t :: List.flatten (List.map subterms (List.sort_uniq compare ts))
 
 let is_subterm s t = List.mem s (subterms t)
 
@@ -326,16 +346,16 @@ let rec lpo ord (s, t) =
     | _, Var x -> if s = t then EQ else if occurs x s then GR else NGE
     | Var _, App _ -> NGE
     | App (f, ss), App (g, ts) ->
-      let forall f ls = not (List.exists (fun e -> not (f e)) ls) in
-      if forall (fun si -> lpo ord (si, t) = NGE) ss then
-        match ord (f, g) with
-        | GR -> if forall (fun ti -> lpo ord (s, ti) = GR) ts then GR else NGE
-        | EQ ->
-          if forall (fun ti -> lpo ord (s, ti) = GR) ts then
-            lex (lpo ord) (ss, ts)
-          else NGE
-        | NGE -> NGE
-      else GR
+        let forall f ls = not (List.exists (fun e -> not (f e)) ls) in
+        if forall (fun si -> lpo ord (si, t) = NGE) ss then
+          match ord (f, g) with
+          | GR -> if forall (fun ti -> lpo ord (s, ti) = GR) ts then GR else NGE
+          | EQ ->
+              if forall (fun ti -> lpo ord (s, ti) = GR) ts then
+                lex (lpo ord) (ss, ts)
+              else NGE
+          | NGE -> NGE
+        else GR
 
 let rec skolemize = function
   | Var x -> App (x, [])
@@ -414,11 +434,10 @@ let one_base where conds tac_main bas =
           (tclPROGRESS (tclVALIDATE_LPO t))
           (fun () -> tclIDTAC)
           (function
-            | NotReducingOrder, _ ->
-              tac (at + 1)
+            | NotReducingOrder, _ -> tac (at + 1)
             (* Could rewrite but not valid rewriting order, so we should check other occurences. *)
             | _ -> Proofview.tclUNIT ())
-          (* other errors which includes "Invalid Occurrences", which means we checked all occurrences for c. *)
+        (* other errors which includes "Invalid Occurrences", which means we checked all occurrences for c. *)
       in
       tac 1
     with e -> tclIDTAC
@@ -428,7 +447,7 @@ let one_base where conds tac_main bas =
         let sigma = Proofview.Goal.sigma gl in
         let rew_ctx, rew_lemma = RewRule.rew_lemma h in
         let subst, ctx' = UnivGen.fresh_universe_context_set_instance rew_ctx in
-        let subst = Sorts.QVar.Map.empty, subst in
+        let subst = (Sorts.QVar.Map.empty, subst) in
         let c' = Vars.subst_univs_level_constr subst rew_lemma in
         let sigma = Evd.merge_context_set Evd.univ_flexible sigma ctx' in
         Proofview.tclTHEN
@@ -443,15 +462,15 @@ let one_base where conds tac_main bas =
       match rew_tac with
       | None -> Proofview.tclUNIT ()
       | Some (Genarg.GenArg (Genarg.Glbwit wit, tac)) ->
-        let ist =
-          {
-            Geninterp.lfun = Names.Id.Map.empty;
-            poly;
-            extra = Geninterp.TacStore.empty;
-          }
-        in
-        Ftactic.run (Geninterp.interp wit ist tac) (fun _ ->
-            Proofview.tclUNIT ())
+          let ist =
+            {
+              Geninterp.lfun = Names.Id.Map.empty;
+              poly;
+              extra = Geninterp.TacStore.empty;
+            }
+          in
+          Ftactic.run (Geninterp.interp wit ist tac) (fun _ ->
+              Proofview.tclUNIT ())
     in
     Tacticals.tclREPEAT_MAIN @@ tclPROTECT_LPO
     @@ Tacticals.tclTHENFIRST (try_rewrite h tac) tac_main
@@ -469,11 +488,11 @@ let autorewrite_multi_in ?(conds = Equality.Naive) idl tac_main lbas =
       let _ = List.map (fun id -> Tacmach.pf_get_hyp id gl) idl in
       Tacticals.tclMAP
         (fun id ->
-           Tacticals.tclREPEAT_MAIN
-             (Proofview.tclPROGRESS
-                (tclMAP_rev
-                   (fun bas -> one_base (Some id) conds tac_main bas)
-                   lbas)))
+          Tacticals.tclREPEAT_MAIN
+            (Proofview.tclPROGRESS
+               (tclMAP_rev
+                  (fun bas -> one_base (Some id) conds tac_main bas)
+                  lbas)))
         idl)
 
 open Locus
@@ -498,16 +517,16 @@ let gen_auto_multi_rewrite conds tac_main lbas cl =
     match cl.onhyps with
     | Some [] -> concl_tac
     | Some l ->
-      Tacticals.tclTHENFIRST concl_tac
-        (try_do_hyps (fun ((_, id), _) -> id) l)
+        Tacticals.tclTHENFIRST concl_tac
+          (try_do_hyps (fun ((_, id), _) -> id) l)
     | None ->
-      let hyp_tac =
-        (* try to rewrite in all hypothesis (except maybe the rewritten one) *)
-        Proofview.Goal.enter (fun gl ->
-            let ids = Tacmach.pf_ids_of_hyps gl in
-            try_do_hyps (fun id -> id) ids)
-      in
-      Tacticals.tclTHENFIRST concl_tac hyp_tac
+        let hyp_tac =
+          (* try to rewrite in all hypothesis (except maybe the rewritten one) *)
+          Proofview.Goal.enter (fun gl ->
+              let ids = Tacmach.pf_ids_of_hyps gl in
+              try_do_hyps (fun id -> id) ids)
+        in
+        Tacticals.tclTHENFIRST concl_tac hyp_tac
 
 let auto_multi_rewrite ?(conds = Naive) lems cl =
   Proofview.wrap_exceptions (fun () ->
@@ -526,7 +545,7 @@ let complete_in_tac axs cs cl =
   let ops =
     List.map
       (fun op ->
-         op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds)
+        op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds)
       cs
   in
   let outputs = Toma.toma axioms in
@@ -537,7 +556,7 @@ let complete_in_tac axs cs cl =
 
 let complete_for (goal : Constrexpr.constr_expr) rs hint_db_name ops =
   let set_name = set_name_of_op ops in
-  State.register hint_db_name { set_name; order_params=[] };
+  State.register hint_db_name { set_name; order_params = [] };
   State.broadcast hint_db_name;
 
   let axioms = List.map constr_of_qualid rs in
@@ -545,7 +564,7 @@ let complete_for (goal : Constrexpr.constr_expr) rs hint_db_name ops =
   let ops =
     List.map
       (fun op ->
-         op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds)
+        op |> Nametab.global |> Names.GlobRef.print |> Pp.string_of_ppcmds)
       ops
   in
   let env = Global.env () in
@@ -567,13 +586,13 @@ let complete_for (goal : Constrexpr.constr_expr) rs hint_db_name ops =
   let _, (rule, rewriters), _ = proc in
   ignore
   @@ prove_completion_subject
-    ~name:(Names.Id.of_string ("t_" ^ hint_db_name ^ "_" ^ fst rule))
-    ~goal:(My_term.to_constrexpr_raw (snd rule) constants)
-    ~rewriters:
-      (List.map (* TODO: use rewrite_step info *)
-         (fun step ->
-            Libnames.qualid_of_string ("t_" ^ hint_db_name ^ "_" ^ step.rule))
-         rewriters);
+       ~name:(Names.Id.of_string ("t_" ^ hint_db_name ^ "_" ^ fst rule))
+       ~goal:(My_term.to_constrexpr_raw (snd rule) constants)
+       ~rewriters:
+         (List.map (* TODO: use rewrite_step info *)
+            (fun step ->
+              Libnames.qualid_of_string ("t_" ^ hint_db_name ^ "_" ^ step.rule))
+            rewriters);
 
   let prefixed_rule (id, (l, r)) = ("_" ^ hint_db_name ^ "_" ^ id, (l, r)) in
   add_rules_for_termination [ prefixed_rule rule ] hint_db_name;
