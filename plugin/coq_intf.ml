@@ -547,7 +547,7 @@ let proof_of_simp ~(rewritee : Libnames.qualid)
            rewrite_steps) <*>
      (if use_symmetry then Tactics.symmetry else Tacticals.tclIDTAC) <*>
 
-     (Auto.gen_auto None [] (Some [])) <*>
+     (Auto.gen_auto None [] None) <*>
       (* Check if goal is cleared *)
       Proofview.numgoals >>= (function
         | 0 -> Proofview.tclUNIT ()
