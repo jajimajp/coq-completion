@@ -32,8 +32,8 @@ val tclPROVE_INTERREDUCE :
   name:Names.Id.t ->
   (* 証明する定理名 *)
   goal:Constrexpr.constr_expr ->
-  (* 定理の型 *)
-  rewriters:Libnames.qualid list ->
+  rewrite_steps:(Libnames.qualid * int list * bool * bool) list ->
+  (* (定理名, Position, left2right?, left-hand side?) list *)
   applier:Libnames.qualid ->
   (* apply を行う定理名 *)
   unit

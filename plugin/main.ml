@@ -20,9 +20,6 @@ let print_term (c : Evd.econstr) : unit Proofview.tactic =
       else print_endline "is not const";
       Proofview.tclUNIT ())
 
-(* for exporting *)
-let prove_interreduce = tclPROVE_INTERREDUCE
-
 let add_axiom (rule : rule) (constants : constants option) axioms =
   let name = Names.Id.of_string ("t" ^ fst rule) in
   let constants =
@@ -106,12 +103,14 @@ let proof_using_toma (proc : procedure) (constants : constants option) axioms
           | Some cs -> cs
         in
         ignore
-        @@ prove_interreduce
+        @@ tclPROVE_INTERREDUCE
              ~name:(Names.Id.of_string ("t" ^ fst rule))
              ~goal:(My_term.to_constrexpr_raw (snd rule) constants)
-             ~rewriters:
+             ~rewrite_steps:
                (List.map
-                  (fun id -> Libnames.qualid_of_string ("t" ^ id))
+                  (fun rew ->
+                    let id = Libnames.qualid_of_string ("t" ^ rew.rule) in
+                    (id, rew.pos, rew.l2r, rew.lhs))
                   rewriters)
              ~applier:(Libnames.qualid_of_string ("t" ^ fst prev))
   in
@@ -571,9 +570,9 @@ let complete_for (goal : Constrexpr.constr_expr) rs hint_db_name ops =
     ~name:(Names.Id.of_string ("t_" ^ hint_db_name ^ "_" ^ fst rule))
     ~goal:(My_term.to_constrexpr_raw (snd rule) constants)
     ~rewriters:
-      (List.map
-         (fun id ->
-            Libnames.qualid_of_string ("t_" ^ hint_db_name ^ "_" ^ id))
+      (List.map (* TODO: use rewrite_step info *)
+         (fun step ->
+            Libnames.qualid_of_string ("t_" ^ hint_db_name ^ "_" ^ step.rule))
          rewriters);
 
   let prefixed_rule (id, (l, r)) = ("_" ^ hint_db_name ^ "_" ^ id, (l, r)) in

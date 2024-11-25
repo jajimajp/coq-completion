@@ -23,14 +23,6 @@ Axiom inv_l : forall a, i a + a = e.
 
 Axiom a1 : forall a, a = e.
 
-Goal forall a : G, a = e.
-  Proof.
-    intros.
-    print_term e.
-    print_term f.
-    print_term a.
-  Abort.
-
 Create HintDb hint_compl.
 
 Complete assoc id_l inv_l : f e i : hint_compl.

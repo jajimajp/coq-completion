@@ -25,7 +25,12 @@ let rec termast_of_string str =
       let f = Str.matched_group 1 str in
       let args_str = Str.matched_group 2 str in
       let args_str_list = split_by_comma args_str in
-      if args_str_list = [ "" ] then Var f
+      if args_str_list = [ "" ] then
+        (* TODO: Hard coded *)
+        if f = "Coq.Numbers.BinNums.Z0" then
+          Var "Z0"
+        else
+          Var f
       else
         let args = List.map termast_of_string args_str_list in
         App (f, args)
@@ -37,7 +42,7 @@ type procedure =
   * order_param (* (proofs for all rules, completed rules) *)
 
 and procedure_for_goal = strat proof list * goal_strat * order_param
-and goal_strat = rule * termid list (* same as strat.Simp *)
+and goal_strat = rule * rewstep list (* same as strat.Simp *)
 and rule = termid * eq
 and eq = term * term
 and 'strat proof = rule * 'strat
@@ -45,17 +50,27 @@ and order_param = string list
 
 and strat =
   | Axiom
-  (* Critical pair between [rule] and [rule] with superposition [term]. *)
+  (* Critical pair between [rule1] and [rule2] with superposition [term]. *)
   | Crit of rule * rule * term
-  (* [Simp (r, l1, l2)] simplify r by rewriting lhs with [l1], and rhs with [l2] *)
-  | Simp of rule * termid list
+  (* [Simp (r, l)] simplify r by rewriting with [l] *)
+  | Simp of rule * rewstep list
 
 and minimal_strat =
   | MAxiom
   (* Critical pair between [rule] and [rule] with superposition [term]. *)
   | MCrit of termid * termid * term
   (* [Simp (r, l1, l2)] simplify r by rewriting lhs with [l1], and rhs with [l2] *)
-  | MSimp of termid * termid list
+  | MSimp of termid * rewstep list
+
+(** single rewrite step *)
+and rewstep =
+  { rule : termid
+  ; lhs  : bool (* rewrites left-hand side? false means the rhs is rewritten *)
+  ; pos  : position
+  ; l2r  : bool
+  }
+and position = int list (* {example} e is at [0; 1] of f(f(_, e), _) *)
+
 
 (** [expect str lines] expects [str] as head of lines.
     If head = str, then returns rest lines, raises error otherwise. *)
@@ -88,6 +103,23 @@ let expect_axioms lines : string list * string list =
     | [] -> failwith "expect_axioms: reached end of input"
   in
   aux lines []
+
+
+(* {example} - rhs by equation 2 L->R at [0,1] *)
+let parse_rewstep : string -> rewstep option = fun line ->
+  let err = failwith in
+  let re = Str.regexp "- \\(.hs\\) by equation \\([0-9]+\\) \\(....\\) at \\[\\(.*\\)\\]$" in
+  if Str.string_match re line 0 then
+    let side = Str.matched_group 1 line in
+    let lhs = match side with "lhs" -> true | "rhs" -> false | _ -> err ("unknown side " ^ side) in
+    let id2 = Str.matched_group 2 line in
+    let dir = Str.matched_group 3 line in
+    let l2r = match dir with "L->R" -> true | "R->L" -> false | _ -> err ("unknown direction " ^ dir) in
+    let pos = Str.matched_group 4 line in
+    let pos = if pos = "" then [] else
+      String.split_on_char ',' pos |> List.map int_of_string in
+    Some { rule=id2; pos; l2r; lhs }
+  else None
 
 (** [consume_proof lines] consumes proof with rule and rest lines if next lines if proof.
     Otherwise returns None with lines unchanged. *)
@@ -135,30 +167,29 @@ let rec consume_proof lines : minimal_strat proof option * string list =
         in
         let parse_simp lines : minimal_strat * string list =
           (* (ex) Proof: Rewrite equation 3,
-                      lhs with equations []
-                      rhs with equations [0]. *)
+               Proof: Rewrite equation 5,
+               - rhs by equation 2 L->R at [0,1]
+               - lhs by equation 1 R->L at [] *)
           match lines with
-          | l1 :: l2 :: l3 :: rest ->
+          | l1 :: rest ->
               let err l = failwith ("parse_simp: invalid toma rule: " ^ l) in
               let re1 = Str.regexp "^Proof: Rewrite equation \\([0-9]+\\),$" in
-              if Str.string_match re1 l1 0 then
-                let id = Str.matched_group 1 l1 in
-                let re2 = Str.regexp ".*lhs with equations \\[\\(.+\\)\\]$" in
-                let lids =
-                  if Str.string_match re2 l2 0 then
-                    Str.matched_group 1 l2 |> String.split_on_char ','
-                  else []
-                in
-                let re3 = Str.regexp ".*rhs with equations \\[\\(.+\\)\\].$" in
-                let rids =
-                  if Str.string_match re3 l3 0 then
-                    Str.matched_group 1 l3 |> String.split_on_char ','
-                  else []
-                in
-                let ids = lids @ rids in
-                (* delete duplicates *)
-                (MSimp (id, ids), rest)
-              else err l1
+              let id =
+                if Str.string_match re1 l1 0
+                then Str.matched_group 1 l1
+                else err l1
+              in
+              let rec read_steps : rewstep list -> string list -> rewstep list * (string list) =
+                fun acc -> function
+                  | [] -> List.rev acc, []
+                  | hd :: tl ->
+                    match parse_rewstep hd with
+                    | Some step -> 
+                      read_steps (step :: acc) tl
+                    | None -> List.rev acc, tl
+              in
+              let rewsteps, rest = read_steps [] rest in
+                (MSimp (id, rewsteps), rest)
           | _ -> failwith "parse_simp: unexpected end of input"
         in
         match String.split_on_char ' ' (List.hd rest) with
@@ -236,6 +267,8 @@ let rec string_of_term = function
 let string_of_rule (id, (l, r)) =
   id ^ ": " ^ string_of_term l ^ " -> " ^ string_of_term r
 
+let string_of_rewstep { rule; _ } = rule
+
 let print_proofs proofs =
   let print_proof = function
     | rule, Axiom -> print_endline @@ "Axiom: " ^ string_of_rule rule
@@ -243,11 +276,12 @@ let print_proofs proofs =
         print_endline @@ "Crit: " ^ string_of_rule rule ^ " with "
         ^ string_of_rule r1 ^ " and " ^ string_of_rule r2
         ^ " with superposition " ^ string_of_term sp
-    | rule, Simp (id, ids) ->
+    | rule, Simp (id, rewsteps) ->
         print_endline @@ "Simp: " ^ string_of_rule rule ^ " with "
-        ^ String.concat "," ids
+        ^ String.concat "," (List.map string_of_rewstep rewsteps)
   in
   List.iter print_proof proofs
+
 
 let print_procedure (proofs, comp_rules, order_param) : unit =
   print_endline ("order: " ^ String.concat " > " order_param);
@@ -279,33 +313,25 @@ let rec consume_goal_simp lines : goal_strat option =
     else None
   in
   match lines with
-  | l0 :: l1 :: l2 :: rest -> (
+  | l0 :: l1 :: rest -> (
       if l0 = "" then consume_goal_simp (List.tl lines)
       else
         match parse_header l0 with
         | None -> None
         | Some (rule, _) ->
             let re1 =
-              Str.regexp "^Proof: Rewrite lhs with equations \\[.*\\]$"
+              Str.regexp "^Proof: Rewrite goal,$"
             in
             if Str.string_match re1 l1 0 then
-              let re2 =
-                Str.regexp "^Proof: Rewrite lhs with equations \\[\\(.+\\)\\]$"
-              in
-              let lids =
-                if Str.string_match re2 l1 0 then
-                  Str.matched_group 1 l1 |> String.split_on_char ','
-                else []
-              in
-              let re3 = Str.regexp ".*rhs with equations \\[\\(.+\\)\\].$" in
-              let rids =
-                if Str.string_match re3 l2 0 then
-                  Str.matched_group 1 l2 |> String.split_on_char ','
-                else []
-              in
-              let ids = lids @ rids in
-              (* delete duplicates *)
-              Some (rule, ids)
+              let rec read_steps acc = function
+              | [] -> List.rev acc, []
+              | hd :: tl ->
+                match parse_rewstep hd with
+                | Some step -> 
+                  read_steps (step :: acc) tl
+                | None -> List.rev acc, tl in
+              let steps, rest = read_steps [] rest in
+              Some (rule, steps)
             else None)
   | _ -> None
 
@@ -354,7 +380,7 @@ let add_prefix procedure prefix =
   let for_strat = function
     | Axiom -> Axiom
     | Crit (r1, r2, t) -> Crit (for_rule r1, for_rule r2, t)
-    | Simp (r, ids) -> Simp (for_rule r, List.map (fun i -> prefix ^ i) ids)
+    | Simp (r, steps) -> Simp (for_rule r, List.map (fun step -> { step with rule = prefix ^ step.rule }) steps)
   in
   let for_proof (r, s) = (for_rule r, for_strat s) in
   let proofs = List.map for_proof proofs in
@@ -367,10 +393,10 @@ let add_prefix_proc_for_goal (procedure : procedure_for_goal) prefix =
   let for_strat = function
     | Axiom -> Axiom
     | Crit (r1, r2, t) -> Crit (for_rule r1, for_rule r2, t)
-    | Simp (r, ids) -> Simp (for_rule r, List.map (fun i -> prefix ^ i) ids)
+    | Simp (r, steps) -> Simp (for_rule r, List.map (fun step -> { step with rule = prefix ^ step.rule } ) steps)
   in
   let for_proof (r, s) = (for_rule r, for_strat s) in
   let proofs = List.map for_proof proofs in
-  let gs = List.map (fun i -> prefix ^ i) gs in
+  let gs = List.map (fun step -> { step with rule = prefix ^ step.rule }) gs in
   let goal_strat = (for_rule gr, gs) in
   (proofs, goal_strat, order_param)

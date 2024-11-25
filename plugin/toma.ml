@@ -76,7 +76,7 @@ let trs_of ~axioms =
       "\n)\n";
     ]
 
-let acceptable_toma_version = "toma version 0.7+PARSABLE"
+let acceptable_toma_version = "toma version 0.8+PARSABLE"
 
 let toma axioms =
   let version = Exe.get_toma_version () in

@@ -19,9 +19,9 @@ let tclPRINT_GOAL s =
                  ++ Printer.pr_econstr_env env sigma econstr))
       in
       let concl = concl gl in
-      Feedback.msg_notice
+      Feedback.msg_debug
         Pp.(
-          str "hyps: " ++ hyps ++ str ", goal: "
+          str "Hyps: " ++ hyps ++ str ", Goal: "
           ++ Printer.pr_econstr_env env sigma concl);
       Proofview.tclUNIT ())
 
@@ -448,6 +448,7 @@ let tclPROVE_BY_REDUCTION ~name ~goal ~rewritee ~rewriters =
     Proofview.tclIFCATCH (tcl (List.hd ls) (List.tl ls) false) (fun _ -> Proofview.tclUNIT ()) (fun _ -> acc)
   ) iter_all_patterns binlss
 
+let _ = tclPROVE_BY_REDUCTION
       
 (** 現在のゴールを冗長な規則の書換によって示す。 *)
 let tac_prove_by_reduction ~(rewriters : Libnames.qualid list)
@@ -518,11 +519,57 @@ let prove_interreduce ~(name : Names.Id.t)
   in
   aux (List.init (List.length rewriters + 1) (fun _ -> true))
 
+
+
+let proof_of_simp ~(rewritee : Libnames.qualid)
+    ~(goal : Constrexpr.constr_expr)
+    ~(rewrite_steps : (Libnames.qualid * int list * bool * bool) list)
+    use_symmetry swap_side auto_first =
+  let open Proofview.Notations in
+  let lhs_idx, rhs_idx = if swap_side then 2, 1 else 1, 2 in
+  Tactics.pose_proof
+    (Names.Name (Names.Id.of_string "H"))
+    (EConstr.mkRef (Nametab.global rewritee, EConstr.EInstance.empty))
+    <*> List.fold_left
+        (fun prev cur -> prev <*> cur)
+        Tacticals.tclIDTAC
+        (List.map
+           (fun (rewriter, pos, l2r, lhs) ->
+             let c env sigma =
+               (* let sigma, c = Evd.fresh_global env sigma (Nametab.global rewriter) in
+               (sigma, (c, Tactypes.NoBindings)) *)
+               (sigma, (EConstr.mkRef (Nametab.global rewriter, EConstr.EInstance.empty), Tactypes.NoBindings))
+             in
+             let pos = if lhs then lhs_idx::pos else rhs_idx::pos in
+             Rewrite_pos.rewrite_pos c l2r (Locus.OnlyOccurrences [1]) (Some (Names.Id.of_string "H")) pos
+             (* cl_rewrite_clause_innermost rewriter _l2r) *)
+           )
+           rewrite_steps) <*>
+     (if use_symmetry then Tactics.symmetry else Tacticals.tclIDTAC) <*>
+     begin
+       if auto_first then
+         (Auto.gen_auto None [] (Some []))
+       else
+      (Proofview.tclIFCATCH
+        (Proofview.tclTHEN
+          (Tactics.eapply
+            (EConstr.mkVar (Names.Id.of_string "H")))
+          (Proofview.tclORELSE
+            (Auto.gen_auto None [] None)
+            (fun _ -> Proofview.tclUNIT ()))
+        )
+        (fun _ -> Proofview.tclUNIT())
+        (fun (e, _) ->
+          (* <*> (* HACK: G -> a = b の形の解決のために、型 G を持つ Parameter を Resolve Hint にもつ HintDb を追加しておく必要がある. *) *)
+          (Auto.gen_auto None [] None)))
+     end
+
 let tclPROVE_INTERREDUCE ~(name : Names.Id.t)
     ~(* 証明する定理名 *)
     (goal : Constrexpr.constr_expr)
     ~(* 定理の型 *)
-    (rewriters : Libnames.qualid list) ~(applier : Libnames.qualid) =
+    (rewrite_steps:(Libnames.qualid * int list * bool * bool) list)
+    ~(applier : Libnames.qualid) =
   (* apply を行う定理名 *)
   let env = Global.env () in
   let sigma = Evd.from_env env in
@@ -533,14 +580,42 @@ let tclPROVE_INTERREDUCE ~(name : Names.Id.t)
   let t, types, ustate, _evmap, obl_info =
     Declare.Obls.prepare_obligations ~name ~body env sigma
   in
-  let tactic = tclPROVE_BY_REDUCTION ~name ~goal ~rewritee:applier ~rewriters in
-  let _, progress =
-      Declare.Obls.add_definition
-        ~pm:Declare.OblState.empty ~cinfo ~info ~opaque:false
-        ~uctx:ustate ~tactic obl_info in
-  match progress with
-  | Defined _ -> ()
-  | _ -> failwith "Could not prove goal by reduction."
+
+  let rec aux l2rs : unit =
+    let tactic =
+    match l2rs with
+    | use_sym :: swap_side :: auto_first :: l2rs ->
+        let rewrite_steps = List.map (fun ((id, l, _l2r, lhs), l2r) -> (id, l, l2r, lhs))
+          (List.combine rewrite_steps l2rs) in
+        proof_of_simp ~rewritee:applier ~goal ~rewrite_steps use_sym swap_side auto_first
+    | _ -> failwith "aux: invalid l2rs"
+    in
+    (* Suppress warning. It is ok because any proof that does not work will received as not successful. *)
+    let tactic =
+      Tacticals.tclIFCATCH tactic
+        (fun () -> Proofview.tclUNIT ())
+        (fun _ -> Proofview.tclUNIT ())
+    in
+    let _, progress =
+      try
+        Declare.Obls.add_definition
+          ~pm:Declare.OblState.empty ~cinfo ~info ~opaque:false
+          ~uctx:ustate ~tactic obl_info
+      with _ ->
+        print_endline "GOT ERR";
+        Declare.Obls.add_definition
+          ~pm:Declare.OblState.empty ~cinfo ~info ~opaque:false
+          ~uctx:ustate ~tactic obl_info
+    in
+    match progress with
+    | Defined _ -> ()
+        (* Feedback.msg_debug Pp.(strbrk"defined") *)
+    | _ -> (
+      match Devutil.next_binls l2rs with
+      | None -> failwith "Could not prove simp"
+      | Some l2rs -> aux l2rs)
+  in
+  aux (List.init (List.length rewrite_steps + 3) (fun _ -> true))
 
 (** [Complete ... for S] の S に当たる、完備化のゴールを証明する。
     与えられた規則のリストで簡約すると両辺が等しくなることから示す。*)

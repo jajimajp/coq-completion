@@ -12,7 +12,7 @@ and procedure_for_goal =
   * goal_strat
   * order_param (* proofs for proving given goal *)
 
-and goal_strat = rule * termid list (* same as strat.Simp *)
+and goal_strat = rule * rewstep list (* same as strat.Simp *)
 and rule = termid * eq
 and eq = term * term
 and 'strat proof = rule * 'strat
@@ -22,7 +22,17 @@ and strat =
   (* Critical pair between [rule1] and [rule2] with superposition [term]. *)
   | Crit of rule * rule * term
   (* [Simp (r, l)] simplify r by rewriting with [l] *)
-  | Simp of rule * termid list
+  | Simp of rule * rewstep list
+
+(** single rewrite step *)
+and rewstep =
+  { rule : termid
+  ; lhs  : bool (* rewrites left-hand side? false means the rhs is rewritten *)
+  ; pos  : position
+  ; l2r  : bool
+  }
+and position = int list (* {example} e is at [0; 1] of f(f(_, e), _) *)
+
 
 (* example: ["a"; "b"; "c"] implies a > b > c *)
 and order_param = string list
@@ -31,6 +41,7 @@ val print_proofs : strat proof list -> unit
 val print_procedure : procedure -> unit
 val parse : string list -> procedure
 val parse_for_goal : string list -> procedure_for_goal
+val parse_rewstep : string -> rewstep option
 
 val add_prefix : procedure -> string -> procedure
 (** [add_prefix procedure prefix] adds prefix to rule names. *)

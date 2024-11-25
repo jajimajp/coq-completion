@@ -11,7 +11,7 @@ VERNAC COMMAND EXTEND Complete CLASSIFIED AS QUERY
     let a = Names.Id.to_string a in
     let rewriters = List.map Libnames.qualid_of_string rs in
     let applier = Libnames.qualid_of_string a in
-    let () = Main.prove_interreduce ~name ~goal:e ~rewriters ~applier in
+    let () = Coq_intf.prove_interreduce ~name ~goal:e ~rewriters ~applier in
     Feedback.msg_notice @@ Pp.str "P"
 }
 | [ "Complete" reference_list(axioms) ":" reference_list(ops) ":" ident(hint) ] -> {
