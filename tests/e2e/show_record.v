@@ -30,20 +30,10 @@ Structure Group A := mkGroup
   ; Assoc : forall a b c, F a (F b c) = F (F a b) c
   }.
 
-Require Import ZAxioms ZProperties BinInt.
-Local Open Scope Z_scope.
+Show Record Group.
 
-Definition ZG :=
-  {| Ident := Z.add_0_l
-   ; Inv   := Z.add_opp_diag_l
-   ; Assoc := Z.add_assoc
+Definition MyGroup :=
+  {| Ident := id_l
+   ; Inv   := inv_l
+   ; Assoc := assoc
    |}.
-
-
-Complete Record ZG : my_hint.
-
-Print Rewrite HintDb my_hint.
-
-Theorem check : forall a, a + 0 = a.
-  intros. (* TODO: lpo_autorewrite *) autorewrite with my_hint. reflexivity. Qed.
-Check check.

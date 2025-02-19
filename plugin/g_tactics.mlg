@@ -31,6 +31,14 @@ VERNAC COMMAND EXTEND Complete CLASSIFIED AS QUERY
 }
 END
 
+VERNAC COMMAND EXTEND ShowRecord CLASSIFIED AS QUERY
+| [ "Show" "Record" reference(r) ] -> {
+  let env = Global.env () in
+  let sigma = Evd.from_env env in
+  Record_ext.show_record env sigma r
+}
+END
+
 TACTIC EXTEND print_term
 | [ "print_term" constr(e) ] -> {
   Main.print_term e

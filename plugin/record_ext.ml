@@ -1,3 +1,7 @@
+open Names
+open Pp
+
+
 let string_of_constr_label constr =
   match Constr.kind constr with
   | Constr.Rel _ -> "Rel"
@@ -140,3 +144,70 @@ let extract : Environ.env -> Evd.evar_map -> Libnames.qualid -> extracted =
           args
       in
       { typ = !typ; ops = !ops; axioms = !axioms }
+
+
+let show_inductive env ind =
+  let (mutind, i) = ind in
+  if i <> 0 then failwith "Mutualy recursive induction is not supported" else
+    Feedback.msg_notice (str"show_inductive " ++ str (MutInd.debug_to_string mutind));
+  let (mb, b) = Inductive.lookup_mind_specif env ind in
+    Feedback.msg_notice (str"mutual inductive body: " ++ int (mb.mind_ntypes));
+    Feedback.msg_notice (str"inductive body: " ++
+      str"typename: " ++ Id.print (b.mind_typename) ++spc()++
+      str"nrealdecls: " ++ int (b.mind_nrealdecls) ++spc()++
+      str"nrealargs: " ++ int (b.mind_nrealargs));
+  match mb.mind_record with
+  | PrimRecord _ ->
+    Feedback.msg_notice (str"prim")
+  | _ ->
+      Feedback.msg_notice (str"not prim");
+  let ta = Inductive.type_of_constructors (UVars.in_punivs ind) (mb, b) in
+  Array.iter begin fun elem ->
+    let sigma = Evd.from_env env in
+    Feedback.msg_notice (str"+ " ++ Printer.pr_constr_env env sigma elem ++spc())
+  end ta;
+  let ctxt = mb.mind_params_ctxt in
+  List.iter begin fun decl ->
+    let nam = Context.Rel.Declaration.get_name decl in
+    let typ = Context.Rel.Declaration.get_type decl in
+    let sigma = Evd.from_env env in
+    Feedback.msg_notice (str"% " ++ Name.print nam ++ spc() ++ Printer.pr_constr_env env sigma typ ++spc())
+  end ctxt;
+  let ctxt = b.mind_arity_ctxt in
+  List.iter begin fun decl ->
+    let nam = Context.Rel.Declaration.get_name decl in
+    let typ = Context.Rel.Declaration.get_type decl in
+    let sigma = Evd.from_env env in
+    Feedback.msg_notice (str"* " ++ Name.print nam ++ spc() ++ Printer.pr_constr_env env sigma typ ++spc())
+  end ctxt;
+  let nf_lc = b.mind_nf_lc in
+  Array.iter begin fun (ctx, typ) ->
+    let sigma = Evd.from_env env in
+    List.iter begin fun decl ->
+      let nam = Context.Rel.Declaration.get_name decl in
+      let typ = Context.Rel.Declaration.get_type decl in
+      let sigma = Evd.from_env env in
+      Feedback.msg_notice (str"  # " ++ Name.print nam ++ spc() ++ Printer.pr_constr_env env sigma typ ++spc())
+    end ctxt;
+    Feedback.msg_notice (str"  - " ++ Printer.pr_constr_env env sigma typ ++spc())
+  end nf_lc;
+  Array.iter begin fun nam ->
+    Feedback.msg_notice (str"  [N] " ++ Id.print nam)
+  end b.mind_consnames
+
+
+let show_record : Environ.env -> Evd.evar_map ->  Libnames.qualid -> unit =
+  fun env sigma record ->
+    match Constrintern.locate_reference record with
+    | None -> ()
+    | Some (IndRef inductive) ->
+        Feedback.msg_info (str"show_record:Ind "++ Printer.pr_inductive env inductive);
+        show_inductive env inductive
+    | Some (ConstructRef cstr) ->
+        Feedback.msg_info (str"show_record:Construct "++ Printer.pr_constructor env cstr);
+        failwith "Not implemented"
+    | Some (ConstRef const) ->
+        Feedback.msg_info (str"show_record:Const "++ Printer.pr_constant env const);
+        failwith "Not implemented"
+    | _ -> failwith "Not implemented"
+

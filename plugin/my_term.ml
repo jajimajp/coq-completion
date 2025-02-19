@@ -111,7 +111,8 @@ let rec constrexpr_of_term t =
       in
       CAst.make
         (CApp (CAst.make (CRef (Libnames.qualid_of_string f, None)), args_constr))
-  | Var x -> CAst.make (CRef (Libnames.qualid_of_string x, None))
+  | Var x ->
+      CAst.make (CRef (Libnames.qualid_of_string x, None))
 
 let set_name = State.current_set_name
 

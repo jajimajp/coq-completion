@@ -274,26 +274,25 @@ let complete_record record hint_db_name =
     List.map
       (fun op ->
         match Constr.kind op with
-        | Const (op, _) -> Names.Constant.print op |> Pp.string_of_ppcmds
+        | Const (op, _) ->
+            Names.Constant.print op |> Pp.string_of_ppcmds
         | Ind ((mutind, _), _) ->
             (* TODO *)
             Pp.string_of_ppcmds (Printer.pr_constr_env env sigma op)
             (* Names.MutInd.print mutind |> Pp.string_of_ppcmds *)
-        | Construct (((mutind, _), _), _) ->
-            (* TODO *)
-            Pp.string_of_ppcmds (Printer.pr_constr_env env sigma op)
-            (* Names.MutInd.print mutind |> Pp.string_of_ppcmds *)
+        | Construct (cstr, _univ) ->
+            let path = Names.Construct.modpath cstr in
+            let label = Printer.pr_constructor env cstr
+              |> Pp.string_of_ppcmds 
+              |> Names.Id.of_string |> Names.Label.of_id in
+            let kername = Names.KerName.make path label in
+            Names.KerName.to_string kername
         | _ ->
             Feedback.msg_debug
               Pp.(str "ops: " ++ str (string_of_constr_label op));
             failwith "ops: not implemented")
       ops
   in
-
-  let ops = "Z0" :: ops in
-
-  (* TODO *)
-  List.iter (fun op -> Feedback.msg_notice Pp.(str "op s: " ++ str op)) ops;
 
   let outputs = Toma.toma axioms in
   let procedure = Tomaparser.parse outputs in
@@ -374,7 +373,9 @@ let ord (a, b) =
     aux 0 ls
   in
   let rank s =
+    print_endline ("rank of " ^ s);
     if List.mem s !order_params then
+      let () = print_endline "=mem" in
       `Func (find_index (fun x -> x = s) !order_params)
     else `Var s
   in

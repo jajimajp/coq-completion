@@ -26,8 +26,7 @@ let rec termast_of_string str =
       let args_str = Str.matched_group 2 str in
       let args_str_list = split_by_comma args_str in
       if args_str_list = [ "" ] then
-        (* TODO: Hard coded *)
-        if f = "Coq.Numbers.BinNums.Z0" then Var "Z0" else Var f
+        Var f
       else
         let args = List.map termast_of_string args_str_list in
         App (f, args)
