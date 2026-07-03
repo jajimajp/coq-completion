@@ -23,7 +23,7 @@ Axiom ax2 : forall x y, (x + (x + x)) + y = x + y.
 
 Create HintDb hint_compl.
 
-Complete ax ax2 : : hint_compl for (forall x y z, x + ((x + y) + z) = (z + (x + y)) + y).
+Complete ax ax2 : f e i : hint_compl for (forall x y z, x + ((x + y) + z) = (z + (x + y)) + y).
 Print Rewrite HintDb hint_compl.
 
 Theorem check1: forall x y z, x + ((x + y) + z) = (z + (x + y)) + y.

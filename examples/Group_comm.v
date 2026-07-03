@@ -36,6 +36,7 @@ Qed.
 
 Print check.
 
+(*
 Theorem check_ : forall x y, y + (x + x) = x + (x + y).
   Proof.
     assert (H0 : forall x0 x1 x2, (x0 + x1) + x2 = x0 + (x1 + x2)) by (
@@ -63,6 +64,7 @@ Theorem check_ : forall x y, y + (x + x) = x + (x + y).
       reflexivity
     ).
     Check comm.
+*)
 
 Theorem check1: forall x y, y + (x + x) = x + (x + y).
 Proof.
