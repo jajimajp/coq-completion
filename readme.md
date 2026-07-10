@@ -1,5 +1,7 @@
 # Completion
 
+Requires Coq 8.20.0
+
 ## Installation
 
 1. Get toma(v0.7+PARSABLE) from [here](https://github.com/jajimajp/toma.git) and build it.
@@ -37,18 +39,4 @@ You can find a lot of example Coq files in ./examples.
 
 ```bash
 coqc examples/commonoid.v
-```
-
-## Tests
-
-1. Unit test:
-
-```bash
-dune runtest tests/unit
-```
-
-2. E2E test:
-
-```bash
-dune build tests/e2e
 ```
